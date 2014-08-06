@@ -59,22 +59,19 @@
     <Compile Include="Configurations\Album\AlbumData2Decorator.generated.cs" />
     <Compile Include="Configurations\Album\AlbumData3Decorator.generated.cs" />
     <Compile Include="Configurations\Album\AlbumDataDecorator.generated.cs" />
+    <Compile Include="Configurations\Album\AlbumInfoResult1Decorator.generated.cs" />
     <Compile Include="Configurations\Album\AlbumInfoResultDecorator.generated.cs" />
     <Compile Include="Configurations\Category\CategoryDataDecorator.generated.cs" />
-    <Compile Include="Configurations\Category\CategoryDiscoverDataDecorator.generated.cs" />
     <Compile Include="Configurations\Category\CategoryResultDecorator.generated.cs" />
-    <Compile Include="Configurations\Discover\HotSoundsResultDecorator.generated.cs" />
     <Compile Include="Configurations\Discover\SuperExploreIndexResultDecorator.generated.cs" />
     <Compile Include="Configurations\FocusImage\FocusImageDataDecorator.generated.cs" />
     <Compile Include="Configurations\FocusImage\FocusImageResultDecorator.generated.cs" />
-    <Compile Include="Configurations\Recommend\RecommendAlbumResultDecorator.generated.cs" />
     <Compile Include="Configurations\Sound\SoundData1Decorator.generated.cs" />
     <Compile Include="Configurations\Sound\SoundData2Decorator.generated.cs" />
     <Compile Include="Configurations\Sound\SoundData3Decorator.generated.cs" />
     <Compile Include="Configurations\Sound\SoundDataDecorator.generated.cs" />
     <Compile Include="Configurations\Sound\SoundsResultDecorator.generated.cs" />
     <Compile Include="Configurations\Subject\SubjectDataDecorator.generated.cs" />
-    <Compile Include="Configurations\Subject\SubjectListResultDecorator.generated.cs" />
     <Compile Include="Configurations\Tags\CategoryTagResultDecorator.generated.cs" />
     <Compile Include="Configurations\Tags\TagAlbumsResultDecorator.generated.cs" />
     <Compile Include="Configurations\Tags\TagDataDecorator.generated.cs" />
@@ -88,22 +85,18 @@
     <Compile Include="RepositoryBase.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Respositories\Album\AlbumInfoResult1Respositories.generated.cs" />
     <Compile Include="Respositories\Album\AlbumInfoResultRespositories.generated.cs" />
+    <Compile Include="Respositories\Album\IAlbumInfoResult1Respositories.generated.cs" />
     <Compile Include="Respositories\Album\IAlbumInfoResultRespositories.generated.cs" />
     <Compile Include="Respositories\Category\CategoryResultRespositories.generated.cs" />
     <Compile Include="Respositories\Category\ICategoryResultRespositories.generated.cs" />
-    <Compile Include="Respositories\Discover\HotSoundsResultRespositories.generated.cs" />
-    <Compile Include="Respositories\Discover\IHotSoundsResultRespositories.generated.cs" />
     <Compile Include="Respositories\Discover\ISuperExploreIndexResultRespositories.generated.cs" />
     <Compile Include="Respositories\Discover\SuperExploreIndexResultRespositories.generated.cs" />
     <Compile Include="Respositories\FocusImage\FocusImageResultRespositories.generated.cs" />
     <Compile Include="Respositories\FocusImage\IFocusImageResultRespositories.generated.cs" />
-    <Compile Include="Respositories\Recommend\IRecommendAlbumResultRespositories.generated.cs" />
-    <Compile Include="Respositories\Recommend\RecommendAlbumResultRespositories.generated.cs" />
     <Compile Include="Respositories\Sound\ISoundsResultRespositories.generated.cs" />
     <Compile Include="Respositories\Sound\SoundsResultRespositories.generated.cs" />
-    <Compile Include="Respositories\Subject\ISubjectListResultRespositories.generated.cs" />
-    <Compile Include="Respositories\Subject\SubjectListResultRespositories.generated.cs" />
     <Compile Include="Respositories\Tags\CategoryTagResultRespositories.generated.cs" />
     <Compile Include="Respositories\Tags\ICategoryTagResultRespositories.generated.cs" />
     <Compile Include="Respositories\Tags\ITagAlbumsResultRespositories.generated.cs" />
@@ -125,43 +118,36 @@
 ..\Configurations\Album\AlbumData2Decorator.generated.cs
 ..\Configurations\Album\AlbumData3Decorator.generated.cs
 ..\Configurations\Album\AlbumDataDecorator.generated.cs
+..\Configurations\Album\AlbumInfoResult1Decorator.generated.cs
 ..\Configurations\Album\AlbumInfoResultDecorator.generated.cs
 ..\Configurations\Category\CategoryDataDecorator.generated.cs
-..\Configurations\Category\CategoryDiscoverDataDecorator.generated.cs
 ..\Configurations\Category\CategoryResultDecorator.generated.cs
-..\Configurations\Discover\HotSoundsResultDecorator.generated.cs
 ..\Configurations\Discover\SuperExploreIndexResultDecorator.generated.cs
 ..\Configurations\FocusImage\FocusImageDataDecorator.generated.cs
 ..\Configurations\FocusImage\FocusImageResultDecorator.generated.cs
-..\Configurations\Recommend\RecommendAlbumResultDecorator.generated.cs
 ..\Configurations\Sound\SoundData1Decorator.generated.cs
 ..\Configurations\Sound\SoundData2Decorator.generated.cs
 ..\Configurations\Sound\SoundData3Decorator.generated.cs
 ..\Configurations\Sound\SoundDataDecorator.generated.cs
 ..\Configurations\Sound\SoundsResultDecorator.generated.cs
 ..\Configurations\Subject\SubjectDataDecorator.generated.cs
-..\Configurations\Subject\SubjectListResultDecorator.generated.cs
 ..\Configurations\Tags\CategoryTagResultDecorator.generated.cs
 ..\Configurations\Tags\TagAlbumsResultDecorator.generated.cs
 ..\Configurations\Tags\TagDataDecorator.generated.cs
 ..\Configurations\Tags\TagSoundListResultDecorator.generated.cs
 ..\Configurations\User\UserDataDecorator.generated.cs
+..\Respositories\Album\AlbumInfoResult1Respositories.generated.cs
 ..\Respositories\Album\AlbumInfoResultRespositories.generated.cs
+..\Respositories\Album\IAlbumInfoResult1Respositories.generated.cs
 ..\Respositories\Album\IAlbumInfoResultRespositories.generated.cs
 ..\Respositories\Category\CategoryResultRespositories.generated.cs
 ..\Respositories\Category\ICategoryResultRespositories.generated.cs
-..\Respositories\Discover\HotSoundsResultRespositories.generated.cs
-..\Respositories\Discover\IHotSoundsResultRespositories.generated.cs
 ..\Respositories\Discover\ISuperExploreIndexResultRespositories.generated.cs
 ..\Respositories\Discover\SuperExploreIndexResultRespositories.generated.cs
 ..\Respositories\FocusImage\FocusImageResultRespositories.generated.cs
 ..\Respositories\FocusImage\IFocusImageResultRespositories.generated.cs
-..\Respositories\Recommend\IRecommendAlbumResultRespositories.generated.cs
-..\Respositories\Recommend\RecommendAlbumResultRespositories.generated.cs
 ..\Respositories\Sound\ISoundsResultRespositories.generated.cs
 ..\Respositories\Sound\SoundsResultRespositories.generated.cs
-..\Respositories\Subject\ISubjectListResultRespositories.generated.cs
-..\Respositories\Subject\SubjectListResultRespositories.generated.cs
 ..\Respositories\Tags\CategoryTagResultRespositories.generated.cs
 ..\Respositories\Tags\ICategoryTagResultRespositories.generated.cs
 ..\Respositories\Tags\ITagAlbumsResultRespositories.generated.cs

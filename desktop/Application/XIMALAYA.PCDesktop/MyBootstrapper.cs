@@ -1,25 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
-using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
 using System.Windows;
+using System.Windows.Controls;
+using MahApps.Metro.Controls;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.MefExtensions;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
-using System.Windows.Controls;
-using MahApps.Metro.Controls;
 using XIMALAYA.PCDesktop.Tools.Behaviors;
 using XIMALAYA.PCDesktop.Tools.RegionAdapter;
-using System.IO;
-using System.Reflection;
-using XIMALAYA.PCDesktop.Tools.Themes;
-using Microsoft.Practices.Prism.Events;
-using Microsoft.Practices.Prism.MefExtensions.Events;
-using XIMALAYA.PCDesktop.Tools.Untils;
 
 namespace XIMALAYA.PCDesktop
 {

@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Threading;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.ViewModel;
+using Microsoft.Win32.SafeHandles;
 using Un4seen.Bass;
 using WPFSoundVisualizationLib;
 
@@ -21,7 +20,7 @@ namespace XIMALAYA.PCDesktop.Tools.Player
     /// <summary>
     /// 
     /// </summary>
-    public sealed class BassEngine : NotificationObject, ISpectrumPlayer, IDisposable
+    public sealed class BassEngine : NotificationObject, ISpectrumPlayer, IDisposable, IWaveformPlayer
     {
         #region 字段
 
@@ -38,6 +37,25 @@ namespace XIMALAYA.PCDesktop.Tools.Player
         private bool _IsMuted = false;
         private readonly int maxFFT = (int)(Un4seen.Bass.BASSData.BASS_DATA_AVAILABLE | Un4seen.Bass.BASSData.BASS_DATA_FFT4096);
         private float _Process = 0F;
+        private long _trackID;
+        private byte[] _data; // local data buffer
+
+        private double _ChannelLength;
+        private double _ChannelPosition;
+        private float[] _WaveformData;
+        private readonly BackgroundWorker waveformGenerateWorker = new BackgroundWorker();
+        private const int waveformCompressedPointCount = 2000;
+        private string pendingWaveformPath;
+        private float[] fullLevelData;
+
+        #endregion
+
+        #region 事件
+
+        /// <summary>
+        /// 播放完成事件
+        /// </summary>
+        public event EventHandler PlayOverEvent;
 
         #endregion
 
@@ -160,10 +178,25 @@ namespace XIMALAYA.PCDesktop.Tools.Player
             {
                 if (value != _CurrentTime)
                 {
-                    //_CurrentTime = value;
                     this.ChangeCurrentTime(value);
                     this.RaisePropertyChanged(() => this.CurrentTime);
+                    this.RaisePropertyChanged(() => this.CurrentProcess);
                 }
+            }
+        }
+        /// <summary>
+        /// 当前播放的百分比
+        /// </summary>
+        public double CurrentProcess
+        {
+            get
+            {
+                if (this.TotalTime.TotalMilliseconds != 0)
+                {
+                    return this.CurrentTime.TotalMilliseconds / this.TotalTime.TotalMilliseconds;
+                }
+
+                return 0D;
             }
         }
         /// <summary>
@@ -231,13 +264,17 @@ namespace XIMALAYA.PCDesktop.Tools.Player
         {
             get
             {
-                return _Volume;
+                if (this.IsMuted)
+                    return 0;
+                else
+                    return _Volume;
             }
             set
             {
                 if (value != _Volume)
                 {
                     _Volume = value;
+                    this.IsMuted = _Volume == 0;
                     this.SetVolume();
                     this.RaisePropertyChanged(() => this.Volume);
                 }
@@ -259,6 +296,7 @@ namespace XIMALAYA.PCDesktop.Tools.Player
                     _IsMuted = value;
                     this.SetVolume();
                     this.RaisePropertyChanged(() => this.IsMuted);
+                    this.RaisePropertyChanged(() => this.Volume);
                 }
             }
         }
@@ -284,7 +322,6 @@ namespace XIMALAYA.PCDesktop.Tools.Player
         /// 第一次加载完数据后，自动播放
         /// </summary>
         public bool IsAutoPlayed { get; set; }
-        private long _trackID;
         /// <summary>
         /// 当前播放的声音ID
         /// </summary>
@@ -300,7 +337,10 @@ namespace XIMALAYA.PCDesktop.Tools.Player
                 }
             }
         }
-
+        /// <summary>
+        /// 下载文件的流
+        /// </summary>
+        public FileStream FileStream { get; set; }
 
         #endregion
 
@@ -388,6 +428,7 @@ namespace XIMALAYA.PCDesktop.Tools.Player
         {
             int handle = 0, syncHandle;
             BASS_CHANNELINFO info;
+            string path = this.GetFilePath(url);
 
             this.SetSoundPath(url);
             this.OnlineFileWorker = new Thread(() =>
@@ -431,12 +472,36 @@ namespace XIMALAYA.PCDesktop.Tools.Player
             this.OnlineFileWorker.Start();
         }
         /// <summary>
-        /// 
+        /// 打开文件
         /// </summary>
         /// <param name="filename"></param>
         public void OpenFile(string filename)
         {
             this.CurrentSoundUrl = filename;
+            this.Stop();
+            int handle = Un4seen.Bass.Bass.BASS_StreamCreateFile(filename, 0, 0, Un4seen.Bass.BASSFlag.BASS_DEFAULT);
+
+            if (handle != 0)
+            {
+                this.ActiveStreamHandle = handle;
+                ChannelLength = Un4seen.Bass.Bass.BASS_ChannelBytes2Seconds(ActiveStreamHandle, Un4seen.Bass.Bass.BASS_ChannelGetLength(ActiveStreamHandle, 0));
+                Un4seen.Bass.BASS_CHANNELINFO info = new Un4seen.Bass.BASS_CHANNELINFO();
+                Un4seen.Bass.Bass.BASS_ChannelGetInfo(ActiveStreamHandle, info);
+                this.SampleFrequency = info.freq;
+                this.TotalTime = TimeSpan.FromSeconds(Bass.BASS_ChannelBytes2Seconds(this.ActiveStreamHandle, Bass.BASS_ChannelGetLength(ActiveStreamHandle, 0)));
+                int syncHandle = Un4seen.Bass.Bass.BASS_ChannelSetSync(ActiveStreamHandle,
+                     Un4seen.Bass.BASSSync.BASS_SYNC_END,
+                     0,
+                     this.EndTrackSyncProc,
+                     IntPtr.Zero);
+
+                if (syncHandle == 0)
+                    throw new ArgumentException("Error establishing End Sync on file stream.", "path");
+                //this.GenerateWaveformData(filename);
+                this.CanPlay = true;
+                this.Process = 1;
+                this.Play();
+            }
         }
         /// <summary>
         /// 设置播放路径
@@ -449,6 +514,10 @@ namespace XIMALAYA.PCDesktop.Tools.Player
             this.Process = 0;
             this.CurrentTime = TimeSpan.Zero;
         }
+        /// <summary>
+        /// 修改当前播放进度
+        /// </summary>
+        /// <param name="value"></param>
         private void ChangeCurrentTime(TimeSpan value)
         {
             if (!this.IsCurrentPositionUpdated)
@@ -471,19 +540,31 @@ namespace XIMALAYA.PCDesktop.Tools.Player
                 this.IsCurrentPositionUpdated = false;
             }
         }
+        /// <summary>
+        /// 设置音量
+        /// </summary>
         private void SetVolume()
         {
-            if (ActiveStreamHandle != 0)
+            if (ActiveStreamHandle == 0) return;
+            if (IsMuted)
             {
-                if (IsMuted)
-                {
-                    Bass.BASS_ChannelSetAttribute(ActiveStreamHandle, BASSAttribute.BASS_ATTRIB_VOL, 0);
-                }
-                else
-                {
-                    Bass.BASS_ChannelSetAttribute(ActiveStreamHandle, BASSAttribute.BASS_ATTRIB_VOL, this.Volume);
-                }
+                Bass.BASS_ChannelSetAttribute(ActiveStreamHandle, BASSAttribute.BASS_ATTRIB_VOL, 0);
             }
+            else
+            {
+                Bass.BASS_ChannelSetAttribute(ActiveStreamHandle, BASSAttribute.BASS_ATTRIB_VOL, this.Volume);
+            }
+        }
+        /// <summary>
+        /// 获取保存文件地址
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        private string GetFilePath(string path)
+        {
+            byte[] urls = Encoding.UTF8.GetBytes(path.Substring(path.LastIndexOf("/") + 1));
+
+            return Path.Combine(@"d:\", Convert.ToBase64String(urls) + ".mp3");
         }
 
         #endregion
@@ -534,7 +615,7 @@ namespace XIMALAYA.PCDesktop.Tools.Player
 
         #region Constructor
 
-        private BassEngine()
+        static BassEngine()
         {
             Un4seen.Bass.BassNet.Registration("yk000123@sina.com", "2X34201017282922");
 
@@ -547,10 +628,12 @@ namespace XIMALAYA.PCDesktop.Tools.Player
 
             // now load all libs manually
             Un4seen.Bass.Bass.LoadMe(targetPath);
-
-            float down;
+        }
+        private BassEngine()
+        {
             Window mainWindow = Application.Current.MainWindow;
             WindowInteropHelper interopHelper = new WindowInteropHelper(mainWindow);
+            //SafeFileHandle safeHandle = new SafeFileHandle(interopHelper.Handle, true);
 
             if (!Un4seen.Bass.Bass.BASS_Init(-1, 44100, Un4seen.Bass.BASSInit.BASS_DEVICE_DEFAULT, interopHelper.Handle))
             {
@@ -560,7 +643,7 @@ namespace XIMALAYA.PCDesktop.Tools.Player
             Un4seen.Bass.Bass.BASS_SetConfig(Un4seen.Bass.BASSConfig.BASS_CONFIG_NET_TIMEOUT, 15000);
 
             this.EndTrackSyncProc = this.EndTrack;
-            this.DownloadProc = new DOWNLOADPROC((a, b, c) =>
+            this.DownloadProc = new DOWNLOADPROC((buffer, length, user) =>
             {
                 if (this.TotalSize <= 0)
                 {
@@ -568,10 +651,18 @@ namespace XIMALAYA.PCDesktop.Tools.Player
                 }
                 if (this.TotalSize > 0)
                 {
-                    down = Bass.BASS_StreamGetFilePosition(this.ActiveStreamHandle, BASSStreamFilePosition.BASS_FILEPOS_DOWNLOAD);
-                    this.Process = down / this.TotalSize;
-                    Debug.WriteLine(down, this.TotalSize.ToString());
-                    if (this.Process > 0 && !this.IsAutoPlayed)
+                    if (buffer == IntPtr.Zero)
+                    {
+                        this.Process = 1;
+                        //this.GenerateWaveformData(this.CurrentSoundUrl);
+                    }
+                    else
+                    {
+                        this.Process = (
+                            Bass.BASS_StreamGetFilePosition(this.ActiveStreamHandle, BASSStreamFilePosition.BASS_FILEPOS_DOWNLOAD)
+                            ) / this.TotalSize;
+                    }
+                    if (this.Process > 0.1 && !this.IsAutoPlayed)
                     {
                         this.IsAutoPlayed = true;
                         this.Play();
@@ -583,8 +674,11 @@ namespace XIMALAYA.PCDesktop.Tools.Player
             this.CurrentPositionTimer.Tick += CurrentPositionTimer_Tick;
 
             this.PlayCommand = new DelegateCommand(this.PlayCommandAction, this.CanPlayCommand);
-        }
 
+            waveformGenerateWorker.DoWork += waveformGenerateWorker_DoWork;
+            waveformGenerateWorker.RunWorkerCompleted += waveformGenerateWorker_RunWorkerCompleted;
+            waveformGenerateWorker.WorkerSupportsCancellation = true;
+        }
         void CurrentPositionTimer_Tick(object sender, EventArgs e)
         {
             Application.Current.Dispatcher.BeginInvoke(new Action(() =>
@@ -622,8 +716,13 @@ namespace XIMALAYA.PCDesktop.Tools.Player
         {
             Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
-                //this.Pause();
-                this.Stop();
+                this.Pause();
+                this.CurrentTime = TimeSpan.Zero;
+                if (this.PlayOverEvent != null)
+                {
+                    this.PlayOverEvent.BeginInvoke(this, new EventArgs(), null, null);
+                }
+                //this.Stop();
             }));
         }
         #endregion
@@ -671,6 +770,12 @@ namespace XIMALAYA.PCDesktop.Tools.Player
                         this.OnlineFileWorker.Abort();
                         this.OnlineFileWorker = null;
                     }
+                    if (this.FileStream != null)
+                    {
+                        this.FileStream.Flush();
+                        this.FileStream.Dispose();
+                        File.Delete(this.GetFilePath(this.CurrentSoundUrl));
+                    }
                 }
                 Bass.BASS_Free();
                 Bass.FreeMe();
@@ -682,6 +787,205 @@ namespace XIMALAYA.PCDesktop.Tools.Player
                 _disposed = true;
             }
         }
+        #endregion
+
+        #region Waveform Generation
+        private class WaveformGenerationParams
+        {
+            public WaveformGenerationParams(int points, string path)
+            {
+                Points = points;
+                Path = path;
+            }
+            public WaveformGenerationParams(int points, string path, Stream stream)
+                : this(points, path)
+            {
+                this.Stream = stream;
+            }
+            public Stream Stream { get; set; }
+            public int Points { get; protected set; }
+            public string Path { get; protected set; }
+        }
+        private void GenerateWaveformData(string path)
+        {
+            if (waveformGenerateWorker.IsBusy)
+            {
+                pendingWaveformPath = path;
+                waveformGenerateWorker.CancelAsync();
+                return;
+            }
+
+            if (!waveformGenerateWorker.IsBusy && waveformCompressedPointCount != 0)
+                waveformGenerateWorker.RunWorkerAsync(new WaveformGenerationParams(waveformCompressedPointCount, path));
+        }
+        private void GenerateWaveformData(Stream stream)
+        {
+            if (waveformGenerateWorker.IsBusy)
+            {
+                waveformGenerateWorker.CancelAsync();
+                return;
+            }
+
+            if (!waveformGenerateWorker.IsBusy && waveformCompressedPointCount != 0)
+                waveformGenerateWorker.RunWorkerAsync(new WaveformGenerationParams(waveformCompressedPointCount, string.Empty, stream));
+        }
+        private void waveformGenerateWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Cancelled)
+            {
+                if (!waveformGenerateWorker.IsBusy && waveformCompressedPointCount != 0)
+                    waveformGenerateWorker.RunWorkerAsync(new WaveformGenerationParams(waveformCompressedPointCount, pendingWaveformPath));
+            }
+        }
+        private void waveformGenerateWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            WaveformGenerationParams waveformParams = e.Argument as WaveformGenerationParams;
+            int stream = Bass.BASS_StreamCreateFile(this.GetFilePath(this.CurrentSoundUrl), 0, 0, BASSFlag.BASS_STREAM_DECODE | BASSFlag.BASS_SAMPLE_FLOAT | BASSFlag.BASS_STREAM_PRESCAN);
+            int frameLength = (int)Bass.BASS_ChannelSeconds2Bytes(stream, 0.02);
+            long streamLength = Bass.BASS_ChannelGetLength(stream, 0);
+            int frameCount = (int)((double)streamLength / (double)frameLength);
+            int waveformLength = frameCount * 2;
+            float[] waveformData = new float[waveformLength];
+            float[] levels = new float[2];
+
+            int compressedPointCount = waveformParams.Points * 2;
+            float[] waveformCompressedPoints = new float[compressedPointCount];
+            List<int> waveMaxPointIndexes = new List<int>();
+            for (int i = 1; i <= waveformParams.Points; i++)
+            {
+                waveMaxPointIndexes.Add((int)Math.Round(waveformLength * ((double)i / (double)waveformParams.Points), 0));
+            }
+
+            float maxLeftPointLevel = float.MinValue;
+            float maxRightPointLevel = float.MinValue;
+            int currentPointIndex = 0;
+            for (int i = 0; i < waveformLength; i += 2)
+            {
+                Bass.BASS_ChannelGetLevel(stream, levels);
+                waveformData[i] = levels[0];
+                waveformData[i + 1] = levels[1];
+
+                if (levels[0] > maxLeftPointLevel)
+                    maxLeftPointLevel = levels[0];
+                if (levels[1] > maxRightPointLevel)
+                    maxRightPointLevel = levels[1];
+
+                if (i > waveMaxPointIndexes[currentPointIndex])
+                {
+                    waveformCompressedPoints[(currentPointIndex * 2)] = maxLeftPointLevel;
+                    waveformCompressedPoints[(currentPointIndex * 2) + 1] = maxRightPointLevel;
+                    maxLeftPointLevel = float.MinValue;
+                    maxRightPointLevel = float.MinValue;
+                    currentPointIndex++;
+                }
+                if (i % 3000 == 0)
+                {
+                    float[] clonedData = (float[])waveformCompressedPoints.Clone();
+
+                    Application.Current.Dispatcher.Invoke(new Action(() =>
+                    {
+                        WaveformData = clonedData;
+                    }));
+                }
+
+                if (waveformGenerateWorker.CancellationPending)
+                {
+                    e.Cancel = true;
+                    break; ;
+                }
+            }
+            float[] finalClonedData = (float[])waveformCompressedPoints.Clone();
+            Application.Current.Dispatcher.Invoke(new Action(() =>
+            {
+                fullLevelData = waveformData;
+                WaveformData = finalClonedData;
+            }));
+            //Bass.BASS_StreamFree(stream);
+        }
+        #endregion
+
+        #region IWaveformPlayer 成员
+
+        private bool InChannelSet { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public double ChannelLength
+        {
+            get
+            {
+                return _ChannelLength;
+            }
+            protected set
+            {
+                if (value != _ChannelLength)
+                {
+                    _ChannelLength = value;
+                    this.RaisePropertyChanged(() => this.ChannelLength);
+                }
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public double ChannelPosition
+        {
+            get
+            {
+                return _ChannelPosition;
+            }
+            set
+            {
+                if (!InChannelSet)
+                {
+                    InChannelSet = true;
+                    double position = Math.Max(0, Math.Min(value, ChannelLength));
+                    this.ChangeCurrentTime(TimeSpan.FromMilliseconds(position));
+                    if (value != _ChannelPosition)
+                    {
+                        _ChannelPosition = value;
+                        this.RaisePropertyChanged(() => this.ChannelPosition);
+                    }
+                    InChannelSet = true;
+                }
+
+            }
+        }
+        /// <summary>
+        /// 波形数据
+        /// </summary>
+        public float[] WaveformData
+        {
+            get
+            {
+                return _WaveformData;
+            }
+            protected set
+            {
+                if (value != _WaveformData)
+                {
+                    _WaveformData = value;
+                    this.RaisePropertyChanged(() => this.WaveformData);
+                }
+            }
+        }
+        /// <summary>
+        /// 选择开始时间
+        /// </summary>
+        public TimeSpan SelectionBegin
+        {
+            get;
+            set;
+        }
+        /// <summary>
+        /// 选择结束时间
+        /// </summary>
+        public TimeSpan SelectionEnd
+        {
+            get;
+            set;
+        }
+
         #endregion
     }
 }

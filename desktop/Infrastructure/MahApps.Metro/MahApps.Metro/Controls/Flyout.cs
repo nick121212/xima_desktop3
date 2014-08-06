@@ -20,6 +20,7 @@ namespace MahApps.Metro.Controls
         /// An event that is raised when IsOpen changes.
         /// </summary>
         public event EventHandler IsOpenChanged;
+        public event EventHandler IsHideComplete;
         
         public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register("Header", typeof(string), typeof(Flyout), new PropertyMetadata(default(string)));
         public static readonly DependencyProperty PositionProperty = DependencyProperty.Register("Position", typeof(Position), typeof(Flyout), new PropertyMetadata(Position.Left, PositionChanged));
@@ -250,6 +251,10 @@ namespace MahApps.Metro.Controls
         {
             // hide the flyout, we should get better performance and prevent showing the flyout on any resizing events
             this.Visibility = Visibility.Hidden;
+            if (this.IsHideComplete != null)
+            {
+                this.IsHideComplete(this, null);
+            }
         }
 
         private static void ThemeChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)

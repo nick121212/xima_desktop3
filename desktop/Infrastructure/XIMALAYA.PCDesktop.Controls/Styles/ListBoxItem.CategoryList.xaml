@@ -1,54 +1,69 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                                 xmlns:tools="http://ximalaya.com/xaml/tools"
-                                 xmlns:converter="http://ximalaya.com/xaml/tools/converter"
-                                 xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
-                                 xmlns:MControls="clr-namespace:XIMALAYA.PCDesktop.Controls">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:tools="http://ximalaya.com/xaml/tools"
+                    xmlns:converter="http://ximalaya.com/xaml/tools/converter"
+                    xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+                    xmlns:MControls="clr-namespace:XIMALAYA.PCDesktop.Controls">
 
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/MyRadioButton.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/ListBoxItem.Common.xaml" />
-    </ResourceDictionary.MergedDictionaries>
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/MyRadioButton.xaml" />
+		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/ListBoxItem.Common.xaml" />
+		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/Path.xaml" />
+		
+	</ResourceDictionary.MergedDictionaries>
 
-    <DataTemplate x:Key="MetroCategoryItemTemplate" DataType="{x:Type ListBoxItem}">
-        <Controls:Tile Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=Width}"
-                       Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=Height}"
-                       Command="{Binding Path=DataContext.ShowCategoryDetailCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListBox}}}"
-                       CommandParameter="{Binding Name}">
-            <Controls:Tile.Template>
-                <ControlTemplate>
-                    <Grid>
-                        <Border Visibility="Hidden" x:Name="background" CornerRadius="30" BorderThickness="1" Background="{DynamicResource AccentColorBrush}" Opacity="0.8" Width="60" Height="60" VerticalAlignment="Top"/>
-                        <Image Width="60" VerticalAlignment="Top" Height="60" Source="{Binding CoverPath}" Stretch="Uniform" />
-						<!--<MControls:MyImage VerticalAlignment="Top" 
-										   Source="{Binding CoverPath}"
-										   DefaultSource="banner.png"
-										   Height="60"
-										   Width="60"/>-->
-                        <Label Content="{Binding Title}" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" />
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="Button.IsPressed"
-                                 Value="True">
-                            <Setter Property="RenderTransform">
-                                <Setter.Value>
-                                    <ScaleTransform ScaleX="0.98"
-                                                    ScaleY="0.98"
-                                                    CenterX="0.5"
-                                                    CenterY="0.5" />
-                                </Setter.Value>
-                            </Setter>
-                            <Setter TargetName="background" Property="Visibility" Value="Visible" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Controls:Tile.Template>
-        </Controls:Tile>
-    </DataTemplate>
-    <Style x:Key="MetroCategoryStyle" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource ListItemBaseTemp}">
-        <Setter Property="MControls:TilePanel.WidthPix" Value="15"/>
-        <Setter Property="MControls:TilePanel.HeightPix" Value="17"/>
-        <Setter Property="ContentTemplate" Value="{StaticResource MetroCategoryItemTemplate}"/>
-    </Style>
+	<DataTemplate x:Key="MetroCategoryItemTemplate" DataType="{x:Type ListBoxItem}">
+		<MControls:MyRadioButton Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=Width}"
+                                 Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=Height}"
+					             Background="Transparent"
+								 GroupName="Category"
+					             BorderThickness="1"
+								 CheckedBorderThickness="2"
+								 IsChecked="False"
+								 SuperScriptSize="0"
+					             BorderBrush="{DynamicResource AccentColorBrush}"
+                                 Command="{Binding Path=DataContext.ShowCategoryDetailCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListBox}}}"
+                                 CommandParameter="{Binding Name}">
+			<MControls:MyRadioButton.Content>
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*"/>
+						<RowDefinition Height="Auto"/>
+					</Grid.RowDefinitions>
+
+					<Path Data="{Binding Path}" 
+						  Style="{StaticResource PathStyle}"
+						  Width="40"
+						  Height="40"
+						  Fill="{DynamicResource AccentColorBrush}" >
+					</Path>
+					
+					<Image Width="60" 
+						   Height="60" 
+						   Stretch="Uniform" 
+						   VerticalAlignment="Center"
+						   Source="{Binding CoverPath}">
+						<Image.Clip>
+							<EllipseGeometry Center="30,30" RadiusX="25" RadiusY="25"/>
+						</Image.Clip>
+					</Image>
+					
+					<Label Grid.Row="1" 
+						   HorizontalContentAlignment="Center" 
+						   Content="{Binding Title}"/>
+				</Grid>
+			</MControls:MyRadioButton.Content>
+		</MControls:MyRadioButton>
+	</DataTemplate>
+	<Style x:Key="MetroCategoryStyle" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource ListItemBaseTemp}">
+		<Setter Property="MControls:TilePanel.WidthPix" Value="{Binding WidthPix}"/>
+		<Setter Property="MControls:TilePanel.HeightPix" Value="{Binding HeightPix}"/>
+		<Setter Property="ContentTemplate" Value="{StaticResource MetroCategoryItemTemplate}"/>
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding IsFirst}" Value="True">
+				<Setter Property="MControls:TilePanel.WidthPix" Value="2"/>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
 
 </ResourceDictionary>

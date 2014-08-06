@@ -20,7 +20,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\build\XIMALAYA.PCDesktop.Core.ParamsModel.XML</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -58,7 +59,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlbumInfoParam.cs" />
+    <Compile Include="AlbumDetailParam.cs" />
     <Compile Include="CategoryTagParam.cs" />
     <Compile Include="CategoryTagAlbums.cs" />
     <Compile Include="CategoryTagSounds.cs" />

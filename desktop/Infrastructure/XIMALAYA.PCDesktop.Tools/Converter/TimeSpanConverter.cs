@@ -27,7 +27,8 @@ namespace XIMALAYA.PCDesktop.Tools.Converter
         /// <returns></returns>
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            double timeSpan = double.Parse(value.ToString());
+            double fix = parameter == null ? 1 : double.Parse(parameter.ToString());
+            double timeSpan = double.Parse(value.ToString())*fix;
 
             TimeSpan ts = TimeSpan.FromMilliseconds(timeSpan);
 

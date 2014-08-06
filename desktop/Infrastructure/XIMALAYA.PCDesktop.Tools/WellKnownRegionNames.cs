@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace XIMALAYA.PCDesktop.Tools
 {
     /// <summary>
@@ -24,7 +19,7 @@ namespace XIMALAYA.PCDesktop.Tools
         /// <summary>
         /// The region of module 菜单.
         /// </summary>
-        public const string MenusRegion = "MenusRegion";
+        public const string MenusRegion = "MenusViewRegion";
 
         /// <summary>
         /// The region of module DiscoverModuleRegion.

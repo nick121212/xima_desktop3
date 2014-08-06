@@ -1,12 +1,5 @@
-﻿using Microsoft.Practices.Prism.Modularity;
-using Microsoft.Practices.Prism.Regions;
-using Microsoft.Practices.ServiceLocation;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using Microsoft.Practices.Prism.Modularity;
 
 namespace XIMALAYA.PCDesktop.Tools.Untils
 {

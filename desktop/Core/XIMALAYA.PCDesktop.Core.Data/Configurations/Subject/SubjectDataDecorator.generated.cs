@@ -46,6 +46,7 @@ namespace XIMALAYA.PCDesktop.Core.Data
                     .Field<System.String>(field => field.CoverPathBig, type => type.To("coverPathBig"))
                     .Field<System.String>(field => field.CoverPathSmall, type => type.To("coverPathSmall"))
                     .Field<System.String>(field => field.Title, type => type.To("title"))
+                    .Field<System.Boolean>(field => field.IsHot, type => type.To("isHot"))
             );
         }
     }

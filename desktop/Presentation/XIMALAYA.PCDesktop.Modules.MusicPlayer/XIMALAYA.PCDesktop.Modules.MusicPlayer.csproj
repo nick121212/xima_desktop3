@@ -35,10 +35,6 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Bass.Net, Version=2.4.9.0, Culture=neutral, PublicKeyToken=b7566c273e6ef480, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\build\Bass.Net.dll</HintPath>
-    </Reference>
     <Reference Include="MahApps.Metro, Version=0.13.1.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\MahApps.Metro.dll</HintPath>
@@ -68,6 +64,10 @@
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Activities" />
     <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />

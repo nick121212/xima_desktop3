@@ -28,15 +28,20 @@ namespace XIMALAYA.PCDesktop.Tools.Converter
         {
             bool result = false;
 
-            if (values.Length > 1)
+            if (values.Length > 2)
             {
-                long first = (long)values[0];
-
-                for (int i = 1; i < values.Length; i++)
+                switch (parameter.ToString())
                 {
-                    result = first == (long)values[i];
+                    case "0":
+                        result = (bool)values[0];
+                        long first = (long)values[1];
+                        for (int i = 1; i < values.Length && result; i++)
+                        {
+                            result = first == (long)values[i];
 
-                    if (!result) break;
+                            if (!result) break;
+                        }
+                        break;
                 }
             }
 

@@ -3,9 +3,9 @@ using Microsoft.Practices.Prism.Modularity;
 using System;
 using XIMALAYA.PCDesktop.Core.Models.Album;
 using XIMALAYA.PCDesktop.Events;
-using XIMALAYA.PCDesktop.Modules.SoundListModule.Views;
 using XIMALAYA.PCDesktop.Tools;
 using XIMALAYA.PCDesktop.Tools.Untils;
+using XIMALAYA.PCDesktop.Modules.SoundListModule.Views;
 
 namespace XIMALAYA.PCDesktop.Modules.SoundListModule
 {
@@ -15,46 +15,20 @@ namespace XIMALAYA.PCDesktop.Modules.SoundListModule
     [ModuleExport(WellKnownModuleNames.SoundListModule, typeof(SoundListModule), InitializationMode = InitializationMode.WhenAvailable)]
     public class SoundListModule : BaseModule
     {
-        #region fields
-
-        private AlbumData _Album;
-
-        #endregion
-
-        #region properties
+        #region 事件
 
         /// <summary>
-        /// 当前专辑数据
+        /// 声音详情页
         /// </summary>
-        public AlbumData Album
+        /// <param name="e"></param>
+        private void OnSoundDetailEvent(long e)
         {
-            get
-            {
-                return _Album;
-            }
-            set
-            {
-                if (value == _Album) return;
-                _Album = value;
-                this.RaisePropertyChanged(() => this.Album);
-                this.OnAlbumChanged();
-            }
-        }
+            var soundDetailView = this.Container.GetInstance<SoundDetailView>();
+            string regionName = this.ContainerView.GetFlyout(string.Empty, null, null);
 
-        #endregion
-
-        #region actions
-
-        /// <summary>
-        /// 当前专辑数据更改
-        /// </summary>
-        private void OnAlbumChanged()
-        {
-            AlbumSoundsView view = this.Container.GetInstance<AlbumSoundsView>();
-            string regionName = this.ContainerView.GetFlyout(this.Album.Title);
-            if (view != null)
+            if (soundDetailView != null)
             {
-                view.ViewModel.DoInit(this.Album, regionName, view);
+                soundDetailView.ViewModel.DoInit(e, regionName, soundDetailView);
             }
         }
 
@@ -67,16 +41,14 @@ namespace XIMALAYA.PCDesktop.Modules.SoundListModule
         /// </summary>
         public override void Initialize()
         {
-            if (this.EventAggregator == null)
+            //标签点击事件，获取专辑详情数据
+            this.EventAggregator.GetEvent<SoundDetailEvent<long>>().Subscribe(e =>
             {
-                throw new ArgumentNullException("EventAggregator");
-            }
-            //标签点击事件，获取声音数据
-            this.EventAggregator.GetEvent<SoundListEvent<AlbumData>>().Subscribe(e =>
-            {
-                this.Album = e;
+                this.OnSoundDetailEvent(e);
             });
         }
+
+        
 
         #endregion
     }

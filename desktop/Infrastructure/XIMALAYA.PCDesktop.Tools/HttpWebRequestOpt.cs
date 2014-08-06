@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using XIMALAYA.PCDesktop.Tools.Untils;
 
 namespace XIMALAYA.PCDesktop.Tools
@@ -107,7 +102,7 @@ namespace XIMALAYA.PCDesktop.Tools
             StreamWriter myStreamWriter = new StreamWriter(myRequestStream, Encoding.GetEncoding("gb2312"));
             myStreamWriter.Write(postDataStr);
             myStreamWriter.Close();
-
+            myRequestStream.Close();
             request.BeginGetResponse(async, request);
         }
         /// <summary>

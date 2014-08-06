@@ -123,14 +123,6 @@ namespace MahApps.Metro.Controls
             set { SetValue(MetroDialogOptionsProperty, value); }
         }
 
-
-        [Obsolete("This propery isn't needed anymore, it will be deleted in next release...")]
-        public Style TextBlockStyle
-        {
-            get { return (Style)this.GetValue(TextBlockStyleProperty); }
-            set { SetValue(TextBlockStyleProperty, value); }
-        }
-
         public bool EnableDWMDropShadow
         {
             get { return (bool)GetValue(EnableDWMDropShadowProperty); }
@@ -227,15 +219,15 @@ namespace MahApps.Metro.Controls
             set { SetValue(RightWindowCommandsProperty, value); }
         }
 
-        /// <summary>
-        /// Gets/sets the right window commands that hosts the user commands.
-        /// </summary>
-        [Obsolete("This property is obsolete and will be delete in next release, use RightWindowCommands instead.")]
-        public WindowCommands WindowCommands
-        {
-            get { return (WindowCommands)GetValue(WindowCommandsProperty); }
-            set { SetValue(WindowCommandsProperty, value); }
-        }
+        ///// <summary>
+        ///// Gets/sets the right window commands that hosts the user commands.
+        ///// </summary>
+        //[Obsolete("This property is obsolete and will be delete in next release, use RightWindowCommands instead.")]
+        //public WindowCommands WindowCommands
+        //{
+        //    get { return (WindowCommands)GetValue(WindowCommandsProperty); }
+        //    set { SetValue(WindowCommandsProperty, value); }
+        //}
 
         private static void WindowCommandsPropertyChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {

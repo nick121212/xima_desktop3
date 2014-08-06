@@ -6,82 +6,15 @@
                     xmlns:MControls="clr-namespace:XIMALAYA.PCDesktop.Controls">
 
 	<ResourceDictionary.MergedDictionaries>
-		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/MyToggleButton.xaml" />
-		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/Converter.xaml" />
 		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/ListBoxItem.Common.xaml" />
 		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/GroupBox.xaml" />
+		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/Converter.xaml" />
+		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/ListBoxItem.SoundList.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 
 	
 	
-	<!--热门声音start-->
-
-	<!--Checked="{Binding TrackId,ConverterParameter={Binding TrackID,Source={x:Static tools:PlayerSingleton.Instance}} }"-->
-	<DataTemplate x:Key="MetroHotSoundsItem1Template" DataType="{x:Type ListBoxItem}">
-		<MControls:MyToggleButton Command="{Binding PlaySoundCommand,Source={x:Static tools:CommandSingleton.Instance}}"
-								  CommandParameter="{Binding TrackId}"
-								  Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=ActualHeight}"
-								  Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=ActualWidth}"
-								  IconData="{Binding ToolbarPlayPath,Source={x:Static MControls:PathData.Instance}}"
-								  IconMargin="2"
-								  Style="{StaticResource MetroMyToggleButton}"
-								  CheckedBorderThickness="0"
-								  SuperScriptSize="35"
-                                  BorderThickness="0">
-			<MControls:MyToggleButton.IsChecked>
-				<MultiBinding Converter="{StaticResource MutiBoolConverter}" Mode="TwoWay">
-					<MultiBinding.Bindings>
-						<Binding Path="TrackId"/>
-						<Binding Path="TrackID" Source="{x:Static tools:PlayerSingleton.Instance}"/>
-						<!--<Binding Path="DataContext.Countries"
-                         RelativeSource="{RelativeSource AncestorType={x:Type Window}}"
-                         Mode="OneWay"/>
-						<Binding Path="Name" Mode="OneWay" />-->
-					</MultiBinding.Bindings>
-				</MultiBinding>
-			</MControls:MyToggleButton.IsChecked>
-			<MControls:MyToggleButton.Content>
-				<Grid Background="{DynamicResource AccentColorBrush4}"
-					  Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=ActualHeight}"
-					  Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=ActualWidth}">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="Auto"/>
-						<ColumnDefinition Width="*"/>
-					</Grid.ColumnDefinitions>
-					<Grid.RowDefinitions>
-						<RowDefinition Height="*"/>
-						<RowDefinition Height="30"/>
-					</Grid.RowDefinitions>
-
-					<MControls:MyImage VerticalAlignment="Center" 
-									   Grid.RowSpan="2"
-									   Margin="5 0"
-									   Height="60"
-									   Width="60"
-									   Source="{Binding CoverWebSmall}"
-									   DefaultSource="track.jpg"/>
-					<TextBlock Grid.Row="0" Grid.Column="1" Foreground="{DynamicResource BlackBrush}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding Title}"/>
-					<Path Grid.Row="1" Grid.Column="1"
-                              Data="{Binding ToolbarPlayPath, Source={x:Static MControls:PathData.Instance}}" 
-                              Stretch="Uniform" 
-                              Fill="{DynamicResource AccentColorBrush}" 
-                              HorizontalAlignment="Left"
-                              VerticalAlignment="Center"
-                              Width="10" 
-                              Height="10" 
-                              UseLayoutRounding="True"/>
-					<TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Foreground="{DynamicResource BlackBrush}" Margin="15 0 0 0" Text="{Binding PlayCount}"/>
-				</Grid>
-			</MControls:MyToggleButton.Content>
-		</MControls:MyToggleButton>
-
-	</DataTemplate>
-
-	<Style x:Key="MetroHotSounds1Style" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource ListItemBaseTemp}">
-		<Setter Property="ContentTemplate" Value="{StaticResource MetroHotSoundsItem1Template}"/>
-		<Setter Property="MControls:TilePanel.WidthPix" Value="1"/>
-		<Setter Property="MControls:TilePanel.HeightPix" Value="1"/>
-	</Style>
+	<!--热门声音Group not used start-->
 
 	<DataTemplate x:Key="MetroHotSoundsItemTemplate" DataType="{x:Type ListBoxItem}">
 		<GroupBox Style="{StaticResource MyMetroGroupBox}"
@@ -105,6 +38,6 @@
 		<Setter Property="ContentTemplate" Value="{StaticResource MetroHotSoundsItemTemplate}"/>
 	</Style>
 
-	<!--热门声音end-->
+	<!--热门声音Group end-->
 
 </ResourceDictionary>

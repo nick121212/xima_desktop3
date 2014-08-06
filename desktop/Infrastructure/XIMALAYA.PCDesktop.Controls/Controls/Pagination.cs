@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 using Microsoft.Practices.Prism.Commands;
 
@@ -41,8 +42,8 @@ namespace XIMALAYA.PCDesktop.Controls
     /// 分页控件
     /// </summary>
     [TemplatePart(Name = Pagination.PART_Pages, Type = typeof(StackPanel))]
-    [TemplatePart(Name = Pagination.PART_PrevBtn, Type = typeof(Button))]
-    [TemplatePart(Name = Pagination.PART_NextBtn, Type = typeof(Button))]
+    [TemplatePart(Name = Pagination.PART_PrevBtn, Type = typeof(MyToggleButton))]
+    [TemplatePart(Name = Pagination.PART_NextBtn, Type = typeof(MyToggleButton))]
     public class Pagination : Control
     {
         #region 常量
@@ -201,11 +202,11 @@ namespace XIMALAYA.PCDesktop.Controls
         /// <summary>
         /// 下一页按钮
         /// </summary>
-        private Button NextBtn { get; set; }
+        private MyToggleButton NextBtn { get; set; }
         /// <summary>
         /// 上一页按钮
         /// </summary>
-        private Button PrevBtn { get; set; }
+        private MyToggleButton PrevBtn { get; set; }
         /// <summary>
         /// 根据Total和PageSize计算总共多少页
         /// </summary>
@@ -264,8 +265,8 @@ namespace XIMALAYA.PCDesktop.Controls
             base.OnApplyTemplate();
 
             this.StackPanel = GetTemplateChild(Pagination.PART_Pages) as StackPanel;
-            this.NextBtn = GetTemplateChild(Pagination.PART_NextBtn) as Button;
-            this.PrevBtn = GetTemplateChild(Pagination.PART_PrevBtn) as Button;
+            this.NextBtn = GetTemplateChild(Pagination.PART_NextBtn) as MyToggleButton;
+            this.PrevBtn = GetTemplateChild(Pagination.PART_PrevBtn) as MyToggleButton;
 
             this.NextBtn.Command = this.NextPageCommand;
             this.PrevBtn.Command = this.PrevPageCommand;
@@ -319,7 +320,11 @@ namespace XIMALAYA.PCDesktop.Controls
                 this.CurrentPage = this.TotalPage;
                 return;
             }
-
+            if (this.TotalPage < 2)
+            {
+                this.Visibility = System.Windows.Visibility.Hidden;
+                return;
+            }
             if (this.CurrentPage < this.InnerCount * 2)
             {
                 this.AddPageNoFront();
@@ -437,14 +442,19 @@ namespace XIMALAYA.PCDesktop.Controls
         }
         private void AddPageNo(int pageNo)
         {
-            this.StackPanel.Children.Add(new Button
+            var toggleButton = new MyToggleButton
             {
                 Content = pageNo,
+                ContentChecked = pageNo,
                 Command = this.ChangePageCommand,
                 CommandParameter = pageNo,
-                Style = this.ButtonStyle,
-                Background = pageNo == this.CurrentPage ? this.Background : new SolidColorBrush(Colors.Transparent),
-            });
+                IsBackground = System.Windows.Visibility.Visible,
+                IsChecked = pageNo == this.CurrentPage,
+                IsEnabled = pageNo != this.CurrentPage,
+                Padding = new Thickness(),
+                Style = this.ButtonStyle
+            };
+            this.StackPanel.Children.Add(toggleButton);
         }
         /// <summary>
         /// Total变量改变回调

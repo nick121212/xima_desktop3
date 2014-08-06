@@ -4,35 +4,68 @@
 
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/Converter.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 
 	<ControlTemplate x:Key="PaginationTemplate" TargetType="local:Pagination">
 		<Border BorderThickness="{TemplateBinding BorderThickness }" 
 				BorderBrush="{TemplateBinding BorderBrush}">
 			<StackPanel Orientation="Horizontal">
-				<Button Margin="{TemplateBinding Margin}" 
+				<!--<Button Margin="{TemplateBinding Margin}" 
 						Visibility="{TemplateBinding IsShowNextPrevBtn}" 
 						Height="{TemplateBinding Height}" 
 						Style="{TemplateBinding ButtonStyle}"
 						x:Name="PART_PrevBtn"
-						Content="上一页"/>
+						Content="上一页"/>-->
+				<local:MyToggleButton Margin="{TemplateBinding Margin}" 
+						              Visibility="{TemplateBinding IsShowNextPrevBtn}" 
+						              Style="{TemplateBinding ButtonStyle}"
+						              Height="{TemplateBinding Height}" 
+						              x:Name="PART_PrevBtn"
+									  IsBackground="Collapsed"
+									  ContentChecked="上一页"
+						              Content="上一页"/>
 				<StackPanel x:Name="PART_Pages" Orientation="Horizontal"/>
-				<Button Margin="{TemplateBinding Margin}" 
+				<local:MyToggleButton Margin="{TemplateBinding Margin}" 
+						              Visibility="{TemplateBinding IsShowNextPrevBtn}" 
+						              Style="{TemplateBinding ButtonStyle}"
+						              Height="{TemplateBinding Height}" 
+						              x:Name="PART_NextBtn"
+									  IsBackground="Collapsed"
+									  ContentChecked="下一页"
+						              Content="下一页"/>
+				<!--<Button Margin="{TemplateBinding Margin}" 
 						Visibility="{TemplateBinding IsShowNextPrevBtn}" 
 						Style="{TemplateBinding ButtonStyle}"
 						Height="{TemplateBinding Height}" 
 						x:Name="PART_NextBtn"
-						Content="下一页"/>
+						Content="下一页"/>-->
 			</StackPanel>
 		</Border>
 	</ControlTemplate>
 
-	<Style TargetType="Button" x:Key="PaginationButtonStyle" BasedOn="{StaticResource MetroButton}">
+		<Label Margin="0"
+			   x:Key="PginationButtonCheckedLabelStyle"
+			   Padding="0"
+			   HorizontalContentAlignment="Center"
+			   VerticalContentAlignment="Center"
+			   Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType=local:MyToggleButton}}"
+			   Background="{Binding Background,RelativeSource={RelativeSource AncestorType=local:MyToggleButton}}"
+			   Width="25"
+			   Height="25">
+		</Label>
+	
+	<Style TargetType="local:MyToggleButton" x:Key="PaginationButtonStyle" BasedOn="{StaticResource {x:Type local:MyToggleButton}}">
 		<Setter Property="Margin" Value="5"/>
 		<Setter Property="Padding" Value="5 0"/>
 		<Setter Property="MinWidth" Value="25"/>
+		<Setter Property="MinHeight" Value="25"/>
+		<Setter Property="BorderType" Value="Rectangle"/>
+		<Setter Property="Foreground" Value="White"/>
+		<Setter Property="Background" Value="{DynamicResource AccentColorBrush}"/>
+		<Setter Property="BorderBrush" Value="{DynamicResource AccentColorBrush}"/>
+		<Setter Property="ContentChecked" Value="{StaticResource PginationButtonCheckedLabelStyle}"/>
 	</Style>
-	
 	<Style TargetType="local:Pagination">
 		<Setter Property="Margin" Value="5"/>
 		<Setter Property="Template" Value="{StaticResource PaginationTemplate}"/>

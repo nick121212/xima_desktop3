@@ -61,22 +61,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ICategoryTagAlbumsService.cs" />
-    <Compile Include="ICategoryTagSoundsService.cs" />
     <Compile Include="ICategoryTagService.cs" />
-    <Compile Include="Impl\HotSoundsService.cs" />
     <Compile Include="Impl\FocusImageService.cs" />
     <Compile Include="Impl\CategoryTagAlbumsService.cs" />
-    <Compile Include="Impl\CategoryTagSoundsService.cs" />
     <Compile Include="Impl\CategoryTagService.cs" />
-    <Compile Include="Impl\CategoryService.cs" />
-    <Compile Include="Impl\AlbumInfoService.cs" />
-    <Compile Include="Impl\SubjectsService.cs" />
+    <Compile Include="Impl\AlbumDetailService.cs" />
     <Compile Include="Impl\SuperExploreIndexService.cs" />
-    <Compile Include="ICategoryService.cs" />
-    <Compile Include="IAlbumInfoService.cs" />
+    <Compile Include="IAlbumDetailService.cs" />
     <Compile Include="IFocusImageService.cs" />
-    <Compile Include="IHotSoundsService.cs" />
-    <Compile Include="ISubjectsService.cs" />
     <Compile Include="ISuperExploreIndex.cs" />
     <Compile Include="Impl\ServiceBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

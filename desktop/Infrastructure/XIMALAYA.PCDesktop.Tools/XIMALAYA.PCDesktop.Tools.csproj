@@ -20,7 +20,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\build\XIMALAYA.PCDesktop.Tools.XML</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -64,6 +65,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\WPFSoundVisualizationLib.dll</HintPath>
     </Reference>
+    <Reference Include="XIMALAYA.PCDesktop.Core.Models, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\XIMALAYA.PCDesktop.Core.Models.dll</HintPath>
+    </Reference>
     <Reference Include="XIMALAYA.PCDesktop.Events, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\XIMALAYA.PCDesktop.Events.dll</HintPath>
@@ -74,11 +79,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\IParamConvert.cs" />
-    <Compile Include="Attributes\ParamConvertAttribute.cs" />
     <Compile Include="Behaviors\AutoPopulateExportedViewsBehavior.cs" />
     <Compile Include="Command\Commands.cs" />
+    <Compile Include="Converter\HalfValueConverter.cs" />
     <Compile Include="Converter\MutiBoolConverter.cs" />
+    <Compile Include="Extension\VisualTreeHelperExtensions.cs" />
     <Compile Include="FlyoutVisible.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Converter\StringToBoolConverter.cs" />
@@ -142,7 +147,16 @@
     <Resource Include="Resources\Images\defaults\track.jpg" />
     <Resource Include="Resources\Images\defaults\album.png" />
     <Resource Include="Resources\Images\defaults\person_186.png" />
-    <Content Include="Resources\System\toolbar_next_n%402x.png" />
+    <Resource Include="Resources\Images\discover\bzbanner.png" />
+    <Resource Include="Resources\Images\discover\phbbanner.png" />
+    <Resource Include="Resources\Images\discover\bzbanner%402x.png" />
+    <Resource Include="Resources\Images\discover\phbbanner%402x.png" />
+    <Resource Include="Resources\Images\discover\lrdticon%402x.png" />
+    <Resource Include="Resources\Images\discover\arrow%402x.png" />
+    <Resource Include="Resources\Images\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

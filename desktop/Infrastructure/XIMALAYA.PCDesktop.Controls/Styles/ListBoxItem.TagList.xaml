@@ -21,7 +21,7 @@
                                  BorderThickness="1"
 								 CheckedBorderThickness="5"
                                  CommandParameter="{Binding TagName}"
-                                 Command="{Binding Path=DataContext.ShowSoundListForTagCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListBox}}}">
+                                 Command="{Binding Path=DataContext.ShowAlbumListForTagCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListBox}}}">
 			<MControls:MyRadioButton.Content>
 				<Grid Margin="0">
 					<Grid.RowDefinitions>

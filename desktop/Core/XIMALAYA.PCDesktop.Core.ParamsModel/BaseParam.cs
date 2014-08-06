@@ -20,7 +20,7 @@ namespace XIMALAYA.PCDesktop.Core.ParamsModel
         /// <summary>
         /// 分页的页码
         /// </summary>
-        [DataMember(IsRequired = false, Name = "page",Order = 20)]
+        [DataMember(IsRequired = false, Name = "page", Order = 20)]
         public int? Page { get; set; }
         /// <summary>
         /// 分页每页的数量
@@ -62,24 +62,21 @@ namespace XIMALAYA.PCDesktop.Core.ParamsModel
                 if (va != null)
                 {
                     val = ve.GetValue(this);
-                    if (val == null )//|| val.ToString() == string.Empty)
+                    if (val == null)//|| val.ToString() == string.Empty)
                     {
                         if (va.IsRequired)
                         {
                             throw new ArgumentNullException(va.Name);
                         }
-                        else
-                        {
-                            continue;
-                        }
+                        continue;
                     }
 
                     if (index > 0)
                     {
                         sReturn.Append("&");
                     }
-                    sReturn.AppendFormat("{0}={1}", va.Name, val.ToString());
                     index++;
+                    sReturn.AppendFormat("{0}={1}", va.Name, val.ToString());
                 }
             }
 

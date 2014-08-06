@@ -16,7 +16,6 @@ using XIMALAYA.PCDesktop.Core.Data.Decorator;
 using XIMALAYA.PCDesktop.Tools;
 using XIMALAYA.PCDesktop.Core.Models.Category;
 using XIMALAYA.PCDesktop.Core.Models.Discover;
-using XIMALAYA.PCDesktop.Core.Models.Recommend;
 using XIMALAYA.PCDesktop.Core.ParamsModel;
 using XIMALAYA.PCDesktop.Core.Models.Tags;
 

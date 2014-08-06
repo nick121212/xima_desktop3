@@ -4,15 +4,15 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Windows;
-using Microsoft.Practices.Prism.Regions;
+using System.Windows.Threading;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Regions;
 using XIMALAYA.PCDesktop.Core.Models.Album;
 using XIMALAYA.PCDesktop.Core.Models.Tags;
 using XIMALAYA.PCDesktop.Core.ParamsModel;
 using XIMALAYA.PCDesktop.Core.Services;
-using XIMALAYA.PCDesktop.Modules.AlbumListModule.Views;
-using System.Windows.Threading;
 using XIMALAYA.PCDesktop.Events;
+using XIMALAYA.PCDesktop.Modules.AlbumListModule.Views;
 using XIMALAYA.PCDesktop.Tools.Untils;
 
 namespace XIMALAYA.PCDesktop.Modules.AlbumListModule
@@ -21,7 +21,7 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumListModule
     /// 专辑model
     /// </summary>
     [Export]
-    [PartCreationPolicy(System.ComponentModel.Composition.CreationPolicy.NonShared)]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class AlbumViewModel : BaseViewModel
     {
         /// <summary>
@@ -139,14 +139,6 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumListModule
             this.StatusList = new List<string>() { "全部", "完结", "连载" };
         }
         /// <summary>
-        /// 下一页事件之前准备
-        /// </summary>
-        protected override void PreNextData()
-        {
-            this.Params.Page += 1;
-        }
-
-        /// <summary>
         /// 
         /// </summary>
         /// <param name="isClear"></param>
@@ -157,7 +149,6 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumListModule
                 if (isClear)
                 {
                     this.Albums.Clear();
-                    //this.CurrentPage = 1;
                 }
 
                 this.Params.Page = this.CurrentPage;

@@ -16,7 +16,6 @@ using XIMALAYA.PCDesktop.Core.Data.Decorator;
 using XIMALAYA.PCDesktop.Tools;
 using XIMALAYA.PCDesktop.Core.Models.Category;
 using XIMALAYA.PCDesktop.Core.Models.Discover;
-using XIMALAYA.PCDesktop.Core.Models.Recommend;
 
 namespace XIMALAYA.PCDesktop.Core.Services
 {
@@ -29,8 +28,9 @@ namespace XIMALAYA.PCDesktop.Core.Services
         /// <summary>
         /// 
         /// </summary>
+        /// 
         [Import]
-        protected ISubjectListResultResponsitory Responsitory { get; set; }
+        protected ISuperExploreIndexResultResponsitory Responsitory { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -39,25 +39,26 @@ namespace XIMALAYA.PCDesktop.Core.Services
             Result<SuperExploreIndexResult> result = new Result<SuperExploreIndexResult>();
 
             new SuperExploreIndexResultDecorator<SuperExploreIndexResult>(result);
-
+            //分类
             new CategoryResultDecorator<SuperExploreIndexResult>(result);
-            new CategoryDiscoverDataDecorator<SuperExploreIndexResult>(result);
-
+            new CategoryDataDecorator<SuperExploreIndexResult>(result);
+            //焦点图
             new FocusImageResultDecorator<SuperExploreIndexResult>(result);
             new FocusImageDataDecorator<SuperExploreIndexResult>(result);
-
-            new UserDataDecorator<SuperExploreIndexResult>(result);
-
-            new RecommendAlbumResultDecorator<SuperExploreIndexResult>(result);
+            //推荐用户
+            //new UserDataDecorator<SuperExploreIndexResult>(result);
+            //推荐专辑
+            new AlbumInfoResult1Decorator<SuperExploreIndexResult>(result);
             new AlbumDataDecorator<SuperExploreIndexResult>(result);
-
-            new SubjectListResultDecorator<SuperExploreIndexResult>(result);
-            new SubjectDataDecorator<SuperExploreIndexResult>(result);
+            //专题列表
+            //new SubjectListResultDecorator<SuperExploreIndexResult>(result);
+            //new SubjectDataDecorator<SuperExploreIndexResult>(result);
 
             this.Act = act;
             this.Decoder = Json.DecoderFor<SuperExploreIndexResult>(config => config.DeriveFrom(result.Config));
 
             this.Responsitory.Fetch(WellKnownUrl.SuperExploreIndex, param.ToString(), GetDataCallBack);
+
         }
     }
 }

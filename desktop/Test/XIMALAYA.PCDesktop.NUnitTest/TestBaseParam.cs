@@ -29,6 +29,11 @@ namespace XIMALAYA.PCDesktop.NUnitTest
                 PerPage = 20
             };
             Assert.AreEqual(baseParam.ToString(), "device=android&page=1&per_page=20");
+            baseParam = new BaseParam
+            {
+                Device = DeviceType.android
+            };
+            Assert.AreEqual(baseParam.ToString(), "device=android");
         }
     }
 }

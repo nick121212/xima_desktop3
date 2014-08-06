@@ -42,13 +42,12 @@ namespace XIMALAYA.PCDesktop.Core.Data
             base.doAddConfig();
             this.Config.MapType<SuperExploreIndexResult>(map => map
                                     .Field<System.Int32>(field => field.Ret, type => type.To("ret"))
-                    .Field<System.Boolean>(field => field.Res, type => type.To("res"))
                     .Field<System.String>(field => field.Message, type => type.To("msg"))
                     .Field<XIMALAYA.PCDesktop.Core.Models.FocusImage.FocusImageResult>(field => field.FocusImages, type => type.To("focusImages"))
                     .Field<XIMALAYA.PCDesktop.Core.Models.Category.CategoryResult>(field => field.Categories, type => type.To("categories"))
-                    .Field<XIMALAYA.PCDesktop.Core.Models.Subject.SubjectListResult>(field => field.Subjects, type => type.To("subjects"))
-                    .Field<XIMALAYA.PCDesktop.Core.Models.Recommend.RecommendAlbumResult>(field => field.Albums, type => type.To("recommendAlbums"))
-                    .Field<XIMALAYA.PCDesktop.Core.Models.User.UserData[]>(field => field.Users, type => type.To("maybeLikeUsers"))
+                    .Field<System.Object>(field => field.LatestActivity, type => type.To("latest_activity"))
+                    .Field<System.Object>(field => field.LatestSpecial, type => type.To("latest_special"))
+                    .Field<XIMALAYA.PCDesktop.Core.Models.Album.AlbumInfoResult1>(field => field.Albums, type => type.To("recommendAlbums"))
             );
         }
     }

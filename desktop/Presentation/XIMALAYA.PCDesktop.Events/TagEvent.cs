@@ -24,6 +24,10 @@ namespace XIMALAYA.PCDesktop.Events
         /// 标签的名称
         /// </summary>
         public string TagName { get; set; }
+        /// <summary>
+        /// 标签的名称
+        /// </summary>
+        public string Title { get; set; }
     }
     /// <summary>
     /// 获取标签事件

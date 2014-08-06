@@ -18,13 +18,15 @@ namespace XIMALAYA.PCDesktop.Core.Models.Subject
         /// contentType
         /// </summary>
         public int ContentType { get; set; }
-
+        /// <summary>
+        /// 是否为热门
+        /// </summary>
+        public bool IsHot { get; set; }
         /// <summary>
         /// 专题封面图大
         /// coverPathBig
         /// </summary>
         public string CoverPathBig { get; set; }
-
         /// <summary>
         /// 专题封面图小
         /// coverPathSmall
@@ -44,6 +46,7 @@ namespace XIMALAYA.PCDesktop.Core.Models.Subject
             this.doAddMap(() => this.CoverPathBig, "coverPathBig");
             this.doAddMap(() => this.CoverPathSmall, "coverPathSmall");
             this.doAddMap(() => this.Title, "title");
+            this.doAddMap(() => this.IsHot, "isHot");
         }
     }
 }

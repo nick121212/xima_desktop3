@@ -1,15 +1,10 @@
-﻿using Microsoft.Practices.Prism.Events;
+﻿using System.ComponentModel.Composition;
+using System.Windows;
+using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Prism.ViewModel;
 using Microsoft.Practices.ServiceLocation;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using Microsoft.Practices.Prism.Commands;
 
 namespace XIMALAYA.PCDesktop.Tools.Untils
 {

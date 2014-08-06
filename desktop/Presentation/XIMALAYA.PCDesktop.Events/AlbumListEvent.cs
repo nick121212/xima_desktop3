@@ -12,4 +12,9 @@ namespace XIMALAYA.PCDesktop.Events
     /// </summary>
     public class AlbumListEvent<T> : CompositePresentationEvent<T> { }
 
+    /// <summary>
+    /// 专辑详情页
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class AlbumDetailEvent<T> : CompositePresentationEvent<T> { }
 }

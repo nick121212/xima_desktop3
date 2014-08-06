@@ -43,8 +43,8 @@ namespace XIMALAYA.PCDesktop.Core.Data
             this.Config.MapType<AlbumData>(map => map
                                     .Field<System.Int64>(field => field.AlbumID, type => type.To("id"))
                     .Field<System.String>(field => field.Title, type => type.To("title"))
-                    .Field<System.String>(field => field.AlbumCoverUrl290, type => type.To("albumCoverUrl290"))
                     .Field<System.Int64>(field => field.PlayCount, type => type.To("playsCounts"))
+                    .Field<System.String>(field => field.AlbumCoverUrl290, type => type.To("albumCoverUrl290"))
                     .Field<System.Int64>(field => field.LastUptrackDate, type => type.To("lastUptrackAt"))
                     .Field<System.Int32>(field => field.SerialState, type => type.To("serialState"))
             );

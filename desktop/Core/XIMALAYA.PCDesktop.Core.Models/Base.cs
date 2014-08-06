@@ -22,6 +22,14 @@ namespace XIMALAYA.PCDesktop.Core.Models
         /// </summary>
         public bool IsFirst { get; set; }
         /// <summary>
+        /// 如果是TilePanel子元素的话，设置宽度的比例
+        /// </summary>
+        public int WidthPix { get; set; }
+        /// <summary>
+        /// 如果是TilePanel子元素的话，设置高度的比例
+        /// </summary>
+        public int HeightPix { get; set; }
+        /// <summary>
         /// 
         /// </summary>
         public Dictionary<string, string> Maps { get; set; }
@@ -29,6 +37,8 @@ namespace XIMALAYA.PCDesktop.Core.Models
         public Base()
         {
             this.Maps = new Dictionary<string, string>();
+            this.WidthPix = 1;
+            this.HeightPix = 1;
         }
         protected void doAddMap(string key, string value)
         {

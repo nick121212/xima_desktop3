@@ -1,15 +1,18 @@
 ﻿using System;
+using System.Windows;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
-using System.Linq;
-using Microsoft.Practices.Prism.Modularity;
-using Microsoft.Practices.Prism.Events;
-using Microsoft.Practices.Prism.ViewModel;
-using XIMALAYA.PCDesktop.Tools.Themes;
-using XIMALAYA.PCDesktop.Events;
-using System.Windows.Forms;
 using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
+using Microsoft.Practices.Prism.Events;
+using Microsoft.Practices.Prism.Modularity;
+using Microsoft.Practices.Prism.ViewModel;
+using XIMALAYA.PCDesktop.Events;
+using XIMALAYA.PCDesktop.Tools;
+using XIMALAYA.PCDesktop.Tools.Player;
+using XIMALAYA.PCDesktop.Tools.Themes;
 
 namespace XIMALAYA.PCDesktop
 {
@@ -72,6 +75,16 @@ namespace XIMALAYA.PCDesktop
         /// 是否关闭
         /// </summary>
         public bool IsShutDown { get; set; }
+        /// <summary>
+        /// 播放相关
+        /// </summary>
+        public BassEngine BassEngine
+        {
+            get
+            {
+                return PlayerSingleton.Instance;
+            }
+        }
 
         #endregion
 
@@ -124,6 +137,16 @@ namespace XIMALAYA.PCDesktop
             this.NotifyIcon.Icon = Icon.ExtractAssociatedIcon(System.Windows.Forms.Application.ExecutablePath);
             this.NotifyIcon.Visible = true;
             this.NotifyIcon.ShowBalloonTip(2000);
+
+            this.NotifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler((sender, MouseEventAtrs) =>
+            {
+                Window win = System.Windows.Application.Current.MainWindow;
+                win.Visibility = win.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+                if (win.Visibility == Visibility.Visible)
+                {
+                    win.Focus();
+                }
+            });
 
             //this.NotifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(notifyIcon_MouseClick);
 

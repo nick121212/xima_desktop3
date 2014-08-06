@@ -149,7 +149,7 @@
                         </Storyboard>
                     </VisualState>
                     <VisualState x:Name="Show">
-                        <Storyboard x:Name="ShowStoryboard">
+                        <Storyboard>
                             <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
                                                            Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
                                                            Storyboard.TargetName="root">

@@ -43,8 +43,8 @@ namespace XIMALAYA.PCDesktop.Core.Data
             this.Config.MapType<CategoryData>(map => map
                                     .Field<System.Int32>(field => field.ID, type => type.To("id"))
                     .Field<System.String>(field => field.Title, type => type.To("title"))
-                    .Field<System.Boolean>(field => field.IsDisplay, type => type.To("is_display"))
                     .Field<System.String>(field => field.CoverPath, type => type.To("coverPath"))
+                    .Field<System.Boolean>(field => field.IsChecked, type => type.To("isChecked"))
                     .Field<System.Int32>(field => field.OrderNum, type => type.To("orderNum"))
                     .Field<System.String>(field => field.Name, type => type.To("name"))
                     .Field<XIMALAYA.PCDesktop.Core.Models.Sound.SoundData[]>(field => field.Sounds, type => type.To("sounds"))

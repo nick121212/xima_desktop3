@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Practices.Prism.Events;
+﻿using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.ViewModel;
 using Microsoft.Practices.ServiceLocation;
 using XIMALAYA.PCDesktop.Events;
@@ -14,11 +8,12 @@ namespace XIMALAYA.PCDesktop.Tools
     /// <summary>
     /// 全局flytou显示属性
     /// </summary>
-    public sealed class FlyoutVisibleBase : NotificationObject
+    public  class FlyoutVisibleBase : NotificationObject
     {
         #region fields
 
         private bool _IsSettingFlyoutShow = false;
+        private bool _IsShowListView;
 
         #endregion
 
@@ -41,12 +36,30 @@ namespace XIMALAYA.PCDesktop.Tools
                     this.RaisePropertyChanged(() => this.IsSettingFlyoutShow);
                     if (this.EventAggregator == null)
                     {
-                        throw new Exception("EventAggregator null");
+                        return;
                     }
                     this.EventAggregator.GetEvent<ModulesManagerEvent>().Publish(new ModuleInfoArgument()
                     {
                         ModuleName = WellKnownModuleNames.SettingsModule
                     });
+                }
+            }
+        }
+        /// <summary>
+        /// 显示当前播放列表
+        /// </summary>
+        public bool IsShowListView
+        {
+            get
+            {
+                return _IsShowListView;
+            }
+            set
+            {
+                if (value != _IsShowListView)
+                {
+                    _IsShowListView = value;
+                    this.RaisePropertyChanged(() => this.IsShowListView);
                 }
             }
         }
@@ -69,7 +82,7 @@ namespace XIMALAYA.PCDesktop.Tools
     /// <summary>
     /// 全局单例
     /// </summary>
-    public class FlyoutVisible : Singleton<FlyoutVisibleBase>
+    public sealed class FlyoutVisible : Singleton<FlyoutVisibleBase>
     {
 
     }

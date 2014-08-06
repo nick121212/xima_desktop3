@@ -11,7 +11,6 @@
         <ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/ListBoxItem.CategoryList.xaml" />
         <ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/ListBoxItem.CategoryList.xaml" />
         <ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/ListBoxItem.CategoryList.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/ListBoxItem.SubjectList.xaml" />
 
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

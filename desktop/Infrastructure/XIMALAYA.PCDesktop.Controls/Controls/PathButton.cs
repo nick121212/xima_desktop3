@@ -88,6 +88,27 @@ namespace XIMALAYA.PCDesktop.Controls
             get { return (Thickness)GetValue(IconMarginProperty); }
             set { SetValue(IconMarginProperty, value); }
         }
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public object  TextContent
+        {
+            get { return (object )GetValue(TextContentProperty); }
+            set { SetValue(TextContentProperty, value); }
+        }
+
+       /// <summary>
+       /// 
+       /// </summary>
+        public static readonly DependencyProperty TextContentProperty =
+            DependencyProperty.Register("TextContent", typeof(object ), typeof(PathButton), new PropertyMetadata(string.Empty));
+
+
+
+
         /// <summary>
         /// 
         /// </summary>

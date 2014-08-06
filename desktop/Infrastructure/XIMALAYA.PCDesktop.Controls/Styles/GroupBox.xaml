@@ -27,6 +27,7 @@
                                    Background="Transparent"
                                    FontSize="14"
                                    Foreground="{DynamicResource LabelTextBrush}"
+								   Command="{Binding HotAlbumListCommand,Source={x:Static tools:CommandSingleton.Instance}}"
                                    Height="30">
 					</Controls:Tile>
 				</DataTemplate>

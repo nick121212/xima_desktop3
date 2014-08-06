@@ -38,7 +38,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icon_16.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MahApps.Metro, Version=0.13.1.0, Culture=neutral, processorArchitecture=MSIL">
@@ -89,12 +90,28 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\XIMALAYA.PCDesktop.Tools.dll</HintPath>
     </Reference>
+    <Reference Include="XIMALAYA.PCDesktop.Tools.Player, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\xima_desktop1\xima_desktop\desktop\build\XIMALAYA.PCDesktop.Tools.Player.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="DarkBlue.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ExpressionDark.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ExpressionLight.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Shell.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -141,7 +158,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icon_16.ico" />
+    <Resource Include="ICO\icon_16.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ICO\Pause.ico" />
+    <Resource Include="ICO\Play.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ICO\next.ico" />
+    <Resource Include="ICO\prev.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

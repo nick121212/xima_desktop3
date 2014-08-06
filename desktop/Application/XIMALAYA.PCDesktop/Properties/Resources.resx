@@ -46,7 +46,7 @@
     
     mimetype: application/x-microsoft.net.object.binary.base64
     value   : The object must be serialized with 
-            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
@@ -60,6 +60,7 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -68,9 +69,10 @@
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="name" use="required" type="xsd:string" />
               <xsd:attribute name="type" type="xsd:string" />
               <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
@@ -85,9 +87,10 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -109,9 +112,12 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="all" xml:space="preserve">
+    <value>F1M54,72C54,73.333 54,74.667 54,76 55.666,76 57.333,76 59,76 59.667,75.667 60.333,75.333 61,75 61,74.667 61,74.333 61,74 60.667,73.333 60.333,72.667 60,72 58,72 56,72 54,72z M68,49C70.524,51.328 70.827,58.45 69,62 68.667,62 68.333,62 68,62 68,57.667 68,53.333 68,49z M37,49C39.524,51.328 39.827,58.45 38,62 37.667,62 37.333,62 37,62 37,57.667 37,53.333 37,49z M51.675,24.994C50.197,24.94 48.64,24.942 47,25 36.627,30.384 22.141,43.3 31,63 31.667,64 32.333,65 33,66 37.513,65.785 38.391,65.292 41,64 41,59 41,53.999 41,49 38.595,44.562 35.378,45.119 33,41 38.946,28.274 49.965,25.538 65,30 68.8,34.965 72.353,37.507 74,45 62.072,44.49 62.885,60.599 70,67 68,69.333 66,71.667 64,74 64.333,74 64.667,74 65,74 69,70.667 73,67.333 77,64 78.083,39.092 73.835,25.797 51.675,24.994z M48,22C68.624,21.214 90.169,39.498 79,64 75.667,73.097 62.026,82.307 51,77 51,75.333 51,73.666 51,72 52,71.333 53,70.667 54,70 58,69.333 62,68.667 66,68 63.042,62.786 62.745,55.065 63,46 65.666,44.667 68.334,43.333 71,42 70.667,41 70.333,40 70,39 62.573,31.973 56.148,28.356 43,32 40.667,35 38.333,38 36,41 36,41.333 36,41.667 36,42 41.498,43.003 41.043,43.99 44,47 43.667,52.666 43.333,58.334 43,64 41.181,68.13 37.964,70.229 33,68 31,66.333 29,64.666 27,63 26.14,36.204 31.248,30.82 48,22z</value>
+  </data>
 </root>

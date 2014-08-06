@@ -41,7 +41,7 @@ namespace XIMALAYA.PCDesktop.Core.Models
             : base()
         {
             this.doAddMap(() => this.Ret, "ret");
-            this.doAddMap(() => this.Res, "res");
+            //this.doAddMap(() => this.Res, "res");
             this.doAddMap(() => this.Message, "msg");
         }
     }

@@ -5,5 +5,8 @@
     <converter:LongToDateConverter x:Key="LongToDateConverter"/>
     <converter:StringToBoolConverter x:Key="StringToBoolConverter"/>
 	<converter:MutiBoolConverter x:Key="MutiBoolConverter" />
+	<converter:HalfValueConverter x:Key="HalfValueConverter"/>
+	<converter:TimeSpanConverter x:Key="TimeSpanConverter"/>
+	<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     
 </ResourceDictionary>

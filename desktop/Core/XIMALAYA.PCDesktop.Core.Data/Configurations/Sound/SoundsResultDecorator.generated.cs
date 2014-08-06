@@ -42,7 +42,6 @@ namespace XIMALAYA.PCDesktop.Core.Data
             base.doAddConfig();
             this.Config.MapType<SoundsResult>(map => map
                                     .Field<System.Int32>(field => field.Ret, type => type.To("ret"))
-                    .Field<System.Boolean>(field => field.Res, type => type.To("res"))
                     .Field<System.String>(field => field.Message, type => type.To("msg"))
                     .Field<System.Int32>(field => field.PageID, type => type.To("pageId"))
                     .Field<System.Int32>(field => field.PageSize, type => type.To("pageSize"))

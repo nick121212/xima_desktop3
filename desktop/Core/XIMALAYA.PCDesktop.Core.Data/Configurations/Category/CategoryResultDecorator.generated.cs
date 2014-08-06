@@ -42,9 +42,7 @@ namespace XIMALAYA.PCDesktop.Core.Data
             base.doAddConfig();
             this.Config.MapType<CategoryResult>(map => map
                                     .Field<System.Int32>(field => field.Ret, type => type.To("ret"))
-                    .Field<System.Boolean>(field => field.Res, type => type.To("res"))
                     .Field<System.String>(field => field.Message, type => type.To("msg"))
-                    .Field<System.Int32>(field => field.Count, type => type.To("count"))
                     .Field<XIMALAYA.PCDesktop.Core.Models.Category.CategoryData[]>(field => field.List, type => type.To("data"))
             );
         }

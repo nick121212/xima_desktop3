@@ -15,6 +15,7 @@ using MahApps.Metro.Controls.Dialogs;
 using MahApps.Metro.Controls;
 using XIMALAYA.PCDesktop.Core.Models.Album;
 using XIMALAYA.PCDesktop.Cache;
+using XIMALAYA.PCDesktop.Controls;
 
 namespace XIMALAYA.PCDesktop.Modules.DiscoverPage
 {
@@ -39,16 +40,6 @@ namespace XIMALAYA.PCDesktop.Modules.DiscoverPage
         /// </summary>
         [Import]
         private ISuperExploreIndex SuperExploreIndex { get; set; }
-        /// <summary>
-        /// 分类接口服务
-        /// </summary>
-        [Import]
-        private ICategoryService CategoryService { get; set; }
-        /// <summary>
-        /// 热门声音服务
-        /// </summary>
-        [Import]
-        private IHotSoundsService HotSoundsService { get; set; }
         /// <summary>
         /// 今日焦点的title
         /// </summary>
@@ -105,24 +96,6 @@ namespace XIMALAYA.PCDesktop.Modules.DiscoverPage
             this.SuperExploreIndex.GetData(this.GetExporeIndexData, new SuperExploreParam
             {
                 Device = DeviceType.pc,
-                PicVersion = 7
-            });
-        }
-        private void GetCategoryListAction()
-        {
-            this.CategoryService.GetData(categories =>
-            {
-                CategoryResult categoryResult = categories as CategoryResult;
-                Application.Current.Dispatcher.InvokeAsync(() =>
-                {
-                    foreach (CategoryData cd in categoryResult.List)
-                    {
-                        DiscoverViewModel.CategoryList.Add(cd);
-                    }
-                });
-            }, new CategoryParam
-            {
-                Device = DeviceType.pc,
                 PicVersion = 5,
                 Scale = 2
             });
@@ -144,14 +117,25 @@ namespace XIMALAYA.PCDesktop.Modules.DiscoverPage
                         index++;
                         this.FocusImageList.Add(fi);
                     }
-                    this.SubjectModuleTitle = superData.Subjects.ModuleTitle;
-                    foreach (var sd in superData.Subjects.List)
+                    //index = 0;
+                    //foreach (var album in superData.Albums.List)
+                    //{
+                    //    album.IsFirst = index == 0;
+                    //    index++;
+                    //    this.AlbumList.Add(album);
+                    //}
+                    //index = 0;
+                    DiscoverViewModel.CategoryList.Add(new CategoryData
                     {
-                        this.SubjectList.Add(sd);
-                    }
-                    foreach (var album in superData.Albums.List)
+                        Title = "搜索",
+                        Name = "search",
+                        //CoverPath = "pack://application:,,,/XIMALAYA.PCDesktop.Tools;component/Resources/Images/search.png"
+                    });
+                    foreach (var category in superData.Categories.List)
                     {
-                        this.AlbumList.Add(album);
+                        //category.IsFirst = index == 0;
+                        //index++;
+                        DiscoverViewModel.CategoryList.Add(category);
                     }
                 }, System.Windows.Threading.DispatcherPriority.Background);
             }
@@ -160,39 +144,9 @@ namespace XIMALAYA.PCDesktop.Modules.DiscoverPage
                 DialogManager.ShowMessageAsync(Application.Current.MainWindow as MetroWindow, "喜马拉雅", superData.Message);
             }
         }
-        private void GetHotSoundsAction()
-        {
-            if (this.HotSoundsService != null)
-            {
-                this.HotSoundsService.GetData(result =>
-                {
-                    var res = result as HotSoundsResult;
-
-                    if (res.Ret == 0)
-                    {
-                        Application.Current.Dispatcher.InvokeAsync(() =>
-                        {
-                            foreach (var cate in res.Categories)
-                            {
-                                SoundCache.Instance.SetData(cate.Sounds);
-                                this.HotSoundsCategories.Add(cate);
-                            }
-                        });
-
-                    }
-                }, new BaseParam
-                {
-                    Device = DeviceType.pc
-                });
-            }
-        }
         public void Initialize()
         {
             this.GetFocusImageDataAction();
-
-            this.GetHotSoundsAction();
-
-            this.GetCategoryListAction();
         }
 
         #endregion

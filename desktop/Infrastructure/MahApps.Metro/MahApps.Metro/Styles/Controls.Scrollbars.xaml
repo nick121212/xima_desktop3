@@ -542,7 +542,7 @@
     </ControlTemplate>
 
     <!-- Style for overall  ScrollBar -->
-	<Style x:Key="MetroScrollBar"
+    <Style x:Key="MetroScrollBar"
            TargetType="{x:Type ScrollBar}">
         <Setter Property="SnapsToDevicePixels"
                 Value="True" />

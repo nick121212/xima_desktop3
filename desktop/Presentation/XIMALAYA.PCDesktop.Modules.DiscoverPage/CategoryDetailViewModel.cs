@@ -70,9 +70,9 @@ namespace XIMALAYA.PCDesktop.Modules.DiscoverPage
             }
         }
         /// <summary>
-        /// 分类，标签 下的声音
+        /// 分类，标签 下的专辑
         /// </summary>
-        public DelegateCommand<string> ShowSoundListForTagCommand { get; set; }
+        public DelegateCommand<string> ShowAlbumListForTagCommand { get; set; }
         /// <summary>
         /// 视图类
         /// </summary>
@@ -156,15 +156,15 @@ namespace XIMALAYA.PCDesktop.Modules.DiscoverPage
         {
             this.TagDataList = new ObservableCollection<TagData>();
 
-
             //点击标签事件
-            this.ShowSoundListForTagCommand = new DelegateCommand<string>(tagName =>
+            this.ShowAlbumListForTagCommand = new DelegateCommand<string>(tagName =>
             {
                 if (this.CurrentCategory != null)
                 {
                     this.EventAggregator.GetEvent<AlbumListEvent<TagEventArgument>>().Publish(new TagEventArgument()
                     {
                         Category = this.CurrentCategory.Name,
+                        Title = tagName == "全部" ? "热门" : tagName,
                         TagName = tagName == "全部" ? " " : tagName,
                     });
                 }

@@ -1,28 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.ComponentModel.Composition.Hosting;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using MahApps.Metro;
 using MahApps.Metro.Controls;
-using Microsoft.Practices.Prism.MefExtensions;
-using Microsoft.Practices.Prism.Modularity;
+using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Practices.Prism.Regions;
 using XIMALAYA.PCDesktop.Tools;
-using System.Windows.Shell;
-using MahApps.Metro.Controls.Dialogs;
+using XIMALAYA.PCDesktop.Tools.Player;
 using XIMALAYA.PCDesktop.Tools.Untils;
 
 namespace XIMALAYA.PCDesktop
@@ -33,22 +17,37 @@ namespace XIMALAYA.PCDesktop
     [Export]
     public partial class Shell : IFlyoutFactory
     {
+        #region 属性
 
         [Import(AllowRecomposition = false)]
         private IRegionManager regionManager { get; set; }
+        [Import]
+        public MainViewModel MainViewModel
+        {
+            get { return this.DataContext as MainViewModel; }
+            set { this.DataContext = value; }
+        }
+        public int Count { get; set; }
+        private Flyout LastFlyout { get; set; }
+        private Flyout CurrentFlyout { get; set; }
 
+        #endregion
+
+        #region 构造
+
+        /// <summary>
+        /// 构造
+        /// </summary>
         public Shell()
         {
             InitializeComponent();
             this.Loaded += Shell_Loaded;
             this.Closed += Shell_Closed;
-            //this.SizeChanged += Shell_SizeChanged;
         }
 
-        void Shell_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            if (LastFlyout != null) this.ContainerGrid.Items.Remove(LastFlyout);
-        }
+        #endregion
+
+        #region 事件
 
         void Shell_Closed(object sender, EventArgs e)
         {
@@ -84,16 +83,7 @@ namespace XIMALAYA.PCDesktop
             //taskBar.ProgressValue = 0.4;
         }
 
-        [Import]
-        public MainViewModel MainViewModel
-        {
-            get { return this.DataContext as MainViewModel; }
-            set { this.DataContext = value; }
-        }
-
-        public int Count { get; set; }
-        private Flyout LastFlyout { get; set; }
-        private Flyout CurrentFlyout { get; set; }
+        #endregion
 
         #region IFlyoutFactory 成员
 
@@ -107,12 +97,8 @@ namespace XIMALAYA.PCDesktop
                 this.CurrentFlyout.IsOpen = true;
             }
         }
-        /// <summary>
-        /// 新建层
-        /// </summary>
-        /// <param name="header"></param>
-        /// <returns></returns>
-        public string GetFlyout(string header)
+
+        private string SetFlyout(string header)
         {
             string regionName = string.Format("ViewRegionName_{0}", ++this.Count);
 
@@ -120,7 +106,6 @@ namespace XIMALAYA.PCDesktop
             Binding binding = null;
             RelativeSource rs;
 
-            this.ContainerGrid.Items.Add(this.CurrentFlyout);
             this.CurrentFlyout.AnimateOnPositionChange = true;
             this.CurrentFlyout.Theme = FlyoutTheme.Adapt;
             this.CurrentFlyout.Header = header;
@@ -130,28 +115,98 @@ namespace XIMALAYA.PCDesktop
             binding = new Binding("ActualWidth");
             binding.RelativeSource = rs;
             this.CurrentFlyout.SetBinding(Flyout.WidthProperty, binding);
+            RegionManager.SetRegionManager(this.CurrentFlyout, this.regionManager);
             RegionManager.SetRegionName(this.CurrentFlyout, regionName);
+            this.ContainerGrid.Items.Add(this.CurrentFlyout);
             this.CurrentFlyout.ApplyTemplate();
-            this.CurrentFlyout.IsOpenChanged += flyout_IsOpenChanged;
+            //this.CurrentFlyout.IsOpenChanged += flyout_IsOpenChanged;
+            this.CurrentFlyout.IsHideComplete += CurrentFlyout_IsHideComplete;
+            this.CurrentFlyout.Position = Position.Right;
+
+            return regionName;
+        }
+
+        
+
+        /// <summary>
+        /// 新建层
+        /// </summary>
+        /// <param name="header"></param>
+        /// <returns></returns>
+        public string GetFlyout(string header)
+        {
+            string regionName = this.SetFlyout(header);
+
             this.CurrentFlyout.Position = Position.Right;
             this.CurrentFlyout.IsOpen = true;
 
             return regionName;
         }
-        void flyout_IsOpenChanged(object sender, EventArgs e)
+        /// <summary>
+        /// 新建面板
+        /// </summary>
+        /// <param name="header"></param>
+        /// <param name="Width"></param>
+        /// <param name="Height"></param>
+        /// <returns></returns>
+        public string GetFlyout(string header, double? Width, double? Height)
         {
-            Flyout flyout = sender as Flyout;
+            return this.GetFlyout(header, Width, Height, false);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="header"></param>
+        /// <param name="Width"></param>
+        /// <param name="Height"></param>
+        /// <param name="isModal"></param>
+        /// <returns></returns>
+        public string GetFlyout(string header, double? Width, double? Height, bool isModal)
+        {
+            string regionName = this.SetFlyout(header);
 
-            if (flyout.IsOpen == false)
+            if (Width.HasValue)
             {
-                if (LastFlyout != null)
-                {
-                    this.ContainerGrid.Items.Remove(LastFlyout);
-                    LastFlyout = null;
-                }
-                LastFlyout = flyout;
-                LastFlyout.Content = null;
+                this.CurrentFlyout.Width = (double)Width;
             }
+            if (Height.HasValue)
+            {
+                this.CurrentFlyout.Height = (double)Height;
+            }
+
+            this.CurrentFlyout.IsModal = isModal;
+            this.CurrentFlyout.Position = Position.Right;
+            this.CurrentFlyout.IsOpen = true;
+
+            return regionName;
+        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="sender"></param>
+        ///// <param name="e"></param>
+        //void flyout_IsOpenChanged(object sender, EventArgs e)
+        //{
+        //    Flyout flyout = sender as Flyout;
+
+        //    if (flyout.IsOpen == false)
+        //    {
+        //        if (LastFlyout != null)
+        //        {
+        //            this.Flyouts.Items.Remove(LastFlyout);
+        //            LastFlyout = null;
+        //        }
+        //        LastFlyout = flyout;
+        //        LastFlyout.Content = null;
+        //    }
+        //}
+
+        void CurrentFlyout_IsHideComplete(object sender, EventArgs e)
+        {
+            var flyout = sender as Flyout;
+
+            flyout.Content = null;
+            this.ContainerGrid.Items.Remove(flyout);
         }
 
         #endregion

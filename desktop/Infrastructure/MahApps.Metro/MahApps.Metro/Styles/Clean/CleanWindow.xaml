@@ -58,12 +58,13 @@
                           Grid.Row="0"
                           Grid.Column="0"
                           Grid.ColumnSpan="5"
+						  HorizontalAlignment="Stretch"
                           Height="{Binding TitlebarHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
                           Visibility="{TemplateBinding ShowTitleBar, Converter={StaticResource BooleanToVisibilityConverter}}">
 
                         <!--This (empty) element is used so everything still responds to drag-->
                         <Label VerticalContentAlignment="Center"
-                               HorizontalContentAlignment="Center">
+                               HorizontalContentAlignment="Left">
                             <ContentControl x:Name="TitleControl"
                                             Content="{TemplateBinding Title}"
                                             ContentTemplate="{TemplateBinding TitleTemplate}"

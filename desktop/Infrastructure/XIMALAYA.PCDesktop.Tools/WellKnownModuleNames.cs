@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace XIMALAYA.PCDesktop.Tools
 {
     /// <summary>
@@ -46,5 +41,9 @@ namespace XIMALAYA.PCDesktop.Tools
         /// </summary>
         public const string AlbumListModule = "AlbumListModule";
 
+        /// <summary>
+        /// 菜单
+        /// </summary>
+        public const string MenusModule = "MenusModule";
     }
 }

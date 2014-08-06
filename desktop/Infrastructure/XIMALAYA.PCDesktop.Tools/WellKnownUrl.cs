@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace XIMALAYA.PCDesktop.Tools
 {
     /// <summary>
@@ -33,7 +28,7 @@ namespace XIMALAYA.PCDesktop.Tools
         /// <summary>
         /// 发现页总接口（焦点图，分类，推荐专辑，专题，推荐喜欢的用户）
         /// </summary>
-        public const string SuperExploreIndex = WebPath + "/m/super_explore_index";
+        public const string SuperExploreIndex = WebPath + "/m/super_explore_index2";
 
         /// <summary>
         /// 分类下的标签接口

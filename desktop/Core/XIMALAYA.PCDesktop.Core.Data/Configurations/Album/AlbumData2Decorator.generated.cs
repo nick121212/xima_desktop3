@@ -43,6 +43,7 @@ namespace XIMALAYA.PCDesktop.Core.Data
             this.Config.MapType<AlbumData>(map => map
                                     .Field<System.Int64>(field => field.AlbumID, type => type.To("album_id"))
                     .Field<System.String>(field => field.Title, type => type.To("title"))
+                    .Field<System.Int64>(field => field.PlayCount, type => type.To("plays_counts"))
                     .Field<System.String>(field => field.AlbumCoverUrl290, type => type.To("album_cover_path_290"))
                     .Field<System.String>(field => field.AlbumCoverUrl640, type => type.To("album_cover_path_640"))
                     .Field<System.String>(field => field.AlbumCoverUrl86, type => type.To("album_cover_path_86"))
@@ -68,7 +69,6 @@ namespace XIMALAYA.PCDesktop.Core.Data
                     .Field<System.String>(field => field.MusicCategory, type => type.To("music_category"))
                     .Field<System.String>(field => field.NickName, type => type.To("nickname"))
                     .Field<System.String>(field => field.OpType, type => type.To("op_type"))
-                    .Field<System.Int64>(field => field.PlayCount, type => type.To("plays_counts"))
                     .Field<System.String>(field => field.RichIntro, type => type.To("rich_intro"))
                     .Field<System.String>(field => field.ShortIntro, type => type.To("short_intro"))
                     .Field<System.String>(field => field.SourceUrl, type => type.To("source_url"))

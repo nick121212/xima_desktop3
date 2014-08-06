@@ -42,7 +42,6 @@ namespace XIMALAYA.PCDesktop.Core.Data
             base.doAddConfig();
             this.Config.MapType<AlbumInfoResult>(map => map
                                     .Field<System.Int32>(field => field.Ret, type => type.To("ret"))
-                    .Field<System.Boolean>(field => field.Res, type => type.To("res"))
                     .Field<System.String>(field => field.Message, type => type.To("msg"))
                     .Field<XIMALAYA.PCDesktop.Core.Models.Album.AlbumData>(field => field.Album, type => type.To("album"))
                     .Field<XIMALAYA.PCDesktop.Core.Models.Sound.SoundsResult>(field => field.SoundsResult, type => type.To("tracks"))

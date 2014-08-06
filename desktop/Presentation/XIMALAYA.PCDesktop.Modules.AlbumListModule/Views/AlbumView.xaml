@@ -25,9 +25,24 @@
 								   IsIndeterminate="{Binding IsWaiting}" />
 
 		<StackPanel Margin="20 0 0 0"  Orientation="Horizontal" Width="Auto">
-			<RadioButton GroupName="Condition" IsChecked="{Binding Condition,Converter={StaticResource ConditaionAlbumTypeToBoolConverter},ConverterParameter=0}" Style="{DynamicResource MetroRadioButton}" Command="{Binding ConditionCommand}" CommandParameter="0" Content="最火"></RadioButton>
-			<RadioButton GroupName="Condition" IsChecked="{Binding Condition,Converter={StaticResource ConditaionAlbumTypeToBoolConverter},ConverterParameter=1}" Style="{DynamicResource MetroRadioButton}" Command="{Binding ConditionCommand}" CommandParameter="1" Content="最近更新"></RadioButton>
-			<RadioButton GroupName="Condition" IsChecked="{Binding Condition,Converter={StaticResource ConditaionAlbumTypeToBoolConverter},ConverterParameter=2}" Style="{DynamicResource MetroRadioButton}" Command="{Binding ConditionCommand}" CommandParameter="2" Content="经典"></RadioButton>
+			<RadioButton GroupName="Condition" 
+						 IsChecked="{Binding Condition,Converter={StaticResource ConditaionAlbumTypeToBoolConverter},ConverterParameter=0}" 
+						 Style="{DynamicResource MetroRadioButton}" 
+						 Command="{Binding ConditionCommand}" 
+						 CommandParameter="0" 
+						 Content="最火"/>
+			<RadioButton GroupName="Condition" 
+						 IsChecked="{Binding Condition,Converter={StaticResource ConditaionAlbumTypeToBoolConverter},ConverterParameter=1}" 
+						 Style="{DynamicResource MetroRadioButton}" 
+						 Command="{Binding ConditionCommand}" 
+						 CommandParameter="1" 
+						 Content="最近更新"/>
+			<RadioButton GroupName="Condition" 
+						 IsChecked="{Binding Condition,Converter={StaticResource ConditaionAlbumTypeToBoolConverter},ConverterParameter=2}" 
+						 Style="{DynamicResource MetroRadioButton}" 
+						 Command="{Binding ConditionCommand}" 
+						 CommandParameter="2" 
+						 Content="经典"/>
 
 			<Controls:SplitButton HorizontalContentAlignment="Left"
                                   HorizontalAlignment="Center"
@@ -55,19 +70,11 @@
 		</ListBox>
 
 		<MControls:Pagination PageSize="{Binding PageSize}"
+							  HorizontalAlignment="Center"
 							  Grid.Row="3" 
 							  Margin="3"
 							  IsEnabled="{Binding IsEnable}"
 							  CurrentPage="{Binding CurrentPage,Mode=TwoWay}"
 							  Total="{Binding Total}"/>
-
-		<!--<StackPanel Visibility="{Binding IsNextPageVisibled,Converter={StaticResource BooleanToVisibility}}"
-					Grid.Row="3" 
-					Margin="10">
-			<Button Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=StackPanel}, Path=ActualWidth}"
-				    Command="{Binding NextPageCommand}"
-					Content="下一页" />
-		</StackPanel>-->
-
 	</Grid>
 </UserControl>

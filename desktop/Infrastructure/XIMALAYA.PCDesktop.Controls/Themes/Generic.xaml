@@ -4,25 +4,27 @@
 
     <ResourceDictionary.MergedDictionaries>
 
-        <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatSlider.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro.Resources;component/Icons.xaml" />-->
-
-        <ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Themes/MetroSLider.xaml" />
+		<!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+		<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+		<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+		<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+		<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+		<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatSlider.xaml" />
+		<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
+		<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Clean/CleanWindow.xaml" />-->
+		
+		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Themes/MetroSLider.xaml" />
         <ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Themes/PathButton.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Themes/MyToggleButton.xaml" />
+		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Themes/MyCheckboxButton.xaml" />
         <ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Themes/MyRadioButton.xaml" />
 		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Themes/MyImage.xaml" />
 		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Themes/Pagination.xaml" />
+		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Themes/MyToggleButton.xaml" />
 		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/ListBoxItem.xaml" />
         <ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/GroupBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/Checkbox.xaml" />
 		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/ScrollViewer.xaml" />
+		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/Path.xaml" />
 
 	</ResourceDictionary.MergedDictionaries>
 
