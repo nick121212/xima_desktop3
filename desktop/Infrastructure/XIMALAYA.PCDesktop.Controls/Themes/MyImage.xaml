@@ -1,0 +1,31 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:XIMALAYA.PCDesktop.Controls">
+	<ControlTemplate x:Key="MyImageTemplate" TargetType="local:MyImage">
+		<Grid Width="{TemplateBinding Width}" 
+			  Height="{TemplateBinding Height}"
+			  Background="{TemplateBinding Background}">
+			<Image x:Name="PART_Image" Source="{TemplateBinding Source}" 
+				   Width="{TemplateBinding Width}" 
+				   Height="{TemplateBinding Height}" 
+				   Stretch="Fill" >
+			</Image>
+		</Grid>
+		<ControlTemplate.Triggers>
+			<!--<EventTrigger RoutedEvent="FrameworkElement.Loaded">
+				<BeginStoryboard >
+					<Storyboard>
+						<DoubleAnimation Storyboard.TargetProperty="Opacity"
+										 Storyboard.TargetName="PART_Image"
+										 To="0" />
+					</Storyboard>
+				</BeginStoryboard>
+			</EventTrigger>-->
+		</ControlTemplate.Triggers>
+	</ControlTemplate>
+
+	<Style TargetType="local:MyImage">
+		<Setter Property="Template" Value="{StaticResource MyImageTemplate}"/>
+	</Style>
+
+</ResourceDictionary>

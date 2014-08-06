@@ -1,0 +1,46 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                                 xmlns:tools="http://ximalaya.com/xaml/tools"
+                                 xmlns:converter="http://ximalaya.com/xaml/tools/converter"
+                                 xmlns:MControls="clr-namespace:XIMALAYA.PCDesktop.Controls">
+
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/MyRadioButton.xaml" />
+		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/ListBoxItem.Common.xaml" />
+	</ResourceDictionary.MergedDictionaries>
+
+	<DataTemplate x:Key="TagItemTemplate" DataType="{x:Type ListBoxItem}">
+		<MControls:MyRadioButton Background="Transparent"
+                                 Width="180" 
+                                 Height="180"
+                                 Margin="5"
+                                 IconMargin="6"
+                                 GroupName="tabGroup"
+                                 IconData="{Binding Submit,Source={x:Static MControls:PathData.Instance}}"
+                                 Style="{StaticResource MetroMyRadioButton}"
+                                 BorderThickness="1"
+								 CheckedBorderThickness="5"
+                                 CommandParameter="{Binding TagName}"
+                                 Command="{Binding Path=DataContext.ShowSoundListForTagCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListBox}}}">
+			<MControls:MyRadioButton.Content>
+				<Grid Margin="0">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*"/>
+						<RowDefinition Height="30"/>
+					</Grid.RowDefinitions>
+
+					<MControls:MyImage Source="{Binding CoverPath}"
+									   DefaultSource="tag.jpg"
+									   Width="180" 
+									   Height="160" />
+										 
+					<Label Grid.Row="1" HorizontalAlignment="Center" Content="{Binding TagName}" />
+				</Grid>
+			</MControls:MyRadioButton.Content>
+		</MControls:MyRadioButton>
+	</DataTemplate>
+	<Style x:Key="TagListStyle" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource ListItemBaseTemp}">
+		<Setter Property="ContentTemplate" Value="{StaticResource TagItemTemplate}"/>
+	</Style>
+
+</ResourceDictionary>

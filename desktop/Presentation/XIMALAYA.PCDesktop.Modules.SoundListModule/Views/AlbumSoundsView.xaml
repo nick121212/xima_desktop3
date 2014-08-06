@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="XIMALAYA.PCDesktop.Modules.SoundListModule.Views.AlbumSoundsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:MControls="http://ximalaya.com/xaml/controls"
+             xmlns:tools="clr-namespace:XIMALAYA.PCDesktop.Tools;assembly=XIMALAYA.PCDesktop.Tools">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Controls:MetroProgressBar Grid.Row="1" Foreground="{DynamicResource AccentColorBrush}" Visibility="{Binding IsWaiting,Converter={StaticResource BooleanToVisibility}}" Margin="10" IsIndeterminate="True" />
+
+        <ListBox ItemsSource="{Binding Sounds}" 
+                 ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                 VirtualizingStackPanel.IsVirtualizing="True" 
+                 VirtualizingStackPanel.VirtualizationMode="Standard"
+                 Grid.Row="2"
+                 ItemContainerStyle="{StaticResource SoundListStyle}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel ScrollViewer.VerticalScrollBarVisibility="Visible"
+                               ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                               Background="Transparent"
+                               Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBox}, Path=ActualWidth}"
+                               Orientation="Horizontal" 
+                               IsItemsHost="True"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.CacheMode>
+                <BitmapCache EnableClearType="False" 
+                             RenderAtScale="1" 
+                             SnapsToDevicePixels="False"/>
+            </ListBox.CacheMode>
+        </ListBox>
+
+    </Grid>
+
+</UserControl>

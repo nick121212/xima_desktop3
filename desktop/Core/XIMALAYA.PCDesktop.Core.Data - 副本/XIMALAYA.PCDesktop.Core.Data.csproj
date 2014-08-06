@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FBF35816-8BAB-4645-8677-FDFE20726703}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>XIMALAYA.PCDesktop.Core.Data</RootNamespace>
+    <AssemblyName>XIMALAYA.PCDesktop.Core.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\build\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FluentJson, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\FluentJson.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="XIMALAYA.PCDesktop.Core.Models, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\XIMALAYA.PCDesktop.Core.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="XIMALAYA.PCDesktop.Tools, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\XIMALAYA.PCDesktop.Tools.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configurations\Album\AlbumDataConfiguration.cs" />
+    <Compile Include="Configurations\Album\AlbumDataConfiguration.generated.cs" />
+    <Compile Include="Configurations\Category\CategoryDataConfiguration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configurations\Category\CategoryDataConfiguration.generated.cs" />
+    <Compile Include="Configurations\Category\CategoryListResultConfiguration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configurations\Category\CategoryListResultConfiguration.generated.cs" />
+    <Compile Include="Configurations\Discover\SuperExploreIndexConfiguration.cs" />
+    <Compile Include="Configurations\Discover\SuperExploreIndexResultConfiguration.generated.cs" />
+    <Compile Include="Configurations\Feed\FeedDataConfiguration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configurations\Feed\FeedDataConfiguration.generated.cs" />
+    <Compile Include="Configurations\Feed\FeedResultConfiguration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configurations\Feed\FeedResultConfiguration.generated.cs" />
+    <Compile Include="Configurations\FocusImage\FocusImageDataConfiguration.cs" />
+    <Compile Include="Configurations\FocusImage\FocusImageDataConfiguration.generated.cs" />
+    <Compile Include="Configurations\FocusImage\FocusImageResultConfiguration.cs" />
+    <Compile Include="Configurations\FocusImage\FocusImageResultConfiguration.generated.cs" />
+    <Compile Include="Configurations\Recommend\RecommendAlbumResultConfiguration.cs" />
+    <Compile Include="Configurations\Recommend\RecommendAlbumResultConfiguration.generated.cs" />
+    <Compile Include="Configurations\Sound\SoundDataConfiguration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configurations\Sound\SoundDataConfiguration.generated.cs" />
+    <Compile Include="Configurations\Subject\SubjectDataConfiguration.cs" />
+    <Compile Include="Configurations\Subject\SubjectDataConfiguration.generated.cs" />
+    <Compile Include="Configurations\Subject\SubjectListResultConfiguration.cs" />
+    <Compile Include="Configurations\Subject\SubjectListResultConfiguration.generated.cs" />
+    <Compile Include="Decorator\ResultBase.cs" />
+    <Compile Include="IJsonConfig.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="JsonConfigDecorator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositoryBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Respositories\Category\CategoryRespositories.generated.cs" />
+    <Compile Include="Respositories\Category\ICategoryRespositories.generated.cs" />
+    <Compile Include="Respositories\Discover\DiscoverRespositories.generated.cs" />
+    <Compile Include="Respositories\Discover\IDiscoverRespositories.generated.cs" />
+    <Compile Include="Respositories\Feed\FeedRespositories.generated.cs" />
+    <Compile Include="Respositories\Feed\IFeedRespositories.generated.cs" />
+    <Compile Include="Respositories\FocusImage\FocusImageRespositories.generated.cs" />
+    <Compile Include="Respositories\FocusImage\IFocusImageRespositories.generated.cs" />
+    <Compile Include="Respositories\Recommend\IRecommendRespositories.generated.cs" />
+    <Compile Include="Respositories\Recommend\RecommendRespositories.generated.cs" />
+    <Compile Include="Respositories\Subject\ISubjectRespositories.generated.cs" />
+    <Compile Include="Respositories\Subject\SubjectRespositories.generated.cs" />
+    <Compile Include="T4\CoreData.cs">
+      <DependentUpon>CoreData.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="T4\CoreData.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CoreData.cs</LastGenOutput>
+      <LastOutputs>
+..\Configurations\Album\AlbumDataConfiguration.generated.cs
+..\Configurations\Category\CategoryDataConfiguration.generated.cs
+..\Configurations\Category\CategoryListResultConfiguration.generated.cs
+..\Configurations\Discover\SuperExploreIndexResultConfiguration.generated.cs
+..\Configurations\Feed\FeedDataConfiguration.generated.cs
+..\Configurations\Feed\FeedResultConfiguration.generated.cs
+..\Configurations\FocusImage\FocusImageDataConfiguration.generated.cs
+..\Configurations\FocusImage\FocusImageResultConfiguration.generated.cs
+..\Configurations\Recommend\RecommendAlbumResultConfiguration.generated.cs
+..\Configurations\Sound\SoundDataConfiguration.generated.cs
+..\Configurations\Subject\SubjectDataConfiguration.generated.cs
+..\Configurations\Subject\SubjectListResultConfiguration.generated.cs
+..\Respositories\Category\CategoryRespositories.generated.cs
+..\Respositories\Category\ICategoryRespositories.generated.cs
+..\Respositories\Discover\DiscoverRespositories.generated.cs
+..\Respositories\Discover\IDiscoverRespositories.generated.cs
+..\Respositories\Feed\FeedRespositories.generated.cs
+..\Respositories\Feed\IFeedRespositories.generated.cs
+..\Respositories\FocusImage\FocusImageRespositories.generated.cs
+..\Respositories\FocusImage\IFocusImageRespositories.generated.cs
+..\Respositories\Recommend\IRecommendRespositories.generated.cs
+..\Respositories\Recommend\RecommendRespositories.generated.cs
+..\Respositories\Subject\ISubjectRespositories.generated.cs
+..\Respositories\Subject\SubjectRespositories.generated.cs
+.\CoreData.cs
+</LastOutputs>
+    </None>
+    <None Include="T4\Includes\IRespositoriesTemplate.ttinclude" />
+    <None Include="T4\Includes\JsonConfigurationDecoratorTemplate.ttinclude" />
+    <None Include="T4\Includes\JsonConfigurationTemplate.ttinclude" />
+    <None Include="T4\Includes\RespositoriesTemplate.ttinclude" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

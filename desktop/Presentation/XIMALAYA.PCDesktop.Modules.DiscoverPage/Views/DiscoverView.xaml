@@ -1,0 +1,117 @@
+﻿<UserControl x:Class="XIMALAYA.PCDesktop.Modules.DiscoverPage.Views.DiscoverView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:MControls="http://ximalaya.com/xaml/controls"
+             xmlns:cal="http://www.codeplex.com/prism"
+             xmlns:local="clr-namespace:XIMALAYA.PCDesktop.Modules.DiscoverPage"
+             xmlns:tools="clr-namespace:XIMALAYA.PCDesktop.Tools;assembly=XIMALAYA.PCDesktop.Tools"
+             mc:Ignorable="d" 
+             HorizontalAlignment="Center">
+
+	<ScrollViewer x:Name="mainScroll"
+				  Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Grid}, Path=ActualWidth}" 
+				  Style="{StaticResource for_scrollviewer}"
+                  HorizontalScrollBarVisibility="Auto" 
+                  VerticalScrollBarVisibility="Disabled">
+		<Grid Margin="0 20" VerticalAlignment="Center">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+			<!--焦点图-->
+			<GroupBox Header=" "
+                      Style="{StaticResource MyMetroGroupBox}"
+                      Width="Auto" >
+				<ListBox Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=GroupBox}, Path=Width}"
+                         Background="Transparent"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         FocusVisualStyle="{x:Null}"
+                         ItemContainerStyle="{StaticResource MetroFocusImageStyle}"
+                         ItemsSource="{Binding FocusImageList}">
+					<ListBox.ItemsPanel>
+						<ItemsPanelTemplate>
+							<MControls:TilePanel TileHeight="5" 
+                                                 TileWidth="5" 
+                                                 TileCount="198"
+                                                 TileMargin="2"/>
+						</ItemsPanelTemplate>
+					</ListBox.ItemsPanel>
+				</ListBox>
+			</GroupBox>
+			<!--分类列表-->
+			<GroupBox Header=" "
+                      Style="{StaticResource MyMetroGroupBox}"
+                      Grid.Column="1">
+				<ListBox Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=GroupBox}, Path=Width}"
+                         Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=GroupBox}, Path=Height}"
+                         Background="Transparent"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         ItemContainerStyle="{StaticResource MetroCategoryStyle}"
+                         ItemsSource="{x:Static local:DiscoverViewModel.CategoryList}">
+					<ListBox.ItemsPanel>
+						<ItemsPanelTemplate>
+							<MControls:TilePanel TileHeight="5" 
+                                                 TileWidth="5" 
+                                                 TileMargin="2"
+                                                 TileCount="60"/>
+						</ItemsPanelTemplate>
+					</ListBox.ItemsPanel>
+				</ListBox>
+			</GroupBox>
+			<!--专题列表-->
+			<GroupBox Header="{Binding SubjectModuleTitle}"
+                      Style="{StaticResource MyMetroGroupBox}"
+                      Grid.Column="2" >
+				<ListBox Background="Transparent"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         ItemContainerStyle="{StaticResource MetroSubjectListStyle}" 
+                         ItemsSource="{Binding SubjectList}">
+					<ListBox.ItemsPanel>
+						<ItemsPanelTemplate>
+							<MControls:TilePanel TileHeight="10" 
+                                                 TileWidth="10" 
+                                                 TileMargin="2"
+                                                 TileCount="30"/>
+						</ItemsPanelTemplate>
+					</ListBox.ItemsPanel>
+				</ListBox>
+			</GroupBox>
+			<!--推荐专辑-->
+			<GroupBox Header="推荐专辑"
+                      Style="{StaticResource MyMetroGroupBox}"
+                      Grid.Column="3" >
+				<ListBox Background="Transparent"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         ItemContainerStyle="{StaticResource MetroAlbumListStyle}" 
+                         ItemsSource="{Binding AlbumList}">
+					<ListBox.ItemsPanel>
+						<ItemsPanelTemplate>
+							<MControls:TilePanel TileHeight="5" 
+                                                 TileWidth="5" 
+                                                 TileMargin="3"
+                                                 TileCount="90"/>
+						</ItemsPanelTemplate>
+					</ListBox.ItemsPanel>
+				</ListBox>
+			</GroupBox>
+			<!--热门声音-->
+			<ListBox Grid.Column="4" 
+                     Background="Transparent"
+                     ItemContainerStyle="{StaticResource MetroHotSoundsStyle}"
+                     ItemsSource="{Binding HotSoundsCategories}">
+				<ListBox.ItemsPanel>
+					<ItemsPanelTemplate>
+						<WrapPanel Orientation="Horizontal"/>
+					</ItemsPanelTemplate>
+				</ListBox.ItemsPanel>
+			</ListBox>
+		</Grid>
+	</ScrollViewer>
+	
+</UserControl>

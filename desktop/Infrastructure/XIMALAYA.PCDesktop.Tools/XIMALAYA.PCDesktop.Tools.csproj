@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9D9640F0-2C41-4788-B2A3-98CB380F0C2A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>XIMALAYA.PCDesktop.Tools</RootNamespace>
+    <AssemblyName>XIMALAYA.PCDesktop.Tools</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\build\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\..\build\XIMALAYA.PCDesktop.Tools.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MahApps.Metro, Version=0.13.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\Microsoft.Practices.Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism.MefExtensions, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\Microsoft.Practices.Prism.MefExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WPFSoundVisualizationLib, Version=0.4.5247.32420, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\WPFSoundVisualizationLib.dll</HintPath>
+    </Reference>
+    <Reference Include="XIMALAYA.PCDesktop.Events, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\XIMALAYA.PCDesktop.Events.dll</HintPath>
+    </Reference>
+    <Reference Include="XIMALAYA.PCDesktop.Tools.Player, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\XIMALAYA.PCDesktop.Tools.Player.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attributes\IParamConvert.cs" />
+    <Compile Include="Attributes\ParamConvertAttribute.cs" />
+    <Compile Include="Behaviors\AutoPopulateExportedViewsBehavior.cs" />
+    <Compile Include="Command\Commands.cs" />
+    <Compile Include="Converter\MutiBoolConverter.cs" />
+    <Compile Include="FlyoutVisible.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="Converter\StringToBoolConverter.cs" />
+    <Compile Include="Converter\LongToDateConverter.cs" />
+    <Compile Include="Extension\TypeExtensions.cs" />
+    <Compile Include="HttpWebRequestOpt.cs" />
+    <Compile Include="Untils\BaseModule.cs" />
+    <Compile Include="Untils\BaseViewModel.cs" />
+    <Compile Include="Untils\IFlyoutFactory.cs" />
+    <Compile Include="T4\T4ModelInfo.cs" />
+    <Compile Include="Untils\OSInfo.cs" />
+    <Compile Include="WellKnownUrl.cs" />
+    <Compile Include="Themes\AccentColorMenuData.cs" />
+    <Compile Include="Themes\AppThemeMenuData.cs" />
+    <Compile Include="Singleton.cs" />
+    <Compile Include="Converter\ErrorConverter.cs" />
+    <Compile Include="Converter\TimeSpanToDoubleConverter.cs" />
+    <Compile Include="Converter\TimeSpanConverter.cs" />
+    <Compile Include="Converter\ImgConverter.cs" />
+    <Compile Include="Attributes\IViewRegionRegistration.cs" />
+    <Compile Include="RegionAdapter\FlyoutRegionAdapter.cs" />
+    <Compile Include="RegionAdapter\StackPanelRegionAdapter.cs" />
+    <Compile Include="Themes\ThemeInfoManager.cs" />
+    <Compile Include="Attributes\ViewExportAttribute.cs" />
+    <Compile Include="WellKnownRegionNames.cs" />
+    <Compile Include="WellKnownModuleNames.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\category\baijia.png" />
+    <Resource Include="Resources\Images\category\book.png" />
+    <Resource Include="Resources\Images\category\chair.png" />
+    <Resource Include="Resources\Images\category\comic.png" />
+    <Resource Include="Resources\Images\category\culture.png" />
+    <Resource Include="Resources\Images\category\emotion.png" />
+    <Resource Include="Resources\Images\category\entertainment.png" />
+    <Resource Include="Resources\Images\category\finance.png" />
+    <Resource Include="Resources\Images\category\health.png" />
+    <Resource Include="Resources\Images\category\it.png" />
+    <Resource Include="Resources\Images\category\kid.png" />
+    <Resource Include="Resources\Images\category\music.png" />
+    <Resource Include="Resources\Images\category\news.png" />
+    <Resource Include="Resources\Images\category\opera.png" />
+    <Resource Include="Resources\Images\category\other.png" />
+    <Resource Include="Resources\Images\category\radio.png" />
+    <Resource Include="Resources\Images\category\radioplay.png" />
+    <Resource Include="Resources\Images\category\train.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\category\all.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\defaults\tag.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\tagall.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\defaults\banner.png" />
+    <Resource Include="Resources\Images\defaults\person.jpg" />
+    <Resource Include="Resources\Images\defaults\track.jpg" />
+    <Resource Include="Resources\Images\defaults\album.png" />
+    <Resource Include="Resources\Images\defaults\person_186.png" />
+    <Content Include="Resources\System\toolbar_next_n%402x.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

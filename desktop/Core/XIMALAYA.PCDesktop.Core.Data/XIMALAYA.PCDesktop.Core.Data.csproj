@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FBF35816-8BAB-4645-8677-FDFE20726703}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>XIMALAYA.PCDesktop.Core.Data</RootNamespace>
+    <AssemblyName>XIMALAYA.PCDesktop.Core.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\build\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FluentJson, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\FluentJson.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="XIMALAYA.PCDesktop.Core.Models, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\XIMALAYA.PCDesktop.Core.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="XIMALAYA.PCDesktop.Tools, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\XIMALAYA.PCDesktop.Tools.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configurations\Album\AlbumData1Decorator.generated.cs" />
+    <Compile Include="Configurations\Album\AlbumData2Decorator.generated.cs" />
+    <Compile Include="Configurations\Album\AlbumData3Decorator.generated.cs" />
+    <Compile Include="Configurations\Album\AlbumDataDecorator.generated.cs" />
+    <Compile Include="Configurations\Album\AlbumInfoResultDecorator.generated.cs" />
+    <Compile Include="Configurations\Category\CategoryDataDecorator.generated.cs" />
+    <Compile Include="Configurations\Category\CategoryDiscoverDataDecorator.generated.cs" />
+    <Compile Include="Configurations\Category\CategoryResultDecorator.generated.cs" />
+    <Compile Include="Configurations\Discover\HotSoundsResultDecorator.generated.cs" />
+    <Compile Include="Configurations\Discover\SuperExploreIndexResultDecorator.generated.cs" />
+    <Compile Include="Configurations\FocusImage\FocusImageDataDecorator.generated.cs" />
+    <Compile Include="Configurations\FocusImage\FocusImageResultDecorator.generated.cs" />
+    <Compile Include="Configurations\Recommend\RecommendAlbumResultDecorator.generated.cs" />
+    <Compile Include="Configurations\Sound\SoundData1Decorator.generated.cs" />
+    <Compile Include="Configurations\Sound\SoundData2Decorator.generated.cs" />
+    <Compile Include="Configurations\Sound\SoundData3Decorator.generated.cs" />
+    <Compile Include="Configurations\Sound\SoundDataDecorator.generated.cs" />
+    <Compile Include="Configurations\Sound\SoundsResultDecorator.generated.cs" />
+    <Compile Include="Configurations\Subject\SubjectDataDecorator.generated.cs" />
+    <Compile Include="Configurations\Subject\SubjectListResultDecorator.generated.cs" />
+    <Compile Include="Configurations\Tags\CategoryTagResultDecorator.generated.cs" />
+    <Compile Include="Configurations\Tags\TagAlbumsResultDecorator.generated.cs" />
+    <Compile Include="Configurations\Tags\TagDataDecorator.generated.cs" />
+    <Compile Include="Configurations\Tags\TagSoundListResultDecorator.generated.cs" />
+    <Compile Include="Configurations\User\UserDataDecorator.generated.cs" />
+    <Compile Include="Decorator\ResultBase.cs" />
+    <Compile Include="IRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositoryBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Respositories\Album\AlbumInfoResultRespositories.generated.cs" />
+    <Compile Include="Respositories\Album\IAlbumInfoResultRespositories.generated.cs" />
+    <Compile Include="Respositories\Category\CategoryResultRespositories.generated.cs" />
+    <Compile Include="Respositories\Category\ICategoryResultRespositories.generated.cs" />
+    <Compile Include="Respositories\Discover\HotSoundsResultRespositories.generated.cs" />
+    <Compile Include="Respositories\Discover\IHotSoundsResultRespositories.generated.cs" />
+    <Compile Include="Respositories\Discover\ISuperExploreIndexResultRespositories.generated.cs" />
+    <Compile Include="Respositories\Discover\SuperExploreIndexResultRespositories.generated.cs" />
+    <Compile Include="Respositories\FocusImage\FocusImageResultRespositories.generated.cs" />
+    <Compile Include="Respositories\FocusImage\IFocusImageResultRespositories.generated.cs" />
+    <Compile Include="Respositories\Recommend\IRecommendAlbumResultRespositories.generated.cs" />
+    <Compile Include="Respositories\Recommend\RecommendAlbumResultRespositories.generated.cs" />
+    <Compile Include="Respositories\Sound\ISoundsResultRespositories.generated.cs" />
+    <Compile Include="Respositories\Sound\SoundsResultRespositories.generated.cs" />
+    <Compile Include="Respositories\Subject\ISubjectListResultRespositories.generated.cs" />
+    <Compile Include="Respositories\Subject\SubjectListResultRespositories.generated.cs" />
+    <Compile Include="Respositories\Tags\CategoryTagResultRespositories.generated.cs" />
+    <Compile Include="Respositories\Tags\ICategoryTagResultRespositories.generated.cs" />
+    <Compile Include="Respositories\Tags\ITagAlbumsResultRespositories.generated.cs" />
+    <Compile Include="Respositories\Tags\ITagSoundListResultRespositories.generated.cs" />
+    <Compile Include="Respositories\Tags\TagAlbumsResultRespositories.generated.cs" />
+    <Compile Include="Respositories\Tags\TagSoundListResultRespositories.generated.cs" />
+    <Compile Include="T4\CoreData.cs">
+      <DependentUpon>CoreData.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="T4\CoreData.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CoreData.cs</LastGenOutput>
+      <LastOutputs>
+..\Configurations\Album\AlbumData1Decorator.generated.cs
+..\Configurations\Album\AlbumData2Decorator.generated.cs
+..\Configurations\Album\AlbumData3Decorator.generated.cs
+..\Configurations\Album\AlbumDataDecorator.generated.cs
+..\Configurations\Album\AlbumInfoResultDecorator.generated.cs
+..\Configurations\Category\CategoryDataDecorator.generated.cs
+..\Configurations\Category\CategoryDiscoverDataDecorator.generated.cs
+..\Configurations\Category\CategoryResultDecorator.generated.cs
+..\Configurations\Discover\HotSoundsResultDecorator.generated.cs
+..\Configurations\Discover\SuperExploreIndexResultDecorator.generated.cs
+..\Configurations\FocusImage\FocusImageDataDecorator.generated.cs
+..\Configurations\FocusImage\FocusImageResultDecorator.generated.cs
+..\Configurations\Recommend\RecommendAlbumResultDecorator.generated.cs
+..\Configurations\Sound\SoundData1Decorator.generated.cs
+..\Configurations\Sound\SoundData2Decorator.generated.cs
+..\Configurations\Sound\SoundData3Decorator.generated.cs
+..\Configurations\Sound\SoundDataDecorator.generated.cs
+..\Configurations\Sound\SoundsResultDecorator.generated.cs
+..\Configurations\Subject\SubjectDataDecorator.generated.cs
+..\Configurations\Subject\SubjectListResultDecorator.generated.cs
+..\Configurations\Tags\CategoryTagResultDecorator.generated.cs
+..\Configurations\Tags\TagAlbumsResultDecorator.generated.cs
+..\Configurations\Tags\TagDataDecorator.generated.cs
+..\Configurations\Tags\TagSoundListResultDecorator.generated.cs
+..\Configurations\User\UserDataDecorator.generated.cs
+..\Respositories\Album\AlbumInfoResultRespositories.generated.cs
+..\Respositories\Album\IAlbumInfoResultRespositories.generated.cs
+..\Respositories\Category\CategoryResultRespositories.generated.cs
+..\Respositories\Category\ICategoryResultRespositories.generated.cs
+..\Respositories\Discover\HotSoundsResultRespositories.generated.cs
+..\Respositories\Discover\IHotSoundsResultRespositories.generated.cs
+..\Respositories\Discover\ISuperExploreIndexResultRespositories.generated.cs
+..\Respositories\Discover\SuperExploreIndexResultRespositories.generated.cs
+..\Respositories\FocusImage\FocusImageResultRespositories.generated.cs
+..\Respositories\FocusImage\IFocusImageResultRespositories.generated.cs
+..\Respositories\Recommend\IRecommendAlbumResultRespositories.generated.cs
+..\Respositories\Recommend\RecommendAlbumResultRespositories.generated.cs
+..\Respositories\Sound\ISoundsResultRespositories.generated.cs
+..\Respositories\Sound\SoundsResultRespositories.generated.cs
+..\Respositories\Subject\ISubjectListResultRespositories.generated.cs
+..\Respositories\Subject\SubjectListResultRespositories.generated.cs
+..\Respositories\Tags\CategoryTagResultRespositories.generated.cs
+..\Respositories\Tags\ICategoryTagResultRespositories.generated.cs
+..\Respositories\Tags\ITagAlbumsResultRespositories.generated.cs
+..\Respositories\Tags\ITagSoundListResultRespositories.generated.cs
+..\Respositories\Tags\TagAlbumsResultRespositories.generated.cs
+..\Respositories\Tags\TagSoundListResultRespositories.generated.cs
+.\CoreData.cs
+</LastOutputs>
+    </None>
+    <None Include="T4\Includes\IRespositoriesTemplate.ttinclude" />
+    <None Include="T4\Includes\JsonDecoratorTemplate.ttinclude" />
+    <None Include="T4\Includes\JsonConfigurationDecoratorTemplate.ttinclude" />
+    <None Include="T4\Includes\JsonConfigurationTemplate.ttinclude" />
+    <None Include="T4\Includes\RespositoriesTemplate.ttinclude" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

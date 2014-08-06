@@ -1,0 +1,181 @@
+﻿<UserControl x:Class="XIMALAYA.PCDesktop.Modules.MusicPlayer.Views.MusicPlayerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:MControls="http://ximalaya.com/xaml/controls"
+             xmlns:tools="http://ximalaya.com/xaml/tools/converter"
+             xmlns:sound="clr-namespace:WPFSoundVisualizationLib;assembly=WPFSoundVisualizationLib"
+             mc:Ignorable="d" 
+             d:DesignWidth="700">
+
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Themes/Generic.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+			<tools:TimeSpanToDoubleConverter x:Key="TimeSpanToDoubleConverter"/>
+			<tools:TimeSpanConverter x:Key="TimeSpanConverter"></tools:TimeSpanConverter>
+			<BooleanToVisibilityConverter x:Key="BoolToVisibility"></BooleanToVisibilityConverter>
+		</ResourceDictionary>
+	</UserControl.Resources>
+
+	<Grid VerticalAlignment="Center" Margin="0 5">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="Auto"/>
+		</Grid.ColumnDefinitions>
+		
+		<!--控制按钮-->
+		<StackPanel Grid.Column="3" Grid.Row="1" Orientation="Horizontal">
+			<!--波形-->
+			<sound:SpectrumAnalyzer x:Name="SpectrumAnalyzer"
+									Margin="10 0"
+									Width="200"
+									Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=WrapPanel}, Path=ActualHeight}">
+				<sound:SpectrumAnalyzer.BarStyle>
+					<Style TargetType="{x:Type Rectangle}">
+						<Setter Property="Fill">
+							<Setter.Value>
+								<LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" x:Name="BarBrush">
+									<GradientStop Color="{DynamicResource AccentColor}" Offset="0"/>
+									<GradientStop Color="{DynamicResource AccentColor4}" Offset="1"/>
+								</LinearGradientBrush>
+							</Setter.Value>
+						</Setter>
+					</Style>
+				</sound:SpectrumAnalyzer.BarStyle>
+				<sound:SpectrumAnalyzer.PeakStyle>
+					<Style TargetType="{x:Type Rectangle}">
+						<Setter Property="Fill">
+							<Setter.Value>
+								<SolidColorBrush Color="{DynamicResource AccentColor2}" />
+							</Setter.Value>
+						</Setter>
+					</Style>
+				</sound:SpectrumAnalyzer.PeakStyle>
+			</sound:SpectrumAnalyzer>
+			<MControls:PathButton IsChecked="{Binding BassEngine.IsMuted}"
+                                  Fill="White"
+                                  Margin="5 0"
+                                  Background="{DynamicResource AccentColorBrush4}"
+                                  IconHeight="10"
+                                  IconWidth="10"
+                                  Height="20"
+                                  Width="20"
+                                  IsSingle="True"
+                                  IconData="{Binding VolumePath, Source={x:Static MControls:PathData.Instance}}" >
+			</MControls:PathButton>
+			<Slider Margin="2"
+                    Width="70" 
+                    Height="5"
+                    Maximum="1"
+                    Minimum="0"
+                    LargeChange="0.2"
+                    SmallChange="0.1"
+                    Value="{Binding BassEngine.Volume}"
+                    Style="{DynamicResource FlatSlider}" />
+			<MControls:PathButton IsChecked="False"
+                                  Fill="White"
+                                  Margin="5 0"
+                                  Background="{DynamicResource AccentColorBrush4}"
+                                  IconHeight="15"
+                                  IconWidth="15"
+                                  Height="30"
+                                  Width="30"
+                                  IsSingle="True"
+                                  IconData="{Binding ToolbarPrevPath, Source={x:Static MControls:PathData.Instance}}" >
+			</MControls:PathButton>
+			<MControls:PathButton Fill="White"
+                                  Margin="5 0"
+								  IconMargin="10 0 5 0"
+                                  Background="{DynamicResource AccentColorBrush4}"
+                                  IsChecked="{Binding BassEngine.IsPlaying,Mode=OneWay}"
+                                  Command="{Binding BassEngine.PlayCommand}"
+                                  CommandParameter="{Binding Source={RelativeSource Self},Path=IsChecked}"
+                                  IconHeight="25"
+                                  IconWidth="25"
+                                  Height="50"
+                                  Width="50"
+                                  IconDataChecked="{Binding ToolbarPausePath, Source={x:Static MControls:PathData.Instance}}"
+                                  IconData="{Binding ToolbarPlayPath, Source={x:Static MControls:PathData.Instance}}">
+			</MControls:PathButton>
+			<MControls:PathButton IsChecked="False"
+                                  Fill="White"
+                                  Margin="5 0"
+                                  Background="{DynamicResource AccentColorBrush4}"
+                                  IconHeight="15"
+                                  IconWidth="15"
+                                  Height="30"
+                                  Width="30"
+                                  IsSingle="True"
+                                  IconData="{Binding ToolbarNextPath, Source={x:Static MControls:PathData.Instance}}" >
+			</MControls:PathButton>
+		</StackPanel>
+
+		<!--人物头像-->
+		<MControls:MyImage Grid.Column="0"
+						   Grid.Row="1"
+						   Margin="5"
+						   VerticalAlignment="Center"
+						   Width="32" 
+						   Height="32" 
+						   Source="{Binding SoundData.CoverSmall}"
+						   DefaultSource="person.jpg"/>
+
+		<!--声音信息-->
+		<Grid Grid.Row="1" Grid.Column="1">
+			<TextBlock TextWrapping="Wrap"
+					   Margin="0 0 100 0"
+					   FontSize="14"
+					   Text="{Binding SoundData.Title}" 
+					   VerticalAlignment="Center"/>
+			<StackPanel Orientation="Horizontal"
+						HorizontalAlignment="Right" 
+						VerticalAlignment="Center">
+				<TextBlock HorizontalAlignment="Right" 
+						   VerticalAlignment="Center"
+						   Text="{Binding TotalTimeSpan,ElementName=metroSlider,Converter={StaticResource TimeSpanConverter}}"/>
+				<TextBlock HorizontalAlignment="Right" 
+						   VerticalAlignment="Center"
+						   Text="{Binding Duration,ElementName=metroSlider,Converter={StaticResource TimeSpanConverter},StringFormat='{} / {0}'}"/>
+			</StackPanel>
+		</Grid>
+
+		<!--进度条-->
+		<Grid Grid.ColumnSpan="4" 
+			  Grid.Row="0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+
+			<MControls:MetroSlider x:Name="metroSlider"
+                                   Minimum="0"
+								   Height="10"
+                                   Maximum="{Binding RelativeSource={RelativeSource Self},Path=Duration}"
+                                   ThumbBackground="{DynamicResource WhiteColorBrush}"
+                                   ThumbForeground="{DynamicResource AccentColorBrush}"
+                                   TrackBackgroundBack="{DynamicResource AccentColorBrush4}"
+                                   TrackBackgroundFront="{DynamicResource AccentColorBrush}"
+                                   TotalTimeSpan="{Binding RelativeSource={RelativeSource Self},Path=Value}"
+                                   Duration="{Binding BassEngine.TotalTime,Converter={StaticResource TimeSpanToDoubleConverter}}"
+                                   Value="{Binding BassEngine.CurrentTime,Converter={StaticResource TimeSpanToDoubleConverter}}"
+                                   Process="{Binding BassEngine.Process}"
+                                   Panel.ZIndex="10"
+                                   LargeChange="5000"
+                                   Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Grid}, Path=ActualWidth}"
+                                   SmallChange="1000">
+			</MControls:MetroSlider>
+		</Grid>
+
+	</Grid>
+
+</UserControl>

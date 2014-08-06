@@ -1,0 +1,118 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:tools="http://ximalaya.com/xaml/tools/converter"
+                    xmlns:local="clr-namespace:XIMALAYA.PCDesktop.Controls">
+
+	<BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+
+	<DataTemplate x:Key="PathButtonTemplate" DataType="{x:Type local:PathButton}">
+		<Path x:Name="IconDataPath" 
+                  Opacity="1"
+                  Data="{Binding IconData, RelativeSource={RelativeSource AncestorType={x:Type local:PathButton}}}" 
+                  Stretch="{Binding Stretch, RelativeSource={RelativeSource AncestorType={x:Type local:PathButton}}}" 
+                  Fill="{Binding Fill, RelativeSource={RelativeSource AncestorType={x:Type local:PathButton}}}" 
+                  Width="{Binding IconWidth, RelativeSource={RelativeSource AncestorType={x:Type local:PathButton}}}" 
+                  Height="{Binding IconHeight, RelativeSource={RelativeSource AncestorType={x:Type local:PathButton}}}" 
+                  Margin="{Binding IconMargin, RelativeSource={RelativeSource AncestorType={x:Type local:PathButton}}}" 
+                  UseLayoutRounding="True">
+			<Path.RenderTransform>
+				<TransformGroup>
+					<TransformGroup.Children>
+						<RotateTransform Angle="0" />
+						<ScaleTransform ScaleX="1" ScaleY="1" />
+					</TransformGroup.Children>
+				</TransformGroup>
+			</Path.RenderTransform>
+		</Path>
+		<DataTemplate.Triggers>
+			<MultiDataTrigger >
+				<MultiDataTrigger.Conditions>
+					<Condition Binding="{Binding Path=IsChecked,RelativeSource={RelativeSource TemplatedParent}}" Value="True" />
+					<Condition Binding="{Binding Path=IsSingle,RelativeSource={RelativeSource TemplatedParent}}" Value="False"/>
+				</MultiDataTrigger.Conditions>
+				<Setter TargetName="IconDataPath" Property="Data" Value="{Binding IconDataChecked, RelativeSource={RelativeSource AncestorType={x:Type local:PathButton}}}"/>
+				<Setter TargetName="IconDataPath" Property="Margin" Value="{Binding IconCheckedMargin, RelativeSource={RelativeSource AncestorType={x:Type local:PathButton}}}"/>
+			</MultiDataTrigger>
+			<DataTrigger Binding="{Binding Path=IsChecked,RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+
+			</DataTrigger>
+		</DataTemplate.Triggers>
+	</DataTemplate>
+
+	<ControlTemplate x:Key="PathButtonTemplate1" TargetType="{x:Type ToggleButton}">
+		<Grid>
+			<Ellipse Fill="{DynamicResource AccentColorBrush}" Opacity="0.8"
+                                 StrokeThickness="0" />
+			<Ellipse x:Name="ellipsebg" Visibility="Hidden"
+                                 Fill="{DynamicResource AccentColorBrush2}"
+                                 Opacity="0"
+                                 StrokeThickness="0" />
+			<Ellipse x:Name="ellipse"
+                                 Stroke="{DynamicResource AccentColorBrush4}"
+                                 StrokeThickness="{Binding RelativeSource={x:Static RelativeSource.TemplatedParent}, Path=BorderThickness.Left}" />
+			<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              Margin="{TemplateBinding Padding}"
+                              ContentSource="Content"
+                              ContentTemplate="{StaticResource PathButtonTemplate}"
+                              RecognizesAccessKey="True"
+                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+		</Grid>
+		<ControlTemplate.Triggers>
+			<Trigger Property="ToggleButton.IsChecked"
+                                 Value="True">
+				<Trigger.EnterActions>
+					<BeginStoryboard>
+						<Storyboard>
+							<DoubleAnimation Storyboard.TargetName="ellipsebg"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         From="0"
+                                                         To="1"
+                                                         Duration="0:0:0.3" />
+						</Storyboard>
+					</BeginStoryboard>
+				</Trigger.EnterActions>
+				<Trigger.ExitActions>
+					<BeginStoryboard>
+						<Storyboard>
+							<DoubleAnimation Storyboard.TargetName="ellipsebg"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="0"
+                                                         Duration="0:0:0.3" />
+						</Storyboard>
+					</BeginStoryboard>
+				</Trigger.ExitActions>
+				<Setter Property="Foreground"
+                                    Value="{DynamicResource IdealForegroundColorBrush}" />
+				<Setter TargetName="ellipse"
+                                    Property="Stroke"
+                                    Value="{DynamicResource AccentColorBrush}" />
+			</Trigger>
+			<Trigger Property="IsMouseOver"
+                                 Value="True">
+				<Setter TargetName="ellipse"
+                                    Property="Opacity"
+                                    Value="1" />
+			</Trigger>
+			<Trigger Property="IsMouseOver"
+                                 Value="False">
+				<Setter TargetName="ellipse"
+                                    Property="Opacity"
+                                    Value=".5" />
+			</Trigger>
+			<Trigger Property="IsEnabled"
+                                 Value="False">
+				<Setter Property="Foreground"
+                                    Value="{DynamicResource GrayBrush7}" />
+			</Trigger>
+		</ControlTemplate.Triggers>
+	</ControlTemplate>
+
+	<Style TargetType="{x:Type local:PathButton}">
+		<Setter Property="Stretch" Value="Uniform"/>
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="Content" Value="{StaticResource PathButtonTemplate}"/>
+		<Setter Property="Template" Value="{StaticResource PathButtonTemplate1}"/>
+	</Style>
+
+</ResourceDictionary>

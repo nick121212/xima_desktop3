@@ -1,0 +1,54 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                                 xmlns:tools="http://ximalaya.com/xaml/tools"
+                                 xmlns:converter="http://ximalaya.com/xaml/tools/converter"
+                                 xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+                                 xmlns:MControls="clr-namespace:XIMALAYA.PCDesktop.Controls">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/Converter.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/ListBoxItem.Common.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <!--声音列表 start-->
+    <DataTemplate x:Key="SoundItemTemplate" DataType="{x:Type ListBoxItem}">
+        <Controls:Tile Background="Transparent" 
+                       Height="220" 
+                       Width="180"
+                       Margin="5"
+                       Command="{Binding PlaySoundCommand,Source={x:Static tools:CommandSingleton.Instance}}"
+                       CommandParameter="{Binding TrackId}">
+            <Controls:Tile.Content>
+                <Label>
+                    <Label.Template>
+                        <ControlTemplate>
+                            <Border BorderThickness="1" Width="180" BorderBrush="{DynamicResource ControlBorderBrush}">
+								<Grid >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="180"/>
+                                        <RowDefinition Height="60"/>
+                                    </Grid.RowDefinitions>
+
+									<MControls:MyImage ToolTip="{Binding Title}" 
+													   Width="180" 
+													   Height="180" 
+													   Source="{Binding CoverLarge}"
+													   DefaultSource="track.jpg"/>
+									<WrapPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center">
+                                        <TextBlock ToolTip="{Binding Title}" Width="180" TextWrapping="NoWrap" TextAlignment="Center" HorizontalAlignment="Center" Text="{Binding Title}" />
+                                    </WrapPanel>
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Label.Template>
+                </Label>
+            </Controls:Tile.Content>
+        </Controls:Tile>
+    </DataTemplate>
+    <Style x:Key="SoundListStyle" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource ListItemBaseTemp}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="ContentTemplate" Value="{StaticResource SoundItemTemplate}"/>
+    </Style>
+    <!--声音列表 end-->
+
+</ResourceDictionary>

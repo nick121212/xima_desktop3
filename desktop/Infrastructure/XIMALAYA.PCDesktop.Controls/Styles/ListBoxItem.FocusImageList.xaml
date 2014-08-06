@@ -1,0 +1,63 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                                 xmlns:tools="http://ximalaya.com/xaml/tools"
+                                 xmlns:converter="http://ximalaya.com/xaml/tools/converter"
+                                 xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+                                 xmlns:MControls="clr-namespace:XIMALAYA.PCDesktop.Controls">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/MyRadioButton.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/ListBoxItem.Common.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <DataTemplate x:Key="MetroFocusImageTemplate" DataType="{x:Type ListBoxItem}">
+        <Controls:Tile Padding="0" Margin="0"
+                       Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=ActualHeight}"
+                       Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=ActualWidth}">
+            <Controls:Tile.Template>
+                <ControlTemplate>
+					<Grid>
+						<MControls:MyImage VerticalAlignment="Top" 
+										   Source="{Binding Pic}"
+										   DefaultSource="banner.png"
+										   Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=ActualHeight}"
+										   Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=ActualWidth}"/>
+                        <!--<Label Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=ActualWidth}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Content=" " Background="Black" Opacity="0.5" />-->
+                        <Label VerticalAlignment="Bottom" 
+							   Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=ActualWidth}"
+							   HorizontalAlignment="Center"
+							   Background="#66000000"
+							   Foreground="White" 
+							   Margin="0" 
+							   Content="{Binding LongTitle}" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Button.IsPressed" Value="True">
+                            <Setter Property="RenderTransform">
+                                <Setter.Value>
+                                    <ScaleTransform ScaleX="0.98"
+                                ScaleY="0.98"
+                                CenterX="0.5"
+                                CenterY="0.5" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Controls:Tile.Template>
+        </Controls:Tile>
+    </DataTemplate>
+
+    <Style x:Key="MetroFocusImageStyle" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource ListItemBaseTemp}">
+        <Setter Property="ContentTemplate" Value="{StaticResource MetroFocusImageTemplate}"/>
+        <Setter Property="MControls:TilePanel.WidthPix" Value="66"/>
+        <Setter Property="MControls:TilePanel.HeightPix" Value="30"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsFirst}" Value="True">
+                <Setter Property="MControls:TilePanel.WidthPix" Value="132"/>
+                <Setter Property="MControls:TilePanel.HeightPix" Value="60"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>
