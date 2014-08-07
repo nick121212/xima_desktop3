@@ -70,10 +70,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\XIMALAYA.PCDesktop.Tools.dll</HintPath>
     </Reference>
-    <Reference Include="XIMALAYA.PCDesktop.Tools.Player, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\build\XIMALAYA.PCDesktop.Tools.Player.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MenusModule.cs" />

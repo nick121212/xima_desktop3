@@ -19,49 +19,51 @@
 		</ResourceDictionary>
 	</UserControl.Resources>
 
-	<Grid VerticalAlignment="Center" Margin="0 5">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="*"/>
-		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="Auto"/>
-			<ColumnDefinition Width="*"/>
-			<ColumnDefinition Width="Auto"/>
-			<ColumnDefinition Width="Auto"/>
-		</Grid.ColumnDefinitions>
-		
-		<!--控制按钮-->
-		<StackPanel Grid.Column="3" Grid.Row="1" Orientation="Horizontal">
-			<!--波形-->
-			<sound:SpectrumAnalyzer x:Name="SpectrumAnalyzer"
+	<Border BorderThickness="0 1 0 0"
+			BorderBrush="{DynamicResource AccentColorBrush}">
+		<Grid VerticalAlignment="Center" Margin="0 5">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
+
+			<!--控制按钮-->
+			<StackPanel Grid.Column="3" Grid.Row="1" Orientation="Horizontal">
+				<!--波形-->
+				<sound:SpectrumAnalyzer x:Name="SpectrumAnalyzer"
 									Margin="10 0"
 									Width="200"
 									Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=WrapPanel}, Path=ActualHeight}">
-				<sound:SpectrumAnalyzer.BarStyle>
-					<Style TargetType="{x:Type Rectangle}">
-						<Setter Property="Fill">
-							<Setter.Value>
-								<LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" x:Name="BarBrush">
-									<GradientStop Color="{DynamicResource AccentColor}" Offset="0"/>
-									<GradientStop Color="{DynamicResource AccentColor4}" Offset="1"/>
-								</LinearGradientBrush>
-							</Setter.Value>
-						</Setter>
-					</Style>
-				</sound:SpectrumAnalyzer.BarStyle>
-				<sound:SpectrumAnalyzer.PeakStyle>
-					<Style TargetType="{x:Type Rectangle}">
-						<Setter Property="Fill">
-							<Setter.Value>
-								<SolidColorBrush Color="{DynamicResource AccentColor2}" />
-							</Setter.Value>
-						</Setter>
-					</Style>
-				</sound:SpectrumAnalyzer.PeakStyle>
-			</sound:SpectrumAnalyzer>
-			<!--静音-->
-			<MControls:MyToggleButton Width="20" 
+					<sound:SpectrumAnalyzer.BarStyle>
+						<Style TargetType="{x:Type Rectangle}">
+							<Setter Property="Fill">
+								<Setter.Value>
+									<LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" x:Name="BarBrush">
+										<GradientStop Color="{DynamicResource AccentColor}" Offset="0"/>
+										<GradientStop Color="{DynamicResource AccentColor4}" Offset="1"/>
+									</LinearGradientBrush>
+								</Setter.Value>
+							</Setter>
+						</Style>
+					</sound:SpectrumAnalyzer.BarStyle>
+					<sound:SpectrumAnalyzer.PeakStyle>
+						<Style TargetType="{x:Type Rectangle}">
+							<Setter Property="Fill">
+								<Setter.Value>
+									<SolidColorBrush Color="{DynamicResource AccentColor2}" />
+								</Setter.Value>
+							</Setter>
+						</Style>
+					</sound:SpectrumAnalyzer.PeakStyle>
+				</sound:SpectrumAnalyzer>
+				<!--静音-->
+				<MControls:MyToggleButton Width="20" 
 								      Height="20"
 								      IsChecked="{Binding BassEngine.IsMuted,Mode=TwoWay}"
 								      BorderType="Ellipse"
@@ -70,23 +72,23 @@
 								      Background="{DynamicResource AccentColorBrush}"
 								      BorderBrush="{DynamicResource AccentColorBrush}"
 								      BorderThickness="1">
-				<MControls:MyToggleButton.Content>
-					<Path Data="{Binding VolumePath, Source={x:Static MControls:PathData.Instance}}" 
+					<MControls:MyToggleButton.Content>
+						<Path Data="{Binding VolumePath, Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{StaticResource PathStyle}"
 						  Width="10" Height="10"
 						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-					</Path>
-				</MControls:MyToggleButton.Content>
-				<MControls:MyToggleButton.ContentChecked>
-					<Path Data="{Binding MutedPath, Source={x:Static MControls:PathData.Instance}}"
+						</Path>
+					</MControls:MyToggleButton.Content>
+					<MControls:MyToggleButton.ContentChecked>
+						<Path Data="{Binding MutedPath, Source={x:Static MControls:PathData.Instance}}"
 						  Style="{StaticResource PathStyle}"
 						  Width="10" Height="10"
 						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-					</Path>
-				</MControls:MyToggleButton.ContentChecked>
-			</MControls:MyToggleButton>
-			<!--音量条-->
-			<Slider Margin="2"
+						</Path>
+					</MControls:MyToggleButton.ContentChecked>
+				</MControls:MyToggleButton>
+				<!--音量条-->
+				<Slider Margin="2"
                     Width="70" 
                     Height="5"
                     Maximum="1"
@@ -95,8 +97,8 @@
                     SmallChange="0.1"
                     Value="{Binding BassEngine.Volume}"
                     Style="{DynamicResource FlatSlider}" />
-			<!--上一首-->
-			<MControls:MyToggleButton Width="30" 
+				<!--上一首-->
+				<MControls:MyToggleButton Width="30" 
 								      Height="30"
 									  Margin="5"
 								      BorderType="Ellipse"
@@ -106,21 +108,21 @@
 								      Background="{DynamicResource AccentColorBrush}"
 								      BorderBrush="{DynamicResource AccentColorBrush}"
 								      BorderThickness="1">
-				<MControls:MyToggleButton.Content>
-					<Path Data="{Binding ToolbarPrevPath, Source={x:Static MControls:PathData.Instance}}" 
+					<MControls:MyToggleButton.Content>
+						<Path Data="{Binding ToolbarPrevPath, Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{StaticResource PathStyle}"
 						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-					</Path>
-				</MControls:MyToggleButton.Content>
-				<MControls:MyToggleButton.ContentChecked>
-					<Path Data="{Binding ToolbarPrevPath, Source={x:Static MControls:PathData.Instance}}"
+						</Path>
+					</MControls:MyToggleButton.Content>
+					<MControls:MyToggleButton.ContentChecked>
+						<Path Data="{Binding ToolbarPrevPath, Source={x:Static MControls:PathData.Instance}}"
 						  Style="{StaticResource PathStyle}"
 						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-					</Path>
-				</MControls:MyToggleButton.ContentChecked>
-			</MControls:MyToggleButton>
-			<!--播放-->
-			<MControls:MyToggleButton Width="40" 
+						</Path>
+					</MControls:MyToggleButton.ContentChecked>
+				</MControls:MyToggleButton>
+				<!--播放-->
+				<MControls:MyToggleButton Width="40" 
 								      Height="40"
 								      BorderType="Ellipse"
 								      Foreground="White"
@@ -131,24 +133,24 @@
 								      Background="{DynamicResource AccentColorBrush}"
 								      BorderBrush="{DynamicResource AccentColorBrush}"
 								      BorderThickness="1">
-				<MControls:MyToggleButton.Content>
-					<Path Data="{Binding ToolbarPlayPath, Source={x:Static MControls:PathData.Instance}}" 
+					<MControls:MyToggleButton.Content>
+						<Path Data="{Binding ToolbarPlayPath, Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{StaticResource PathStyle}"
 						  Margin="5 0 0 0"
 						  Width="20" Height="20"
 						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-					</Path>
-				</MControls:MyToggleButton.Content>
-				<MControls:MyToggleButton.ContentChecked>
-					<Path Data="{Binding ToolbarPausePath, Source={x:Static MControls:PathData.Instance}}"
+						</Path>
+					</MControls:MyToggleButton.Content>
+					<MControls:MyToggleButton.ContentChecked>
+						<Path Data="{Binding ToolbarPausePath, Source={x:Static MControls:PathData.Instance}}"
 						  Style="{StaticResource PathStyle}"
 						  Width="15" Height="20"
 						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-					</Path>
-				</MControls:MyToggleButton.ContentChecked>
-			</MControls:MyToggleButton>
-			<!--下一首-->
-			<MControls:MyToggleButton Width="30" 
+						</Path>
+					</MControls:MyToggleButton.ContentChecked>
+				</MControls:MyToggleButton>
+				<!--下一首-->
+				<MControls:MyToggleButton Width="30" 
 								      Height="30"
 									  Margin="5"
 								      BorderType="Ellipse"
@@ -158,21 +160,21 @@
 								      Background="{DynamicResource AccentColorBrush}"
 								      BorderBrush="{DynamicResource AccentColorBrush}"
 								      BorderThickness="1">
-				<MControls:MyToggleButton.Content>
-					<Path Data="{Binding ToolbarNextPath, Source={x:Static MControls:PathData.Instance}}" 
+					<MControls:MyToggleButton.Content>
+						<Path Data="{Binding ToolbarNextPath, Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{StaticResource PathStyle}"
 						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-					</Path>
-				</MControls:MyToggleButton.Content>
-				<MControls:MyToggleButton.ContentChecked>
-					<Path Data="{Binding ToolbarNextPath, Source={x:Static MControls:PathData.Instance}}"
+						</Path>
+					</MControls:MyToggleButton.Content>
+					<MControls:MyToggleButton.ContentChecked>
+						<Path Data="{Binding ToolbarNextPath, Source={x:Static MControls:PathData.Instance}}"
 						  Style="{StaticResource PathStyle}"
 						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-					</Path>
-				</MControls:MyToggleButton.ContentChecked>
-			</MControls:MyToggleButton>
-			<!--当前播放列表-->
-			<MControls:MyToggleButton x:Name="btnShowList"
+						</Path>
+					</MControls:MyToggleButton.ContentChecked>
+				</MControls:MyToggleButton>
+				<!--当前播放列表-->
+				<MControls:MyToggleButton x:Name="btnShowList"
 									  Width="30" 
 								      Height="30"
 									  Margin="5"
@@ -184,82 +186,57 @@
 								      Background="{DynamicResource AccentColorBrush}"
 								      BorderBrush="{DynamicResource AccentColorBrush}"
 								      BorderThickness="1">
-				<MControls:MyToggleButton.Content>
-					<Path Data="{Binding ListViewPath, Source={x:Static MControls:PathData.Instance}}" 
+					<MControls:MyToggleButton.Content>
+						<Path Data="{Binding ListViewPath, Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{StaticResource PathStyle}"
 						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-					</Path>
-				</MControls:MyToggleButton.Content>
-				<MControls:MyToggleButton.ContentChecked>
-					<Path Data="{Binding ListViewPath, Source={x:Static MControls:PathData.Instance}}"
+						</Path>
+					</MControls:MyToggleButton.Content>
+					<MControls:MyToggleButton.ContentChecked>
+						<Path Data="{Binding ListViewPath, Source={x:Static MControls:PathData.Instance}}"
 						  Style="{StaticResource PathStyle}"
 						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-					</Path>
-				</MControls:MyToggleButton.ContentChecked>
-			</MControls:MyToggleButton>
-			<!--声音详情页-->
-			<MControls:MyToggleButton Width="30" 
-								      Height="30"
-									  Margin="5"
-								      BorderType="Ellipse"
-								      Foreground="White"
-									  IsSingle="True"
-									  Command="{Binding ShowSoundDetailCommand,Source={x:Static tools:CommandSingleton.Instance}}"
-								      BackgroundChecked="{DynamicResource GrayBrush10}"
-								      Background="{DynamicResource AccentColorBrush}"
-								      BorderBrush="{DynamicResource AccentColorBrush}"
-								      BorderThickness="1">
-				<MControls:MyToggleButton.Content>
-					<Path Data="{Binding ListViewPath, Source={x:Static MControls:PathData.Instance}}" 
-						  Style="{StaticResource PathStyle}"
-						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-					</Path>
-				</MControls:MyToggleButton.Content>
-				<MControls:MyToggleButton.ContentChecked>
-					<Path Data="{Binding ListViewPath, Source={x:Static MControls:PathData.Instance}}"
-						  Style="{StaticResource PathStyle}"
-						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-					</Path>
-				</MControls:MyToggleButton.ContentChecked>
-			</MControls:MyToggleButton>
-		</StackPanel>
+						</Path>
+					</MControls:MyToggleButton.ContentChecked>
+				</MControls:MyToggleButton>
+			</StackPanel>
 
-		<!--人物头像-->
-		<MControls:MyImage Grid.Column="0"
-						   Grid.Row="1"
-						   Margin="5"
-						   VerticalAlignment="Center"
-						   Width="32" 
-						   Height="32" 
-						   Source="{Binding SoundData.CoverSmall}"
-						   DefaultSource="person.jpg"/>
-		<!--声音信息-->
-		<Grid Grid.Row="1" Grid.Column="1">
-			<TextBlock TextWrapping="Wrap"
+			<!--人物头像-->
+			<MControls:MyImage Grid.Column="0"
+						       Grid.Row="1"
+						       Margin="5"
+						       VerticalAlignment="Center"
+						       Width="32" 
+						       Height="32" 
+						       Source="{Binding SoundData.CoverSmall}"
+						       DefaultSource="track.jpg"/>
+			<!--声音信息-->
+			<Grid Grid.Row="1" Grid.Column="1">
+				<TextBlock TextWrapping="Wrap"
 					   Margin="0 0 100 0"
 					   FontSize="14"
 					   Text="{Binding SoundData.Title}" 
 					   VerticalAlignment="Center"/>
-			<StackPanel Orientation="Horizontal"
+				<StackPanel Orientation="Horizontal"
 						HorizontalAlignment="Right" 
 						VerticalAlignment="Center">
-				<TextBlock HorizontalAlignment="Right" 
+					<TextBlock HorizontalAlignment="Right" 
 						   VerticalAlignment="Center"
 						   Text="{Binding TotalTimeSpan,ElementName=metroSlider,Converter={StaticResource TimeSpanConverter}}"/>
-				<TextBlock HorizontalAlignment="Right" 
+					<TextBlock HorizontalAlignment="Right" 
 						   VerticalAlignment="Center"
 						   Text="{Binding Duration,ElementName=metroSlider,Converter={StaticResource TimeSpanConverter},StringFormat='{} / {0}'}"/>
-			</StackPanel>
-		</Grid>
-		<!--进度条-->
-		<Grid Grid.ColumnSpan="4" 
+				</StackPanel>
+			</Grid>
+			<!--进度条-->
+			<Grid Grid.ColumnSpan="4" 
 			  Grid.Row="0">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="*"/>
-			</Grid.RowDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
 
-			<MControls:MetroSlider x:Name="metroSlider"
+				<MControls:MetroSlider x:Name="metroSlider"
                                    Minimum="0"
 								   Height="10"
                                    Maximum="{Binding RelativeSource={RelativeSource Self},Path=Duration}"
@@ -275,8 +252,9 @@
                                    LargeChange="5000"
                                    Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Grid}, Path=ActualWidth}"
                                    SmallChange="1000">
-			</MControls:MetroSlider>
-		</Grid>
+				</MControls:MetroSlider>
+			</Grid>
 
-	</Grid>
+		</Grid>
+	</Border>
 </UserControl>

@@ -92,7 +92,7 @@
     </Reference>
     <Reference Include="XIMALAYA.PCDesktop.Tools.Player, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\xima_desktop1\xima_desktop\desktop\build\XIMALAYA.PCDesktop.Tools.Player.dll</HintPath>
+      <HintPath>..\..\build\XIMALAYA.PCDesktop.Tools.Player.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

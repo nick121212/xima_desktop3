@@ -8,26 +8,24 @@
              xmlns:cal="http://www.codeplex.com/prism"
              xmlns:local="clr-namespace:XIMALAYA.PCDesktop.Modules.DiscoverPage"
              xmlns:tools="clr-namespace:XIMALAYA.PCDesktop.Tools;assembly=XIMALAYA.PCDesktop.Tools"
-             mc:Ignorable="d" 
              HorizontalAlignment="Center">
 
 	<ScrollViewer x:Name="mainScroll"
 				  Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Grid}, Path=ActualWidth}" 
 				  Style="{StaticResource for_scrollviewer}"
                   HorizontalScrollBarVisibility="Auto" 
-                  VerticalScrollBarVisibility="Disabled">
-		<Grid Margin="0 20" VerticalAlignment="Center">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="*"/>
-			</Grid.ColumnDefinitions>
+                  VerticalScrollBarVisibility="Auto">
+		<Grid Margin="0 5" HorizontalAlignment="Center">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
 			<!--焦点图-->
 			<GroupBox Header=" "
                       Style="{StaticResource MyMetroGroupBox}"
-                      Width="Auto" >
+					  Margin="0 0 0 0"
+					  Height="Auto"
+					  HorizontalContentAlignment="Left">
 				<ListBox Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=GroupBox}, Path=Width}"
                          Background="Transparent"
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
@@ -38,7 +36,8 @@
 						<ItemsPanelTemplate>
 							<MControls:TilePanel TileHeight="30" 
                                                  TileWidth="30" 
-                                                 TileCount="33"
+												 Orientation="Vertical"
+                                                 TileCount="15"
                                                  TileMargin="2"/>
 						</ItemsPanelTemplate>
 					</ListBox.ItemsPanel>
@@ -47,7 +46,9 @@
 			<!--分类列表-->
 			<GroupBox Header=" "
                       Style="{StaticResource MyMetroGroupBox}"
-					  Margin="0 0 20 0"
+					  Margin="0 0 0 0"
+					  Grid.Row="1"
+					  Height="Auto"
                       Grid.Column="1">
 				<ListBox Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=GroupBox}, Path=Width}"
                          Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=GroupBox}, Path=Height}"
@@ -57,174 +58,15 @@
                          ItemsSource="{x:Static local:DiscoverViewModel.CategoryList}">
 					<ListBox.ItemsPanel>
 						<ItemsPanelTemplate>
-							<MControls:TilePanel TileHeight="88" 
-                                                 TileWidth="88" 
+							<MControls:TilePanel TileHeight="96" 
+                                                 TileWidth="96" 
+												 Orientation="Vertical"
                                                  TileMargin="2"
-                                                 TileCount="4"/>
-						</ItemsPanelTemplate>
-					</ListBox.ItemsPanel>
-				</ListBox>
-			</GroupBox>
-			<!--专题列表-->
-			<!--<GroupBox Header="{Binding SubjectModuleTitle}"
-                      Style="{StaticResource MyMetroGroupBox}"
-                      Grid.Column="3" >
-				<ListBox Background="Transparent"
-                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                         ItemContainerStyle="{StaticResource MetroSubjectListStyle}" 
-                         ItemsSource="{Binding SubjectList}">
-					<ListBox.ItemsPanel>
-						<ItemsPanelTemplate>
-							<MControls:TilePanel TileHeight="10" 
-                                                 TileWidth="10" 
-                                                 TileMargin="2"
-                                                 TileCount="30"/>
-						</ItemsPanelTemplate>
-					</ListBox.ItemsPanel>
-				</ListBox>
-			</GroupBox>-->
-			<!--功能-->
-			<!--<GroupBox Header=""
-                      Style="{StaticResource MyMetroGroupBox}"
-                      Grid.Column="2" >
-				<MControls:TilePanel TileCount="2" 
-								     TileWidth="290" 
-									 TileMargin="3"
-								     TileHeight="10">
-					--><!--最火播主--><!--
-					<Controls:Tile MControls:TilePanel.WidthPix="1"
-						           MControls:TilePanel.HeightPix="14">
-						<Controls:Tile.Content>
-							<Image Source="pack://application:,,,/XIMALAYA.PCDesktop.Tools;component/Resources/Images/discover/bzbanner@2x.png"/>
-						</Controls:Tile.Content>
-					</Controls:Tile>
-					--><!--排行榜--><!--
-					<Controls:Tile MControls:TilePanel.WidthPix="1"
-						           MControls:TilePanel.HeightPix="14">
-						<Controls:Tile.Content>
-							<Image Source="pack://application:,,,/XIMALAYA.PCDesktop.Tools;component/Resources/Images/discover/phbbanner@2x.png"/>
-						</Controls:Tile.Content>
-					</Controls:Tile>
-					--><!--懒人电台--><!--
-					<Controls:Tile MControls:TilePanel.WidthPix="2"
-								   MControls:TilePanel.HeightPix="10"
-								   Background="White">
-						<Grid Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Controls:Tile}, Path=ActualHeight}"
-							  Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Controls:Tile}, Path=ActualWidth}">
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="Auto"/>
-								<ColumnDefinition Width="*"/>
-								<ColumnDefinition Width="Auto"/>
-								<ColumnDefinition Width="Auto"/>
-							</Grid.ColumnDefinitions>
-
-							<Image Grid.Column="0" 
-								   Margin="20" 
-								   Width="60" 
-								   Height="60" 
-								   Source="pack://application:,,,/XIMALAYA.PCDesktop.Tools;component/Resources/Images/discover/lrdticon@2x.png" />
-							<StackPanel Grid.Column="1">
-								<Label VerticalAlignment="Top" VerticalContentAlignment="Top" Padding="0" FontSize="25" Margin="0 20 0 5" Content="懒人电台"/>
-								<Label VerticalAlignment="Top" VerticalContentAlignment="Top" Padding="0" FontSize="15" Margin="0"  Content="智能化个性电台，一键收听"/>
-							</StackPanel>
-
-							<Image Grid.Column="2" 
-								   Stretch="None"
-								   Margin="25 0 20 0" 
-								   Source="pack://application:,,,/XIMALAYA.PCDesktop.Tools;component/Resources/Images/discover/arrow@2x.png" />
-						</Grid>
-					</Controls:Tile>
-					--><!--专题--><!--
-					<Controls:Tile MControls:TilePanel.WidthPix="2"
-								   MControls:TilePanel.HeightPix="10"
-								   Background="White">
-						<Grid Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Controls:Tile}, Path=ActualHeight}"
-							  Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Controls:Tile}, Path=ActualWidth}">
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="Auto"/>
-								<ColumnDefinition Width="*"/>
-								<ColumnDefinition Width="Auto"/>
-								<ColumnDefinition Width="Auto"/>
-							</Grid.ColumnDefinitions>
-
-							<Image Grid.Column="0" 
-								   Margin="20" 
-								   Width="60" 
-								   Height="60" 
-								   Source="pack://application:,,,/XIMALAYA.PCDesktop.Tools;component/Resources/Images/discover/lrdticon@2x.png" />
-							<StackPanel Grid.Column="1">
-								<Label VerticalAlignment="Top" VerticalContentAlignment="Top" Padding="0" FontSize="25" Margin="0 20 0 5" Content="专题"/>
-								<Label VerticalAlignment="Top" VerticalContentAlignment="Top" Padding="0" FontSize="15" Margin="0"  Content="父亲，愿时光别再让你变老"/>
-							</StackPanel>
-
-							<Image Grid.Column="2" 
-								   Stretch="None"
-								   Margin="25 0 20 0" 
-								   Source="pack://application:,,,/XIMALAYA.PCDesktop.Tools;component/Resources/Images/discover/arrow@2x.png" />
-						</Grid>
-					</Controls:Tile>
-					--><!--热门活动--><!--
-					<Controls:Tile MControls:TilePanel.WidthPix="2"
-								   MControls:TilePanel.HeightPix="10"
-								   Background="White">
-						<Grid Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Controls:Tile}, Path=ActualHeight}"
-							  Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Controls:Tile}, Path=ActualWidth}">
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="Auto"/>
-								<ColumnDefinition Width="*"/>
-								<ColumnDefinition Width="Auto"/>
-								<ColumnDefinition Width="Auto"/>
-							</Grid.ColumnDefinitions>
-
-							<Image Grid.Column="0" 
-								   Margin="20" 
-								   Width="60" 
-								   Height="60" 
-								   Source="pack://application:,,,/XIMALAYA.PCDesktop.Tools;component/Resources/Images/discover/lrdticon@2x.png" />
-							<StackPanel Grid.Column="1">
-								<Label VerticalAlignment="Top" VerticalContentAlignment="Top" Padding="0" FontSize="25" Margin="0 20 0 5" Content="热门活动"/>
-								<Label VerticalAlignment="Top" VerticalContentAlignment="Top" Padding="0" FontSize="15" Margin="0"  Content="喜马拉雅新词征取活动"/>
-							</StackPanel>
-
-							<Image Grid.Column="2" 
-								   Stretch="None"
-								   Margin="25 0 20 0" 
-								   Source="pack://application:,,,/XIMALAYA.PCDesktop.Tools;component/Resources/Images/discover/arrow@2x.png" />
-						</Grid>
-					</Controls:Tile>
-
-				</MControls:TilePanel>
-			</GroupBox>-->
-			<!--推荐专辑-->
-			<!--<GroupBox Header="推荐专辑"
-                      Style="{StaticResource MyMetroGroupBox}"
-                      Grid.Column="4" >
-				<ListBox Background="Transparent"
-                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                         ItemContainerStyle="{StaticResource MetroAlbumListStyle}" 
-                         ItemsSource="{Binding AlbumList}">
-					<ListBox.ItemsPanel>
-						<ItemsPanelTemplate>
-							<MControls:TilePanel TileHeight="110" 
-                                                 TileWidth="120" 
-                                                 TileMargin="3"
                                                  TileCount="2"/>
 						</ItemsPanelTemplate>
 					</ListBox.ItemsPanel>
 				</ListBox>
-			</GroupBox>-->
-			<!--热门声音-->
-			<!--
-			<ListBox Grid.Column="4" 
-                     Background="Transparent"
-                     ItemContainerStyle="{StaticResource MetroHotSoundsStyle}"
-                     ItemsSource="{Binding HotSoundsCategories}">
-				<ListBox.ItemsPanel>
-					<ItemsPanelTemplate>
-						<WrapPanel Orientation="Horizontal"/>
-					</ItemsPanelTemplate>
-				</ListBox.ItemsPanel>
-			</ListBox>-->
+			</GroupBox>
 		</Grid>
 	</ScrollViewer>
 

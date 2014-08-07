@@ -126,8 +126,6 @@ namespace XIMALAYA.PCDesktop
             return regionName;
         }
 
-        
-
         /// <summary>
         /// 新建层
         /// </summary>
@@ -135,7 +133,7 @@ namespace XIMALAYA.PCDesktop
         /// <returns></returns>
         public string GetFlyout(string header)
         {
-            string regionName = this.SetFlyout(header);
+            string regionName = this.GetFlyout(header, this.ActualWidth - this.LeftContainer.ActualWidth, null);
 
             this.CurrentFlyout.Position = Position.Right;
             this.CurrentFlyout.IsOpen = true;
@@ -161,7 +159,7 @@ namespace XIMALAYA.PCDesktop
         /// <param name="Height"></param>
         /// <param name="isModal"></param>
         /// <returns></returns>
-        public string GetFlyout(string header, double? Width, double? Height, bool isModal)
+        public string GetFlyout(string header, double? Width, double? Height, bool isModal = false)
         {
             string regionName = this.SetFlyout(header);
 

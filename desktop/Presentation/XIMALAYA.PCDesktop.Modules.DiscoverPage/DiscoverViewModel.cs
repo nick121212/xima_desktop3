@@ -1,8 +1,11 @@
-﻿using Microsoft.Practices.Prism.Commands;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Windows;
+using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
+using Microsoft.Practices.Prism.Commands;
+using XIMALAYA.PCDesktop.Core.Models.Album;
 using XIMALAYA.PCDesktop.Core.Models.Category;
 using XIMALAYA.PCDesktop.Core.Models.Discover;
 using XIMALAYA.PCDesktop.Core.Models.FocusImage;
@@ -11,24 +14,19 @@ using XIMALAYA.PCDesktop.Core.ParamsModel;
 using XIMALAYA.PCDesktop.Core.Services;
 using XIMALAYA.PCDesktop.Events;
 using XIMALAYA.PCDesktop.Tools.Untils;
-using MahApps.Metro.Controls.Dialogs;
-using MahApps.Metro.Controls;
-using XIMALAYA.PCDesktop.Core.Models.Album;
-using XIMALAYA.PCDesktop.Cache;
-using XIMALAYA.PCDesktop.Controls;
 
 namespace XIMALAYA.PCDesktop.Modules.DiscoverPage
 {
     [Export]
     public sealed class DiscoverViewModel : BaseViewModel
     {
-        #region fields
+        #region 字段
 
         private string _SubjectModuleTitle;
 
         #endregion
 
-        #region Properties
+        #region 属性
 
         /// <summary>
         /// 焦点图服务
@@ -78,7 +76,7 @@ namespace XIMALAYA.PCDesktop.Modules.DiscoverPage
 
         #endregion
 
-        #region commands
+        #region 命令
 
         /// <summary>
         /// 查看分类的详情
@@ -87,7 +85,7 @@ namespace XIMALAYA.PCDesktop.Modules.DiscoverPage
 
         #endregion
 
-        #region actions
+        #region 方法
 
         private void GetFocusImageDataAction()
         {
@@ -125,16 +123,8 @@ namespace XIMALAYA.PCDesktop.Modules.DiscoverPage
                     //    this.AlbumList.Add(album);
                     //}
                     //index = 0;
-                    DiscoverViewModel.CategoryList.Add(new CategoryData
-                    {
-                        Title = "搜索",
-                        Name = "search",
-                        //CoverPath = "pack://application:,,,/XIMALAYA.PCDesktop.Tools;component/Resources/Images/search.png"
-                    });
                     foreach (var category in superData.Categories.List)
                     {
-                        //category.IsFirst = index == 0;
-                        //index++;
                         DiscoverViewModel.CategoryList.Add(category);
                     }
                 }, System.Windows.Threading.DispatcherPriority.Background);
@@ -151,7 +141,7 @@ namespace XIMALAYA.PCDesktop.Modules.DiscoverPage
 
         #endregion
 
-        #region construction
+        #region 构造函数
 
         public DiscoverViewModel()
         {

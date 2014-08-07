@@ -36,6 +36,5 @@ namespace XIMALAYA.PCDesktop.Modules.MusicPlayer
                 region.Add(view, WellKnownModuleNames.MusicPlayerModule);
             }
         }
-
     }
 }

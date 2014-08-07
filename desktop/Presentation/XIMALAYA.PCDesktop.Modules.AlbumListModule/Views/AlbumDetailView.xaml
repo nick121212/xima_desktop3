@@ -12,6 +12,7 @@
 	<UserControl.Resources>
 		<converter:MutiBoolConverter x:Key="MutiBoolConverter" />
 		<converter:TimeSpanConverter x:Key="TimeSpanConverter"/>
+		<converter:LongToDateConverter x:Key="LongToDateConverter"/>
 	</UserControl.Resources>
 
 	<Grid Margin="30 10">
@@ -231,9 +232,9 @@
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
 					<DataGridTextColumn Header="声音标题" Binding="{Binding Title}" />
-					<DataGridTextColumn Width="200" Header="用户" Binding="{Binding NickName}" />
 					<DataGridTextColumn Width="80" Header="时长" Binding="{Binding Duration,Converter={StaticResource TimeSpanConverter}}" />
-					<DataGridTextColumn Width="200" Header="创建时间" Binding="{Binding CreateAt}" />
+					<DataGridTextColumn Width="200" Header="用户" Binding="{Binding NickName}" />
+					<DataGridTextColumn Width="200" Header="创建时间" Binding="{Binding CreateAt,Converter={StaticResource LongToDateConverter}}" />
 				</DataGrid.Columns>
 			</DataGrid>
 			<!--分页控件-->

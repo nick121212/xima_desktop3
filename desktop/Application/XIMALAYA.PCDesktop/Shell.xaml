@@ -9,14 +9,12 @@
                       Style="{DynamicResource CleanWindowStyle}"
                       GlowBrush="{DynamicResource AccentColorBrush}"
                       Title="{Binding WindowTitle}" 
-					  ShowTitleBar="False"
+					  ShowTitleBar="True"
                       MinHeight="700"
-                      MinWidth="1045"
-                      Width="1045"
+                      MinWidth="1150"
                       Height="750"
                       FontFamily="微软雅黑"
                       WindowStartupLocation="CenterScreen">
-	<!--Icon="ico/icon_16.ico"-->
 	<Window.Resources>
 		<Style x:Key="CleanWindowStyle" TargetType="Controls:MetroWindow" BasedOn="{StaticResource CleanWindowStyleKey}" />
 		<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
@@ -112,43 +110,25 @@
 	<DockPanel>
 
 		<Grid DockPanel.Dock="Bottom" MaxHeight="70" ClipToBounds="False">
-			<ContentControl Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=WrapPanel}, Path=ActualWidth}" 
-							Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=WrapPanel}, Path=ActualHeight}" 
-							cal:RegionManager.RegionName="{x:Static tools:WellKnownRegionNames.MusicPlayerModuleRegion}"/>
+			<ContentControl cal:RegionManager.RegionName="{x:Static tools:WellKnownRegionNames.MusicPlayerModuleRegion}"/>
 		</Grid>
-		<Border DockPanel.Dock="Left" 
+		
+		<Border x:Name="LeftContainer" DockPanel.Dock="Left" 
 				Width="100"
 				BorderBrush="{DynamicResource AccentColorBrush}"
 				BorderThickness=" 0 0 1 0">
-			<!--<Border.Effect>
-				--><!--<DropShadowEffect BlurRadius="3" 
-								  Color="{DynamicResource AccentColor}" 
-								  Direction="1"
-								  Opacity="0.6"
-								  RenderingBias="Quality" 
-								  ShadowDepth="1"/>--><!--
-			</Border.Effect>-->
 			<ContentControl Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Border}, Path=ActualWidth}" 
 							Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Border}, Path=ActualHeight}" 
 							cal:RegionManager.RegionName="{x:Static tools:WellKnownRegionNames.MenusRegion}"/>
 		</Border>
 
-		<Border DockPanel.Dock="Right" 
-				Width="200"
-				BorderBrush="{DynamicResource AccentColorBrush}"
-				BorderThickness=" 2 0 0 0">
-			
-		</Border>
-
 		<Grid>
-			<ContentControl Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Grid}, Path=ActualWidth}" 
-                            Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Grid}, Path=ActualHeight}" 
-                            cal:RegionManager.RegionName="{x:Static tools:WellKnownRegionNames.DiscoverModuleRegion}" />
+			<ContentControl cal:RegionManager.RegionName="{x:Static tools:WellKnownRegionNames.DiscoverModuleRegion}" />
 			<Controls:FlyoutsControl x:Name="ContainerGrid"/>
 			<ListBox Width="300" 
 					 Height="300"
 					 BorderBrush="{DynamicResource AccentColorBrush}"
-					 BorderThickness="1"
+					 BorderThickness="1 1 0 0"
 					 Visibility="{Binding IsShowListView,Source={x:Static tools:FlyoutVisible.Instance},Converter={StaticResource BooleanToVisibilityConverter}}"
 					 VerticalAlignment="Bottom"
 					 HorizontalAlignment="Right"
@@ -162,6 +142,9 @@
                                              TileCount="1"/>
 					</ItemsPanelTemplate>
 				</ListBox.ItemsPanel>
+				<ListBox.Triggers>
+					
+				</ListBox.Triggers>
 			</ListBox>
 		</Grid>
 	</DockPanel>

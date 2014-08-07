@@ -179,7 +179,7 @@
 
 					<TextBlock Grid.Column="0" Margin="5 0" Text="{Binding Title}"/>
 					<!--<TextBlock Grid.Column="1" Margin="5 0" Text="{Binding NickName}"/>-->
-					<TextBlock Grid.Column="2" Margin="5 0" Text="{Binding Duration,Converter={StaticResource TimeSpanConverter},ConverterParameter=1000}"/>
+					<TextBlock Grid.Column="2" Margin="5 0" Text="{Binding Duration,Converter={StaticResource TimeSpanConverter},ConverterParameter=1}"/>
 
 				</Grid>
 			</MControls:MyCheckboxButton.Content>

@@ -6,12 +6,19 @@
              xmlns:MControls="http://ximalaya.com/xaml/controls" 
 			 xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:tools="http://ximalaya.com/xaml/tools">
+	
+	<UserControl.Resources>
+		<Style x:Key="NavPathStyle" BasedOn="{StaticResource PathStyle}" TargetType="Path">
+			<Setter Property="Width" Value="40"/>
+			<Setter Property="Height" Value="40"/>
+		</Style>
+	</UserControl.Resources>
+	
 	<StackPanel Orientation="Vertical" Margin="0 10 0 0">
-		
-		<Image Width="60" Source="pack://application:,,,/XIMALAYA.PCDesktop.Tools;component/Resources/Images/logo.png"/>
+		<!--<Image Width="60" Source="pack://application:,,,/XIMALAYA.PCDesktop.Tools;component/Resources/Images/logo.png"/>-->
 		<Label Content="喜马拉雅" 
 			   Margin="0 0 0 20"
-			   Foreground="{DynamicResource AccentColorBrush }"
+			   Foreground="{DynamicResource AccentColorBrush}"
 			   HorizontalContentAlignment="Center"/>
 		
 		<MControls:MyToggleButton Width="100" 
@@ -27,9 +34,7 @@
 			<MControls:MyToggleButton.Content>
 				<StackPanel>
 					<Path Data="{Binding SearchPath, Source={x:Static MControls:PathData.Instance}}" 
-						  Style="{DynamicResource PathStyle}"
-						  Width="50"
-						  Height="50"
+						  Style="{DynamicResource NavPathStyle}"
 						  HorizontalAlignment="Center"
 						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
 					</Path>
@@ -54,10 +59,8 @@
 			<MControls:MyToggleButton.Content>
 				<StackPanel>
 					<Path Data="{Binding DiscoverPath, Source={x:Static MControls:PathData.Instance}}" 
-						  Style="{DynamicResource PathStyle}"
+						  Style="{DynamicResource NavPathStyle}"
 						  HorizontalAlignment="Center"
-						  Width="50"
-						  Height="50"
 						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
 					</Path>
 					<Label Foreground="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
@@ -82,10 +85,8 @@
 			<MControls:MyToggleButton.Content>
 				<StackPanel>
 					<Path Data="{Binding ToolbarSettings, Source={x:Static MControls:PathData.Instance}}" 
-						  Style="{DynamicResource PathStyle}"
+						  Style="{DynamicResource NavPathStyle}"
 						  HorizontalAlignment="Center"
-						  Width="50"
-						  Height="50"
 						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
 					</Path>
 					<Label Foreground="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
@@ -98,10 +99,8 @@
 			<MControls:MyToggleButton.ContentChecked>
 				<StackPanel>
 					<Path Data="{Binding ToolbarSettings, Source={x:Static MControls:PathData.Instance}}" 
-						  Style="{DynamicResource PathStyle}"
+						  Style="{DynamicResource NavPathStyle}"
 						  HorizontalAlignment="Center"
-						  Width="50"
-						  Height="50"
 						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
 					</Path>
 					<Label Foreground="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
@@ -112,5 +111,6 @@
 				</StackPanel>
 			</MControls:MyToggleButton.ContentChecked>
 		</MControls:MyToggleButton>
+		
 	</StackPanel>
 </UserControl>

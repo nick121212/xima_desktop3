@@ -86,7 +86,7 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumListModule
         private void OnAlbumDetailEvent(long albumID)
         {
             var albumDetailView = this.Container.GetInstance<AlbumDetailView>();
-            string regionName = this.ContainerView.GetFlyout(string.Empty, null, null);
+            string regionName = this.ContainerView.GetFlyout(string.Empty);
 
             if (albumDetailView != null)
             {
