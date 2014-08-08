@@ -63,6 +63,7 @@
     <Compile Include="FocusImage\Sound\SoundData2.cs" />
     <Compile Include="FocusImage\Sound\SoundData1.cs" />
     <Compile Include="FocusImage\Sound\SoundsResult.cs" />
+    <Compile Include="Search\SearchResult.cs" />
     <Compile Include="Subject\SubjectData.cs" />
     <Compile Include="Tags\CategoryTagResult.cs" />
     <Compile Include="Tags\TagData.cs" />
