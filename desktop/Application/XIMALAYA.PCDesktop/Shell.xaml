@@ -10,9 +10,10 @@
                       GlowBrush="{DynamicResource AccentColorBrush}"
                       Title="{Binding WindowTitle}" 
 					  ShowTitleBar="True"
-                      MinHeight="700"
+                      MinHeight="850"
                       MinWidth="1150"
-                      Height="750"
+                      Width="1150"
+                      Height="850"
                       FontFamily="微软雅黑"
                       WindowStartupLocation="CenterScreen">
 	<Window.Resources>

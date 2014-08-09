@@ -148,7 +148,7 @@ namespace XIMALAYA.PCDesktop.Tools
         private CommandBaseSingleton()
         {
             this.EventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
-
+            this.SoundCollection = new ListBox().Items;
             this.PlaySound1Command = new DelegateCommand<Control>(con =>
             {
                 var soundData = con.DataContext as SoundData;
@@ -156,7 +156,12 @@ namespace XIMALAYA.PCDesktop.Tools
                 if (soundData == null) return;
 
                 var dataGrid = VisualTreeHelperExtensions.FindAncestor<DataGrid>(con);
-                this.SoundCollection = dataGrid.Items;
+                var sounds = new SoundData[dataGrid.Items.Count];
+
+                this.SoundCollection.Clear();
+                dataGrid.Items.CopyTo(sounds, 0);
+                sounds.ToList().ForEach(sound => this.SoundCollection.Add(sound));
+                // this.SoundCollection = dataGrid.Items;
                 if (this.SoundCollection.MoveCurrentTo(soundData))
                 {
                     this.PlaySoundCommand.Execute(((SoundData)this.SoundCollection.CurrentItem).TrackId);
@@ -232,7 +237,8 @@ namespace XIMALAYA.PCDesktop.Tools
                 });
             });
 
-            this.ShowSoundDetailCommand = new DelegateCommand(() => {
+            this.ShowSoundDetailCommand = new DelegateCommand(() =>
+            {
                 this.EventAggregator.GetEvent<SoundDetailEvent<long>>().Publish(this.TrackID);
             });
         }
