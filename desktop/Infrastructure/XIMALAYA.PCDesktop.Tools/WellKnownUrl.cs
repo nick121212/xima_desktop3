@@ -51,5 +51,8 @@ namespace XIMALAYA.PCDesktop.Tools
         /// 专辑详情页接口
         /// </summary>
         public const string AlbumInfo = WebPath + "/mobile/others/ca/album/track";
+
+        public const string SearchPath = WebPath + "/s/mobile/search";
+
     }
 }

@@ -67,7 +67,7 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumListModule
 
             if (albumView != null)
             {
-                albumView.AlbumViewModel.DoInit(new CategoryTagAlbums
+                albumView.AlbumViewModel.DoInit(new CategoryTagAlbumParam
                 {
                     Category = this.TagEventArgument.Category,
                     TagName = this.TagEventArgument.TagName,

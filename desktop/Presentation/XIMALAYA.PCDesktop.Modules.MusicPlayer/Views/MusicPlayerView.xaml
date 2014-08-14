@@ -102,10 +102,10 @@
 								      Height="30"
 									  Margin="5"
 								      BorderType="Ellipse"
-								      Foreground="White"
+								      Foreground="{DynamicResource WhiteBrush}"
 									  Command="{Binding PrevCommand,Source={x:Static tools:CommandSingleton.Instance}}"
 								      BackgroundChecked="{DynamicResource GrayBrush10}"
-								      Background="{DynamicResource AccentColorBrush}"
+								      Background="{DynamicResource BlackBrush}"
 								      BorderBrush="{DynamicResource AccentColorBrush}"
 								      BorderThickness="1">
 					<MControls:MyToggleButton.Content>
@@ -125,12 +125,12 @@
 				<MControls:MyToggleButton Width="40" 
 								      Height="40"
 								      BorderType="Ellipse"
-								      Foreground="White"
+								      Foreground="{DynamicResource WhiteBrush}"
 									  IsChecked="{Binding BassEngine.IsPlaying,Mode=OneWay}"
                                       Command="{Binding BassEngine.PlayCommand}"
                                       CommandParameter="{Binding Source={RelativeSource Self},Path=IsChecked}"
 								      BackgroundChecked="{DynamicResource GrayBrush10}"
-								      Background="{DynamicResource AccentColorBrush}"
+								      Background="{DynamicResource BlackBrush}"
 								      BorderBrush="{DynamicResource AccentColorBrush}"
 								      BorderThickness="1">
 					<MControls:MyToggleButton.Content>
@@ -154,10 +154,10 @@
 								      Height="30"
 									  Margin="5"
 								      BorderType="Ellipse"
-								      Foreground="White"
+								      Foreground="{DynamicResource WhiteBrush}"
 									  Command="{Binding NextCommand,Source={x:Static tools:CommandSingleton.Instance}}"
 								      BackgroundChecked="{DynamicResource GrayBrush10}"
-								      Background="{DynamicResource AccentColorBrush}"
+								      Background="{DynamicResource BlackBrush}"
 								      BorderBrush="{DynamicResource AccentColorBrush}"
 								      BorderThickness="1">
 					<MControls:MyToggleButton.Content>
@@ -179,11 +179,11 @@
 								      Height="30"
 									  Margin="5"
 								      BorderType="Ellipse"
-								      Foreground="White"
+								      Foreground="{DynamicResource WhiteBrush}"
 									  IsBackground="Visible"
 									  IsChecked="{Binding IsShowListView,Source={x:Static tools:FlyoutVisible.Instance}}"
 								      BackgroundChecked="{DynamicResource GrayBrush10}"
-								      Background="{DynamicResource AccentColorBrush}"
+								      Background="{DynamicResource BlackBrush}"
 								      BorderBrush="{DynamicResource AccentColorBrush}"
 								      BorderThickness="1">
 					<MControls:MyToggleButton.Content>

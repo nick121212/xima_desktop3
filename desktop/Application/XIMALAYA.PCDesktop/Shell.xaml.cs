@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.Composition;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
@@ -79,6 +80,7 @@ namespace XIMALAYA.PCDesktop
         void Shell_Loaded(object sender, RoutedEventArgs e)
         {
             RegionManager.SetRegionManager(this.testFlyout, this.regionManager);
+
             //taskBar.ProgressState = TaskbarItemProgressState.Normal;
             //taskBar.ProgressValue = 0.4;
         }
@@ -111,7 +113,7 @@ namespace XIMALAYA.PCDesktop
             this.CurrentFlyout.Header = header;
             this.CurrentFlyout.IsOpen = false;
             rs = new RelativeSource(RelativeSourceMode.FindAncestor);
-            rs.AncestorType = typeof(MetroWindow);
+            rs.AncestorType = typeof(Grid);
             binding = new Binding("ActualWidth");
             binding.RelativeSource = rs;
             this.CurrentFlyout.SetBinding(Flyout.WidthProperty, binding);
@@ -133,11 +135,11 @@ namespace XIMALAYA.PCDesktop
         /// <returns></returns>
         public string GetFlyout(string header)
         {
-            string regionName = this.GetFlyout(header, this.ActualWidth - this.LeftContainer.ActualWidth, null);
+            string regionName = this.GetFlyout(header, null, null);
 
             this.CurrentFlyout.Position = Position.Right;
             this.CurrentFlyout.IsOpen = true;
-
+         
             return regionName;
         }
         /// <summary>

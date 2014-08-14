@@ -41,11 +41,9 @@ namespace XIMALAYA.PCDesktop.Core.Data
         {
             base.doAddConfig();
             this.Config.MapType<UserData>(map => map
-                                    .Field<System.Boolean>(field => field.IsVerified, type => type.To("isVerified"))
-                    .Field<System.String>(field => field.LargeLogo, type => type.To("largeLogo"))
-                    .Field<System.String>(field => field.NickName, type => type.To("nickname"))
-                    .Field<System.String>(field => field.PersonDescribe, type => type.To("personDescribe"))
+                                    .Field<System.String>(field => field.NickName, type => type.To("nickname"))
             );
+            this.doAddOtherConfig();
         }
     }
 }

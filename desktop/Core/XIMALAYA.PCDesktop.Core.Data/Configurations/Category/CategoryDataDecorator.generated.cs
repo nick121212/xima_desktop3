@@ -49,6 +49,7 @@ namespace XIMALAYA.PCDesktop.Core.Data
                     .Field<System.String>(field => field.Name, type => type.To("name"))
                     .Field<XIMALAYA.PCDesktop.Core.Models.Sound.SoundData[]>(field => field.Sounds, type => type.To("sounds"))
             );
+            this.doAddOtherConfig();
         }
     }
 }

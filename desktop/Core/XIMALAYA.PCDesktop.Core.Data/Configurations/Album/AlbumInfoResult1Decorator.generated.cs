@@ -47,6 +47,7 @@ namespace XIMALAYA.PCDesktop.Core.Data
                     .Field<System.Int32>(field => field.Count, type => type.To("count"))
                     .Field<XIMALAYA.PCDesktop.Core.Models.Album.AlbumData[]>(field => field.List, type => type.To("list"))
             );
+            this.doAddOtherConfig();
         }
     }
 }

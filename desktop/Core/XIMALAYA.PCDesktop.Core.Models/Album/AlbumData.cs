@@ -180,12 +180,9 @@ namespace XIMALAYA.PCDesktop.Core.Models.Album
         public int SerialState { get; set; }
 
         public AlbumData()
-            : base()
         {
+            this.doAddMap("FXClassName", "AlbumData");
             this.doAddMap(() => this.AlbumID, "id");
-            this.doAddMap(() => this.Title, "title");
-            this.doAddMap(() => this.PlayCount, "playsCounts");
-            this.doAddMap(() => this.AlbumCoverUrl290, "coverSmall");
         }
     }
 }

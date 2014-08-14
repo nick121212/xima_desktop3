@@ -1,0 +1,148 @@
+﻿<UserControl x:Class="XIMALAYA.PCDesktop.Modules.Search.Views.SearchMainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:MControls="http://ximalaya.com/xaml/controls"
+			 xmlns:tools="http://ximalaya.com/xaml/tools"
+			 xmlns:converter="http://ximalaya.com/xaml/tools/converter"
+             xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls">
+	<UserControl.Resources>
+		<converter:EqualConverter x:Key="EqualConverter"/>
+		<BooleanToVisibilityConverter	x:Key="BooleanToVisibilityConverter"/>
+	</UserControl.Resources>
+	
+    <Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+		<!--搜索框-->
+		<TextBox Margin="10"
+                 Grid.Row="0"
+				 Height="40"
+				 Text="{Binding ConditionString}"
+				 Controls:TextboxHelper.ButtonCommand="{Binding SearchCommand, Mode=OneWay}"
+				 Controls:TextboxHelper.MouseOverBorderBrush="{DynamicResource AccentColorBrush}"
+				 BorderBrush="{DynamicResource AccentColorBrush3}"
+				 FontSize="18"
+				 VerticalContentAlignment="Center"
+                 Controls:TextboxHelper.Watermark="搜索条件"
+                 Style="{DynamicResource SearchMetroTextBox}" />
+		<!--搜索条件-->
+		<TabControl Margin="0,10,0,0"
+					Grid.Row="1" 
+					SelectedItem="{Binding CurrentTab}"
+					Style="{DynamicResource StandardTabControl1}">
+			<Controls:MetroTabItem Header="全部" Tag="all"></Controls:MetroTabItem>
+			<Controls:MetroTabItem Header="找专辑" Tag="album">
+				<StackPanel Margin="10 10 0 0"  Orientation="Horizontal" Width="Auto">
+					<RadioButton GroupName="Condition" 
+								 Margin="5"
+								 IsChecked="{Binding CurrentAlbumSort,Converter={StaticResource EqualConverter},ConverterParameter={x:Null}}"
+						         Style="{DynamicResource MetroRadioButton}" 
+						         Content="相关度"/>
+					<RadioButton GroupName="Condition" 
+								 Margin="5"
+								 IsChecked="{Binding CurrentAlbumSort,Converter={StaticResource EqualConverter},ConverterParameter=play}"
+						         Style="{DynamicResource MetroRadioButton}" 
+						         Content="最多播放"/>
+					<RadioButton GroupName="Condition" 
+								 Margin="5"
+								 IsChecked="{Binding CurrentAlbumSort,Converter={StaticResource EqualConverter},ConverterParameter=recent}"
+						         Style="{DynamicResource MetroRadioButton}" 
+						         Content="最新上传"/>
+				</StackPanel>
+			</Controls:MetroTabItem>
+			<Controls:MetroTabItem Header="找人" Tag="user">
+				<StackPanel Margin="10 10 0 0"  Orientation="Horizontal" Width="Auto">
+					<RadioButton GroupName="Condition" 
+								 Margin="5"
+								 IsChecked="{Binding CurrentUserSort,Converter={StaticResource EqualConverter},ConverterParameter={x:Null}}"
+						         Style="{DynamicResource MetroRadioButton}" 
+						         Content="相关度"/>
+					<RadioButton GroupName="Condition" 
+								 Margin="5"
+								 IsChecked="{Binding CurrentUserSort,Converter={StaticResource EqualConverter},ConverterParameter=fans}"
+						         Style="{DynamicResource MetroRadioButton}" 
+						         Content="最多粉丝"/>
+					<RadioButton GroupName="Condition" 
+								 Margin="5"
+								 IsChecked="{Binding CurrentUserSort,Converter={StaticResource EqualConverter},ConverterParameter=voice}"
+						         Style="{DynamicResource MetroRadioButton}" 
+						         Content="最多声音"/>
+					<RadioButton GroupName="Condition" 
+								 Margin="5"
+								 IsChecked="{Binding CurrentUserSort,Converter={StaticResource EqualConverter},ConverterParameter=update}"
+						         Style="{DynamicResource MetroRadioButton}" 
+						         Content="最近更新"/>
+				</StackPanel>
+			</Controls:MetroTabItem>
+			<Controls:MetroTabItem Header="找声音" Tag="voice">
+				<StackPanel Margin="10 10 0 0"  Orientation="Horizontal" Width="Auto">
+					<RadioButton GroupName="Condition" 
+								 Margin="5"
+								 IsChecked="{Binding CurrentSoundSort,Converter={StaticResource EqualConverter},ConverterParameter={x:Null}}"
+						         Style="{DynamicResource MetroRadioButton}" 
+						         Content="相关度"/>
+					<RadioButton GroupName="Condition" 
+								 Margin="5"
+								 IsChecked="{Binding CurrentSoundSort,Converter={StaticResource EqualConverter},ConverterParameter=recent}"
+						         Style="{DynamicResource MetroRadioButton}" 
+						         Content="最新上传"/>
+					<RadioButton GroupName="Condition" 
+								 Margin="5"
+								 IsChecked="{Binding CurrentSoundSort,Converter={StaticResource EqualConverter},ConverterParameter=play}"
+						         Style="{DynamicResource MetroRadioButton}" 
+						         Content="最多播放"/>
+				</StackPanel>
+			</Controls:MetroTabItem>
+		</TabControl>
+		<!--搜索进度条-->
+		<Controls:MetroProgressBar Grid.Row="2" 
+								   Background="Transparent"
+								   Foreground="{DynamicResource AccentColorBrush}"
+								   Margin="0 0 0 2" 
+								   IsIndeterminate="{Binding IsWaiting}" />
+		<!--搜索数据-->
+		<Grid Grid.Row="3">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="{Binding WidthAlbum}"/>
+				<ColumnDefinition Width="{Binding WidthUser}"/>
+				<ColumnDefinition Width="{Binding WidthSound}"/>
+			</Grid.ColumnDefinitions>
+			<GroupBox Grid.Column="0" 
+					  Style="{DynamicResource CleanGroupBoxStyleKey}" 
+					  Header="专辑" 
+					  Padding="5" 
+					  Controls:ControlsHelper.HeaderFontSize="30">
+				
+			</GroupBox>
+			<GroupBox Grid.Column="1" 
+					  Style="{DynamicResource CleanGroupBoxStyleKey}" 
+					  Header="用户" 
+					  Padding="5" 
+					  Controls:ControlsHelper.HeaderFontSize="30">
+
+			</GroupBox>
+			<GroupBox Grid.Column="2" 
+					  Style="{DynamicResource CleanGroupBoxStyleKey}" 
+					  Header="声音" 
+					  Padding="5" 
+					  Controls:ControlsHelper.HeaderFontSize="30">
+
+			</GroupBox>
+		</Grid>
+		<!--分页控件-->
+		<MControls:Pagination PageSize="{Binding PageSize}"
+							  HorizontalAlignment="Center"
+							  Grid.Row="4" 
+							  Margin="3"
+							  Visibility="{Binding IsNextPageVisibled,Converter={StaticResource BooleanToVisibilityConverter}}"
+							  IsEnabled="{Binding IsEnable}"
+							  CurrentPage="{Binding CurrentPage,Mode=TwoWay}"
+							  Total="{Binding Total}"/>
+	</Grid>
+</UserControl>

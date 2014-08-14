@@ -46,6 +46,7 @@ namespace XIMALAYA.PCDesktop.Core.Data
                     .Field<XIMALAYA.PCDesktop.Core.Models.Album.AlbumData>(field => field.Album, type => type.To("album"))
                     .Field<XIMALAYA.PCDesktop.Core.Models.Sound.SoundsResult>(field => field.SoundsResult, type => type.To("tracks"))
             );
+            this.doAddOtherConfig();
         }
     }
 }

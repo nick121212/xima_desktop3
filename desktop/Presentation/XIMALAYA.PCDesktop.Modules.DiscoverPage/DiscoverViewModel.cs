@@ -9,6 +9,7 @@ using XIMALAYA.PCDesktop.Core.Models.Album;
 using XIMALAYA.PCDesktop.Core.Models.Category;
 using XIMALAYA.PCDesktop.Core.Models.Discover;
 using XIMALAYA.PCDesktop.Core.Models.FocusImage;
+using XIMALAYA.PCDesktop.Core.Models.Search;
 using XIMALAYA.PCDesktop.Core.Models.Subject;
 using XIMALAYA.PCDesktop.Core.ParamsModel;
 using XIMALAYA.PCDesktop.Core.Services;
@@ -37,7 +38,7 @@ namespace XIMALAYA.PCDesktop.Modules.DiscoverPage
         /// 发现也整合接口，没用
         /// </summary>
         [Import]
-        private ISuperExploreIndex SuperExploreIndex { get; set; }
+        private ISuperExploreIndexService SuperExploreIndex { get; set; }
         /// <summary>
         /// 今日焦点的title
         /// </summary>
@@ -93,8 +94,8 @@ namespace XIMALAYA.PCDesktop.Modules.DiscoverPage
 
             this.SuperExploreIndex.GetData(this.GetExporeIndexData, new SuperExploreParam
             {
-                Device = DeviceType.pc,
-                PicVersion = 5,
+                Device = DeviceType.iphone,
+                PicVersion = 4,
                 Scale = 2
             });
         }
@@ -115,14 +116,6 @@ namespace XIMALAYA.PCDesktop.Modules.DiscoverPage
                         index++;
                         this.FocusImageList.Add(fi);
                     }
-                    //index = 0;
-                    //foreach (var album in superData.Albums.List)
-                    //{
-                    //    album.IsFirst = index == 0;
-                    //    index++;
-                    //    this.AlbumList.Add(album);
-                    //}
-                    //index = 0;
                     foreach (var category in superData.Categories.List)
                     {
                         DiscoverViewModel.CategoryList.Add(category);
@@ -136,7 +129,18 @@ namespace XIMALAYA.PCDesktop.Modules.DiscoverPage
         }
         public void Initialize()
         {
+            if (this.Initialized) return;
+
+            this.Initialized = true;
             this.GetFocusImageDataAction();
+            //SearchService.GetAllData(result =>
+            //{
+            //    var res = result as SearchResult;
+            //}, new SearchParam
+            //{
+            //    Condition = "N",
+            //    Scope = "all"
+            //});
         }
 
         #endregion

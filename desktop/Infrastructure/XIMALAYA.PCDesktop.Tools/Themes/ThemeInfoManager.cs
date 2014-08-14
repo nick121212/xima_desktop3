@@ -78,8 +78,8 @@ namespace XIMALAYA.PCDesktop.Tools.Themes
                                            .Select(a => new AppThemeMenuData() { Name = a.Name, BorderColorBrush = a.Resources["BlackColorBrush"] as Brush, ColorBrush = a.Resources["WhiteColorBrush"] as Brush })
                                            .ToList();
             this.BrushResources = FindBrushResources();
-            this.Theme = this.AppThemes.Find(x => x.Name.Equals("BaseLight"));
-            this.AccentColor = this.AccentColors.Find(x => x.Name.Equals("Orange"));
+            this.Theme = this.AppThemes.Find(x => x.Name.Equals("BaseDark"));
+            this.AccentColor = this.AccentColors.Find(x => x.Name.Equals("Blue"));
         }
         private IEnumerable<string> FindBrushResources()
         {

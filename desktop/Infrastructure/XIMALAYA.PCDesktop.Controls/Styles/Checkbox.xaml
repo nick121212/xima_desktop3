@@ -8,8 +8,8 @@
                    Width="{TemplateBinding Width}"
                    Height="{TemplateBinding Height}"
 				   Foreground="{TemplateBinding Foreground}"
-                   HorizontalAlignment="Center"
                    HorizontalContentAlignment="Center"
+				   VerticalContentAlignment="Center"
                    Background="{TemplateBinding Background}"/>
         </Border>
         <ControlTemplate.Triggers>
@@ -23,7 +23,9 @@
         <Setter Property="Width" Value="80"/>
         <Setter Property="Height" Value="30"/>
 		<Setter Property="Foreground" Value="White"/>
-        <Setter Property="Background" Value="{DynamicResource AccentColorBrush2}"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Background" Value="{DynamicResource AccentColorBrush3}"/>
         <Setter Property="Template" Value="{StaticResource MetroRadioButtonTemplate}" />
     </Style>
     

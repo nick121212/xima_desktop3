@@ -85,6 +85,12 @@ namespace XIMALAYA.PCDesktop.Controls
 
         #endregion
 
+        protected override void OnClearChildren()
+        {
+            this.SetVerticalOffset(0D);
+            base.OnClearChildren();
+        }
+
         #region IScrollInfo 成员
 
         /// <summary>

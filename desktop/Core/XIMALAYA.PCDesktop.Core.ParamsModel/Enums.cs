@@ -49,7 +49,19 @@ namespace XIMALAYA.PCDesktop.Core.ParamsModel
         /// <summary>
         /// 专辑标签
         /// </summary>
-        album
+        album,
+        /// <summary>
+        /// 声音标签
+        /// </summary>
+        voice,
+        /// <summary>
+        /// 所有标签
+        /// </summary>
+        all,
+        /// <summary>
+        /// 用户标签
+        /// </summary>
+        user,
     }
     /// <summary>
     /// 查询条件

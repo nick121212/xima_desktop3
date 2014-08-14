@@ -72,6 +72,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MainMenuViewModel.cs" />
     <Compile Include="MenusModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\MainMenuView.xaml.cs">

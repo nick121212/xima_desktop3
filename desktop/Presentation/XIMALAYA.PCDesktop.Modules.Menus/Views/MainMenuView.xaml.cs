@@ -27,5 +27,12 @@ namespace XIMALAYA.PCDesktop.Modules.Menus.Views
         {
             InitializeComponent();
         }
+
+        [Import]
+        public MainMenuViewModel ViewModel
+        {
+            get { return this.DataContext as MainMenuViewModel; }
+            set { this.DataContext = value; }
+        }
     }
 }

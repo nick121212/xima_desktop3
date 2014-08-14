@@ -13,7 +13,7 @@ namespace XIMALAYA.PCDesktop.Core.ParamsModel
     /// <summary>
     /// 分类，标签下的专辑
     /// </summary>
-    public class CategoryTagAlbums : BaseParam
+    public class CategoryTagAlbumParam : BaseParam
     {
         /// <summary>
         /// 默认(不传或传””) : 24小时最热声音,

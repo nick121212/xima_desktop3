@@ -164,7 +164,7 @@
 					<MultiBinding.Bindings>
 						<Binding Path="BassEngine.IsPlaying" Source="{x:Static tools:CommandSingleton.Instance}" />
 						<Binding Path="TrackId"/>
-						<Binding Path="TrackID" Source="{x:Static tools:CommandSingleton.Instance}"/>
+						<Binding Path="SoundData.TrackId" Source="{x:Static tools:CommandSingleton.Instance}"/>
 					</MultiBinding.Bindings>
 				</MultiBinding>
 			</MControls:MyCheckboxButton.IsChecked>

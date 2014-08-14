@@ -33,16 +33,12 @@ namespace XIMALAYA.PCDesktop.Core.ParamsModel
         /// </summary>
         [DataMember(IsRequired = false, Name = "device", Order = 10)]
         public DeviceType? Device { get; set; }
-        ///// <summary>
-        ///// 登陆用户的id
-        ///// </summary>
-        //[DataMember(IsRequired = false, Name = "uid")]
-        //public int? Uid { get; set; }
-        ///// <summary>
-        ///// 参数列表
-        ///// </summary>
-        //[ImportMany(AllowRecomposition = true)]
-        //protected Lazy<object, IDataMember>[] Params { get; set; }
+        /// <summary>
+        /// 登陆用户的id
+        /// </summary>
+        [DataMember(IsRequired = false, Name = "uid", Order = 40)]
+        public int? Uid { get; set; }
+
         /// <summary>
         /// 返回成字符
         /// </summary>
@@ -62,7 +58,7 @@ namespace XIMALAYA.PCDesktop.Core.ParamsModel
                 if (va != null)
                 {
                     val = ve.GetValue(this);
-                    if (val == null)//|| val.ToString() == string.Empty)
+                    if (val == null)
                     {
                         if (va.IsRequired)
                         {
@@ -79,25 +75,6 @@ namespace XIMALAYA.PCDesktop.Core.ParamsModel
                     sReturn.AppendFormat("{0}={1}", va.Name, val.ToString());
                 }
             }
-
-
-            //if (this.Params == null)
-            //{
-            //    throw new ArgumentNullException("Params can not be null!");
-            //}
-            //foreach (var ve in this.Params)
-            //{
-            //    if (ve.Metadata.IsRequired && !ve.IsValueCreated )
-            //    {
-            //        throw new ArgumentNullException(ve.Metadata.Name);
-            //    }
-            //    if (index > 0)
-            //    {
-            //        sReturn.Append("&");
-            //    }
-            //    sReturn.AppendFormat("{0}={1}", ve.Metadata.Name, ve.Value.ToString());
-            //    index++;
-            //}
 
             return sReturn.ToString();
         }

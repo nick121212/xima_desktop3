@@ -47,6 +47,7 @@ namespace XIMALAYA.PCDesktop.Core.Data
                     .Field<System.Int32>(field => field.MaxPageId, type => type.To("maxPageId"))
                     .Field<System.Int32>(field => field.Count, type => type.To("count"))
             );
+            this.doAddOtherConfig();
         }
     }
 }

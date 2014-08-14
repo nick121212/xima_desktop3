@@ -11,7 +11,7 @@ namespace XIMALAYA.PCDesktop.Core.ParamsModel
     /// <summary>
     /// 分类，标签下的声音
     /// </summary>
-    public class CategoryTagSounds : BaseParam
+    public class CategoryTagSoundParam : BaseParam
     {
         /// <summary>
         /// 分类，传分类名称，like：music

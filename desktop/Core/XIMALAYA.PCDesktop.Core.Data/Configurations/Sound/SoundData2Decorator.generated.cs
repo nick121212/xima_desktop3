@@ -69,6 +69,7 @@ namespace XIMALAYA.PCDesktop.Core.Data
                     .Field<System.String>(field => field.SmallLogo, type => type.To("smallLogo"))
                     .Field<System.Int64>(field => field.UID, type => type.To("uid"))
             );
+            this.doAddOtherConfig();
         }
     }
 }

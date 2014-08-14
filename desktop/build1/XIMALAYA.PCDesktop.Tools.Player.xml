@@ -1,0 +1,496 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>XIMALAYA.PCDesktop.Tools.Player</name>
+    </assembly>
+    <members>
+        <member name="T:XIMALAYA.PCDesktop.Tools.Player.BassEngine1">
+            <summary>
+            Bass播放器
+            </summary>
+        </member>
+        <member name="F:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.instance">
+            <summary>
+            BassEngine的唯一实例
+            </summary>
+        </member>
+        <member name="F:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.positionTimer">
+            <summary>
+            用于更新播放进度的计时器
+            </summary>
+        </member>
+        <member name="F:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.endTrackSyncProc">
+            <summary>
+            当播放结束时调用
+            </summary>
+        </member>
+        <member name="F:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.activeStreamHandle">
+            <summary>
+            当前流的句柄
+            </summary>
+        </member>
+        <member name="F:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.canPlay">
+            <summary>
+            可以使用播放命令
+            </summary>
+        </member>
+        <member name="F:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.canPause">
+            <summary>
+            可以使用暂停命令
+            </summary>
+        </member>
+        <member name="F:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.isPlaying">
+            <summary>
+            是否正在播放
+            </summary>
+        </member>
+        <member name="F:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.canStop">
+            <summary>
+            可以使用停止命令
+            </summary>
+        </member>
+        <member name="F:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.process">
+            <summary>
+            下载噻进度
+            </summary>
+        </member>
+        <member name="F:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.channelLength">
+            <summary>
+            音频长度
+            </summary>
+        </member>
+        <member name="F:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.currentChannelPosition">
+            <summary>
+            当前播放进度
+            </summary>
+        </member>
+        <member name="F:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.onlineFileWorker">
+            <summary>
+            用于异步打开网络音频文件的线程
+            </summary>
+        </member>
+        <member name="F:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.pendingOperation">
+            <summary>
+            待执行的命令，当打开网络上的音频时非常有用
+            </summary>
+        </member>
+        <member name="F:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.volume">
+            <summary>
+            音量
+            </summary>
+        </member>
+        <member name="F:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.isMuted">
+            <summary>
+            是否静音
+            </summary>
+        </member>
+        <member name="F:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.proxyHandle">
+            <summary>
+            代理服务器设置的非托管资源句柄
+            </summary>
+        </member>
+        <member name="F:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.openningFile">
+            <summary>
+            保存正在打开的文件的地址，当短时间内多次打开网络文件时，这个字段保存最后一次打开的文件，可以使其他打开文件的操作失效
+            </summary>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.Finalize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.Dispose">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.Dispose(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.Stop">
+            <summary>
+            停止当前音频，并释放资源
+            </summary>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.Pause">
+            <summary>
+            暂停当前音频
+            </summary>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.Play">
+            <summary>
+            播放当前音频
+            </summary>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.OpenFile(System.String)">
+            <summary>
+            打开文件
+            </summary>
+            <param name="filename">文件名</param>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.OpenUrlAsync(System.String)">
+            <summary>
+            打开网络地址
+            </summary>
+            <param name="url">URL地址</param>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.SetProxy(System.String,System.Int32,System.String,System.String)">
+            <summary>
+            设置代理服务器
+            </summary>
+            <param name="host">主机</param>
+            <param name="port">端口</param>
+            <param name="username">用户名</param>
+            <param name="password">密码</param>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.UseDefaultProxy">
+            <summary>
+            使用默认代理服务器
+            </summary>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.DontUseProxy">
+            <summary>
+            不使用任何代理服务器
+            </summary>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.positionTimer_Tick(System.Object,System.EventArgs)">
+            <summary>
+            更新播放进度
+            </summary>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.Initialize">
+            <summary>
+            初始化BassEngine
+            </summary>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.PlayCurrentStream">
+            <summary>
+            播放当前流
+            </summary>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.FreeCurrentStream">
+            <summary>
+            释放当前流
+            </summary>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.SetVolume">
+            <summary>
+            设置音量
+            </summary>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.EndTrack(System.Int32,System.Int32,System.Int32,System.IntPtr)">
+            <summary>
+            播放完毕
+            </summary>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.RaiseTrackEndedEvent">
+            <summary>
+            引发播放完毕事件
+            </summary>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.RaiseOpenFailedEvent">
+            <summary>
+            引发打开音频文件失败事件
+            </summary>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.RaiseOpenSucceededEvent">
+            <summary>
+            引发打开音频文件成功事件
+            </summary>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.GetFFTData(System.Single[])">
+            <summary>
+            
+            </summary>
+            <param name="fftDataBuffer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.GetFFTFrequencyIndex(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="frequency"></param>
+            <returns></returns>
+        </member>
+        <member name="E:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.PropertyChanged">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.Instance">
+            <summary>
+            获取BassEngine的唯一实例
+            </summary>
+        </member>
+        <member name="P:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.ChannelLength">
+            <summary>
+            长度
+            </summary>
+        </member>
+        <member name="P:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.ChannelPosition">
+            <summary>
+            位置
+            </summary>
+        </member>
+        <member name="P:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.ActiveStreamHandle">
+            <summary>
+            当前流的句柄
+            </summary>
+        </member>
+        <member name="P:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.CanPlay">
+            <summary>
+            可以使用播放命令
+            </summary>
+        </member>
+        <member name="P:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.CanPause">
+            <summary>
+            可以使用暂停命令
+            </summary>
+        </member>
+        <member name="P:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.CanStop">
+            <summary>
+            可以使用停止命令
+            </summary>
+        </member>
+        <member name="P:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.IsPlaying">
+            <summary>
+            是否正在播放
+            </summary>
+        </member>
+        <member name="P:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.Volume">
+            <summary>
+            音量
+            </summary>
+        </member>
+        <member name="P:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.IsMuted">
+            <summary>
+            是否静音
+            </summary>
+        </member>
+        <member name="P:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.Process">
+            <summary>
+            是否静音
+            </summary>
+        </member>
+        <member name="E:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.TrackEnded">
+            <summary>
+            当播放完毕时发生。
+            </summary>
+        </member>
+        <member name="E:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.OpenFailed">
+            <summary>
+            当打开音频文件失败时发生。
+            </summary>
+        </member>
+        <member name="E:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.OpenSucceeded">
+            <summary>
+            当打开音频文件成功时发生。
+            </summary>
+        </member>
+        <member name="T:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.PendingOperation">
+            <summary>
+            待执行的命令
+            </summary>
+        </member>
+        <member name="F:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.PendingOperation.None">
+            <summary>
+            无
+            </summary>
+        </member>
+        <member name="F:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.PendingOperation.Play">
+            <summary>
+            播放
+            </summary>
+        </member>
+        <member name="F:XIMALAYA.PCDesktop.Tools.Player.BassEngine1.PendingOperation.Pause">
+            <summary>
+            暂停
+            </summary>
+        </member>
+        <member name="T:XIMALAYA.PCDesktop.Tools.Player.BassEngine">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine.Play">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine.Pause">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine.Stop">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine.OpenUrlAsync(System.String)">
+            <summary>
+            打开网络播放地址
+            </summary>
+            <param name="url"></param>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine.OpenFile(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="filename"></param>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine.SetSoundPath(System.String)">
+            <summary>
+            设置播放路径
+            </summary>
+            <param name="path"></param>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine.PlayCurrentStream">
+            <summary>
+            播放当前流
+            </summary>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine.FreeCurrentStream">
+            <summary>
+            释放当前流
+            </summary>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine.Finalize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine.EndTrack(System.Int32,System.Int32,System.Int32,System.IntPtr)">
+            <summary>
+            播放完毕
+            </summary>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine.GetFFTData(System.Single[])">
+            <summary>
+            
+            </summary>
+            <param name="fftDataBuffer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine.GetFFTFrequencyIndex(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="frequency"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XIMALAYA.PCDesktop.Tools.Player.BassEngine.Dispose">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:XIMALAYA.PCDesktop.Tools.Player.BassEngine.ActiveStreamHandle">
+            <summary>
+            当前流的句柄，声音播放句柄
+            </summary>
+        </member>
+        <member name="P:XIMALAYA.PCDesktop.Tools.Player.BassEngine.EndTrackSyncProc">
+            <summary>
+            播放完毕回调
+            </summary>
+        </member>
+        <member name="P:XIMALAYA.PCDesktop.Tools.Player.BassEngine.DownloadProc">
+            <summary>
+            下载回调
+            </summary>
+        </member>
+        <member name="P:XIMALAYA.PCDesktop.Tools.Player.BassEngine.OnlineFileWorker">
+            <summary>
+            下载网络地址声音 线程
+            </summary>
+        </member>
+        <member name="P:XIMALAYA.PCDesktop.Tools.Player.BassEngine.ProxyHandle">
+            <summary>
+            代理
+            </summary>
+        </member>
+        <member name="P:XIMALAYA.PCDesktop.Tools.Player.BassEngine.SampleFrequency">
+            <summary>
+            属性描述
+            </summary>
+        </member>
+        <member name="P:XIMALAYA.PCDesktop.Tools.Player.BassEngine.CurrentPositionTimer">
+            <summary>
+            当前播放位置获取
+            </summary>
+        </member>
+        <member name="P:XIMALAYA.PCDesktop.Tools.Player.BassEngine.IsCurrnetPositionUpdate">
+            <summary>
+            当前播放时长是否更新
+            </summary>
+        </member>
+        <member name="P:XIMALAYA.PCDesktop.Tools.Player.BassEngine.TotalSize">
+            <summary>
+            文件总长度
+            </summary>
+        </member>
+        <member name="P:XIMALAYA.PCDesktop.Tools.Player.BassEngine.IsCurrentPositionUpdated">
+            <summary>
+            当前播放时长是否更新完毕
+            </summary>
+        </member>
+        <member name="P:XIMALAYA.PCDesktop.Tools.Player.BassEngine.CurrentSoundUrl">
+            <summary>
+            当前播放音乐的地址
+            </summary>
+        </member>
+        <member name="P:XIMALAYA.PCDesktop.Tools.Player.BassEngine.TotalTime">
+            <summary>
+            声音总时长
+            </summary>
+        </member>
+        <member name="P:XIMALAYA.PCDesktop.Tools.Player.BassEngine.CurrentTime">
+            <summary>
+            当前播放位置
+            </summary>
+        </member>
+        <member name="P:XIMALAYA.PCDesktop.Tools.Player.BassEngine.CanPlay">
+            <summary>
+            是否可以播放声音
+            </summary>
+        </member>
+        <member name="P:XIMALAYA.PCDesktop.Tools.Player.BassEngine.CanPause">
+            <summary>
+            是否可以暂停
+            </summary>
+        </member>
+        <member name="P:XIMALAYA.PCDesktop.Tools.Player.BassEngine.IsPlaying">
+            <summary>
+            是否正在播放
+            </summary>
+        </member>
+        <member name="P:XIMALAYA.PCDesktop.Tools.Player.BassEngine.Volume">
+            <summary>
+            音量
+            </summary>
+        </member>
+        <member name="P:XIMALAYA.PCDesktop.Tools.Player.BassEngine.IsMuted">
+            <summary>
+            是否静音
+            </summary>
+        </member>
+        <member name="P:XIMALAYA.PCDesktop.Tools.Player.BassEngine.Process">
+            <summary>
+            下载进度
+            </summary>
+        </member>
+        <member name="P:XIMALAYA.PCDesktop.Tools.Player.BassEngine.IsAutoPlayed">
+            <summary>
+            第一次加载完数据后，自动播放
+            </summary>
+        </member>
+        <member name="P:XIMALAYA.PCDesktop.Tools.Player.BassEngine.PlayCommand">
+            <summary>
+            播放命令
+            </summary>
+        </member>
+    </members>
+</doc>

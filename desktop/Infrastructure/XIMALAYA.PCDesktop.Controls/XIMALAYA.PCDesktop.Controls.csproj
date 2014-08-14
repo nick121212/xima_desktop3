@@ -34,10 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Bass.Net, Version=2.4.9.0, Culture=neutral, PublicKeyToken=b7566c273e6ef480, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DoubanFM.Bass\Bass.Net.dll</HintPath>
-    </Reference>
     <Reference Include="MahApps.Metro, Version=0.13.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\MahApps.Metro.dll</HintPath>
@@ -53,6 +49,7 @@
     <Reference Include="PresentationBuildTasks" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -64,20 +61,13 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="WPFSoundVisualizationLib, Version=0.4.5246.18879, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\reference\wpfsvl-16372\WPFSoundVisualizationLib\Main\Source\WPFSoundVisualizationLibrary\bin\Debug\WPFSoundVisualizationLib.dll</HintPath>
-    </Reference>
-    <Reference Include="XIMALAYA.PCDesktop.Events, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\build\XIMALAYA.PCDesktop.Events.dll</HintPath>
-    </Reference>
     <Reference Include="XIMALAYA.PCDesktop.Tools, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\XIMALAYA.PCDesktop.Tools.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ImageAttached.cs" />
     <Compile Include="Controls\MyCheckboxButton.cs" />
     <Compile Include="Controls\MyImage.cs" />
     <Compile Include="Controls\MyRadioButton.cs" />
@@ -162,6 +152,10 @@
     <Page Include="Styles\ScrollViewer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\TabControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>

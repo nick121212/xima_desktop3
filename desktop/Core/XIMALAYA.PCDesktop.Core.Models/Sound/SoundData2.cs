@@ -14,7 +14,6 @@ namespace XIMALAYA.PCDesktop.Core.Models.Sound
         public SoundData2()
             : base()
         {
-            this.doAddMap("FXClassName", "SoundData");
             this.doAddMap(() => this.AlbumImage, "album_cover_path");
             this.doAddMap(() => this.AlbumImage86, "albumImage");
             this.doAddMap(() => this.AlbumID, "albumId");

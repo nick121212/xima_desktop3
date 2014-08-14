@@ -49,6 +49,7 @@ namespace XIMALAYA.PCDesktop.Core.Data
                     .Field<System.Object>(field => field.LatestSpecial, type => type.To("latest_special"))
                     .Field<XIMALAYA.PCDesktop.Core.Models.Album.AlbumInfoResult1>(field => field.Albums, type => type.To("recommendAlbums"))
             );
+            this.doAddOtherConfig();
         }
     }
 }

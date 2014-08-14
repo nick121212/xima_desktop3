@@ -14,7 +14,6 @@ namespace XIMALAYA.PCDesktop.Core.Models.Album
         public AlbumData2()
             : base()
         {
-            this.doAddMap("FXClassName", "AlbumData");
             this.doAddMap(() => this.AlbumCoverUrl290, "album_cover_path_290");
             this.doAddMap(() => this.AlbumCoverUrl640, "album_cover_path_640");
             this.doAddMap(() => this.AlbumCoverUrl86, "album_cover_path_86");

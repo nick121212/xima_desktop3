@@ -61,7 +61,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
-    <Reference Include="WPFSoundVisualizationLib, Version=0.4.5247.32420, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="WPFSoundVisualizationLib, Version=0.3.5338.29566, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\WPFSoundVisualizationLib.dll</HintPath>
     </Reference>
@@ -81,6 +81,7 @@
   <ItemGroup>
     <Compile Include="Behaviors\AutoPopulateExportedViewsBehavior.cs" />
     <Compile Include="Command\Commands.cs" />
+    <Compile Include="Converter\EqualConverter.cs" />
     <Compile Include="Converter\HalfValueConverter.cs" />
     <Compile Include="Converter\MutiBoolConverter.cs" />
     <Compile Include="Extension\VisualTreeHelperExtensions.cs" />

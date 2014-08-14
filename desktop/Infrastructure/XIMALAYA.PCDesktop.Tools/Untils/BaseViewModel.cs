@@ -149,11 +149,18 @@ namespace XIMALAYA.PCDesktop.Tools.Untils
                 if (value != _Page)
                 {
                     _Page = value;
-                    this.GetData(true);
+                    if (_Page > 0)
+                    {
+                        this.GetData(true);
+                    }
                     this.RaisePropertyChanged(() => this.CurrentPage);
                 }
             }
         }
+        /// <summary>
+        /// 是否已经初始化过
+        /// </summary>
+        public bool Initialized { get; set; }
 
         #endregion
 

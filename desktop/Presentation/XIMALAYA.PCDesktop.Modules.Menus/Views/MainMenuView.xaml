@@ -15,10 +15,10 @@
 	</UserControl.Resources>
 	
 	<StackPanel Orientation="Vertical" Margin="0 10 0 0">
-		<!--<Image Width="60" Source="pack://application:,,,/XIMALAYA.PCDesktop.Tools;component/Resources/Images/logo.png"/>-->
+		<Image Width="60" Source="pack://application:,,,/XIMALAYA.PCDesktop.Tools;component/Resources/Images/logo.png"/>
 		<Label Content="喜马拉雅" 
 			   Margin="0 0 0 20"
-			   Foreground="{DynamicResource AccentColorBrush}"
+			   Foreground="{DynamicResource BlackBrush}"
 			   HorizontalContentAlignment="Center"/>
 		
 		<MControls:MyToggleButton Width="100" 
@@ -27,10 +27,11 @@
 								  Margin="0 5"
 								  BorderThickness="0"
 								  BorderType="Rectangle"
-								  Foreground="White"
+								  Foreground="{DynamicResource WhiteBrush}"
 								  IsSingle="True"
-								  Background="{DynamicResource AccentColorBrush}"
-								  BorderBrush="{DynamicResource AccentColorBrush}">
+								  Command="{Binding ShowContentCommand,Source={x:Static tools:CommandSingleton.Instance}}"
+								  CommandParameter="{x:Static tools:WellKnownModuleNames.SearchModule}"
+								  Background="{DynamicResource BlackBrush}">
 			<MControls:MyToggleButton.Content>
 				<StackPanel>
 					<Path Data="{Binding SearchPath, Source={x:Static MControls:PathData.Instance}}" 
@@ -52,10 +53,11 @@
 								  Margin="0 5"
 								  BorderThickness="0"
 								  BorderType="Rectangle"
-								  Foreground="White"
+								  Foreground="{DynamicResource WhiteBrush}"
 								  IsSingle="True"
-								  Background="{DynamicResource AccentColorBrush}"
-								  BorderBrush="{DynamicResource AccentColorBrush}">
+								  Command="{Binding ShowContentCommand,Source={x:Static tools:CommandSingleton.Instance}}"
+								  CommandParameter="{x:Static tools:WellKnownModuleNames.DiscoverModule}"
+								  Background="{DynamicResource BlackBrush}">
 			<MControls:MyToggleButton.Content>
 				<StackPanel>
 					<Path Data="{Binding DiscoverPath, Source={x:Static MControls:PathData.Instance}}" 
@@ -77,11 +79,10 @@
 								  Margin="0 5"
 								  BorderThickness="0"
 								  BorderType="Rectangle"
-								  Foreground="White"
+								   Foreground="{DynamicResource WhiteBrush}"
 								  IsBackground="Visible"
 								  IsChecked="{Binding IsSettingFlyoutShow,Source={x:Static tools:FlyoutVisible.Instance}}"
-								  Background="{DynamicResource AccentColorBrush}"
-								  BorderBrush="{DynamicResource AccentColorBrush}">
+								  Background="{DynamicResource BlackBrush}">
 			<MControls:MyToggleButton.Content>
 				<StackPanel>
 					<Path Data="{Binding ToolbarSettings, Source={x:Static MControls:PathData.Instance}}" 

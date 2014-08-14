@@ -42,10 +42,8 @@ namespace XIMALAYA.PCDesktop.Core.Data
             base.doAddConfig();
             this.Config.MapType<AlbumData>(map => map
                                     .Field<System.Int64>(field => field.AlbumID, type => type.To("id"))
-                    .Field<System.String>(field => field.Title, type => type.To("title"))
-                    .Field<System.Int64>(field => field.PlayCount, type => type.To("playsCounts"))
-                    .Field<System.String>(field => field.AlbumCoverUrl290, type => type.To("coverSmall"))
             );
+            this.doAddOtherConfig();
         }
     }
 }

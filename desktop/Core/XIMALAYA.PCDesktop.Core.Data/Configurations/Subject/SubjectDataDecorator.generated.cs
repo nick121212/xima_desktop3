@@ -48,6 +48,7 @@ namespace XIMALAYA.PCDesktop.Core.Data
                     .Field<System.String>(field => field.Title, type => type.To("title"))
                     .Field<System.Boolean>(field => field.IsHot, type => type.To("isHot"))
             );
+            this.doAddOtherConfig();
         }
     }
 }

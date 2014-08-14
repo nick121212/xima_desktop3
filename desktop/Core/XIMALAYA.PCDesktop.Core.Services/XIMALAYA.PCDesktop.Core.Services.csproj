@@ -37,6 +37,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -67,9 +68,11 @@
     <Compile Include="Impl\CategoryTagService.cs" />
     <Compile Include="Impl\AlbumDetailService.cs" />
     <Compile Include="Impl\SuperExploreIndexService.cs" />
+    <Compile Include="Impl\SearchService.cs" />
     <Compile Include="IAlbumDetailService.cs" />
     <Compile Include="IFocusImageService.cs" />
-    <Compile Include="ISuperExploreIndex.cs" />
+    <Compile Include="ISearchService.cs" />
+    <Compile Include="ISuperExploreIndexService.cs" />
     <Compile Include="Impl\ServiceBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

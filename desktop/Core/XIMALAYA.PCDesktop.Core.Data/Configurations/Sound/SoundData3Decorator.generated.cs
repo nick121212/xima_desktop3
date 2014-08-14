@@ -62,6 +62,7 @@ namespace XIMALAYA.PCDesktop.Core.Data
                     .Field<System.String>(field => field.CoverWebSmall, type => type.To("coverWebSmall"))
                     .Field<System.String>(field => field.PlayUrl64, type => type.To("playPath64"))
             );
+            this.doAddOtherConfig();
         }
     }
 }

@@ -33,7 +33,7 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumListModule
         /// </summary>
         [Import]
         private ICategoryTagAlbumsService CategoryTagAlbumsService { get; set; }
-        private CategoryTagAlbums Params { get; set; }
+        private CategoryTagAlbumParam Params { get; set; }
         /// <summary>
         /// 状态列表
         /// </summary>
@@ -178,7 +178,7 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumListModule
         /// <param name="param"></param>
         /// <param name="regionName"></param>
         /// <param name="view"></param>
-        public void DoInit(CategoryTagAlbums param, string regionName, AlbumView view)
+        public void DoInit(CategoryTagAlbumParam param, string regionName, AlbumView view)
         {
             if (this.RegionManager != null)
             {

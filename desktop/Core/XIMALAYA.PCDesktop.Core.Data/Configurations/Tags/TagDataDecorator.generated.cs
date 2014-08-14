@@ -45,6 +45,7 @@ namespace XIMALAYA.PCDesktop.Core.Data
                     .Field<System.String>(field => field.CoverPath, type => type.To("cover_path"))
                     .Field<System.String>(field => field.TagName, type => type.To("tname"))
             );
+            this.doAddOtherConfig();
         }
     }
 }

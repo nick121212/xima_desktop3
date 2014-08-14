@@ -45,5 +45,10 @@ namespace XIMALAYA.PCDesktop.Tools
         /// 菜单
         /// </summary>
         public const string MenusModule = "MenusModule";
+
+        /// <summary>
+        /// 搜索
+        /// </summary>
+        public const string SearchModule = "SearchModule";
     }
 }

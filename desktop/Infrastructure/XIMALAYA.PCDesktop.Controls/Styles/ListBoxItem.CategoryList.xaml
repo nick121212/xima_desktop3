@@ -30,27 +30,19 @@
 						<RowDefinition Height="*"/>
 						<RowDefinition Height="Auto"/>
 					</Grid.RowDefinitions>
-
-					<Path Data="{Binding Path}" 
-						  Style="{StaticResource PathStyle}"
-						  Width="40"
-						  Height="40"
-						  Fill="{DynamicResource AccentColorBrush}" >
-					</Path>
-					
-					<Image Width="60" 
-						   Height="60" 
+					<Image Width="96" 
+						   Height="96" 
 						   Stretch="Uniform" 
+						   MControls:ImageAttached.IsSetGray="false"
 						   VerticalAlignment="Center"
 						   Source="{Binding CoverPath}">
-						<Image.Clip>
+						<!--<Image.Clip>
 							<EllipseGeometry Center="30,30" RadiusX="25" RadiusY="25"/>
-						</Image.Clip>
+						</Image.Clip>-->
 					</Image>
-					
-					<Label Grid.Row="1" 
+					<!--<Label Grid.Row="1" 
 						   HorizontalContentAlignment="Center" 
-						   Content="{Binding Title}"/>
+						   Content="{Binding Title}"/>-->
 				</Grid>
 			</MControls:MyRadioButton.Content>
 		</MControls:MyRadioButton>

@@ -223,7 +223,7 @@ namespace XIMALAYA.PCDesktop.Controls
         {
             this.ChangePageCommand = new DelegateCommand<int?>((pageNo) =>
             {
-                if (pageNo.HasValue)
+                if (pageNo.HasValue && pageNo > 0)
                 {
                     this.CurrentPage = (int)pageNo;
                 }

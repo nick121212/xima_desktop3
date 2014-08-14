@@ -49,6 +49,7 @@ namespace XIMALAYA.PCDesktop.Core.Data
                     .Field<System.Int32>(field => field.MaxPageID, type => type.To("maxPageId"))
                     .Field<XIMALAYA.PCDesktop.Core.Models.Sound.SoundData[]>(field => field.Sounds, type => type.To("list"))
             );
+            this.doAddOtherConfig();
         }
     }
 }

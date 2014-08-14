@@ -42,10 +42,8 @@ namespace XIMALAYA.PCDesktop.Core.Data
             base.doAddConfig();
             this.Config.MapType<AlbumData>(map => map
                                     .Field<System.Int64>(field => field.AlbumID, type => type.To("albumId"))
-                    .Field<System.String>(field => field.Title, type => type.To("title"))
-                    .Field<System.Int64>(field => field.PlayCount, type => type.To("playTimes"))
-                    .Field<System.String>(field => field.AlbumCoverUrl290, type => type.To("coverWebLarge"))
                     .Field<System.String>(field => field.AlbumCoverUrl140, type => type.To("coverLarge"))
+                    .Field<System.String>(field => field.AlbumCoverUrl290, type => type.To("coverWebLarge"))
                     .Field<System.String>(field => field.AlbumCoverUrl640, type => type.To("coverOrigin"))
                     .Field<System.String>(field => field.AlbumCoverUrl86, type => type.To("coverSmall"))
                     .Field<System.String>(field => field.AvatarPath, type => type.To("avatarPath"))
@@ -54,9 +52,11 @@ namespace XIMALAYA.PCDesktop.Core.Data
                     .Field<System.String>(field => field.Intro, type => type.To("intro"))
                     .Field<System.Boolean>(field => field.IsVerified, type => type.To("isVerified"))
                     .Field<System.String>(field => field.NickName, type => type.To("nickname"))
+                    .Field<System.Int64>(field => field.PlayCount, type => type.To("playTimes"))
                     .Field<System.String>(field => field.RichIntro, type => type.To("rich_intro"))
                     .Field<System.Int32>(field => field.Status, type => type.To("status"))
                     .Field<System.String>(field => field.Tags, type => type.To("tags"))
+                    .Field<System.String>(field => field.Title, type => type.To("title"))
                     .Field<System.Int32>(field => field.TrackCount, type => type.To("tracks"))
                     .Field<System.Boolean>(field => field.IsFavorite, type => type.To("isFavorite"))
                     .Field<System.Int64>(field => field.Uid, type => type.To("uid"))
@@ -64,6 +64,7 @@ namespace XIMALAYA.PCDesktop.Core.Data
                     .Field<System.Int32>(field => field.SerialState, type => type.To("serializeStatus"))
                     .Field<System.Int64>(field => field.LastUptrackDate, type => type.To("lastUptrackAt"))
             );
+            this.doAddOtherConfig();
         }
     }
 }

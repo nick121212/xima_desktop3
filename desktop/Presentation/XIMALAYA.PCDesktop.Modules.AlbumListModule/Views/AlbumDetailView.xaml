@@ -165,11 +165,17 @@
 		<Grid Grid.Row="1" 
 			  Margin="5">
 			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
 				<RowDefinition Height="*" />
 				<RowDefinition Height="Auto" />
 			</Grid.RowDefinitions>
+			<Controls:MetroProgressBar Grid.Row="0" 
+								       Foreground="{DynamicResource AccentColorBrush}"
+								       Margin="0 0 0 2" 
+								       IsIndeterminate="{Binding IsWaiting}" />
 			<!--声音列表-->
 			<DataGrid x:Name="MetroDataGrid"
+					  Grid.Row="1" 
                       RenderOptions.ClearTypeHint="Enabled"
                       TextOptions.TextFormattingMode="Display"
 				      CanUserAddRows="False"
@@ -216,7 +222,7 @@
 											<MultiBinding.Bindings>
 												<Binding Path="BassEngine.IsPlaying" Source="{x:Static tools:CommandSingleton.Instance}" />
 												<Binding Path="TrackId"/>
-												<Binding Path="TrackID" Source="{x:Static tools:CommandSingleton.Instance}"/>
+												<Binding Path="SoundData.TrackId" Source="{x:Static tools:CommandSingleton.Instance}"/>
 											</MultiBinding.Bindings>
 										</MultiBinding>
 									</MControls:MyToggleButton.IsChecked>
@@ -240,7 +246,7 @@
 			<!--分页控件-->
 			<MControls:Pagination PageSize="{Binding PageSize}"
 							      HorizontalAlignment="Center"
-							      Grid.Row="1" 
+							      Grid.Row="2" 
 							      Margin="3"
 							      IsEnabled="{Binding IsEnable}"
 							      CurrentPage="{Binding CurrentPage,Mode=TwoWay}"

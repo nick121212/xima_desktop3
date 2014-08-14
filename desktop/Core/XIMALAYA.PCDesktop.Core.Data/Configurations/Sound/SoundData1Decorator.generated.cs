@@ -75,6 +75,7 @@ namespace XIMALAYA.PCDesktop.Core.Data
                     .Field<System.String>(field => field.Tags, type => type.To("tags"))
                     .Field<System.Int64>(field => field.UID, type => type.To("track_uid"))
             );
+            this.doAddOtherConfig();
         }
     }
 }

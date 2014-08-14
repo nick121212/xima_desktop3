@@ -59,6 +59,7 @@ namespace XIMALAYA.PCDesktop.Core.Data
                     .Field<System.String>(field => field.WaveForm, type => type.To("waveform"))
                     .Field<System.Int32>(field => field.ActivityId, type => type.To("activity_id"))
             );
+            this.doAddOtherConfig();
         }
     }
 }

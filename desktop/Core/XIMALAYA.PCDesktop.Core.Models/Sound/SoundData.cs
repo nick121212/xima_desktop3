@@ -60,6 +60,10 @@ namespace XIMALAYA.PCDesktop.Core.Models.Sound
         /// </summary>
         public string AlbumTitle { get; set; }
         /// <summary>
+        /// 更新时间
+        /// </summary>
+        public long UpdateAt { get; set; }
+        /// <summary>
         /// 声音所属专辑图片
         /// </summary>
         public string AlbumImage { get; set; }
@@ -175,6 +179,8 @@ namespace XIMALAYA.PCDesktop.Core.Models.Sound
         public SoundData()
             : base()
         {
+            this.doAddMap("FXClassName", "SoundData");
+
             this.doAddMap(() => this.TrackId, "toTid");
             this.doAddMap(() => this.AlbumID, "albumId");
             this.doAddMap(() => this.AlbumTitle, "albumName");

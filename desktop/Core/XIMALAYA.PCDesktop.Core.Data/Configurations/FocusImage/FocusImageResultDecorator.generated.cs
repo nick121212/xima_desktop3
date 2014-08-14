@@ -45,6 +45,7 @@ namespace XIMALAYA.PCDesktop.Core.Data
                     .Field<System.String>(field => field.Message, type => type.To("msg"))
                     .Field<XIMALAYA.PCDesktop.Core.Models.FocusImage.FocusImageData[]>(field => field.List, type => type.To("list"))
             );
+            this.doAddOtherConfig();
         }
     }
 }

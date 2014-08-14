@@ -14,7 +14,6 @@
                       MinWidth="1150"
                       Width="1150"
                       Height="850"
-                      FontFamily="微软雅黑"
                       WindowStartupLocation="CenterScreen">
 	<Window.Resources>
 		<Style x:Key="CleanWindowStyle" TargetType="Controls:MetroWindow" BasedOn="{StaticResource CleanWindowStyleKey}" />
@@ -24,8 +23,9 @@
 	<Controls:MetroWindow.TaskbarItemInfo>
 		<TaskbarItemInfo x:Name="taskBar" 
 						 ProgressState="Normal"
+						 Overlay="{Binding SoundData.CoverSmall,Source={x:Static tools:CommandSingleton.Instance}}"
 						 ProgressValue="{Binding BassEngine.CurrentProcess}"
-                         Description="{Binding TrackTitle,Source={x:Static tools:CommandSingleton.Instance}}">
+                         Description="{Binding SoundData.Title,Source={x:Static tools:CommandSingleton.Instance}}">
 			<TaskbarItemInfo.ThumbButtonInfos>
 				<ThumbButtonInfoCollection>
 					<ThumbButtonInfo DismissWhenClicked="True"
@@ -114,7 +114,8 @@
 			<ContentControl cal:RegionManager.RegionName="{x:Static tools:WellKnownRegionNames.MusicPlayerModuleRegion}"/>
 		</Grid>
 		
-		<Border x:Name="LeftContainer" DockPanel.Dock="Left" 
+		<Border x:Name="LeftContainer" 
+				DockPanel.Dock="Left" 
 				Width="100"
 				BorderBrush="{DynamicResource AccentColorBrush}"
 				BorderThickness=" 0 0 1 0">
@@ -122,10 +123,11 @@
 							Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Border}, Path=ActualHeight}" 
 							cal:RegionManager.RegionName="{x:Static tools:WellKnownRegionNames.MenusRegion}"/>
 		</Border>
-
-		<Grid>
+		<Grid x:Name="ContentContainer">
 			<ContentControl cal:RegionManager.RegionName="{x:Static tools:WellKnownRegionNames.DiscoverModuleRegion}" />
-			<Controls:FlyoutsControl x:Name="ContainerGrid"/>
+			<Controls:FlyoutsControl Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Grid}, Path=ActualWidth}" 
+									 Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Grid}, Path=ActualHeight}" 
+									 x:Name="ContainerGrid"/>
 			<ListBox Width="300" 
 					 Height="300"
 					 BorderBrush="{DynamicResource AccentColorBrush}"
@@ -144,7 +146,7 @@
 					</ItemsPanelTemplate>
 				</ListBox.ItemsPanel>
 				<ListBox.Triggers>
-					
+
 				</ListBox.Triggers>
 			</ListBox>
 		</Grid>

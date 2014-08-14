@@ -26,9 +26,11 @@ namespace XIMALAYA.PCDesktop.Tools
     {
         #region 字段
 
-        private long _TrackID;
         private ItemCollection _SoundCollection;
         private string _TrackTitle;
+        private string _TrackImage;
+        private long _TrackID;
+        private SoundData _SoundData;
 
         #endregion
 
@@ -107,6 +109,42 @@ namespace XIMALAYA.PCDesktop.Tools
                 }
             }
         }
+        /// <summary>
+        /// 佔位服务
+        /// </summary>
+        public string TrackImage
+        {
+            get
+            {
+                return _TrackImage;
+            }
+            set
+            {
+                if (value != _TrackImage)
+                {
+                    _TrackImage = value;
+                    this.RaisePropertyChanged(() => this.TrackImage);
+                }
+            }
+        }
+        /// <summary>
+        /// 当前播放的声音
+        /// </summary>
+        public SoundData SoundData
+        {
+            get
+            {
+                return _SoundData;
+            }
+            set
+            {
+                if (value != _SoundData)
+                {
+                    _SoundData = value;
+                    this.RaisePropertyChanged(() => this.SoundData);
+                }
+            }
+        }
 
         #endregion
 
@@ -140,6 +178,10 @@ namespace XIMALAYA.PCDesktop.Tools
         /// 声音详情页命令
         /// </summary>
         public DelegateCommand ShowSoundDetailCommand { get; set; }
+        /// <summary>
+        /// 内容切换的命令
+        /// </summary>
+        public DelegateCommand<string> ShowContentCommand { get; set; }
 
         #endregion
 
@@ -241,6 +283,12 @@ namespace XIMALAYA.PCDesktop.Tools
             {
                 this.EventAggregator.GetEvent<SoundDetailEvent<long>>().Publish(this.TrackID);
             });
+
+            this.ShowContentCommand = new DelegateCommand<string>(s =>
+            {
+                this.EventAggregator.GetEvent<ContentChangeEvent>().Publish(s);
+            });
+
         }
 
         #endregion
