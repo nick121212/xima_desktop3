@@ -197,13 +197,24 @@ namespace XIMALAYA.PCDesktop.Tools
 
                 if (soundData == null) return;
 
-                var dataGrid = VisualTreeHelperExtensions.FindAncestor<DataGrid>(con);
-                var sounds = new SoundData[dataGrid.Items.Count];
-
                 this.SoundCollection.Clear();
-                dataGrid.Items.CopyTo(sounds, 0);
-                sounds.ToList().ForEach(sound => this.SoundCollection.Add(sound));
-                // this.SoundCollection = dataGrid.Items;
+                if (con.GetType() == typeof(ListBoxItem))
+                {
+                    var listBox = VisualTreeHelperExtensions.FindAncestor<ListBox>(con);
+                    var sounds = new SoundData[listBox.Items.Count];
+
+                    listBox.Items.CopyTo(sounds, 0);
+                    sounds.ToList().ForEach(sound => this.SoundCollection.Add(sound));
+                }
+                else
+                {
+                    var dataGrid = VisualTreeHelperExtensions.FindAncestor<DataGrid>(con);
+                    var sounds = new SoundData[dataGrid.Items.Count];
+
+                    dataGrid.Items.CopyTo(sounds, 0);
+                    sounds.ToList().ForEach(sound => this.SoundCollection.Add(sound));
+                }
+                
                 if (this.SoundCollection.MoveCurrentTo(soundData))
                 {
                     this.PlaySoundCommand.Execute(((SoundData)this.SoundCollection.CurrentItem).TrackId);

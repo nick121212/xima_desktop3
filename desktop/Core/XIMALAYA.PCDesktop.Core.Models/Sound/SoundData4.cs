@@ -28,8 +28,8 @@ namespace XIMALAYA.PCDesktop.Core.Models.Sound
             this.doAddMap(() => this.IsVerified, "is_v");
             this.doAddMap(() => this.NickName, "nickname");
             this.doAddMap(() => this.IsRelay, "iRelay");
-            this.doAddMap(() => this.PlayUrl32, "playPath32");
-            this.doAddMap(() => this.PlayUrl64, "playPath64");
+            this.doAddMap(() => this.PlayUrl32, "play_path_32");
+            this.doAddMap(() => this.PlayUrl64, "play_path_64");
             this.doAddMap(() => this.Title, "title");
             this.doAddMap(() => this.UID, "uid");
             this.doAddMap(() => this.UpdateAt, "updated_at");

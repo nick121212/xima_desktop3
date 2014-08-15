@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
                     xmlns:tools="http://ximalaya.com/xaml/tools"
                     xmlns:converter="http://ximalaya.com/xaml/tools/converter"
                     xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
@@ -143,6 +144,104 @@
 		<Setter Property="MControls:TilePanel.HeightPix" Value="1"/>
 	</Style>
 	<!--热门声音 end-->
+
+	<!--默认声音列表样式 start-->
+
+	<DataTemplate x:Key="NormalSoundItemTemplate" DataType="{x:Type ListBoxItem}">
+		<Border BorderThickness=" 0 0 0 0.5" 
+				BorderBrush="{DynamicResource BlackBrush}">
+			<Grid Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=ActualWidth}">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="30"/>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="50"/>
+				</Grid.ColumnDefinitions>
+				<!--播放按钮-->
+				<MControls:MyToggleButton Width="20" 
+								          Height="20"
+									      Margin="5"
+									      IsSingle="True"
+								          BorderType="Ellipse"
+								          Foreground="{DynamicResource WhiteBrush}"
+								          Background="{DynamicResource BlackBrush}"
+								          BorderBrush="{DynamicResource BlackBrush}">
+					<MControls:MyToggleButton.Content>
+						<Path Data="{Binding ToolbarPlayPath, Source={x:Static MControls:PathData.Instance}}" 
+						  Style="{DynamicResource PathStyle}"
+						  Width="10"
+						  Height="10"
+						  Margin="3 0 0 0"
+						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" />
+					</MControls:MyToggleButton.Content>
+					<MControls:MyToggleButton.ContentChecked>
+						<Path Data="{Binding ToolbarPausePath, Source={x:Static MControls:PathData.Instance}}"
+						  Style="{DynamicResource PathStyle}"
+						  Width="10"
+						  Height="10"
+						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" />
+					</MControls:MyToggleButton.ContentChecked>
+					<MControls:MyToggleButton.IsChecked>
+						<MultiBinding Converter="{StaticResource MutiBoolConverter}" ConverterParameter="0" Mode="OneWay">
+							<MultiBinding.Bindings>
+								<Binding Path="BassEngine.IsPlaying" Source="{x:Static tools:CommandSingleton.Instance}" />
+								<Binding Path="TrackId"/>
+								<Binding Path="SoundData.TrackId" Source="{x:Static tools:CommandSingleton.Instance}"/>
+							</MultiBinding.Bindings>
+						</MultiBinding>
+					</MControls:MyToggleButton.IsChecked>
+					<i:Interaction.Triggers>
+						<i:EventTrigger EventName="Click">
+							<i:InvokeCommandAction Command="{Binding PlaySound1Command,Source={x:Static tools:CommandSingleton.Instance}}" 
+											   CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}}">
+							</i:InvokeCommandAction>
+						</i:EventTrigger>
+					</i:Interaction.Triggers>
+				</MControls:MyToggleButton>
+				<!--声音信息-->
+				<Grid Grid.Column="1" 
+					  ClipToBounds="True"
+					  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+					  ScrollViewer.IsDeferredScrollingEnabled="False">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*"/>
+						<RowDefinition Height="Auto"/>
+					</Grid.RowDefinitions>
+					<!--声音标题-->
+					<Label Content="{Binding Title}"
+						   HorizontalAlignment="Left"
+						   HorizontalContentAlignment="Left"
+						   VerticalAlignment="Center"/>
+					<!--用户名-->
+					<Label Grid.Row="1" 
+						   FontSize="10" 
+						   Foreground="{DynamicResource GrayBrush7}"
+						   HorizontalAlignment="Left" 
+						   ContentStringFormat="by {0}"
+						   Content="{Binding NickName}" />
+					<!--创建时间-->
+					<Label Grid.Row="1" 
+						   FontSize="10" 
+						   Foreground="{DynamicResource GrayBrush7}"
+						   HorizontalAlignment="Right" 
+						   Content="{Binding CreateAt,Converter={StaticResource NickTimeConverter}}" />
+				</Grid>
+				<!--声音图片-->
+				<MControls:MyImage Grid.Column="2"
+						           Margin="5"
+						           VerticalAlignment="Center"
+						           Width="32" 
+						           Height="32" 
+						           Source="{Binding CoverSmall}"
+						           DefaultSource="track.jpg"/>
+			</Grid>
+		</Border>
+	</DataTemplate>
+	
+	<Style x:Key="NormalSoundItemStyle" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource ListItemBaseTemp}">
+		<Setter Property="ContentTemplate" Value="{StaticResource NormalSoundItemTemplate}"/>
+	</Style>
+	
+	<!--默认声音列表样式 end-->
 
 	<!--当前播放列表 start-->
 

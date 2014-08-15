@@ -84,6 +84,8 @@
     <Compile Include="Converter\EqualConverter.cs" />
     <Compile Include="Converter\HalfValueConverter.cs" />
     <Compile Include="Converter\MutiBoolConverter.cs" />
+    <Compile Include="Converter\NickTimeConverter.cs" />
+    <Compile Include="Extension\DateTimeExtensions.cs" />
     <Compile Include="Extension\VisualTreeHelperExtensions.cs" />
     <Compile Include="FlyoutVisible.cs" />
     <Compile Include="Player.cs" />

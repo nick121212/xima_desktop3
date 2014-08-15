@@ -23,7 +23,7 @@
 	<Controls:MetroWindow.TaskbarItemInfo>
 		<TaskbarItemInfo x:Name="taskBar" 
 						 ProgressState="Normal"
-						 Overlay="{Binding SoundData.CoverSmall,Source={x:Static tools:CommandSingleton.Instance}}"
+						 Overlay="{Binding SoundData.CoverSmall1,Source={x:Static tools:CommandSingleton.Instance}}"
 						 ProgressValue="{Binding BassEngine.CurrentProcess}"
                          Description="{Binding SoundData.Title,Source={x:Static tools:CommandSingleton.Instance}}">
 			<TaskbarItemInfo.ThumbButtonInfos>

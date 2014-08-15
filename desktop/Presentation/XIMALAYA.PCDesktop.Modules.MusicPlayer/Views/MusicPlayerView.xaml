@@ -67,9 +67,9 @@
 								      Height="20"
 								      IsChecked="{Binding BassEngine.IsMuted,Mode=TwoWay}"
 								      BorderType="Ellipse"
-								      Foreground="White"
+								      Foreground="{DynamicResource WhiteBrush}"
 								      BackgroundChecked="{DynamicResource GrayBrush10}"
-								      Background="{DynamicResource AccentColorBrush}"
+								      Background="{DynamicResource BlackBrush}"
 								      BorderBrush="{DynamicResource AccentColorBrush}"
 								      BorderThickness="1">
 					<MControls:MyToggleButton.Content>
@@ -123,16 +123,16 @@
 				</MControls:MyToggleButton>
 				<!--播放-->
 				<MControls:MyToggleButton Width="40" 
-								      Height="40"
-								      BorderType="Ellipse"
-								      Foreground="{DynamicResource WhiteBrush}"
-									  IsChecked="{Binding BassEngine.IsPlaying,Mode=OneWay}"
-                                      Command="{Binding BassEngine.PlayCommand}"
-                                      CommandParameter="{Binding Source={RelativeSource Self},Path=IsChecked}"
-								      BackgroundChecked="{DynamicResource GrayBrush10}"
-								      Background="{DynamicResource BlackBrush}"
-								      BorderBrush="{DynamicResource AccentColorBrush}"
-								      BorderThickness="1">
+								          Height="40"
+								          BorderType="Ellipse"
+								          Foreground="{DynamicResource WhiteBrush}"
+									      IsChecked="{Binding BassEngine.IsPlaying,Mode=OneWay}"
+                                          Command="{Binding BassEngine.PlayCommand}"
+                                          CommandParameter="{Binding Source={RelativeSource Self},Path=IsChecked}"
+								          BackgroundChecked="{DynamicResource GrayBrush10}"
+								          Background="{DynamicResource BlackBrush}"
+								          BorderBrush="{DynamicResource AccentColorBrush}"
+								          BorderThickness="1">
 					<MControls:MyToggleButton.Content>
 						<Path Data="{Binding ToolbarPlayPath, Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{StaticResource PathStyle}"

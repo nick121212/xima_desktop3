@@ -308,6 +308,7 @@ namespace XIMALAYA.PCDesktop.Controls
             this.StackPanel.Children.Clear();
             if (this.Total <= 0)
             {
+                this.Visibility = System.Windows.Visibility.Hidden;
                 return;
             }
             if (this.CurrentPage <= 0)

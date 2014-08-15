@@ -50,7 +50,7 @@ namespace XIMALAYA.PCDesktop.Core.Data
                     .Field<System.Boolean>(field => field.IsLike, type => type.To("is_like"))
                     .Field<System.Boolean>(field => field.IsRelay, type => type.To("iRelay"))
                     .Field<System.Int64>(field => field.LikeCount, type => type.To("count_like"))
-                    .Field<System.String>(field => field.PlayUrl32, type => type.To("playPath32"))
+                    .Field<System.String>(field => field.PlayUrl32, type => type.To("play_path_32"))
                     .Field<System.Int64>(field => field.PlayCount, type => type.To("count_play"))
                     .Field<System.Int64>(field => field.ShareCount, type => type.To("count_share"))
                     .Field<System.String>(field => field.Title, type => type.To("title"))
@@ -63,7 +63,7 @@ namespace XIMALAYA.PCDesktop.Core.Data
                     .Field<System.String>(field => field.CoverSmall, type => type.To("cover_path"))
                     .Field<System.Boolean>(field => field.IsVerified, type => type.To("is_v"))
                     .Field<System.String>(field => field.NickName, type => type.To("nickname"))
-                    .Field<System.String>(field => field.PlayUrl64, type => type.To("playPath64"))
+                    .Field<System.String>(field => field.PlayUrl64, type => type.To("play_path_64"))
                     .Field<System.Int64>(field => field.UID, type => type.To("uid"))
                     .Field<System.Int64>(field => field.UpdateAt, type => type.To("updated_at"))
             );

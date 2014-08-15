@@ -24,6 +24,16 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumListModule
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class AlbumViewModel : BaseViewModel
     {
+        #region 字段
+
+        private bool _IsShowStatus;
+        private ConditionAlbumType _Condition;
+        private int _Status;
+
+        #endregion
+
+        #region 属性
+
         /// <summary>
         /// 专辑数据
         /// </summary>
@@ -33,19 +43,16 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumListModule
         /// </summary>
         [Import]
         private ICategoryTagAlbumsService CategoryTagAlbumsService { get; set; }
+        /// <summary>
+        /// 当前参数
+        /// </summary>
         private CategoryTagAlbumParam Params { get; set; }
         /// <summary>
         /// 状态列表
         /// </summary>
         public List<String> StatusList { get; set; }
         /// <summary>
-        /// 
-        /// </summary>
-        public DelegateCommand<long?> ShowAlbumInfoCommand { get; set; }
-
-        private bool _IsShowStatus;
-        /// <summary>
-        /// 属性描述
+        /// 显示条件搜索
         /// </summary>
         public bool IsShowStatus
         {
@@ -61,10 +68,8 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumListModule
 
             }
         }
-
-        private ConditionAlbumType _Condition;
         /// <summary>
-        /// 属性描述
+        /// 当前选中的条件
         /// </summary>
         public ConditionAlbumType Condition
         {
@@ -79,12 +84,6 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumListModule
                 this.RaisePropertyChanged(() => this.Condition);
             }
         }
-        /// <summary>
-        /// 排序条件
-        /// </summary>
-        public DelegateCommand<string> ConditionCommand { get; set; }
-
-        private int _Status;
         /// <summary>
         /// 属性描述
         /// </summary>
@@ -103,11 +102,28 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumListModule
             }
         }
 
+        #endregion
+
+        #region 命令
+
+        /// <summary>
+        /// 排序条件
+        /// </summary>
+        public DelegateCommand<string> ConditionCommand { get; set; }
+
+        #endregion
+
+        #region 事件
+
         private void OnStatusChanged()
         {
             this.Params.Status = Status;
             this.GetData(true);
         }
+
+        #endregion
+
+        #region 构造
 
         /// <summary>
         /// 构造
@@ -125,21 +141,15 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumListModule
                     this.GetData(true);
                 }
             });
-            this.ShowAlbumInfoCommand = new DelegateCommand<long?>(albumID =>
-            {
-                if (albumID == null) throw new ArgumentNullException("albumID");
-
-                var albumInfo = this.Albums.FirstOrDefault(album => album.AlbumID == albumID);
-
-                if (albumInfo.AlbumID == albumID)
-                {
-                    this.EventAggregator.GetEvent<SoundListEvent<AlbumData>>().Publish(albumInfo);
-                }
-            });
             this.StatusList = new List<string>() { "全部", "完结", "连载" };
         }
+
+        #endregion
+
+        #region 方法
+
         /// <summary>
-        /// 
+        /// 获取数据
         /// </summary>
         /// <param name="isClear"></param>
         protected override void GetData(bool isClear)
@@ -191,5 +201,7 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumListModule
                 this.CurrentPage = 1;
             }
         }
+
+        #endregion
     }
 }

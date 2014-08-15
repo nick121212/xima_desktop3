@@ -7,7 +7,6 @@
         <ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/ListBoxItem.CategoryList.xaml" />
 
         <ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/ListBoxItem.FocusImageList.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/ListBoxItem.HotSoundList.xaml" />
         <ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/ListBoxItem.CategoryList.xaml" />
         <ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/ListBoxItem.CategoryList.xaml" />
         <ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/ListBoxItem.CategoryList.xaml" />

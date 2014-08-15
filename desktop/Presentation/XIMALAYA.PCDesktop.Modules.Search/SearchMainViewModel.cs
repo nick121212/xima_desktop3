@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Windows;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Practices.Prism.Commands;
+using XIMALAYA.PCDesktop.Cache;
+using XIMALAYA.PCDesktop.Core.Models.Album;
 using XIMALAYA.PCDesktop.Core.Models.Search;
+using XIMALAYA.PCDesktop.Core.Models.Sound;
+using XIMALAYA.PCDesktop.Core.Models.User;
 using XIMALAYA.PCDesktop.Core.ParamsModel;
 using XIMALAYA.PCDesktop.Core.Services;
 using XIMALAYA.PCDesktop.Tools.Untils;
@@ -190,6 +195,18 @@ namespace XIMALAYA.PCDesktop.Modules.Search
                 }
             }
         }
+        /// <summary>
+        /// 专辑数据
+        /// </summary>
+        public ObservableCollection<AlbumData> AlbumDatas { get; private set; }
+        /// <summary>
+        /// 声音数据
+        /// </summary>
+        public ObservableCollection<SoundData> SoundDatas { get; private set; }
+        /// <summary>
+        /// 用户数据
+        /// </summary>
+        public ObservableCollection<UserData> UserDatas { get; private set; }
 
         #endregion
 
@@ -233,7 +250,7 @@ namespace XIMALAYA.PCDesktop.Modules.Search
                     this.WidthSound = new GridLength(100, GridUnitType.Star);
                     break;
             }
-            
+
             this.GetData(true);
         }
         /// <summary>
@@ -272,15 +289,12 @@ namespace XIMALAYA.PCDesktop.Modules.Search
             {
                 return;
             }
-
-            //if (isClear)
-            //{
-            //    if (this.CurrentPage !=1)
-            //    {
-            //        this.CurrentPage = 1;
-            //        return;
-            //    }
-            //}
+            if (isClear)
+            {
+                this.UserDatas.Clear();
+                this.AlbumDatas.Clear();
+                this.SoundDatas.Clear();
+            }
             this.IsNextPageVisibled = false;
             this.Param.Page = this.CurrentPage;
             base.GetData(isClear);
@@ -313,7 +327,19 @@ namespace XIMALAYA.PCDesktop.Modules.Search
                     if (result == null) return;
                     if (result.Ret == 0)
                     {
-                        DialogManager.ShowMessageAsync(Application.Current.MainWindow as MetroWindow, "喜马拉雅", "搜索成功！");
+                        SoundCache.Instance.SetData(result.SoundData.Sounds);
+                        foreach (var sound in result.SoundData.Sounds)
+                        {
+                            this.SoundDatas.Add(sound);
+                        }
+                        foreach (var album in result.AlbumData.Albums)
+                        {
+                            this.AlbumDatas.Add(album);
+                        }
+                        foreach (var user in result.UserData.Users)
+                        {
+                            this.UserDatas.Add(user);
+                        }
                     }
                     else
                     {
@@ -338,7 +364,18 @@ namespace XIMALAYA.PCDesktop.Modules.Search
                     if (result.Ret == 0)
                     {
                         this.Total = result.TotalCount;
-                        DialogManager.ShowMessageAsync(Application.Current.MainWindow as MetroWindow, "喜马拉雅", "搜索成功！");
+                        if (this.Total > 0)
+                        {
+                            SoundCache.Instance.SetData(result.Sounds);
+                            foreach (var sound in result.Sounds)
+                            {
+                                this.SoundDatas.Add(sound);
+                            }
+                        }
+                        else
+                        {
+                            DialogManager.ShowMessageAsync(Application.Current.MainWindow as MetroWindow, "喜马拉雅", "未搜索到相关数据！");
+                        }
                     }
                     else
                     {
@@ -362,7 +399,18 @@ namespace XIMALAYA.PCDesktop.Modules.Search
                     if (result.Ret == 0)
                     {
                         this.Total = result.TotalCount;
-                        DialogManager.ShowMessageAsync(Application.Current.MainWindow as MetroWindow, "喜马拉雅", "搜索成功！");
+                        if (this.Total > 0)
+                        {
+                            foreach (var album in result.Albums)
+                            {
+                                this.AlbumDatas.Add(album);
+                            }
+                        }
+                        else
+                        {
+                            DialogManager.ShowMessageAsync(Application.Current.MainWindow as MetroWindow, "喜马拉雅", "未搜索到相关数据！");
+                        }
+
                     }
                     else
                     {
@@ -386,7 +434,17 @@ namespace XIMALAYA.PCDesktop.Modules.Search
                     if (result.Ret == 0)
                     {
                         this.Total = result.TotalCount;
-                        DialogManager.ShowMessageAsync(Application.Current.MainWindow as MetroWindow, "喜马拉雅", "搜索成功！");
+                        if (this.Total > 0)
+                        {
+                            foreach (var user in result.Users)
+                            {
+                                this.UserDatas.Add(user);
+                            }
+                        }
+                        else
+                        {
+                            DialogManager.ShowMessageAsync(Application.Current.MainWindow as MetroWindow, "喜马拉雅", "未搜索到相关数据！");
+                        }
                     }
                     else
                     {
@@ -421,6 +479,9 @@ namespace XIMALAYA.PCDesktop.Modules.Search
             {
                 return this.ConditionString.Trim() != string.Empty;
             });
+            this.SoundDatas = new ObservableCollection<SoundData>();
+            this.AlbumDatas = new ObservableCollection<AlbumData>();
+            this.UserDatas = new ObservableCollection<UserData>();
         }
 
         #endregion

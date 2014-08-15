@@ -8,5 +8,6 @@
 	<converter:HalfValueConverter x:Key="HalfValueConverter"/>
 	<converter:TimeSpanConverter x:Key="TimeSpanConverter"/>
 	<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-    
+	<converter:NickTimeConverter x:Key="NickTimeConverter"/>
+
 </ResourceDictionary>
