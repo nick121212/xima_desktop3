@@ -68,8 +68,8 @@
 					Grid.Row="1" 
 					SelectedItem="{Binding CurrentTab}"
 					Style="{DynamicResource StandardTabControl1}">
-			<Controls:MetroTabItem Header="全部" Tag="all"/>
-			<Controls:MetroTabItem Header="找专辑" Tag="album">
+			<Controls:MetroTabItem Foreground="{DynamicResource BlackBrush}" Header="全部" HorizontalAlignment="Center" Tag="all"/>
+            <Controls:MetroTabItem Foreground="{DynamicResource BlackBrush}" Header="找专辑" Tag="album">
 				<StackPanel Margin="10 10 0 0"  Orientation="Horizontal" Width="Auto">
 					<RadioButton GroupName="Condition" 
 								 Margin="5"
@@ -88,7 +88,7 @@
 						         Content="最新上传"/>
 				</StackPanel>
 			</Controls:MetroTabItem>
-			<Controls:MetroTabItem Header="找人" Tag="user">
+            <Controls:MetroTabItem Foreground="{DynamicResource BlackBrush}" Header="找人" Tag="user">
 				<StackPanel Margin="10 10 0 0"  Orientation="Horizontal" Width="Auto">
 					<RadioButton GroupName="Condition" 
 								 Margin="5"
@@ -112,7 +112,7 @@
 						         Content="最近更新"/>
 				</StackPanel>
 			</Controls:MetroTabItem>
-			<Controls:MetroTabItem Header="找声音" Tag="voice">
+            <Controls:MetroTabItem Foreground="{DynamicResource BlackBrush}" Header="找声音" Tag="voice">
 				<StackPanel Margin="10 10 0 0"  Orientation="Horizontal" Width="Auto">
 					<RadioButton GroupName="Condition" 
 								 Margin="5"

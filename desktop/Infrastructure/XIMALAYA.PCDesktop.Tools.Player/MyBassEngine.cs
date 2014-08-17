@@ -384,6 +384,7 @@ namespace XIMALAYA.PCDesktop.Tools.Player
         {
             if (this.CanPlay)
             {
+                this.SetVolume();
                 this.PlayCurrentStream();
                 this.IsPlaying = this.CanPause = true;
                 this.CanPlay = false;

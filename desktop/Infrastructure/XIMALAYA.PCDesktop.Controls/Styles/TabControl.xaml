@@ -9,9 +9,8 @@
                         Value="{x:Null}" />
 				<Setter Property="Background"
                         Value="Transparent" />
-				<Setter Property="Foreground" Value="Black"
-                         />
-				<Setter Property="Template">
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="Template">
 					<Setter.Value>
 						<ControlTemplate TargetType="{x:Type Controls:MetroTabItem}">
 							<Grid Height="30"
@@ -55,7 +54,6 @@
 				</Setter>
 			</Style>
 		</Style.Resources>
-
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type TabControl}">

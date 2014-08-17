@@ -136,6 +136,7 @@ namespace XIMALAYA.PCDesktop.Modules.Search
                 {
                     _ConditionString = value;
                     this.CurrentPage = 0;
+                    this.CanResearch = true;
                     this.SearchCommand.RaiseCanExecuteChanged();
                     this.RaisePropertyChanged(() => this.ConditionString);
                 }
@@ -207,6 +208,10 @@ namespace XIMALAYA.PCDesktop.Modules.Search
         /// 用户数据
         /// </summary>
         public ObservableCollection<UserData> UserDatas { get; private set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        private bool CanResearch { get; set; }
 
         #endregion
 
@@ -295,7 +300,8 @@ namespace XIMALAYA.PCDesktop.Modules.Search
                 this.AlbumDatas.Clear();
                 this.SoundDatas.Clear();
             }
-            this.IsNextPageVisibled = false;
+            //this.IsNextPageVisibled = false;
+            this.CanResearch = false;
             this.Param.Page = this.CurrentPage;
             base.GetData(isClear);
             switch (this.Param.Scope)
@@ -468,6 +474,7 @@ namespace XIMALAYA.PCDesktop.Modules.Search
             {
                 PerPage = 30
             };
+            this.CanResearch = true;
             this.PageSize = (int)this.Param.PerPage;
             this.IsNextPageVisibled = false;
 
@@ -477,7 +484,7 @@ namespace XIMALAYA.PCDesktop.Modules.Search
                 this.CurrentPage = 1;
             }, () =>
             {
-                return this.ConditionString.Trim() != string.Empty;
+                return this.ConditionString.Trim() != string.Empty && this.CanResearch;
             });
             this.SoundDatas = new ObservableCollection<SoundData>();
             this.AlbumDatas = new ObservableCollection<AlbumData>();
