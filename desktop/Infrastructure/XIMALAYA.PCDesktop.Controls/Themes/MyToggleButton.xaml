@@ -125,12 +125,11 @@
 				   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 				   Foreground="{TemplateBinding ForegroundChecked}">
-				<ContentPresenter 
-                              Content="{TemplateBinding Content}"
-                              ContentTemplate="{TemplateBinding ContentTemplate}"
-                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                              Margin="{TemplateBinding Padding}"/>
+				<ContentPresenter Content="{TemplateBinding Content}"
+                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                  Margin="0"/>
 			</Label>
 			<!--选中内容-->
 			<Label x:Name="contentCheckedPresenter"
@@ -139,18 +138,18 @@
 				   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 				   Foreground="{TemplateBinding ForegroundChecked}">
-				<ContentPresenter 
-                              Content="{TemplateBinding ContentChecked}"
-                              ContentTemplate="{TemplateBinding ContentTemplate}"
-                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                              Margin="{TemplateBinding Padding}"/>
+				<ContentPresenter Content="{TemplateBinding ContentChecked}"
+                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                  Margin="0"/>
 			</Label>
 		</Grid>
 	</ControlTemplate>
 
 	<Style TargetType="local:MyToggleButton">
 		<Setter Property="Template" Value="{StaticResource MyToggleButtonTemplate}"/>
+		<Setter Property="BorderThickness" Value="1"/>
 		<Style.Triggers>
 			<Trigger Property="IsMouseOver" Value="True">
 				<Setter Property="ForegroundChecked" Value="{Binding Foreground,RelativeSource={RelativeSource Self}}"/>

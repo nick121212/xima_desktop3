@@ -9,5 +9,6 @@
 	<converter:TimeSpanConverter x:Key="TimeSpanConverter"/>
 	<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 	<converter:NickTimeConverter x:Key="NickTimeConverter"/>
+	<converter:ActualSizeFixedConverter x:Key="ActualSizeFixedConverter"/>
 
 </ResourceDictionary>

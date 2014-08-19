@@ -4,14 +4,11 @@
                                  xmlns:converter="http://ximalaya.com/xaml/tools/converter"
                                  xmlns:MControls="clr-namespace:XIMALAYA.PCDesktop.Controls">
 
-	<!--<ResourceDictionary.MergedDictionaries>
-		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/ScrollViewer.xaml" />
-	</ResourceDictionary.MergedDictionaries>-->
-
 	<Style x:Key="ListItemBaseTemp" TargetType="ListBoxItem">
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="0"/>
 		<Setter Property="Focusable" Value="False"/>
+		<Setter Property="Background" Value="Transparent"/>
 		<Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBoxItem}">

@@ -112,12 +112,12 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumListModule
                             this.AlbumData = albumInfo.Album;
                         }
                         this.Total = albumInfo.SoundsResult.TotalCount;
-                        SoundCache.Instance.SetData(albumInfo.SoundsResult.Sounds);
                         foreach (SoundData sound in albumInfo.SoundsResult.Sounds)
                         {
                             sound.Duration *= 1000;
                             this.Sounds.Add(sound);
                         }
+                        SoundCache.Instance.SetData(albumInfo.SoundsResult.Sounds);
                     }
 
                 }), DispatcherPriority.Background);

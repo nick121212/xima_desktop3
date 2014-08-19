@@ -326,6 +326,7 @@ namespace XIMALAYA.PCDesktop.Controls
                 this.Visibility = System.Windows.Visibility.Hidden;
                 return;
             }
+            this.Visibility = System.Windows.Visibility.Visible;
             if (this.CurrentPage < this.InnerCount * 2)
             {
                 this.AddPageNoFront();

@@ -13,148 +13,25 @@
 		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/Path.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 
-	<!--声音列表 not used start-->
-	<DataTemplate x:Key="SoundItemTemplate" DataType="{x:Type ListBoxItem}">
-		<Controls:Tile Background="Transparent" 
-                       Height="220" 
-                       Width="180"
-                       Margin="5"
-                       Command="{Binding PlaySoundCommand,Source={x:Static tools:CommandSingleton.Instance}}"
-                       CommandParameter="{Binding TrackId}">
-			<Controls:Tile.Content>
-				<Label>
-					<Label.Template>
-						<ControlTemplate>
-							<Border BorderThickness="1" Width="180" BorderBrush="{DynamicResource ControlBorderBrush}">
-								<Grid >
-									<Grid.RowDefinitions>
-										<RowDefinition Height="180"/>
-										<RowDefinition Height="60"/>
-									</Grid.RowDefinitions>
-
-									<MControls:MyImage ToolTip="{Binding Title}" 
-													   Width="180" 
-													   Height="180" 
-													   Source="{Binding CoverLarge}"
-													   DefaultSource="track.jpg"/>
-									<WrapPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center">
-										<TextBlock ToolTip="{Binding Title}" Width="180" TextWrapping="NoWrap" TextAlignment="Center" HorizontalAlignment="Center" Text="{Binding Title}" />
-									</WrapPanel>
-								</Grid>
-							</Border>
-						</ControlTemplate>
-					</Label.Template>
-				</Label>
-			</Controls:Tile.Content>
-		</Controls:Tile>
-	</DataTemplate>
-	<Style x:Key="SoundListStyle" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource ListItemBaseTemp}">
-		<Setter Property="Background" Value="Transparent"/>
-		<Setter Property="ContentTemplate" Value="{StaticResource SoundItemTemplate}"/>
-	</Style>
-	<!--声音列表 end-->
-
-	<!--热门声音 not used start-->
-	<DataTemplate x:Key="MetroHotSoundsItem1Template" DataType="{x:Type ListBoxItem}">
-		<MControls:MyCheckboxButton CommandParameter="{Binding TrackId}"
-								    Command="{Binding PlaySoundCommand,Source={x:Static tools:CommandSingleton.Instance}}"
-								    Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=ActualHeight}"
-								    Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=ActualWidth}"
-								    IconData="{Binding ToolbarPlayPath,Source={x:Static MControls:PathData.Instance}}"
-								    Style="{StaticResource MetroMyToggleButton}"
-								    BorderBrush="{DynamicResource AccentColorBrush}"
-								    IconMargin="2"
-								    Background="{DynamicResource WhiteBrush}"
-								    CheckedBorderThickness="2"
-								    SuperScriptSize="35"
-                                    BorderThickness="1">
-			<MControls:MyCheckboxButton.IsChecked>
-				<MultiBinding Converter="{StaticResource MutiBoolConverter}" Mode="OneWay">
-					<MultiBinding.Bindings>
-						<Binding Path="TrackId"/>
-						<Binding Path="TrackID" Source="{x:Static tools:CommandSingleton.Instance}"/>
-					</MultiBinding.Bindings>
-				</MultiBinding>
-			</MControls:MyCheckboxButton.IsChecked>
-			<MControls:MyCheckboxButton.Content>
-				<Grid Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=ActualHeight}"
-					  Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=ActualWidth}">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="Auto"/>
-						<ColumnDefinition Width="*"/>
-					</Grid.ColumnDefinitions>
-					<Grid.RowDefinitions>
-						<RowDefinition Height="*"/>
-						<RowDefinition Height="30"/>
-					</Grid.RowDefinitions>
-
-					<MControls:MyImage VerticalAlignment="Center" 
-									   Grid.RowSpan="2"
-									   Margin="5 0"
-									   Height="60"
-									   Width="60"
-									   Source="{Binding CoverWebSmall}"
-									   DefaultSource="track.jpg"/>
-					<TextBlock Grid.Row="0" Grid.Column="1" Foreground="{DynamicResource BlackBrush}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding Title}"/>
-
-					<MControls:MyToggleButton Width="Auto" 
-											  Padding="0"
-											  HorizontalAlignment="Left"
-											  Grid.Row="1" 
-										      Grid.Column="1"
-										      IsEnabled="False"
-								              Foreground="White"
-										      HorizontalContentAlignment="Left"
-								              Background="{DynamicResource AccentColorBrush}">
-						<MControls:MyToggleButton.Content>
-							<Grid>
-								<Path Data="{Binding ToolbarPlayPath, Source={x:Static MControls:PathData.Instance}}" 
-								  Style="{StaticResource PathStyle}"
-								  HorizontalAlignment="Left"
-									  Width="10" Height="10"
-								  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-								</Path>
-								<Label Margin="12 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{Binding PlayCount}"/>
-							</Grid>
-
-						</MControls:MyToggleButton.Content>
-					</MControls:MyToggleButton>
-
-					<!--<MControls:PathButton Grid.Row="1" 
-										  Grid.Column="1"
-										  HorizontalAlignment="Left"
-										  IconData="{Binding ToolbarPlayPath, Source={x:Static MControls:PathData.Instance}}"
-									      IsSingle="True"
-										  IsEnabled="False"
-									      Fill="{DynamicResource AccentColorBrush}"
-									      BorderThickness="0"
-									      Foreground="Black"
-									      TextContent="{Binding PlayCount}"
-									      IconHeight="10"
-									      IconWidth="10"
-									      Height="20"
-									      Width="Auto" />-->
-				</Grid>
-			</MControls:MyCheckboxButton.Content>
-		</MControls:MyCheckboxButton>
-	</DataTemplate>
-	<Style x:Key="MetroHotSounds1Style" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource ListItemBaseTemp}">
-		<Setter Property="ContentTemplate" Value="{StaticResource MetroHotSoundsItem1Template}"/>
-		<Setter Property="MControls:TilePanel.WidthPix" Value="1"/>
-		<Setter Property="MControls:TilePanel.HeightPix" Value="1"/>
-	</Style>
-	<!--热门声音 end-->
-
 	<!--默认声音列表样式 start-->
 
 	<DataTemplate x:Key="NormalSoundItemTemplate" DataType="{x:Type ListBoxItem}">
-		<Border BorderThickness=" 0 0 0 0.5" 
-				BorderBrush="{DynamicResource BlackBrush}">
-			<Grid Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=ActualWidth}">
+		<MControls:MyRadioButton Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBox}, Path=Width}"
+                                 Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBox}, Path=Height}"
+					             Background="Transparent"
+								 GroupName="SearchAlbum"
+					             BorderThickness="0 0 0 1"
+								 CheckedBorderThickness="0 0 0 1"
+								 IsChecked="False"
+								 SuperScriptSize="0"
+					             BorderBrush="{DynamicResource BlackBrush}"
+								 Command="{Binding ShowSoundDetailCommand,Source={x:Static tools:CommandSingleton.Instance}}"
+								 CommandParameter="{Binding TrackId}">
+			<Grid Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType=ListBox},Converter={StaticResource ActualSizeFixedConverter},ConverterParameter='-,15'}">
 				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="30"/>
+					<ColumnDefinition Width="Auto"/>
 					<ColumnDefinition Width="*"/>
-					<ColumnDefinition Width="50"/>
+					<ColumnDefinition Width="Auto"/>
 				</Grid.ColumnDefinitions>
 				<!--播放按钮-->
 				<MControls:MyToggleButton Width="20" 
@@ -162,23 +39,24 @@
 									      Margin="5"
 									      IsSingle="True"
 								          BorderType="Ellipse"
+										  BorderThickness="1"
 								          Foreground="{DynamicResource WhiteBrush}"
 								          Background="{DynamicResource BlackBrush}"
 								          BorderBrush="{DynamicResource BlackBrush}">
 					<MControls:MyToggleButton.Content>
 						<Path Data="{Binding ToolbarPlayPath, Source={x:Static MControls:PathData.Instance}}" 
-						  Style="{DynamicResource PathStyle}"
-						  Width="10"
-						  Height="10"
-						  Margin="3 0 0 0"
-						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" />
+						      Style="{DynamicResource PathStyle}"
+						      Width="10"
+						      Height="10"
+						      Margin="3 0 0 0"
+						      Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" />
 					</MControls:MyToggleButton.Content>
 					<MControls:MyToggleButton.ContentChecked>
 						<Path Data="{Binding ToolbarPausePath, Source={x:Static MControls:PathData.Instance}}"
-						  Style="{DynamicResource PathStyle}"
-						  Width="10"
-						  Height="10"
-						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" />
+						      Style="{DynamicResource PathStyle}"
+						      Width="10"
+						      Height="10"
+						      Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" />
 					</MControls:MyToggleButton.ContentChecked>
 					<MControls:MyToggleButton.IsChecked>
 						<MultiBinding Converter="{StaticResource MutiBoolConverter}" ConverterParameter="0" Mode="OneWay">
@@ -192,25 +70,27 @@
 					<i:Interaction.Triggers>
 						<i:EventTrigger EventName="Click">
 							<i:InvokeCommandAction Command="{Binding PlaySound1Command,Source={x:Static tools:CommandSingleton.Instance}}" 
-											   CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}}">
+											       CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}}">
 							</i:InvokeCommandAction>
 						</i:EventTrigger>
 					</i:Interaction.Triggers>
 				</MControls:MyToggleButton>
 				<!--声音信息-->
 				<Grid Grid.Column="1" 
-					  ClipToBounds="True"
-					  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-					  ScrollViewer.IsDeferredScrollingEnabled="False">
+					  ClipToBounds="True">
 					<Grid.RowDefinitions>
 						<RowDefinition Height="*"/>
 						<RowDefinition Height="Auto"/>
 					</Grid.RowDefinitions>
 					<!--声音标题-->
-					<Label Content="{Binding Title}"
-						   HorizontalAlignment="Left"
-						   HorizontalContentAlignment="Left"
-						   VerticalAlignment="Center"/>
+					<TextBlock Text="{Binding Title}"
+							   ToolTip="{Binding Binding Title}"
+							   Foreground="{DynamicResource BlackBrush}"
+							   TextWrapping="NoWrap"
+							   TextOptions.TextRenderingMode="Grayscale"
+							   HorizontalAlignment="Stretch"
+							   VerticalAlignment="Center"/>
+
 					<!--用户名-->
 					<Label Grid.Row="1" 
 						   FontSize="10" 
@@ -229,18 +109,17 @@
 				<MControls:MyImage Grid.Column="2"
 						           Margin="5"
 						           VerticalAlignment="Center"
-						           Width="32" 
-						           Height="32" 
+						           Width="50" 
+						           Height="50" 
 						           Source="{Binding CoverSmall}"
 						           DefaultSource="track.jpg"/>
 			</Grid>
-		</Border>
+		</MControls:MyRadioButton>
 	</DataTemplate>
-	
 	<Style x:Key="NormalSoundItemStyle" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource ListItemBaseTemp}">
 		<Setter Property="ContentTemplate" Value="{StaticResource NormalSoundItemTemplate}"/>
 	</Style>
-	
+
 	<!--默认声音列表样式 end-->
 
 	<!--当前播放列表 start-->

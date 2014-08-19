@@ -307,6 +307,7 @@ namespace XIMALAYA.PCDesktop.Modules.Search
             switch (this.Param.Scope)
             {
                 case TagType.all:
+                    this.IsNextPageVisibled = false;
                     this.SearchAllData();
                     break;
                 case TagType.voice:
@@ -333,11 +334,12 @@ namespace XIMALAYA.PCDesktop.Modules.Search
                     if (result == null) return;
                     if (result.Ret == 0)
                     {
-                        SoundCache.Instance.SetData(result.SoundData.Sounds);
                         foreach (var sound in result.SoundData.Sounds)
                         {
+                            sound.Duration *= 1000;
                             this.SoundDatas.Add(sound);
                         }
+                        SoundCache.Instance.SetData(result.SoundData.Sounds);
                         foreach (var album in result.AlbumData.Albums)
                         {
                             this.AlbumDatas.Add(album);
@@ -372,11 +374,12 @@ namespace XIMALAYA.PCDesktop.Modules.Search
                         this.Total = result.TotalCount;
                         if (this.Total > 0)
                         {
-                            SoundCache.Instance.SetData(result.Sounds);
                             foreach (var sound in result.Sounds)
                             {
+                                sound.Duration *= 1000;
                                 this.SoundDatas.Add(sound);
                             }
+                            SoundCache.Instance.SetData(result.Sounds);
                         }
                         else
                         {

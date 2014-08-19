@@ -7,12 +7,14 @@
 			 xmlns:tools="http://ximalaya.com/xaml/tools"
 			 xmlns:converter="http://ximalaya.com/xaml/tools/converter"
              xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls">
+
 	<UserControl.Resources>
 		<converter:EqualConverter x:Key="EqualConverter"/>
-		<BooleanToVisibilityConverter	x:Key="BooleanToVisibilityConverter"/>
+		<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+		<converter:ActualSizeFixedConverter x:Key="ActualSizeFixedConverter"/>
 	</UserControl.Resources>
-	
-    <Grid>
+
+	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="Auto"/>
@@ -21,113 +23,91 @@
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 		<!--搜索框-->
-		<TextBox Margin="10"
-                 Grid.Row="0"
-				 Height="40"
-				 Text="{Binding ConditionString,UpdateSourceTrigger=PropertyChanged}"
-				 Controls:TextboxHelper.ButtonCommand="{Binding SearchCommand, Mode=OneWay}"
-				 Controls:TextboxHelper.FocusBorderBrush="{DynamicResource AccentColorBrush}"
-				 Controls:TextboxHelper.MouseOverBorderBrush="{DynamicResource AccentColorBrush}"
-				 BorderBrush="{DynamicResource AccentColorBrush3}"
-				 FontSize="18"
-				 VerticalContentAlignment="Center"
-                 Controls:TextboxHelper.Watermark="搜索条件"
-                 Style="{DynamicResource SearchMetroTextBox}" >
-			<Controls:TextboxHelper.ButtonTemplate>
-				<ControlTemplate>
-					<MControls:MyToggleButton Width="40" 
-								              Height="40"
-								              BorderType="Rectangle"
-								              Foreground="{DynamicResource WhiteBrush}"
-								              BackgroundChecked="{DynamicResource GrayBrush10}"
-								              Background="{DynamicResource BlackBrush}"
-								              BorderThickness="0">
-						<MControls:MyToggleButton.Content>
-							<Path Data="{Binding SearchPath, Source={x:Static MControls:PathData.Instance}}" 
-						          Style="{StaticResource PathStyle}"
-						          Width="20" Height="20"
-						          Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-							</Path>
-						</MControls:MyToggleButton.Content>
-						<MControls:MyToggleButton.ContentChecked>
-							<Path Data="{Binding SearchPath, Source={x:Static MControls:PathData.Instance}}" 
-						          Style="{StaticResource PathStyle}"
-						          Width="20" Height="20"
-						          Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-							</Path>
-						</MControls:MyToggleButton.ContentChecked>
-					</MControls:MyToggleButton>
-				</ControlTemplate>
-			</Controls:TextboxHelper.ButtonTemplate>
-			<TextBox.InputBindings>
-				<KeyBinding  Key="Enter" Command="{Binding SearchCommand}"/>
-			</TextBox.InputBindings>
-		</TextBox>
+		<Canvas Height="60" Grid.Row="0" Panel.ZIndex="10">
+			<TextBox Margin="10"
+					 Height="40"
+					 x:Name="searchBox"
+					 Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Canvas}, Path=ActualWidth,Converter={StaticResource ActualSizeFixedConverter},ConverterParameter='-,20'}"
+					 Text="{Binding ConditionString,UpdateSourceTrigger=PropertyChanged}"
+					 Controls:TextboxHelper.FocusBorderBrush="{DynamicResource AccentColorBrush}"
+					 Controls:TextboxHelper.MouseOverBorderBrush="{DynamicResource AccentColorBrush}"
+					 Controls:TextboxHelper.IsWaitingForData="{Binding IsWaiting}"
+					 Controls:TextboxHelper.Watermark="搜索条件"
+					 BorderBrush="{DynamicResource AccentColorBrush3}"
+					 FontSize="18"
+					 HorizontalAlignment="Stretch"
+					 VerticalContentAlignment="Center"
+					 Style="{DynamicResource MySearchTextBox}" >
+				<TextBox.InputBindings>
+					<KeyBinding  Key="Enter" Command="{Binding SearchCommand}"/>
+				</TextBox.InputBindings>
+			</TextBox>
+		</Canvas>
 		<!--搜索条件-->
 		<TabControl Margin="0,10,0,0"
 					Grid.Row="1" 
 					SelectedItem="{Binding CurrentTab}"
 					Style="{DynamicResource StandardTabControl1}">
 			<Controls:MetroTabItem Foreground="{DynamicResource BlackBrush}" Header="全部" HorizontalAlignment="Center" Tag="all"/>
-            <Controls:MetroTabItem Foreground="{DynamicResource BlackBrush}" Header="找专辑" Tag="album">
+			<Controls:MetroTabItem Foreground="{DynamicResource BlackBrush}" Header="找专辑" Tag="album">
 				<StackPanel Margin="10 10 0 0"  Orientation="Horizontal" Width="Auto">
 					<RadioButton GroupName="Condition" 
 								 Margin="5"
 								 IsChecked="{Binding CurrentAlbumSort,Converter={StaticResource EqualConverter},ConverterParameter={x:Null}}"
-						         Style="{DynamicResource MetroRadioButton}" 
+						         Style="{StaticResource MyMetroRadioButton}" 
 						         Content="相关度"/>
 					<RadioButton GroupName="Condition" 
 								 Margin="5"
 								 IsChecked="{Binding CurrentAlbumSort,Converter={StaticResource EqualConverter},ConverterParameter=play}"
-						         Style="{DynamicResource MetroRadioButton}" 
+						         Style="{StaticResource MyMetroRadioButton}" 
 						         Content="最多播放"/>
 					<RadioButton GroupName="Condition" 
 								 Margin="5"
 								 IsChecked="{Binding CurrentAlbumSort,Converter={StaticResource EqualConverter},ConverterParameter=recent}"
-						         Style="{DynamicResource MetroRadioButton}" 
+						         Style="{StaticResource MyMetroRadioButton}" 
 						         Content="最新上传"/>
 				</StackPanel>
 			</Controls:MetroTabItem>
-            <Controls:MetroTabItem Foreground="{DynamicResource BlackBrush}" Header="找人" Tag="user">
+			<Controls:MetroTabItem Foreground="{DynamicResource BlackBrush}" Header="找人" Tag="user">
 				<StackPanel Margin="10 10 0 0"  Orientation="Horizontal" Width="Auto">
 					<RadioButton GroupName="Condition" 
 								 Margin="5"
 								 IsChecked="{Binding CurrentUserSort,Converter={StaticResource EqualConverter},ConverterParameter={x:Null}}"
-						         Style="{DynamicResource MetroRadioButton}" 
+						         Style="{StaticResource MyMetroRadioButton}" 
 						         Content="相关度"/>
 					<RadioButton GroupName="Condition" 
 								 Margin="5"
 								 IsChecked="{Binding CurrentUserSort,Converter={StaticResource EqualConverter},ConverterParameter=fans}"
-						         Style="{DynamicResource MetroRadioButton}" 
+						         Style="{StaticResource MyMetroRadioButton}" 
 						         Content="最多粉丝"/>
 					<RadioButton GroupName="Condition" 
 								 Margin="5"
 								 IsChecked="{Binding CurrentUserSort,Converter={StaticResource EqualConverter},ConverterParameter=voice}"
-						         Style="{DynamicResource MetroRadioButton}" 
+						         Style="{StaticResource MyMetroRadioButton}" 
 						         Content="最多声音"/>
 					<RadioButton GroupName="Condition" 
 								 Margin="5"
 								 IsChecked="{Binding CurrentUserSort,Converter={StaticResource EqualConverter},ConverterParameter=update}"
-						         Style="{DynamicResource MetroRadioButton}" 
+						         Style="{StaticResource MyMetroRadioButton}" 
 						         Content="最近更新"/>
 				</StackPanel>
 			</Controls:MetroTabItem>
-            <Controls:MetroTabItem Foreground="{DynamicResource BlackBrush}" Header="找声音" Tag="voice">
+			<Controls:MetroTabItem Foreground="{DynamicResource BlackBrush}" Header="找声音" Tag="voice">
 				<StackPanel Margin="10 10 0 0"  Orientation="Horizontal" Width="Auto">
 					<RadioButton GroupName="Condition" 
 								 Margin="5"
 								 IsChecked="{Binding CurrentSoundSort,Converter={StaticResource EqualConverter},ConverterParameter={x:Null}}"
-						         Style="{DynamicResource MetroRadioButton}" 
+						         Style="{StaticResource MyMetroRadioButton}" 
 						         Content="相关度"/>
 					<RadioButton GroupName="Condition" 
 								 Margin="5"
 								 IsChecked="{Binding CurrentSoundSort,Converter={StaticResource EqualConverter},ConverterParameter=recent}"
-						         Style="{DynamicResource MetroRadioButton}" 
+						         Style="{StaticResource MyMetroRadioButton}" 
 						         Content="最新上传"/>
 					<RadioButton GroupName="Condition" 
 								 Margin="5"
 								 IsChecked="{Binding CurrentSoundSort,Converter={StaticResource EqualConverter},ConverterParameter=play}"
-						         Style="{DynamicResource MetroRadioButton}" 
+						         Style="{StaticResource MyMetroRadioButton}" 
 						         Content="最多播放"/>
 				</StackPanel>
 			</Controls:MetroTabItem>
@@ -150,14 +130,17 @@
 					  Header="专辑" 
 					  Padding="5" 
 					  Controls:ControlsHelper.HeaderFontSize="30">
-				<ListBox ItemsSource="{Binding AlbumDatas}"></ListBox>
+				<ListBox ItemsSource="{Binding AlbumDatas}"
+						 ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+						 ItemContainerStyle="{DynamicResource NormalAlbumItemStyle}"/>
 			</GroupBox>
 			<GroupBox Grid.Column="1" 
 					  Style="{DynamicResource CleanGroupBoxStyleKey}" 
 					  Header="用户" 
 					  Padding="5" 
 					  Controls:ControlsHelper.HeaderFontSize="30">
-				<ListBox ItemsSource="{Binding UserDatas}"></ListBox>
+				<ListBox ItemsSource="{Binding UserDatas}"
+						 ItemContainerStyle="{DynamicResource NormalUserItemStyle}"/>
 			</GroupBox>
 			<GroupBox Grid.Column="2" 
 					  Style="{DynamicResource CleanGroupBoxStyleKey}" 
@@ -165,7 +148,8 @@
 					  Padding="5" 
 					  Controls:ControlsHelper.HeaderFontSize="30">
 				<ListBox ItemsSource="{Binding SoundDatas}"
-						 ItemContainerStyle="{DynamicResource NormalSoundItemStyle}"></ListBox>
+						 ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+						 ItemContainerStyle="{DynamicResource NormalSoundItemStyle}"/>
 			</GroupBox>
 		</Grid>
 		<!--分页控件-->
@@ -178,4 +162,5 @@
 							  CurrentPage="{Binding CurrentPage,Mode=TwoWay}"
 							  Total="{Binding Total}"/>
 	</Grid>
+
 </UserControl>

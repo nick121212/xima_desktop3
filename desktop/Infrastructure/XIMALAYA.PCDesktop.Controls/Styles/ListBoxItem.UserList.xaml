@@ -1,0 +1,83 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                    xmlns:tools="http://ximalaya.com/xaml/tools"
+                    xmlns:converter="http://ximalaya.com/xaml/tools/converter"
+                    xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+                    xmlns:MControls="clr-namespace:XIMALAYA.PCDesktop.Controls">
+
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/Converter.xaml" />
+		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/ListBoxItem.Common.xaml" />
+		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/MyCheckboxButton.xaml" />
+		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/Path.xaml" />
+	</ResourceDictionary.MergedDictionaries>
+
+	<!--默认用户列表样式 start-->
+
+	<DataTemplate x:Key="NormalUserItemTemplate" DataType="{x:Type ListBoxItem}">
+		<MControls:MyRadioButton Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBox}, Path=Width}"
+                                 Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBox}, Path=Height}"
+					             Background="Transparent"
+								 GroupName="SearchAlbum"
+					             BorderThickness="0 0 0 1"
+								 CheckedBorderThickness="0 0 0 1"
+								 IsChecked="False"
+								 SuperScriptSize="0"
+					             BorderBrush="{DynamicResource BlackBrush}">
+			<Grid Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType=ListBox},Converter={StaticResource ActualSizeFixedConverter},ConverterParameter='-,15'}">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+				<!--声音图片-->
+				<MControls:MyImage Margin="5"
+						           VerticalAlignment="Center"
+						           Width="60" 
+						           Height="60" 
+						           Source="{Binding MobileSmallLogo}"
+						           DefaultSource="person.jpg">
+					<MControls:MyImage.Clip>
+						<EllipseGeometry Center="30,30" RadiusX="30" RadiusY="30"/>
+					</MControls:MyImage.Clip>
+				</MControls:MyImage>
+				<!--用户信息-->
+				<Grid Grid.Column="1" 
+					  ClipToBounds="True">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*"/>
+						<RowDefinition Height="Auto"/>
+					</Grid.RowDefinitions>
+					<!--用户名称-->
+					<TextBlock Text="{Binding NickName}"
+							   ToolTip="{Binding Binding NickName}"
+							   Foreground="{DynamicResource BlackBrush}"
+							   TextWrapping="NoWrap"
+							   HorizontalAlignment="Stretch"
+							   VerticalAlignment="Center"/>
+					<StackPanel Orientation="Horizontal"
+								Grid.Row="1" >
+						<Label FontSize="10" 
+						       Foreground="{DynamicResource GrayBrush7}"
+						       HorizontalAlignment="Left" 
+						       ContentStringFormat="声音 {0}"
+						       Content="{Binding TrackCount}" />
+						<Label FontSize="10" 
+						       Foreground="{DynamicResource GrayBrush7}"
+						       HorizontalAlignment="Left" 
+						       ContentStringFormat="粉丝 {0}"
+						       Content="{Binding FollowerCount}" />
+					</StackPanel>
+				</Grid>
+			</Grid>
+		</MControls:MyRadioButton>
+	</DataTemplate>
+
+	<Style x:Key="NormalUserItemStyle" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource ListItemBaseTemp}">
+		<Setter Property="ContentTemplate" Value="{StaticResource NormalUserItemTemplate}"/>
+	</Style>
+
+	<!--默认用户列表样式 end-->
+
+
+</ResourceDictionary>

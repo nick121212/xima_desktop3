@@ -289,12 +289,12 @@ namespace XIMALAYA.PCDesktop.Tools
                     TagName = " ",
                 });
             });
-
+            //声音详情页
             this.ShowSoundDetailCommand = new DelegateCommand(() =>
             {
                 this.EventAggregator.GetEvent<SoundDetailEvent<long>>().Publish(this.TrackID);
             });
-
+            //内容切换的命令，现在有搜索和发现切换
             this.ShowContentCommand = new DelegateCommand<string>(s =>
             {
                 this.EventAggregator.GetEvent<ContentChangeEvent>().Publish(s);

@@ -5,110 +5,141 @@
                                  xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
                                  xmlns:MControls="clr-namespace:XIMALAYA.PCDesktop.Controls">
 
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/Converter.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/ListBoxItem.Common.xaml" />
-    </ResourceDictionary.MergedDictionaries>
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/Converter.xaml" />
+		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/ListBoxItem.Common.xaml" />
+	</ResourceDictionary.MergedDictionaries>
 
-    <!--标签下的专辑列表 start-->
-    <DataTemplate x:Key="AlbumItemTemplate" DataType="{x:Type ListBoxItem}">
-        <Controls:Tile Background="Transparent" 
+	<!--标签下的专辑列表 start-->
+	<DataTemplate x:Key="AlbumItemTemplate" DataType="{x:Type ListBoxItem}">
+		<Controls:Tile Background="Transparent" 
                        Height="220" 
                        Width="180"
                        Margin="5"
                        Command="{Binding Path=AlbumDetailCommand,Source={x:Static tools:CommandSingleton.Instance}}"
                        CommandParameter="{Binding AlbumID}">
-            <Controls:Tile.Content>
-                <Label>
-                    <Label.Template>
-                        <ControlTemplate>
-                            <Border BorderThickness="1" Width="180" BorderBrush="{DynamicResource ControlBorderBrush}">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="180"/>
-                                        <RowDefinition Height="60"/>
-                                    </Grid.RowDefinitions>
+			<Controls:Tile.Content>
+				<Label>
+					<Label.Template>
+						<ControlTemplate>
+							<Border BorderThickness="1" Width="180" BorderBrush="{DynamicResource ControlBorderBrush}">
+								<Grid>
+									<Grid.RowDefinitions>
+										<RowDefinition Height="180"/>
+										<RowDefinition Height="60"/>
+									</Grid.RowDefinitions>
 
 									<MControls:MyImage ToolTip="{Binding Title}" 
 													   Width="180" 
 													   Height="180" 
 													   Source="{Binding AlbumCoverUrl290}"
 													   DefaultSource="album.png"/>
-                                    <WrapPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center">
-                                        <TextBlock ToolTip="{Binding Title}" Width="180" TextWrapping="NoWrap" TextAlignment="Center" HorizontalAlignment="Center" Text="{Binding Title}" />
-                                        <TextBlock Width="180" TextWrapping="WrapWithOverflow" TextAlignment="Center" HorizontalAlignment="Center" Text="{Binding LastUptrackDate,Converter={StaticResource LongToDateConverter}}" />
-                                    </WrapPanel>
-                                    <Grid x:Name="isOverCon" VerticalAlignment="Bottom" 
+									<WrapPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center">
+										<TextBlock ToolTip="{Binding Title}" Width="180" TextWrapping="NoWrap" TextAlignment="Center" HorizontalAlignment="Center" Text="{Binding Title}" />
+										<TextBlock Width="180" TextWrapping="WrapWithOverflow" TextAlignment="Center" HorizontalAlignment="Center" Text="{Binding LastUptrackDate,Converter={StaticResource LongToDateConverter},ConverterParameter='yyyy-MM-dd hh:mm:ss'}" />
+									</WrapPanel>
+									<Grid x:Name="isOverCon" VerticalAlignment="Bottom" 
                                           HorizontalAlignment="Right" 
                                           Visibility="Hidden" 
                                           Width="90" Height="90">
-                                        <Label Content="完本" 
+										<Label Content="完本" 
                                                HorizontalAlignment="Right"
                                                VerticalAlignment="Bottom"
                                                HorizontalContentAlignment="Center" 
                                                MControls:RotationManager.Angle="-45"/>
-                                        <Path Stroke="Transparent" Fill="{DynamicResource AccentColorBrush2}">
-                                            <Path.Data>
-                                                <PathGeometry>
-                                                    <PathFigure IsClosed="True" StartPoint="45,90">
-                                                        <LineSegment Point="90,90"/>
-                                                        <LineSegment Point="90,45"/>
-                                                    </PathFigure>
-                                                </PathGeometry>
-                                            </Path.Data>
-                                        </Path>
-                                    </Grid>
-                                </Grid>
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <DataTrigger Binding="{Binding SerialState}" Value="2">
-                                    <Setter TargetName="isOverCon" Property="Visibility" Value="Visible"/>
-                                </DataTrigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Label.Template>
-                </Label>
-            </Controls:Tile.Content>
-        </Controls:Tile>
-    </DataTemplate>
-    <Style x:Key="AlbumListStyle" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource ListItemBaseTemp}">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="ContentTemplate" Value="{StaticResource AlbumItemTemplate}"/>
-    </Style>
+										<Path Stroke="Transparent" Fill="{DynamicResource AccentColorBrush2}">
+											<Path.Data>
+												<PathGeometry>
+													<PathFigure IsClosed="True" StartPoint="45,90">
+														<LineSegment Point="90,90"/>
+														<LineSegment Point="90,45"/>
+													</PathFigure>
+												</PathGeometry>
+											</Path.Data>
+										</Path>
+									</Grid>
+								</Grid>
+							</Border>
+							<ControlTemplate.Triggers>
+								<DataTrigger Binding="{Binding SerialState}" Value="2">
+									<Setter TargetName="isOverCon" Property="Visibility" Value="Visible"/>
+								</DataTrigger>
+							</ControlTemplate.Triggers>
+						</ControlTemplate>
+					</Label.Template>
+				</Label>
+			</Controls:Tile.Content>
+		</Controls:Tile>
+	</DataTemplate>
+	<Style x:Key="AlbumListStyle" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource ListItemBaseTemp}">
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="ContentTemplate" Value="{StaticResource AlbumItemTemplate}"/>
+	</Style>
 	<!--标签下的专辑列表 end-->
 
-	<!--发现页热门专辑 start-->
-    <DataTemplate x:Key="MetroAlbumItemTemplate" DataType="{x:Type ListBoxItem}">
-        <Controls:Tile Background="Transparent" 
-					   ToolTip="{Binding Title}"
-                       Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=ActualWidth}"
-                       Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=ActualHeight}"
-                       Margin="0"
-                       Command="{Binding Path=AlbumDetailCommand,Source={x:Static tools:CommandSingleton.Instance}}"
-                       CommandParameter="{Binding AlbumID}">
-            <Controls:Tile.Content>
-                <Grid>
-					<MControls:MyImage VerticalAlignment="Center" 
-									   Source="{Binding AlbumCoverUrl290}"
-									   DefaultSource="album.png"/>
-					<Label VerticalAlignment="Bottom" 
-						   Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=ActualWidth}"
-						   HorizontalAlignment="Center"
-						   Background="#66000000"
-						   Foreground="White" 
-						   Margin="0" 
-						   Content="{Binding Title}" />
-				</Grid>
-            </Controls:Tile.Content>
-        </Controls:Tile>
-    </DataTemplate>
-    <Style x:Key="MetroAlbumListStyle" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource ListItemBaseTemp}">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="MControls:TilePanel.WidthPix" Value="1"/>
-        <Setter Property="MControls:TilePanel.HeightPix" Value="1"/>
-        <Setter Property="ContentTemplate" Value="{StaticResource MetroAlbumItemTemplate}"/>
-    </Style>
+	<!--默认专辑列表样式 start-->
 
-	<!--发现页热门专辑 end-->
+	<DataTemplate x:Key="NormalAlbumItemTemplate">
+		<MControls:MyRadioButton Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBox}, Path=Width}"
+                                 Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBox}, Path=Height}"
+					             Background="Transparent"
+								 GroupName="SearchAlbum"
+					             BorderThickness="0 0 0 1"
+								 CheckedBorderThickness="0 0 0 1"
+								 IsChecked="False"
+								 SuperScriptSize="0"
+					             BorderBrush="{DynamicResource BlackBrush}"
+                                 Command="{Binding Path=AlbumDetailCommand,Source={x:Static tools:CommandSingleton.Instance}}"
+								 CommandParameter="{Binding AlbumID}">
+			<Grid Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType=ListBox},Converter={StaticResource ActualSizeFixedConverter},ConverterParameter='-,15'}">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+				<!--专辑图片-->
+				<MControls:MyImage Margin="5"
+						           VerticalAlignment="Center"
+						           Width="60" 
+						           Height="60" 
+						           Source="{Binding CoverPath}"
+						           DefaultSource="album.png"/>
+				<!--声音信息-->
+				<Grid Grid.Column="1" 
+					  ClipToBounds="True">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*"/>
+						<RowDefinition Height="Auto"/>
+					</Grid.RowDefinitions>
+					<!--专辑标题-->
+					<TextBlock Text="{Binding Title}"
+							   ToolTip="{Binding Binding Title}"
+							   Foreground="{DynamicResource BlackBrush}"
+							   TextWrapping="NoWrap"
+							   TextOptions.TextRenderingMode="Grayscale"
+							   HorizontalAlignment="Stretch"
+							   VerticalAlignment="Center"/>
+					<!--节目数-->
+					<Label Grid.Row="1" 
+						   FontSize="10" 
+						   Foreground="{DynamicResource GrayBrush7}"
+						   HorizontalAlignment="Left" 
+						   ContentStringFormat="节目数 {0}"
+						   Content="{Binding TrackCount}" />
+					<!--创建时间-->
+					<Label Grid.Row="1" 
+						   FontSize="10" 
+						   Foreground="{DynamicResource GrayBrush7}"
+						   HorizontalAlignment="Right" 
+						   ContentStringFormat="最后更新 {0}"
+						   Content="{Binding UpdateDate,Converter={StaticResource NickTimeConverter}}" />
+				</Grid>
+			</Grid>
+		</MControls:MyRadioButton>
+	</DataTemplate>
+	<Style x:Key="NormalAlbumItemStyle" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource ListItemBaseTemp}">
+		<Setter Property="ContentTemplate" Value="{StaticResource NormalAlbumItemTemplate}"/>
+	</Style>
+
+	<!--默认专辑列表样式 end-->
 
 </ResourceDictionary>

@@ -81,6 +81,7 @@
   <ItemGroup>
     <Compile Include="Behaviors\AutoPopulateExportedViewsBehavior.cs" />
     <Compile Include="Command\Commands.cs" />
+    <Compile Include="Converter\ActualSizeFixedConverter.cs" />
     <Compile Include="Converter\EqualConverter.cs" />
     <Compile Include="Converter\HalfValueConverter.cs" />
     <Compile Include="Converter\MutiBoolConverter.cs" />

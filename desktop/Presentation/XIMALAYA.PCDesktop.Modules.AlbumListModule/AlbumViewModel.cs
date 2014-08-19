@@ -176,7 +176,7 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumListModule
                             {
                                 this.Albums.Add(album);
                             }
-                            base.IsNextPageVisibled = tagAlbumsResult.MaxPageId > this.Params.Page;
+                            //base.IsNextPageVisibled = tagAlbumsResult.MaxPageId > this.Params.Page;
                         }
                     }), DispatcherPriority.Background);
                 }, this.Params);

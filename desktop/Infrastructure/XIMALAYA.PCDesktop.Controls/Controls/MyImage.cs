@@ -51,7 +51,9 @@ namespace XIMALAYA.PCDesktop.Controls
 
         private static void OnDefaulImageChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ImageBrush ib = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/XIMALAYA.PCDesktop.Tools;component/Resources/Images/defaults/" + e.NewValue.ToString(), UriKind.RelativeOrAbsolute)));
+            var uri = new Uri("pack://application:,,,/XIMALAYA.PCDesktop.Tools;component/Resources/Images/defaults/" + e.NewValue.ToString(), UriKind.RelativeOrAbsolute);
+            
+            ImageBrush ib = new ImageBrush(new BitmapImage(uri));
             d.SetValue(Control.BackgroundProperty, ib);
         }
 

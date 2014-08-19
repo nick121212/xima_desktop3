@@ -27,19 +27,19 @@
 		<StackPanel Margin="20 0 0 0"  Orientation="Horizontal" Width="Auto">
 			<RadioButton GroupName="Condition" 
 						 IsChecked="{Binding Condition,Converter={StaticResource ConditaionAlbumTypeToBoolConverter},ConverterParameter=0}" 
-						 Style="{DynamicResource MetroRadioButton}" 
+						 Style="{DynamicResource MyMetroRadioButton}" 
 						 Command="{Binding ConditionCommand}" 
 						 CommandParameter="0" 
 						 Content="最火"/>
 			<RadioButton GroupName="Condition" 
 						 IsChecked="{Binding Condition,Converter={StaticResource ConditaionAlbumTypeToBoolConverter},ConverterParameter=1}" 
-						 Style="{DynamicResource MetroRadioButton}" 
+						 Style="{DynamicResource MyMetroRadioButton}" 
 						 Command="{Binding ConditionCommand}" 
 						 CommandParameter="1" 
 						 Content="最近更新"/>
 			<RadioButton GroupName="Condition" 
 						 IsChecked="{Binding Condition,Converter={StaticResource ConditaionAlbumTypeToBoolConverter},ConverterParameter=2}" 
-						 Style="{DynamicResource MetroRadioButton}" 
+						 Style="{DynamicResource MyMetroRadioButton}" 
 						 Command="{Binding ConditionCommand}" 
 						 CommandParameter="2" 
 						 Content="经典"/>
