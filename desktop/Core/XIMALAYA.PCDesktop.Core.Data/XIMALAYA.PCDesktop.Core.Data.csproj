@@ -76,7 +76,9 @@
     <Compile Include="Configurations\Sound\SoundData3Decorator.generated.cs" />
     <Compile Include="Configurations\Sound\SoundData4Decorator.cs" />
     <Compile Include="Configurations\Sound\SoundData4Decorator.generated.cs" />
+    <Compile Include="Configurations\Sound\SoundData5Decorator.generated.cs" />
     <Compile Include="Configurations\Sound\SoundDataDecorator.generated.cs" />
+    <Compile Include="Configurations\Sound\SoundResultDecorator.generated.cs" />
     <Compile Include="Configurations\Sound\SoundsResultDecorator.generated.cs" />
     <Compile Include="Configurations\Subject\SubjectDataDecorator.generated.cs" />
     <Compile Include="Configurations\Tags\CategoryTagResultDecorator.generated.cs" />
@@ -112,7 +114,9 @@
     <Compile Include="Respositories\Search\SearchResultRespositories.generated.cs" />
     <Compile Include="Respositories\Search\SearchSoundResultRespositories.generated.cs" />
     <Compile Include="Respositories\Search\SearchUserResultRespositories.generated.cs" />
+    <Compile Include="Respositories\Sound\ISoundResultRespositories.generated.cs" />
     <Compile Include="Respositories\Sound\ISoundsResultRespositories.generated.cs" />
+    <Compile Include="Respositories\Sound\SoundResultRespositories.generated.cs" />
     <Compile Include="Respositories\Sound\SoundsResultRespositories.generated.cs" />
     <Compile Include="Respositories\Tags\CategoryTagResultRespositories.generated.cs" />
     <Compile Include="Respositories\Tags\ICategoryTagResultRespositories.generated.cs" />
@@ -151,7 +155,9 @@
 ..\Configurations\Sound\SoundData2Decorator.generated.cs
 ..\Configurations\Sound\SoundData3Decorator.generated.cs
 ..\Configurations\Sound\SoundData4Decorator.generated.cs
+..\Configurations\Sound\SoundData5Decorator.generated.cs
 ..\Configurations\Sound\SoundDataDecorator.generated.cs
+..\Configurations\Sound\SoundResultDecorator.generated.cs
 ..\Configurations\Sound\SoundsResultDecorator.generated.cs
 ..\Configurations\Subject\SubjectDataDecorator.generated.cs
 ..\Configurations\Tags\CategoryTagResultDecorator.generated.cs
@@ -178,7 +184,9 @@
 ..\Respositories\Search\SearchResultRespositories.generated.cs
 ..\Respositories\Search\SearchSoundResultRespositories.generated.cs
 ..\Respositories\Search\SearchUserResultRespositories.generated.cs
+..\Respositories\Sound\ISoundResultRespositories.generated.cs
 ..\Respositories\Sound\ISoundsResultRespositories.generated.cs
+..\Respositories\Sound\SoundResultRespositories.generated.cs
 ..\Respositories\Sound\SoundsResultRespositories.generated.cs
 ..\Respositories\Tags\CategoryTagResultRespositories.generated.cs
 ..\Respositories\Tags\ICategoryTagResultRespositories.generated.cs

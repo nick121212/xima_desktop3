@@ -46,9 +46,9 @@ namespace XIMALAYA.PCDesktop.Modules.SoundListModule
             {
                 this.OnSoundDetailEvent(e);
             });
-        }
 
-        
+            this.EventAggregator.GetEvent<SoundDetailEvent<long>>().Publish(3427215);
+        }
 
         #endregion
     }

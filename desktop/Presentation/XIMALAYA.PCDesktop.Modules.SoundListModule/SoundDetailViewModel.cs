@@ -1,9 +1,14 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.ComponentModel.Composition;
+using System.Windows;
+using System.Windows.Threading;
+using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Practices.Prism.Regions;
+using XIMALAYA.PCDesktop.Cache;
 using XIMALAYA.PCDesktop.Core.Models.Sound;
+using XIMALAYA.PCDesktop.Core.Services;
 using XIMALAYA.PCDesktop.Modules.SoundListModule.Views;
-using XIMALAYA.PCDesktop.Tools;
-using XIMALAYA.PCDesktop.Tools.Player;
 using XIMALAYA.PCDesktop.Tools.Untils;
 
 namespace XIMALAYA.PCDesktop.Modules.SoundListModule
@@ -12,22 +17,71 @@ namespace XIMALAYA.PCDesktop.Modules.SoundListModule
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class SoundDetailViewModel : BaseViewModel
     {
+        #region 字段
+
+        private SoundData _SoundData;
+
+        #endregion
+
         #region 属性
 
         /// <summary>
         /// 声音数据
         /// </summary>
-        public SoundData SoundData { get; set; }
-        /// <summary>
-        /// 播放器控件
-        /// </summary>
-        public BassEngine BassEngine
+        public SoundData SoundData
         {
             get
             {
-                return PlayerSingleton.Instance;
+                return _SoundData;
+            }
+            set
+            {
+                if (value != _SoundData)
+                {
+                    _SoundData = value;
+                    this.RaisePropertyChanged(() => this.SoundData);
+                }
             }
         }
+        /// <summary>
+        /// 当前声音ID
+        /// </summary>
+        private long TrackID { get; set; }
+        /// <summary>
+        /// 声音详情页接口
+        /// </summary>
+        [Import]
+        private ISoundDetailService SoundDetailService { get; set; }
+
+        #endregion
+
+        #region BaseViewModel方法
+
+        /// <summary>
+        /// 获取声音详情数据
+        /// </summary>
+        /// <param name="isClear"></param>
+        protected override void GetData(bool isClear)
+        {
+            if (this.SoundDetailService == null) return;
+
+            this.SoundDetailService.GetData<SoundData>(res =>
+            {
+                var result = res as SoundData;
+                Application.Current.Dispatcher.InvokeAsync(new Action(() =>
+                {
+                    if (result.TrackId > 0)
+                    {
+                        SoundCache.Instance[result.TrackId] = result;
+                        this.SoundData = result;
+                        return;
+                    }
+                    DialogManager.ShowMessageAsync(Application.Current.MainWindow as MetroWindow, "喜马拉雅", "获取声音数据失败！");
+                }), DispatcherPriority.Background);
+            }, this.TrackID);
+            base.GetData(isClear);
+        }
+
         #endregion
 
         #region 方法
@@ -43,9 +97,11 @@ namespace XIMALAYA.PCDesktop.Modules.SoundListModule
             if (this.RegionManager != null && this.RegionManager.Regions.ContainsRegionWithName(regionName))
             {
                 this.RegionManager.AddToRegion(regionName, soundDetailView);
+                this.TrackID = trackID;
+                this.GetData(true);
             }
         }
-    
+
         #endregion
-     }
+    }
 }

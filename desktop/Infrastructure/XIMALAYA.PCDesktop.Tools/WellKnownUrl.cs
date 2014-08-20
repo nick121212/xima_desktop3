@@ -54,5 +54,6 @@ namespace XIMALAYA.PCDesktop.Tools
 
         public const string SearchPath = WebPath + "/s/mobile/search";
 
+        public const string SoundInfo = WebPath + "/mobile/track/{0}";
     }
 }

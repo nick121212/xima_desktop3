@@ -2,7 +2,7 @@
 //     此代码由工具生成。
 //     对此文件的更改可能会导致不正确的行为，并且如果
 //     重新生成代码，这些更改将会丢失。
-//		如存在本生成代码外的新需求，请在相同命名空间下创建同名分部类实现 SoundData2ConfigurationAppend 分部方法。
+//		如存在本生成代码外的新需求，请在相同命名空间下创建同名分部类实现 SoundData5ConfigurationAppend 分部方法。
 // </auto-generated>
 using System;
 using System.Collections.Generic;
@@ -18,17 +18,17 @@ using XIMALAYA.PCDesktop.Core.Models.Sound;
 namespace XIMALAYA.PCDesktop.Core.Data
 {
     /// <summary>
-    ///     SoundData2
+    ///     SoundData5
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public partial class SoundData2Decorator<T> : Decorator<T>
+    public partial class SoundData5Decorator<T> : Decorator<T>
     {
         partial void doAddOtherConfig();
         /// <summary>
         ///     
         /// </summary>
         /// <typeparam name="result"></typeparam>
-        public SoundData2Decorator(Result<T> result)
+        public SoundData5Decorator(Result<T> result)
             : base(result)
         {
 
@@ -42,28 +42,36 @@ namespace XIMALAYA.PCDesktop.Core.Data
             base.doAddConfig();
             this.Config.MapType<SoundData>(map => map
                                     .Field<System.Int64>(field => field.TrackId, type => type.To("trackId"))
-                    .Field<System.String>(field => field.AlbumImage, type => type.To("album_cover_path"))
-                    .Field<System.String>(field => field.AlbumImage86, type => type.To("albumImage"))
                     .Field<System.Int64>(field => field.AlbumID, type => type.To("albumId"))
+                    .Field<System.String>(field => field.AlbumImage, type => type.To("albumImage"))
                     .Field<System.String>(field => field.AlbumTitle, type => type.To("albumTitle"))
+                    .Field<System.Int64>(field => field.CategoryID, type => type.To("categoryId"))
+                    .Field<System.String>(field => field.CategoryName, type => type.To("categoryName"))
                     .Field<System.Int64>(field => field.CommentCount, type => type.To("comments"))
                     .Field<System.String>(field => field.CoverLarge, type => type.To("coverLarge"))
                     .Field<System.String>(field => field.CoverSmall, type => type.To("coverSmall"))
                     .Field<System.Int64>(field => field.CreateAt, type => type.To("createdAt"))
                     .Field<System.Double>(field => field.Duration, type => type.To("duration"))
-                    .Field<System.Boolean>(field => field.IsPlulic, type => type.To("is_public"))
+                    .Field<System.String>(field => field.Intro, type => type.To("intro"))
+                    .Field<System.Boolean>(field => field.IsLike, type => type.To("isLike"))
+                    .Field<System.Boolean>(field => field.IsPlulic, type => type.To("isPublic"))
+                    .Field<System.Boolean>(field => field.IsRelay, type => type.To("isRelay"))
                     .Field<System.Int64>(field => field.LikeCount, type => type.To("likes"))
                     .Field<System.String>(field => field.NickName, type => type.To("nickname"))
-                    .Field<System.Int32>(field => field.OpType, type => type.To("opType"))
-                    .Field<System.Int64>(field => field.PlayCount, type => type.To("playtimes"))
                     .Field<System.String>(field => field.PlayUrl32, type => type.To("playUrl32"))
                     .Field<System.String>(field => field.PlayUrl64, type => type.To("playUrl64"))
+                    .Field<System.Int64>(field => field.PlayCount, type => type.To("playtimes"))
                     .Field<System.Int32>(field => field.ProcessState, type => type.To("processState"))
+                    .Field<System.String>(field => field.RichIntro, type => type.To("richIntro"))
                     .Field<System.Int64>(field => field.ShareCount, type => type.To("shares"))
                     .Field<System.String>(field => field.SmallLogo, type => type.To("smallLogo"))
+                    .Field<System.String>(field => field.Tags, type => type.To("tags"))
+                    .Field<System.Int32>(field => field.Status, type => type.To("status"))
                     .Field<System.String>(field => field.Title, type => type.To("title"))
                     .Field<System.Int64>(field => field.UID, type => type.To("uid"))
-                    .Field<System.Int32>(field => field.UploadSource, type => type.To("userSource"))
+                    .Field<System.Int32>(field => field.UserSource, type => type.To("userSource"))
+                    .Field<System.String[]>(field => field.Images, type => type.To("images"))
+                    .Field<System.Object[]>(field => field.TrackBlocks, type => type.To("trackBlocks"))
             );
             this.doAddOtherConfig();
         }

@@ -29,7 +29,5 @@
 		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/Checkbox.xaml" />
 
 	</ResourceDictionary.MergedDictionaries>
-
-
 </ResourceDictionary>
 

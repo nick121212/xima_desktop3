@@ -42,22 +42,6 @@ namespace XIMALAYA.PCDesktop.Core.Data
             base.doAddConfig();
             this.Config.MapType<SoundData>(map => map
                                     .Field<System.Int64>(field => field.TrackId, type => type.To("toTid"))
-                    .Field<System.Int64>(field => field.AlbumID, type => type.To("albumId"))
-                    .Field<System.String>(field => field.AlbumTitle, type => type.To("albumName"))
-                    .Field<System.Int64>(field => field.CommentCount, type => type.To("comments"))
-                    .Field<System.Int64>(field => field.CreateAt, type => type.To("createdAt"))
-                    .Field<System.Double>(field => field.Duration, type => type.To("duration"))
-                    .Field<System.Boolean>(field => field.IsLike, type => type.To("isLike"))
-                    .Field<System.Boolean>(field => field.IsRelay, type => type.To("isRelay"))
-                    .Field<System.Int64>(field => field.LikeCount, type => type.To("likes"))
-                    .Field<System.String>(field => field.PlayUrl32, type => type.To("url"))
-                    .Field<System.Int64>(field => field.PlayCount, type => type.To("playtimes"))
-                    .Field<System.Int64>(field => field.ShareCount, type => type.To("shares"))
-                    .Field<System.String>(field => field.Title, type => type.To("title"))
-                    .Field<System.Int32>(field => field.UploadSource, type => type.To("uploadSource"))
-                    .Field<System.Int32>(field => field.OpType, type => type.To("userSource"))
-                    .Field<System.String>(field => field.WaveForm, type => type.To("waveform"))
-                    .Field<System.Int32>(field => field.ActivityId, type => type.To("activity_id"))
             );
             this.doAddOtherConfig();
         }

@@ -2,7 +2,7 @@
 //     此代码由工具生成。
 //     对此文件的更改可能会导致不正确的行为，并且如果
 //     重新生成代码，这些更改将会丢失。
-//		如存在本生成代码外的新需求，请在相同命名空间下创建同名分部类实现 HotSoundsResultConfigurationAppend 分部方法。
+//		如存在本生成代码外的新需求，请在相同命名空间下创建同名分部类实现 SoundResultConfigurationAppend 分部方法。
 // </auto-generated>
 using System;
 using System.Collections.Generic;
@@ -13,22 +13,22 @@ using System.Threading.Tasks;
 using FluentJson.Configuration;
 using FluentJson;
 using XIMALAYA.PCDesktop.Core.Data.Decorator;
-using XIMALAYA.PCDesktop.Core.Models.Discover;
+using XIMALAYA.PCDesktop.Core.Models.Sound;
 
 namespace XIMALAYA.PCDesktop.Core.Data
 {
     /// <summary>
-    ///     HotSoundsResult
+    ///     SoundResult
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public partial class HotSoundsResultDecorator<T> : Decorator<T>
+    public partial class SoundResultDecorator<T> : Decorator<T>
     {
         partial void doAddOtherConfig();
         /// <summary>
         ///     
         /// </summary>
         /// <typeparam name="result"></typeparam>
-        public HotSoundsResultDecorator(Result<T> result)
+        public SoundResultDecorator(Result<T> result)
             : base(result)
         {
 
@@ -40,12 +40,11 @@ namespace XIMALAYA.PCDesktop.Core.Data
         public override void doAddConfig()
         {
             base.doAddConfig();
-            this.Config.MapType<HotSoundsResult>(map => map
+            this.Config.MapType<SoundResult>(map => map
                                     .Field<System.Int32>(field => field.Ret, type => type.To("ret"))
-                    .Field<System.Boolean>(field => field.Res, type => type.To("res"))
                     .Field<System.String>(field => field.Message, type => type.To("msg"))
-                    .Field<XIMALAYA.PCDesktop.Core.Models.Category.CategoryData[]>(field => field.Categories, type => type.To("categories"))
             );
+            this.doAddOtherConfig();
         }
     }
 }

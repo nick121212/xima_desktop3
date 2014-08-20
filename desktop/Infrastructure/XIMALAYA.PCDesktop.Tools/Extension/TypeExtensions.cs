@@ -80,6 +80,24 @@ namespace XIMALAYA.PCDesktop.Tools.Extension
         {
             return memberInfo.GetCustomAttributes(typeof(T), inherit).Cast<T>().ToArray();
         }
+        /// <summary>
+        /// 判断当前类型的对象是否继承自指定接口
+        /// </summary>
+        /// <param name="givenType">给定类型</param>
+        /// <param name="genericType">泛型类型</param>
+        /// <returns></returns>
+        public static bool IsInterfaceToGenericType(this Type givenType, Type genericType)
+        {
+            Type[] interfaces = givenType.GetInterfaces();
+            bool res = false;
+
+            foreach (Type t in interfaces)
+            {
+                res = t == genericType;
+                if (res) break;
+            }
+            return res;
+        }
 
         /// <summary>
         /// 判断当前类型的对象能分配于指定泛型类型

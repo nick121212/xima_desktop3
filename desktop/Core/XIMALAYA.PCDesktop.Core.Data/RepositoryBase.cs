@@ -15,7 +15,7 @@ namespace XIMALAYA.PCDesktop.Core.Data
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public abstract class RepositoryBase<T> : IRepository
-         where T : BaseResult
+         where T : IBaseResult
     {
         /// <summary>
         /// 获得数据

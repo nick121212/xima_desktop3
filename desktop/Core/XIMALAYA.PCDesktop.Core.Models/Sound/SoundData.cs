@@ -19,6 +19,20 @@ namespace XIMALAYA.PCDesktop.Core.Models.Sound
         /// 标签，中间用逗号分隔
         /// </summary>
         public string Tags { get; set; }
+        public List<string> TagList
+        {
+            get
+            {
+                List<string> list = new List<string>();
+
+                if (this.Tags != null)
+                {
+                    list.AddRange(this.Tags.Split(','));
+                }
+
+                return list;
+            }
+        }
         /// <summary>
         /// 标题
         /// </summary>
@@ -87,6 +101,10 @@ namespace XIMALAYA.PCDesktop.Core.Models.Sound
         /// 简介
         /// </summary>
         public string Intro { get; set; }
+        /// <summary>
+        /// 富文本简介
+        /// </summary>
+        public string RichIntro { get; set; }
         /// <summary>
         /// 播放地址
         /// </summary>
@@ -175,6 +193,29 @@ namespace XIMALAYA.PCDesktop.Core.Models.Sound
         /// 活动id
         /// </summary>
         public int ActivityId { get; set; }
+        /// <summary>
+        /// 状态
+        /// </summary>
+        public int Status { get; set; }
+        /// <summary>
+        /// 图片列表
+        /// </summary>
+        public string[] Images { get; set; }
+        /// <summary>
+        /// 无解
+        /// </summary>
+        public object[] TrackBlocks { get; set; }
+        /// <summary>
+        /// 声音类型，原创，转采
+        /// </summary>
+        public int UserSource { get; set; }
+        public string UserSourceString
+        {
+            get
+            {
+                return this.UserSource == 1 ? "原创" : "采集";
+            }
+        }
 
         public SoundData()
             : base()
@@ -182,22 +223,22 @@ namespace XIMALAYA.PCDesktop.Core.Models.Sound
             this.doAddMap("FXClassName", "SoundData");
 
             this.doAddMap(() => this.TrackId, "toTid");
-            this.doAddMap(() => this.AlbumID, "albumId");
-            this.doAddMap(() => this.AlbumTitle, "albumName");
-            this.doAddMap(() => this.CommentCount, "comments");
-            this.doAddMap(() => this.CreateAt, "createdAt");
-            this.doAddMap(() => this.Duration, "duration");
-            this.doAddMap(() => this.IsLike, "isLike");
-            this.doAddMap(() => this.IsRelay, "isRelay");
-            this.doAddMap(() => this.LikeCount, "likes");
-            this.doAddMap(() => this.PlayUrl32, "url");
-            this.doAddMap(() => this.PlayCount, "playtimes");
-            this.doAddMap(() => this.ShareCount, "shares");
-            this.doAddMap(() => this.Title, "title");
-            this.doAddMap(() => this.UploadSource, "uploadSource");
-            this.doAddMap(() => this.OpType, "userSource");
-            this.doAddMap(() => this.WaveForm, "waveform");
-            this.doAddMap(() => this.ActivityId, "activity_id");
+            //this.doAddMap(() => this.AlbumID, "albumId");
+            //this.doAddMap(() => this.AlbumTitle, "albumName");
+            //this.doAddMap(() => this.CommentCount, "comments");
+            //this.doAddMap(() => this.CreateAt, "createdAt");
+            //this.doAddMap(() => this.Duration, "duration");
+            //this.doAddMap(() => this.IsLike, "isLike");
+            //this.doAddMap(() => this.IsRelay, "isRelay");
+            //this.doAddMap(() => this.LikeCount, "likes");
+            //this.doAddMap(() => this.PlayUrl32, "url");
+            //this.doAddMap(() => this.PlayCount, "playtimes");
+            //this.doAddMap(() => this.ShareCount, "shares");
+            //this.doAddMap(() => this.Title, "title");
+            //this.doAddMap(() => this.UploadSource, "uploadSource");
+            //this.doAddMap(() => this.OpType, "userSource");
+            //this.doAddMap(() => this.WaveForm, "waveform");
+            //this.doAddMap(() => this.ActivityId, "activity_id");
         }
     }
 }

@@ -168,7 +168,16 @@ namespace XIMALAYA.PCDesktop.Controls
                 return Geometry.Parse(this["discover"]);
             }
         }
-
+        /// <summary>
+        /// 下载
+        /// </summary>
+        public Geometry DownloadPath
+        {
+            get
+            {
+                return Geometry.Parse(this["download"]);
+            }
+        }
         //public Geometry all
         //{
         //    get

@@ -121,7 +121,7 @@
 			<!--未选中内容-->
 			<Label x:Name="contentPresenter"
 				   Margin="0"
-				   Padding="0"
+				   Padding="{TemplateBinding Padding}"
 				   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 				   Foreground="{TemplateBinding ForegroundChecked}">
@@ -134,7 +134,7 @@
 			<!--选中内容-->
 			<Label x:Name="contentCheckedPresenter"
 				   Margin="0"
-				   Padding="0"
+				   Padding="{TemplateBinding Padding}"
 				   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 				   Foreground="{TemplateBinding ForegroundChecked}">

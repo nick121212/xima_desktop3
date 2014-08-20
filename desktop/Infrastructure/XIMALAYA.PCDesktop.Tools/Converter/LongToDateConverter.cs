@@ -25,9 +25,8 @@ namespace XIMALAYA.PCDesktop.Tools.Converter
         {
             long date = long.Parse(value.ToString());
             DateTime dtStart = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
-            TimeSpan toNow = new TimeSpan(date);
 
-            return dtStart.Add(toNow).ToString(parameter.ToString());
+            return dtStart.AddMilliseconds(date).ToString(parameter.ToString());
         }
         /// <summary>
         /// 

@@ -81,6 +81,21 @@ namespace XIMALAYA.PCDesktop.Tools.Themes
             this.Theme = this.AppThemes.Find(x => x.Name.Equals("BaseDark"));
             this.AccentColor = this.AccentColors.Find(x => x.Name.Equals("Blue"));
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public ResourceDictionary FindResourceDictionary(string path)
+        {
+            var rd = new ResourceDictionary
+            {
+                Source = new Uri(path, UriKind.RelativeOrAbsolute)
+            };
+
+            return rd;
+        }
+
         private IEnumerable<string> FindBrushResources()
         {
             var rd = new ResourceDictionary

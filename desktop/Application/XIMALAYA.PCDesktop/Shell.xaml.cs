@@ -3,11 +3,13 @@ using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Practices.Prism.Regions;
 using XIMALAYA.PCDesktop.Tools;
 using XIMALAYA.PCDesktop.Tools.Player;
+using XIMALAYA.PCDesktop.Tools.Themes;
 using XIMALAYA.PCDesktop.Tools.Untils;
 
 namespace XIMALAYA.PCDesktop
@@ -31,6 +33,7 @@ namespace XIMALAYA.PCDesktop
         public int Count { get; set; }
         private Flyout LastFlyout { get; set; }
         private Flyout CurrentFlyout { get; set; }
+        private ResourceDictionary ResourceDic { get; set; }
 
         #endregion
 
@@ -80,7 +83,7 @@ namespace XIMALAYA.PCDesktop
         void Shell_Loaded(object sender, RoutedEventArgs e)
         {
             RegionManager.SetRegionManager(this.testFlyout, this.regionManager);
-
+            this.ResourceDic = ThemeInfoManager.Instance.FindResourceDictionary(@"/MahApps.Metro;component/Styles/Colors.xaml");
             //taskBar.ProgressState = TaskbarItemProgressState.Normal;
             //taskBar.ProgressValue = 0.4;
         }
@@ -103,15 +106,19 @@ namespace XIMALAYA.PCDesktop
         private string SetFlyout(string header)
         {
             string regionName = string.Format("ViewRegionName_{0}", ++this.Count);
-
-            this.CurrentFlyout = new Flyout();
             Binding binding = null;
             RelativeSource rs;
 
+            this.CurrentFlyout = new Flyout();
             this.CurrentFlyout.AnimateOnPositionChange = true;
             this.CurrentFlyout.Theme = FlyoutTheme.Adapt;
             this.CurrentFlyout.Header = header;
-            this.CurrentFlyout.IsOpen = false;
+
+            if (this.ResourceDic != null)
+            {
+                this.CurrentFlyout.Background = this.ResourceDic["WhiteBrush"] as Brush;
+            }
+
             rs = new RelativeSource(RelativeSourceMode.FindAncestor);
             rs.AncestorType = typeof(Grid);
             binding = new Binding("ActualWidth");
@@ -121,7 +128,6 @@ namespace XIMALAYA.PCDesktop
             RegionManager.SetRegionName(this.CurrentFlyout, regionName);
             this.ContainerGrid.Items.Add(this.CurrentFlyout);
             this.CurrentFlyout.ApplyTemplate();
-            //this.CurrentFlyout.IsOpenChanged += flyout_IsOpenChanged;
             this.CurrentFlyout.IsHideComplete += CurrentFlyout_IsHideComplete;
             this.CurrentFlyout.Position = Position.Right;
 
@@ -139,7 +145,7 @@ namespace XIMALAYA.PCDesktop
 
             this.CurrentFlyout.Position = Position.Right;
             this.CurrentFlyout.IsOpen = true;
-         
+
             return regionName;
         }
         /// <summary>
@@ -210,5 +216,7 @@ namespace XIMALAYA.PCDesktop
         }
 
         #endregion
+
+        
     }
 }

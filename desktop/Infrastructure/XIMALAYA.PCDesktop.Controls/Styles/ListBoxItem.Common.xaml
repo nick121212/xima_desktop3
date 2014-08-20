@@ -5,32 +5,31 @@
                                  xmlns:MControls="clr-namespace:XIMALAYA.PCDesktop.Controls">
 
 	<Style x:Key="ListItemBaseTemp" TargetType="ListBoxItem">
-        <Setter Property="Margin" Value="0"/>
-        <Setter Property="Padding" Value="0"/>
+		<Setter Property="Margin" Value="0"/>
+		<Setter Property="Padding" Value="0"/>
 		<Setter Property="Focusable" Value="False"/>
 		<Setter Property="Background" Value="Transparent"/>
 		<Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                    <Border x:Name="Border"
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ListBoxItem}">
+					<Border x:Name="Border"
                             Background="{TemplateBinding Background}"
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                        <ContentPresenter Margin="0"
+						<ContentPresenter Margin="0"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver"
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver"
                                  Value="True">
-                            <Setter TargetName="Border"
+							<Setter TargetName="Border"
                                     Property="Background"
                                     Value="Transparent" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 </ResourceDictionary>

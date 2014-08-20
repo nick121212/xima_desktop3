@@ -43,4 +43,16 @@
 		<Setter Property="ContentTemplate" Value="{StaticResource TagItemTemplate}"/>
 	</Style>
 
+	<DataTemplate x:Key="NormalTagTemplate" DataType="{x:Type ListBoxItem}">
+		<Label Content="{Binding}" 
+			   Height="30"
+			   Margin="5"
+			   Width="Auto"
+			   VerticalContentAlignment="Center">
+		</Label>
+	</DataTemplate>
+	<Style x:Key="NormalTagStyle" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource ListItemBaseTemp}">
+		<Setter Property="ContentTemplate" Value="{StaticResource NormalTagTemplate}"/>
+	</Style>
+
 </ResourceDictionary>

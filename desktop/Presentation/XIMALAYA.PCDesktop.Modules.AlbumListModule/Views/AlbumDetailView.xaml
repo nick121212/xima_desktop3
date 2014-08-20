@@ -87,13 +87,6 @@
 
 					</MControls:MyToggleButton.Content>
 				</MControls:MyToggleButton>
-
-			</StackPanel>
-			<!--操作按钮-->
-			<StackPanel Orientation="Horizontal" 
-						Margin="10 10 0 0"
-						Grid.Column="1"
-						Grid.Row="2">
 				<!--访问用户-->
 				<MControls:MyToggleButton Width="30" 
 										  Height="30"
@@ -128,7 +121,8 @@
 								  HorizontalAlignment="Left"
 						          Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
 							</Path>
-							<Label Foreground="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" Content="订阅专辑"/>
+							<Label Foreground="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" 
+								   Content="订阅专辑"/>
 						</StackPanel>
 					</MControls:MyToggleButton.Content>
 					<MControls:MyToggleButton.ContentChecked>
@@ -138,10 +132,18 @@
 								  HorizontalAlignment="Left"
 						          Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
 							</Path>
-							<Label Content="取消订阅"/>
+							<Label Foreground="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
+								   Content="取消订阅"/>
 						</StackPanel>
 					</MControls:MyToggleButton.ContentChecked>
 				</MControls:MyToggleButton>
+			</StackPanel>
+			<!--操作按钮-->
+			<StackPanel Orientation="Horizontal" 
+						Margin="10 10 0 0"
+						Grid.Column="1"
+						Grid.Row="2">
+				
 			</StackPanel>
 		</Grid>
 
@@ -149,23 +151,28 @@
 			  Margin="5">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
 				<RowDefinition Height="*" />
 				<RowDefinition Height="Auto" />
 			</Grid.RowDefinitions>
+			<!--进度条-->
 			<Controls:MetroProgressBar Grid.Row="0" 
 									   Background="Transparent"
 								       Foreground="{DynamicResource AccentColorBrush}"
 								       Margin="0 0 0 2" 
 								       IsIndeterminate="{Binding IsWaiting}" />
+			<!--节目数量-->
+			<Label Grid.Row="1" FontSize="18" ContentStringFormat="节目列表（{0}）" Content="{Binding Total}"/>
 			<!--声音列表-->
-			<ListBox Grid.Row="1" 
+			<ListBox Grid.Row="2" 
 					 ItemsSource="{Binding Path=Sounds}"
+					 Background="Transparent"
 					 ScrollViewer.HorizontalScrollBarVisibility="Hidden"
 					 ItemContainerStyle="{DynamicResource NormalSoundItemStyle}"/>
 			<!--分页控件-->
 			<MControls:Pagination PageSize="{Binding PageSize}"
 							      HorizontalAlignment="Center"
-							      Grid.Row="2" 
+							      Grid.Row="3" 
 							      Margin="3"
 							      IsEnabled="{Binding IsEnable}"
 							      CurrentPage="{Binding CurrentPage,Mode=TwoWay}"

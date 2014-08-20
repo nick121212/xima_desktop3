@@ -37,6 +37,7 @@
 				<MControls:MyToggleButton Width="20" 
 								          Height="20"
 									      Margin="5"
+										  Padding="0"
 									      IsSingle="True"
 								          BorderType="Ellipse"
 										  BorderThickness="1"

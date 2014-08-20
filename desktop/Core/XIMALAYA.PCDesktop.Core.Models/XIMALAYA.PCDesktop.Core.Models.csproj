@@ -52,6 +52,7 @@
     <Compile Include="Base.cs" />
     <Compile Include="Album\AlbumInfoResult1.cs" />
     <Compile Include="BaseData.cs" />
+    <Compile Include="IBaseResult.cs" />
     <Compile Include="Category\CategoryData.cs" />
     <Compile Include="Category\CategoryResult.cs" />
     <Compile Include="BaseResult.cs" />
@@ -68,6 +69,8 @@
     <Compile Include="Sound\SoundData2.cs" />
     <Compile Include="Sound\SoundData4.cs" />
     <Compile Include="Sound\SoundData3.cs" />
+    <Compile Include="Sound\SoundData5.cs" />
+    <Compile Include="Sound\SoundResult.cs" />
     <Compile Include="Sound\SoundsResult.cs" />
     <Compile Include="Subject\SubjectData.cs" />
     <Compile Include="Tags\CategoryTagResult.cs" />

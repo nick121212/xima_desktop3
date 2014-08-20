@@ -10,7 +10,7 @@ namespace XIMALAYA.PCDesktop.Core.Models
     /// <summary>
     /// 基类
     /// </summary>
-    public abstract class BaseResult : Base
+    public abstract class BaseResult : Base, IBaseResult
     {
         private bool _res = false;
         /// <summary>
@@ -41,7 +41,6 @@ namespace XIMALAYA.PCDesktop.Core.Models
             : base()
         {
             this.doAddMap(() => this.Ret, "ret");
-            //this.doAddMap(() => this.Res, "res");
             this.doAddMap(() => this.Message, "msg");
         }
     }

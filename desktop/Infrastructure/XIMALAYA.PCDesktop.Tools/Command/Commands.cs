@@ -177,7 +177,7 @@ namespace XIMALAYA.PCDesktop.Tools
         /// <summary>
         /// 声音详情页命令
         /// </summary>
-        public DelegateCommand ShowSoundDetailCommand { get; set; }
+        public DelegateCommand<long?> ShowSoundDetailCommand { get; set; }
         /// <summary>
         /// 内容切换的命令
         /// </summary>
@@ -290,9 +290,12 @@ namespace XIMALAYA.PCDesktop.Tools
                 });
             });
             //声音详情页
-            this.ShowSoundDetailCommand = new DelegateCommand(() =>
+            this.ShowSoundDetailCommand = new DelegateCommand<long?>(trackId =>
             {
-                this.EventAggregator.GetEvent<SoundDetailEvent<long>>().Publish(this.TrackID);
+                if (trackId.HasValue)
+                {
+                    this.EventAggregator.GetEvent<SoundDetailEvent<long>>().Publish((long)trackId);
+                }
             });
             //内容切换的命令，现在有搜索和发现切换
             this.ShowContentCommand = new DelegateCommand<string>(s =>

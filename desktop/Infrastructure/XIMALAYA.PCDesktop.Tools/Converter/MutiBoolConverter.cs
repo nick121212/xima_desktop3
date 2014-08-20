@@ -27,6 +27,7 @@ namespace XIMALAYA.PCDesktop.Tools.Converter
         public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             bool result = false;
+            long first = 0;
 
             if (values.Length > 2)
             {
@@ -34,12 +35,14 @@ namespace XIMALAYA.PCDesktop.Tools.Converter
                 {
                     case "0":
                         result = (bool)values[0];
-                        long first = (long)values[1];
-                        for (int i = 1; i < values.Length && result; i++)
+                        if (long.TryParse(values[1].ToString(), out first))
                         {
-                            result = first == (long)values[i];
+                            for (int i = 1; i < values.Length && result; i++)
+                            {
+                                result = first == (long)values[i];
 
-                            if (!result) break;
+                                if (!result) break;
+                            }
                         }
                         break;
                 }

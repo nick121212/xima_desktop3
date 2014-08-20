@@ -19,7 +19,6 @@ namespace XIMALAYA.PCDesktop.Tools.Extension
         public static DateTime DateFormatToNiceTime(this long unix)
         {
             DateTime dtStart = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
-
             TimeSpan toNow = TimeSpan.FromMilliseconds(unix);
             DateTime dtResult = dtStart.Add(toNow);
 

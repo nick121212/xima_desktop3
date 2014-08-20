@@ -30,7 +30,7 @@
 					<ColumnDefinition Width="Auto"/>
 					<ColumnDefinition Width="*"/>
 				</Grid.ColumnDefinitions>
-				<!--声音图片-->
+				<!--用户图片-->
 				<MControls:MyImage Margin="5"
 						           VerticalAlignment="Center"
 						           Width="60" 

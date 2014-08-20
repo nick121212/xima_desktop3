@@ -74,11 +74,14 @@ namespace XIMALAYA.PCDesktop.Cache
 
             foreach (PropertyInfo property in typeof(SoundData).GetProperties())
             {
-                newValue = property.GetValue(newSound);
-
-                if (newValue != null && newValue != this.DefaultForType(newValue.GetType()))
+                if (property.CanWrite)
                 {
-                    property.SetValue(oldSound, newValue);
+                    newValue = property.GetValue(newSound);
+
+                    if (newValue != null && newValue != this.DefaultForType(newValue.GetType()))
+                    {
+                        property.SetValue(oldSound, newValue);
+                    }
                 }
             }
         }
