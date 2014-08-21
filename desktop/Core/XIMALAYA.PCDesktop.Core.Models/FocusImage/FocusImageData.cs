@@ -15,10 +15,11 @@ namespace XIMALAYA.PCDesktop.Core.Models.FocusImage
         public string ShortTitle { get; set; }
         public string LongTitle { get; set; }
         public string Pic { get; set; }
-        public string TrackId { get; set; }
+        public long TrackId { get; set; }
         public int Type { get; set; }
         public long Uid { get; set; }
-
+        public long AlbumID { get; set; }
+        public string Url { get; set; }
 
         public FocusImageData()
             : base()
@@ -30,6 +31,8 @@ namespace XIMALAYA.PCDesktop.Core.Models.FocusImage
             this.doAddMap(() => this.Type, "type");
             this.doAddMap(() => this.Uid, "uid");
             this.doAddMap(() => this.Pic, "pic");
+            this.doAddMap(() => this.AlbumID, "albumId");
+            this.doAddMap(() => this.Url, "url");
         }
     }
 }

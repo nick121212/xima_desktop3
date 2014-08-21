@@ -43,11 +43,13 @@ namespace XIMALAYA.PCDesktop.Core.Data
             this.Config.MapType<FocusImageData>(map => map
                                     .Field<System.Int32>(field => field.ID, type => type.To("id"))
                     .Field<System.String>(field => field.ShortTitle, type => type.To("shortTitle"))
-                    .Field<System.String>(field => field.TrackId, type => type.To("trackId"))
+                    .Field<System.Int64>(field => field.TrackId, type => type.To("trackId"))
                     .Field<System.String>(field => field.LongTitle, type => type.To("longTitle"))
                     .Field<System.Int32>(field => field.Type, type => type.To("type"))
                     .Field<System.Int64>(field => field.Uid, type => type.To("uid"))
                     .Field<System.String>(field => field.Pic, type => type.To("pic"))
+                    .Field<System.Int64>(field => field.AlbumID, type => type.To("albumId"))
+                    .Field<System.String>(field => field.Url, type => type.To("url"))
             );
             this.doAddOtherConfig();
         }

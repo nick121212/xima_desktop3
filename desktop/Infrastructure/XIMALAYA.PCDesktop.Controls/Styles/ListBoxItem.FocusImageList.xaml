@@ -11,13 +11,16 @@
 	</ResourceDictionary.MergedDictionaries>
 
 	<DataTemplate x:Key="MetroFocusImageTemplate" DataType="{x:Type ListBoxItem}">
-		<Controls:Tile Padding="0" Margin="0"
+		<Controls:Tile Padding="0" 
+					   Margin="0"
+					   Tag="1"
                        Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=ActualHeight}"
                        Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=ActualWidth}">
 			<Controls:Tile.Content>
 				<Grid>
 					<MControls:MyImage VerticalAlignment="Top" 
 									   Source="{Binding Pic}"
+									   x:Name="FocusCommand"
 									   DefaultSource="banner.png"
 									   Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=ActualHeight}"
 									   Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=ActualWidth}"/>
@@ -30,6 +33,60 @@
 						   Content="{Binding LongTitle}" />
 				</Grid>
 			</Controls:Tile.Content>
+			<Controls:Tile.Resources>
+				<Style TargetType="Controls:Tile" BasedOn="{StaticResource {x:Type Controls:Tile}}">
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding Type}" Value="2">
+							<Setter Property="ButtonBase.Command" 
+									Value="{Binding AlbumDetailCommand,Source={x:Static tools:CommandSingleton.Instance}}"/>
+							<Setter Property="ButtonBase.CommandParameter"
+									Value="{Binding AlbumID}"/>
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Type}" Value="3">
+							<Setter Property="ButtonBase.Command" 
+									Value="{Binding ShowSoundDetailCommand,Source={x:Static tools:CommandSingleton.Instance}}"/>
+							<Setter Property="ButtonBase.CommandParameter"
+									Value="{Binding TrackId}"/>
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Type}" Value="4">
+							<Setter Property="ButtonBase.Command" 
+									Value="{Binding RedirectCommand,Source={x:Static tools:CommandSingleton.Instance}}"/>
+							<Setter Property="ButtonBase.CommandParameter"
+									Value="{Binding Url}"/>
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Type}" Value="8">
+							<Setter Property="ButtonBase.Command" 
+									Value="{Binding RedirectCommand,Source={x:Static tools:CommandSingleton.Instance}}"/>
+							<Setter Property="ButtonBase.CommandParameter"
+									Value="{Binding Url}"/>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</Controls:Tile.Resources>
+				<!--<DataTrigger Binding="{Binding Type}" Value="2">
+					<Setter Property="ButtonBase.Command" 
+							Value="{Binding AlbumDetailCommand,Source={x:Static tools:CommandSingleton.Instance}}"/>
+					<Setter Property="ButtonBase.CommandParameter"
+							Value="{Binding AlbumID}"/>
+				</DataTrigger>
+				<DataTrigger Binding="{Binding Type}" Value="3">
+					<Setter Property="ButtonBase.Command" 
+							Value="{Binding ShowSoundDetailCommand,Source={x:Static tools:CommandSingleton.Instance}}"/>
+					<Setter Property="ButtonBase.CommandParameter"
+							Value="{Binding TrackId}"/>
+				</DataTrigger>
+				<DataTrigger Binding="{Binding Type}" Value="4">
+					<Setter Property="ButtonBase.Command" 
+							Value="{Binding RedirectCommand,Source={x:Static tools:CommandSingleton.Instance}}"/>
+					<Setter Property="ButtonBase.CommandParameter"
+							Value="{Binding Url}"/>
+				</DataTrigger>
+				<DataTrigger Binding="{Binding Type}" Value="8">
+					<Setter Property="ButtonBase.Command" 
+							Value="{Binding RedirectCommand,Source={x:Static tools:CommandSingleton.Instance}}"/>
+					<Setter Property="ButtonBase.CommandParameter"
+							Value="{Binding Url}"/>
+				</DataTrigger>-->
 		</Controls:Tile>
 	</DataTemplate>
 

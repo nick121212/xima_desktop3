@@ -79,9 +79,10 @@
 								  Margin="0 5"
 								  BorderThickness="0"
 								  BorderType="Rectangle"
-								  IsBackground="Visible"
-								  Command="{Binding ShowContentCommand,Source={x:Static tools:CommandSingleton.Instance}}"
-								  CommandParameter="{x:Static tools:WellKnownModuleNames.DiscoverModule}"
+								  IsBackground="Hidden"
+								  IsSingle="True"
+								  Command="{Binding RedirectCommand,Source={x:Static tools:CommandSingleton.Instance}}"
+								  CommandParameter="http://www.ximalaya.com/download"
 								  Foreground="{DynamicResource WhiteBrush}"
 								  Background="{DynamicResource BlackBrush}">
 			<MControls:MyToggleButton.Content>
@@ -98,20 +99,6 @@
 						   Content="下载"/>
 				</StackPanel>
 			</MControls:MyToggleButton.Content>
-			<MControls:MyToggleButton.ContentChecked>
-				<StackPanel>
-					<Path Data="{Binding DownloadPath, Source={x:Static MControls:PathData.Instance}}" 
-						  Style="{DynamicResource NavPathStyle}"
-						  HorizontalAlignment="Center"
-						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-					</Path>
-					<Label Foreground="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
-						   HorizontalAlignment="Center" 
-						   FontSize="16"
-						   FontWeight="Bold"
-						   Content="下载"/>
-				</StackPanel>
-			</MControls:MyToggleButton.ContentChecked>
 		</MControls:MyToggleButton>
 		<MControls:MyToggleButton Width="100" 
 								  Height="90" 

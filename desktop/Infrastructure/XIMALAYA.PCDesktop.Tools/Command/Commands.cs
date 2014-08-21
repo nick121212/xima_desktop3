@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
@@ -182,6 +183,10 @@ namespace XIMALAYA.PCDesktop.Tools
         /// 内容切换的命令
         /// </summary>
         public DelegateCommand<string> ShowContentCommand { get; set; }
+        /// <summary>
+        /// 跳转网页
+        /// </summary>
+        public DelegateCommand<string> RedirectCommand { get; set; }
 
         #endregion
 
@@ -214,7 +219,7 @@ namespace XIMALAYA.PCDesktop.Tools
                     dataGrid.Items.CopyTo(sounds, 0);
                     sounds.ToList().ForEach(sound => this.SoundCollection.Add(sound));
                 }
-                
+
                 if (this.SoundCollection.MoveCurrentTo(soundData))
                 {
                     this.PlaySoundCommand.Execute(((SoundData)this.SoundCollection.CurrentItem).TrackId);
@@ -303,6 +308,17 @@ namespace XIMALAYA.PCDesktop.Tools
                 this.EventAggregator.GetEvent<ContentChangeEvent>().Publish(s);
             });
 
+            this.RedirectCommand = new DelegateCommand<string>(s =>
+            {
+                try
+                {
+                    System.Diagnostics.Process.Start(s);
+                }
+                catch
+                {
+                    // TODO: Warn the user? Log the error? Do nothing since Witty itself is not affected?
+                }
+            });
         }
 
         #endregion
