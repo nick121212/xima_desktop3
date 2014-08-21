@@ -17,11 +17,11 @@
                                  Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=Height}"
 					             Background="Transparent"
 								 GroupName="Category"
-					             BorderThickness="1"
-								 CheckedBorderThickness="2"
+					             BorderThickness="0"
+								 CheckedBorderThickness="0"
 								 IsChecked="False"
 								 SuperScriptSize="0"
-					             BorderBrush="{DynamicResource AccentColorBrush}"
+					             BorderBrush="{DynamicResource BlackBrush}"
                                  Command="{Binding Path=DataContext.ShowCategoryDetailCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListBox}}}"
                                  CommandParameter="{Binding Name}">
 			<MControls:MyRadioButton.Content>

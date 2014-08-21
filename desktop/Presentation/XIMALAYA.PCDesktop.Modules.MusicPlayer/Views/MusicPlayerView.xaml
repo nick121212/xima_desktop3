@@ -19,7 +19,7 @@
 		</ResourceDictionary>
 	</UserControl.Resources>
 
-	<Border BorderThickness="0 1 0 0"
+	<Border BorderThickness="0"
 			BorderBrush="{DynamicResource AccentColorBrush}">
 		<Grid VerticalAlignment="Center" Margin="0 5">
 			<Grid.RowDefinitions>

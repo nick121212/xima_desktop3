@@ -113,7 +113,6 @@ namespace XIMALAYA.PCDesktop
             this.CurrentFlyout.AnimateOnPositionChange = true;
             this.CurrentFlyout.Theme = FlyoutTheme.Adapt;
             this.CurrentFlyout.Header = header;
-
             if (this.ResourceDic != null)
             {
                 this.CurrentFlyout.Background = this.ResourceDic["WhiteBrush"] as Brush;
@@ -216,7 +215,5 @@ namespace XIMALAYA.PCDesktop
         }
 
         #endregion
-
-        
     }
 }

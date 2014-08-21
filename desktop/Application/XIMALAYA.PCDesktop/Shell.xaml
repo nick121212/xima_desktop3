@@ -118,7 +118,7 @@
 				DockPanel.Dock="Left" 
 				Width="100"
 				BorderBrush="{DynamicResource AccentColorBrush}"
-				BorderThickness=" 0 0 1 0">
+				BorderThickness="0">
 			<ContentControl Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Border}, Path=ActualWidth}" 
 							Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Border}, Path=ActualHeight}" 
 							cal:RegionManager.RegionName="{x:Static tools:WellKnownRegionNames.MenusRegion}"/>
@@ -131,7 +131,7 @@
 			<ListBox Width="300" 
 					 Height="300"
 					 BorderBrush="{DynamicResource AccentColorBrush}"
-					 BorderThickness="1 1 0 0"
+					 BorderThickness="0"
 					 Visibility="{Binding IsShowListView,Source={x:Static tools:FlyoutVisible.Instance},Converter={StaticResource BooleanToVisibilityConverter}}"
 					 VerticalAlignment="Bottom"
 					 HorizontalAlignment="Right"
