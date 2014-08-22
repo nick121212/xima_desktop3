@@ -69,7 +69,7 @@
 								      Foreground="{DynamicResource WhiteBrush}"
 								      BackgroundChecked="{DynamicResource GrayBrush10}"
 								      Background="{DynamicResource BlackBrush}"
-								      BorderBrush="{DynamicResource AccentColorBrush}"
+								      BorderBrush="{DynamicResource BlackBrush}"
 								      BorderThickness="1">
 				<MControls:MyToggleButton.Content>
 					<Path Data="{Binding VolumePath, Source={x:Static MControls:PathData.Instance}}" 
@@ -105,7 +105,7 @@
 									  Command="{Binding PrevCommand,Source={x:Static tools:CommandSingleton.Instance}}"
 								      BackgroundChecked="{DynamicResource GrayBrush10}"
 								      Background="{DynamicResource BlackBrush}"
-								      BorderBrush="{DynamicResource AccentColorBrush}"
+								      BorderBrush="{DynamicResource BlackBrush}"
 								      BorderThickness="1">
 				<MControls:MyToggleButton.Content>
 					<Path Data="{Binding ToolbarPrevPath, Source={x:Static MControls:PathData.Instance}}" 
@@ -130,7 +130,7 @@
                                       CommandParameter="{Binding Source={RelativeSource Self},Path=IsChecked}"
 								      BackgroundChecked="{DynamicResource GrayBrush10}"
 								      Background="{DynamicResource BlackBrush}"
-								      BorderBrush="{DynamicResource AccentColorBrush}"
+								      BorderBrush="{DynamicResource BlackBrush}"
 								      BorderThickness="1">
 				<MControls:MyToggleButton.Content>
 					<Path Data="{Binding ToolbarPlayPath, Source={x:Static MControls:PathData.Instance}}" 
@@ -157,7 +157,7 @@
 									  Command="{Binding NextCommand,Source={x:Static tools:CommandSingleton.Instance}}"
 								      BackgroundChecked="{DynamicResource GrayBrush10}"
 								      Background="{DynamicResource BlackBrush}"
-								      BorderBrush="{DynamicResource AccentColorBrush}"
+								      BorderBrush="{DynamicResource BlackBrush}"
 								      BorderThickness="1">
 				<MControls:MyToggleButton.Content>
 					<Path Data="{Binding ToolbarNextPath, Source={x:Static MControls:PathData.Instance}}" 
@@ -183,7 +183,7 @@
 									  IsChecked="{Binding IsShowListView,Source={x:Static tools:FlyoutVisible.Instance}}"
 								      BackgroundChecked="{DynamicResource GrayBrush10}"
 								      Background="{DynamicResource BlackBrush}"
-								      BorderBrush="{DynamicResource AccentColorBrush}"
+								      BorderBrush="{DynamicResource BlackBrush}"
 								      BorderThickness="1">
 				<MControls:MyToggleButton.Content>
 					<Path Data="{Binding ListViewPath, Source={x:Static MControls:PathData.Instance}}" 
