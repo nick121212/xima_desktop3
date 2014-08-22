@@ -6,6 +6,7 @@ using System.Windows.Data;
 using System.Windows.Media;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Regions;
 using XIMALAYA.PCDesktop.Tools;
 using XIMALAYA.PCDesktop.Tools.Player;
@@ -112,7 +113,23 @@ namespace XIMALAYA.PCDesktop
             this.CurrentFlyout = new Flyout();
             this.CurrentFlyout.AnimateOnPositionChange = true;
             this.CurrentFlyout.Theme = FlyoutTheme.Adapt;
-            this.CurrentFlyout.Header = header;
+            if (header != string.Empty)
+            {
+                this.CurrentFlyout.Header = header;
+            }
+            else
+            {
+                this.CurrentFlyout.HeaderTemplate = null;
+                this.CurrentFlyout.CloseCommand = new DelegateCommand<Flyout>((con) =>
+                {
+                    Flyout flyout = con as Flyout;
+
+                    if (flyout != null)
+                    {
+                        flyout.IsOpen = false;
+                    }
+                });
+            }
             if (this.ResourceDic != null)
             {
                 this.CurrentFlyout.Background = this.ResourceDic["WhiteBrush"] as Brush;

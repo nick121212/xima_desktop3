@@ -9,6 +9,7 @@
 		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/ListBoxItem.Common.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 
+	<!--标签的样式 start-->
 	<DataTemplate x:Key="TagItemTemplate" DataType="{x:Type ListBoxItem}">
 		<MControls:MyRadioButton Background="Transparent"
                                  Width="180" 
@@ -18,7 +19,8 @@
                                  GroupName="tabGroup"
                                  IconData="{Binding Submit,Source={x:Static MControls:PathData.Instance}}"
                                  Style="{StaticResource MetroMyRadioButton}"
-                                 BorderThickness="1"
+                                 BorderBrush="{DynamicResource BlackBrush}"
+								 BorderThickness="1"
 								 CheckedBorderThickness="5"
                                  CommandParameter="{Binding TagName}"
                                  Command="{Binding Path=DataContext.ShowAlbumListForTagCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListBox}}}">
@@ -42,7 +44,10 @@
 	<Style x:Key="TagListStyle" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource ListItemBaseTemp}">
 		<Setter Property="ContentTemplate" Value="{StaticResource TagItemTemplate}"/>
 	</Style>
+	<!--标签的样式 end-->
 
+	<!--声音详情页标签 start-->
+	
 	<DataTemplate x:Key="NormalTagTemplate" DataType="{x:Type ListBoxItem}">
 		<Label Content="{Binding}" 
 			   Height="30"
@@ -54,5 +59,7 @@
 	<Style x:Key="NormalTagStyle" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource ListItemBaseTemp}">
 		<Setter Property="ContentTemplate" Value="{StaticResource NormalTagTemplate}"/>
 	</Style>
+
+	<!--声音详情页标签 end-->
 
 </ResourceDictionary>

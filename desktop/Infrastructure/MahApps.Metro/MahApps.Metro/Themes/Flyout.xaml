@@ -234,4 +234,5 @@
         <Setter Property="Background" 
                 Value="{DynamicResource FlyoutBackgroundBrush}" />
     </Style>
+	
 </ResourceDictionary>

@@ -52,7 +52,7 @@
 		<Setter Property="BorderType" Value="Rectangle"/>
 		<Setter Property="Foreground" Value="{DynamicResource WhiteBrush}"/>
 		<Setter Property="Background" Value="{DynamicResource BlackBrush}"/>
-		<Setter Property="BorderBrush" Value="{DynamicResource AccentColorBrush}"/>
+		<Setter Property="BorderBrush" Value="{DynamicResource BlackBrush}"/>
 		<Setter Property="ContentChecked" Value="{StaticResource PginationButtonCheckedLabelStyle}"/>
 	</Style>
 	<Style TargetType="local:Pagination">

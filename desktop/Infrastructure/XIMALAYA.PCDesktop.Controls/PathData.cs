@@ -178,6 +178,16 @@ namespace XIMALAYA.PCDesktop.Controls
                 return Geometry.Parse(this["download"]);
             }
         }
+        /// <summary>
+        /// 箭头
+        /// </summary>
+        public Geometry ArrowPath
+        {
+            get
+            {
+                return Geometry.Parse(this["arrow"]);
+            }
+        }
         //public Geometry all
         //{
         //    get

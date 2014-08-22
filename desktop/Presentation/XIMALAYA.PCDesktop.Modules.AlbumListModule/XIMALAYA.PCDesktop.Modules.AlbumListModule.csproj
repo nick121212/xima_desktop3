@@ -83,7 +83,7 @@
     <Reference Include="WindowsBase" />
     <Reference Include="XIMALAYA.PCDesktop.Cache, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\xima_desktop1\xima_desktop\desktop\build\XIMALAYA.PCDesktop.Cache.dll</HintPath>
+      <HintPath>..\..\build\XIMALAYA.PCDesktop.Cache.dll</HintPath>
     </Reference>
     <Reference Include="XIMALAYA.PCDesktop.Controls, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
