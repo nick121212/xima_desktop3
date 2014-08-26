@@ -11,6 +11,6 @@ namespace XIMALAYA.PCDesktop.Core.Services
         /// <summary>
         /// 获取数据接口
         /// </summary>
-        void GetData<T>(Action<object> act,long trackId);
+        void GetData<T>(Action<object> act,T param);
     }
 }

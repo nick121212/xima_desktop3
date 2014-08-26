@@ -7,6 +7,7 @@ using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Practices.Prism.Regions;
 using XIMALAYA.PCDesktop.Cache;
 using XIMALAYA.PCDesktop.Core.Models.Sound;
+using XIMALAYA.PCDesktop.Core.ParamsModel;
 using XIMALAYA.PCDesktop.Core.Services;
 using XIMALAYA.PCDesktop.Modules.SoundListModule.Views;
 using XIMALAYA.PCDesktop.Tools.Untils;
@@ -65,7 +66,7 @@ namespace XIMALAYA.PCDesktop.Modules.SoundListModule
         {
             if (this.SoundDetailService == null) return;
 
-            this.SoundDetailService.GetData<SoundData>(res =>
+            this.SoundDetailService.GetData(res =>
             {
                 var result = res as SoundData;
                 Application.Current.Dispatcher.InvokeAsync(new Action(() =>
@@ -78,7 +79,10 @@ namespace XIMALAYA.PCDesktop.Modules.SoundListModule
                     }
                     DialogManager.ShowMessageAsync(Application.Current.MainWindow as MetroWindow, "喜马拉雅", "获取声音数据失败！");
                 }), DispatcherPriority.Background);
-            }, this.TrackID);
+            }, new SoundDetailParam
+            {
+                TrackId = this.TrackID
+            });
             base.GetData(isClear);
         }
 

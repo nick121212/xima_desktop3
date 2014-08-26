@@ -1,0 +1,282 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:sys="clr-namespace:System;assembly=mscorlib"
+					xmlns:tools="http://ximalaya.com/xaml/tools"
+					xmlns:converter="http://ximalaya.com/xaml/tools/converter"
+					xmlns:PresentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
+					xmlns:local="clr-namespace:XIMALAYA.PCDesktop.Controls">
+
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/Path.xaml" />
+		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/Converter.xaml" />
+		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Themes/MyToggleButton.xaml" />
+	</ResourceDictionary.MergedDictionaries>
+
+	<PowerEase x:Key="Smooth" Power="3" PresentationOptions:Freeze="True"/>
+	<converter:MutiParamConverter x:Key="MutiParamConverter" />
+
+	<Style x:Key="ShareMyToggleButton" TargetType="Button" >
+		<Setter Property="Foreground" Value="{DynamicResource BlackBrush}"/>
+		<Setter Property="Background" Value="{DynamicResource WhiteBrush}"/>
+		<Setter Property="BorderThickness" Value="0"/>
+		<Setter Property="Width" Value="20"/>
+		<Setter Property="Height" Value="20"/>
+		<Setter Property="Margin" Value="0"/>
+		<Setter Property="Padding" Value="0"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Label Content="{TemplateBinding Content}" 
+						   Width="{TemplateBinding Width}" 
+						   Margin="{TemplateBinding Margin}"
+						   Padding="{TemplateBinding Padding}"
+						   VerticalContentAlignment="Center"
+						   HorizontalContentAlignment="Center"
+						   Height="{TemplateBinding Height}"/>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Style.Triggers>
+			<Trigger Property="IsMouseOver" Value="True">
+				<Setter Property="Foreground" Value="{DynamicResource GrayBrush4}"/>
+			</Trigger>
+		</Style.Triggers>
+	</Style>
+	
+	<ControlTemplate x:Key="ShareBtns">
+		<Viewbox StretchDirection="Both">
+			<StackPanel  Height="24" Orientation="Horizontal">
+				<!--豆瓣-->
+				<Button Style="{StaticResource ShareMyToggleButton}"
+										Command="{Binding ShareCommand,Source={x:Static tools:CommandSingleton.Instance}}"
+										ToolTip="豆瓣">
+					<Button.CommandParameter>
+						<MultiBinding Converter="{StaticResource MutiParamConverter}">
+							<Binding Source="{x:Static tools:Sites.Douban}" />
+							<Binding Path="TrackId"/>
+						</MultiBinding>
+					</Button.CommandParameter>
+					<Button.Content>
+						<Path Data="{Binding [share_douban], Source={x:Static local:PathData.Instance}}" 
+											  Style="{StaticResource PathStyle}"
+											  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType=Button}}" >
+						</Path>
+					</Button.Content>
+				</Button>
+				<!--新浪-->
+				<Button Style="{StaticResource ShareMyToggleButton}"
+										Command="{Binding ShareCommand,Source={x:Static tools:CommandSingleton.Instance}}"
+										ToolTip="新浪">
+					<Button.CommandParameter>
+						<MultiBinding Converter="{StaticResource MutiParamConverter}">
+							<MultiBinding.Bindings>
+								<Binding Source="{x:Static tools:Sites.Weibo}" />
+								<Binding Path="TrackId"/>
+							</MultiBinding.Bindings>
+						</MultiBinding>
+					</Button.CommandParameter>
+					<Button.Content>
+						<Viewbox>
+							<Canvas Width="256" Height="256" Clip="F1 M 0,0L 256,0L 256,256L 0,256L 0,0" Background="Transparent">
+								<Path Data="{Binding [share_sing_1], Source={x:Static local:PathData.Instance}}" 
+													  Width="209.463" Height="167.047" Canvas.Left="8.00002" Canvas.Top="58.16"
+												      Style="{StaticResource PathStyle}"
+												      Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType=Button}}" />
+								<Path Data="{Binding [share_sing_2], Source={x:Static local:PathData.Instance}}" 
+													  Width="84.1582" Height="89.533" Canvas.Left="163.94" Canvas.Top="30.7096"
+												      Style="{StaticResource PathStyle}"
+												      Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType=Button}}" />
+								<Path Data="{Binding [share_sing_3], Source={x:Static local:PathData.Instance}}" 
+													   Width="43.6995" Height="45.9727" Canvas.Left="171.777" Canvas.Top="63.3363"
+												      Style="{StaticResource PathStyle}"
+												      	      Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType=Button}}" />
+								<Path Data="{Binding [share_sing_4], Source={x:Static local:PathData.Instance}}" 
+													  Width="76.1243" Height="66.4617" Canvas.Left="61.0397" Canvas.Top="135.257"
+												      Style="{StaticResource PathStyle}"
+												      Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType=Button}}" />
+							</Canvas>
+						</Viewbox>
+					</Button.Content>
+				</Button>
+				<!--开心-->
+				<Button Style="{StaticResource ShareMyToggleButton}"
+										Command="{Binding ShareCommand,Source={x:Static tools:CommandSingleton.Instance}}"
+										ToolTip="开心">
+					<Button.CommandParameter>
+						<MultiBinding Converter="{StaticResource MutiParamConverter}">
+							<MultiBinding.Bindings>
+								<Binding Source="{x:Static tools:Sites.Kaixin}" />
+								<Binding Path="TrackId"/>
+							</MultiBinding.Bindings>
+						</MultiBinding>
+					</Button.CommandParameter>
+					<Button.Content>
+						<Path Data="{Binding [share_kaixin], Source={x:Static local:PathData.Instance}}" 
+											  Style="{StaticResource PathStyle}"
+											  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType=Button}}" />
+					</Button.Content>
+				</Button>
+				<!--人人-->
+				<Button Style="{StaticResource ShareMyToggleButton}"
+										Command="{Binding ShareCommand,Source={x:Static tools:CommandSingleton.Instance}}"
+										ToolTip="人人">
+					<Button.CommandParameter>
+						<MultiBinding Converter="{StaticResource MutiParamConverter}">
+							<MultiBinding.Bindings>
+								<Binding Source="{x:Static tools:Sites.Renren}" />
+								<Binding Path="TrackId"/>
+							</MultiBinding.Bindings>
+						</MultiBinding>
+					</Button.CommandParameter>
+					<Button.Content>
+						<Path Data="{Binding [share_renren], Source={x:Static local:PathData.Instance}}" 
+											  Style="{StaticResource PathStyle}"
+											  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType=Button}}" />
+					</Button.Content>
+				</Button>
+				<!--qqzone-->
+				<Button Style="{StaticResource ShareMyToggleButton}"
+										Command="{Binding ShareCommand,Source={x:Static tools:CommandSingleton.Instance}}"
+										ToolTip="qq空间">
+					<Button.CommandParameter>
+						<MultiBinding Converter="{StaticResource MutiParamConverter}">
+							<MultiBinding.Bindings>
+								<Binding Source="{x:Static tools:Sites.Qzone}" />
+								<Binding Path="TrackId"/>
+							</MultiBinding.Bindings>
+						</MultiBinding>
+					</Button.CommandParameter>
+					<Button.Content>
+						<Path Data="{Binding [share_qqzone], Source={x:Static local:PathData.Instance}}" 
+											  Style="{StaticResource PathStyle}"
+											  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType=Button}}" />
+					</Button.Content>
+				</Button>
+				<!--腾讯微博-->
+				<Button Style="{StaticResource ShareMyToggleButton}"
+										Command="{Binding ShareCommand,Source={x:Static tools:CommandSingleton.Instance}}"
+										ToolTip="腾讯微博">
+					<Button.CommandParameter>
+						<MultiBinding Converter="{StaticResource MutiParamConverter}">
+							<MultiBinding.Bindings>
+								<Binding Source="{x:Static tools:Sites.TencentWeibo}" />
+								<Binding Path="TrackId"/>
+							</MultiBinding.Bindings>
+						</MultiBinding>
+					</Button.CommandParameter>
+					<Button.Content>
+						<Path Data="{Binding [share_qqweibo], Source={x:Static local:PathData.Instance}}" 
+											  Style="{StaticResource PathStyle}"
+											  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType=Button}}" />
+					</Button.Content>
+				</Button>
+				<!--facebook-->
+				<Button Style="{StaticResource ShareMyToggleButton}"
+										Command="{Binding ShareCommand,Source={x:Static tools:CommandSingleton.Instance}}"
+										ToolTip="Facebook">
+					<Button.CommandParameter>
+						<MultiBinding Converter="{StaticResource MutiParamConverter}">
+							<MultiBinding.Bindings>
+								<Binding Source="{x:Static tools:Sites.Facebook}" />
+								<Binding Path="TrackId"/>
+							</MultiBinding.Bindings>
+						</MultiBinding>
+					</Button.CommandParameter>
+					<Button.Content>
+						<Path Data="{Binding [share_facebook], Source={x:Static local:PathData.Instance}}" 
+											  Style="{StaticResource PathStyle}"
+											  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType=Button}}" />
+					</Button.Content>
+				</Button>
+				<!--twitter-->
+				<Button Style="{StaticResource ShareMyToggleButton}"
+										Command="{Binding ShareCommand,Source={x:Static tools:CommandSingleton.Instance}}"
+										ToolTip="Twitter">
+					<Button.CommandParameter>
+						<MultiBinding Converter="{StaticResource MutiParamConverter}">
+							<MultiBinding.Bindings>
+								<Binding Source="{x:Static tools:Sites.Twitter}" />
+								<Binding Path="TrackId"/>
+							</MultiBinding.Bindings>
+						</MultiBinding>
+					</Button.CommandParameter>
+					<Button.Content>
+						<Path Data="{Binding [share_twitter], Source={x:Static local:PathData.Instance}}" 
+											  Style="{StaticResource PathStyle}"
+											  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType=Button}}" />
+					</Button.Content>
+				</Button>
+			</StackPanel>
+		</Viewbox>
+	</ControlTemplate>
+
+	<Style TargetType="local:SharePanel">
+		<Setter Property="Height" Value="30"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate>
+					<Grid x:Name="SharePanel">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition/>
+							<ColumnDefinition Width="Auto"/>
+						</Grid.ColumnDefinitions>
+						<Grid.Triggers>
+							<EventTrigger RoutedEvent="UIElement.MouseEnter">
+								<BeginStoryboard>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="Shares" Storyboard.TargetProperty="Opacity" To="1" 
+														 EasingFunction="{StaticResource Smooth}" Duration="0:0:0.5"/>
+										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="Shares" Storyboard.TargetProperty="Width">
+											<DiscreteDoubleKeyFrame KeyTime="0" Value="{x:Static sys:Double.NaN}"/>
+										</DoubleAnimationUsingKeyFrames>
+									</Storyboard>
+								</BeginStoryboard>
+							</EventTrigger>
+							<EventTrigger RoutedEvent="UIElement.MouseLeave">
+								<BeginStoryboard>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="Shares" Storyboard.TargetProperty="Opacity" To="0" 
+														 EasingFunction="{StaticResource Smooth}" Duration="0:0:1"/>
+										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="Shares" Storyboard.TargetProperty="Width">
+											<DiscreteDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+										</DoubleAnimationUsingKeyFrames>
+									</Storyboard>
+								</BeginStoryboard>
+							</EventTrigger>
+						</Grid.Triggers>
+						<Label Width="0" Opacity="0"  x:Name="Shares" Template="{StaticResource ShareBtns}"/>
+						<!--分享按钮-->
+						<local:MyToggleButton Grid.Column="1"
+											  Width="20" 
+											  Height="20"
+											  BorderType="Ellipse"
+											  IsBackground="Visible"
+											  Foreground="{DynamicResource WhiteBrush}"
+											  BackgroundChecked="{DynamicResource GrayBrush10}"
+											  Background="{DynamicResource BlackBrush}"
+											  BorderBrush="{DynamicResource BlackBrush}"
+											  BorderThickness="1">
+							<local:MyToggleButton.ContentChecked>
+								<Path Data="{Binding [share], Source={x:Static local:PathData.Instance}}" 
+									  Style="{StaticResource PathStyle}"
+									  Width="10"
+									  Height="10"
+									  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type local:MyToggleButton}}}" >
+								</Path>
+							</local:MyToggleButton.ContentChecked>
+							<local:MyToggleButton.Content>
+								<Path Data="{Binding [share], Source={x:Static local:PathData.Instance}}" 
+									  Style="{StaticResource PathStyle}"
+									  Width="10"
+									  Height="10"
+									  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type local:MyToggleButton}}}" >
+								</Path>
+							</local:MyToggleButton.Content>
+						</local:MyToggleButton>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+</ResourceDictionary>

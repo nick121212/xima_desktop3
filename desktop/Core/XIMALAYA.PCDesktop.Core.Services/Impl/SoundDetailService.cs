@@ -18,19 +18,20 @@ namespace XIMALAYA.PCDesktop.Core.Services
         /// 
         /// </summary>
         [Import]
-        protected ISoundResultResponsitory Responsitory { get; set; }
+        protected ISoundsResultResponsitory Responsitory { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public void GetData<T>(Action<object> act, long trackId)
+        public void GetData<T>(Action<object> act, T param)
         {
             Result<SoundData> result = new Result<SoundData>();
 
-            new SoundData5Decorator<SoundData>(result);
+            new SoundDetailResultDecorator<SoundData>(result);
+            new UserData2Decorator<SoundData>(result);
 
             this.Act = act;
             this.Decoder = Json.DecoderFor<SoundData>(config => config.DeriveFrom(result.Config));
-            this.Responsitory.Fetch(string.Format(WellKnownUrl.SoundInfo, trackId), string.Empty, base.GetDataCallBack);
+            this.Responsitory.Fetch(WellKnownUrl.SoundInfoNew, param.ToString(), base.GetDataCallBack);
         }
     }
 }

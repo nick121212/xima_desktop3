@@ -65,6 +65,7 @@
     <Compile Include="CategoryTagSoundParam.cs" />
     <Compile Include="EnumsConverter.cs" />
     <Compile Include="SearchParam.cs" />
+    <Compile Include="SoundDetailParam.cs" />
     <Compile Include="SuperExploreParam.cs" />
     <Compile Include="CategoryParam.cs" />
     <Compile Include="Enums.cs" />

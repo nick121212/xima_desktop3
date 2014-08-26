@@ -145,6 +145,19 @@ namespace XIMALAYA.PCDesktop.Controls
         public static readonly DependencyProperty ContentCheckedProperty =
             DependencyProperty.Register("ContentChecked", typeof(object), typeof(MyToggleButton), new PropertyMetadata(null));
         /// <summary>
+        /// 第三状态下的内容
+        /// </summary>
+        public object ContentThreeState
+        {
+            get { return (object)GetValue(ContentThreeStateProperty); }
+            set { SetValue(ContentThreeStateProperty, value); }
+        }
+        /// <summary>
+        /// 第三状态下的内容
+        /// </summary>
+        public static readonly DependencyProperty ContentThreeStateProperty =
+            DependencyProperty.Register("ContentThreeState", typeof(object), typeof(MyToggleButton), new PropertyMetadata(null));
+        /// <summary>
         /// 背景色控制选项
         /// </summary>
         public Visibility IsBackground

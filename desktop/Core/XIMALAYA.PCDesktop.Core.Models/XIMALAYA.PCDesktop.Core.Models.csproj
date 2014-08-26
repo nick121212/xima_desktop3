@@ -70,13 +70,14 @@
     <Compile Include="Sound\SoundData4.cs" />
     <Compile Include="Sound\SoundData3.cs" />
     <Compile Include="Sound\SoundData5.cs" />
-    <Compile Include="Sound\SoundResult.cs" />
+    <Compile Include="Sound\SoundDetailResult.cs" />
     <Compile Include="Sound\SoundsResult.cs" />
     <Compile Include="Subject\SubjectData.cs" />
     <Compile Include="Tags\CategoryTagResult.cs" />
     <Compile Include="Tags\TagData.cs" />
     <Compile Include="Tags\TagAlbumsResult.cs" />
     <Compile Include="Tags\TagSoundListResult.cs" />
+    <Compile Include="User\UserData2.cs" />
     <Compile Include="User\UserData1.cs" />
     <Compile Include="User\UserData.cs" />
   </ItemGroup>

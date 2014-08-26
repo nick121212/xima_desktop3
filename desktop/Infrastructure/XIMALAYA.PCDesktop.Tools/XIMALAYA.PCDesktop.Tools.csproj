@@ -65,6 +65,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\WPFSoundVisualizationLib.dll</HintPath>
     </Reference>
+    <Reference Include="XIMALAYA.PCDesktop.Cache, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\XIMALAYA.PCDesktop.Cache.dll</HintPath>
+    </Reference>
     <Reference Include="XIMALAYA.PCDesktop.Core.Models, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\XIMALAYA.PCDesktop.Core.Models.dll</HintPath>
@@ -80,8 +84,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Behaviors\AutoPopulateExportedViewsBehavior.cs" />
+    <Compile Include="Converter\MutiParamConverter.cs" />
+    <Compile Include="Sites.cs" />
     <Compile Include="Command\Commands.cs" />
     <Compile Include="Converter\ActualSizeFixedConverter.cs" />
+    <Compile Include="Converter\ToTransparentColorConverter.cs" />
     <Compile Include="Converter\EqualConverter.cs" />
     <Compile Include="Converter\HalfValueConverter.cs" />
     <Compile Include="Converter\MutiBoolConverter.cs" />
@@ -96,6 +103,7 @@
     <Compile Include="HttpWebRequestOpt.cs" />
     <Compile Include="Untils\BaseModule.cs" />
     <Compile Include="Untils\BaseViewModel.cs" />
+    <Compile Include="Untils\Parameters.cs" />
     <Compile Include="Untils\IFlyoutFactory.cs" />
     <Compile Include="T4\T4ModelInfo.cs" />
     <Compile Include="Untils\OSInfo.cs" />

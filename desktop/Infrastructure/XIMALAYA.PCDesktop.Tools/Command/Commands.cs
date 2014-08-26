@@ -13,10 +13,12 @@ using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.ViewModel;
 using Microsoft.Practices.ServiceLocation;
+using XIMALAYA.PCDesktop.Cache;
 using XIMALAYA.PCDesktop.Core.Models.Sound;
 using XIMALAYA.PCDesktop.Events;
 using XIMALAYA.PCDesktop.Tools.Extension;
 using XIMALAYA.PCDesktop.Tools.Player;
+using XIMALAYA.PCDesktop.Tools.Untils;
 
 namespace XIMALAYA.PCDesktop.Tools
 {
@@ -187,6 +189,10 @@ namespace XIMALAYA.PCDesktop.Tools
         /// 跳转网页
         /// </summary>
         public DelegateCommand<string> RedirectCommand { get; set; }
+        /// <summary>
+        /// 分享命令
+        /// </summary>
+        public DelegateCommand<object> ShareCommand { get; set; }
 
         #endregion
 
@@ -319,6 +325,99 @@ namespace XIMALAYA.PCDesktop.Tools
                     // TODO: Warn the user? Log the error? Do nothing since Witty itself is not affected?
                 }
             });
+
+            this.ShareCommand = new DelegateCommand<object>((param) =>
+            {
+                if (param != null)
+                {
+                    if (param.GetType() != typeof(object[]))
+                    {
+                        return;
+                    }
+                    object[] arr = param as object[];
+
+                    if (arr.Length != 2) return;
+                    if (arr[0].GetType() != typeof(Sites)) return;
+                    if (arr[1].GetType() != typeof(long)) return;
+
+                    this.GetShareLink((Sites)arr[0], (long)arr[1]);
+                }
+            });
+        }
+
+        #endregion
+
+        #region 方法
+
+        public void GetShareLink(Sites Site,long SoundID)
+        {
+            Parameters parameters = new Parameters(true);
+            string url = null;
+            var SoundInfo = SoundCache.Instance[SoundID];
+
+            if (SoundInfo == null) return;
+
+            switch (Site)
+            {
+                case Sites.Douban:
+                    parameters["name"] = SoundInfo.Title;
+                    parameters["href"] = string.Format("http://www.ximalaya.com/sound/{0}", SoundInfo.TrackId);
+                    parameters["image"] = SoundInfo.CoverSmall;
+                    parameters["text"] = string.Empty;
+                    parameters["desc"] = string.Empty;
+                    parameters["apikey"] = "0c2e1df44f97c4eb248a59dceec74ec1";
+                    url = string.Format("http://shuo.douban.com/!service/share?{0}", parameters);
+                    break;
+                case Sites.Weibo:
+                    parameters["appkey"] = "1075899032";
+                    parameters["url"] = string.Format("http://www.ximalaya.com/sound/{0}", SoundInfo.TrackId);
+                    parameters["title"] = SoundInfo.Title;
+                    parameters["content"] = "utf-8";
+                    parameters["pic"] = SoundInfo.CoverSmall;
+                    url = string.Format("http://service.t.sina.com.cn/share/share.php?{0}", parameters);
+                    break;
+                case Sites.Kaixin:
+                    parameters["rurl"] = string.Format("http://www.ximalaya.com/sound/{0}", SoundInfo.TrackId);
+                    parameters["rcontent"] = "";
+                    parameters["rtitle"] = SoundInfo.Title;
+                    url = string.Format("http://www.kaixin001.com/repaste/bshare.php?{0}", parameters);
+                    break;
+                case Sites.Renren:
+                    parameters["resourceUrl"] = string.Format("http://www.ximalaya.com/sound/{0}", SoundInfo.TrackId);
+                    parameters["title"] = SoundInfo.Title;
+                    parameters["pic"] = SoundInfo.CoverSmall;
+                    parameters["description"] = string.Empty;
+                    parameters["charset"] = "utf-8";
+                    url = string.Format("http://widget.renren.com/dialog/share?{0}", parameters);
+                    break;
+                case Sites.TencentWeibo:
+                    parameters["url"] = string.Format("http://www.ximalaya.com/sound/{0}", SoundInfo.TrackId);
+                    parameters["title"] = SoundInfo.Title;
+                    parameters["site"] = "http://www.kfstorm.com/doubanfm";
+                    parameters["pic"] = SoundInfo.CoverSmall;
+                    parameters["appkey"] = "801098586";
+                    url = string.Format("http://v.t.qq.com/share/share.php?{0}", parameters);
+                    //url = ConnectionBase.ConstructUrlWithParameters("http://v.t.qq.com/share/share.php", parameters);
+                    break;
+                case Sites.Facebook:
+                    parameters["u"] = string.Format("http://www.ximalaya.com/sound/{0}", SoundInfo.TrackId);
+                    parameters["t"] = SoundInfo.Title;
+                    url = string.Format("http://www.facebook.com/sharer.php?{0}", parameters);
+                    break;
+                case Sites.Twitter:
+                    parameters["status"] = SoundInfo.Title + " " + string.Format("http://www.ximalaya.com/sound/{0}", SoundInfo.TrackId);
+                    url = string.Format("http://twitter.com/home?{0}", parameters);
+                    break;
+                case Sites.Qzone:
+                    parameters["url"] = string.Format("http://www.ximalaya.com/sound/{0}", SoundInfo.TrackId);
+                    parameters["title"] = SoundInfo.Title;
+                    url = string.Format("http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?{0}", parameters);
+                    break;
+                default:
+                    break;
+            }
+
+            System.Diagnostics.Process.Start(url);
         }
 
         #endregion

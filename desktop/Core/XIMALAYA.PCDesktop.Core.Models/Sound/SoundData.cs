@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using XIMALAYA.PCDesktop.Core.Models.User;
 
 namespace XIMALAYA.PCDesktop.Core.Models.Sound
 {
@@ -209,6 +210,10 @@ namespace XIMALAYA.PCDesktop.Core.Models.Sound
         /// 声音类型，原创，转采
         /// </summary>
         public int UserSource { get; set; }
+        /// <summary>
+        /// 用户信息
+        /// </summary>
+        public UserData User { get; set; }
         public string UserSourceString
         {
             get
@@ -216,6 +221,10 @@ namespace XIMALAYA.PCDesktop.Core.Models.Sound
                 return this.UserSource == 1 ? "原创" : "采集";
             }
         }
+        /// <summary>
+        /// 富文本歌词
+        /// </summary>
+        public string Lyric { get; set; }
 
         public SoundData()
             : base()

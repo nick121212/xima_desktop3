@@ -20,6 +20,7 @@
 		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Themes/MyImage.xaml" />
 		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Themes/Pagination.xaml" />
 		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Themes/MyToggleButton.xaml" />
+		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Themes/SharePanel.xaml" />
 		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/ListBoxItem.xaml" />
         <ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/GroupBox.xaml" />
 		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/TabControl.xaml" />
@@ -27,6 +28,7 @@
 		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/Path.xaml" />
 		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/TextBox.xaml" />
 		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/Checkbox.xaml" />
+
 
 	</ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

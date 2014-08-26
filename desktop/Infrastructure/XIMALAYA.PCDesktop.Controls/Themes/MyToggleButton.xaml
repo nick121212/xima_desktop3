@@ -59,6 +59,9 @@
 							<DoubleAnimation Duration="0:0:0.1" 
 											 Storyboard.TargetName="contentCheckedPresenter" 
 											 Storyboard.TargetProperty="Opacity" To="1"/>
+							<DoubleAnimation Duration="0:0:0.1" 
+											 Storyboard.TargetName="contentThreeStatePresenter" 
+											 Storyboard.TargetProperty="Opacity" To="0"/>
 							<DoubleAnimation Duration="0"
 											 Storyboard.TargetName="PART_BackGround"
 											 Storyboard.TargetProperty="Opacity" To="1"/>
@@ -72,6 +75,25 @@
 							<DoubleAnimation Duration="0:0:0.1" 
 											 Storyboard.TargetName="contentCheckedPresenter" 
 											 Storyboard.TargetProperty="Opacity" To="0"/>
+							<DoubleAnimation Duration="0:0:0.1" 
+											 Storyboard.TargetName="contentThreeStatePresenter" 
+											 Storyboard.TargetProperty="Opacity" To="0"/>
+							<DoubleAnimation Duration="0"
+											 Storyboard.TargetName="PART_BackGround"
+											 Storyboard.TargetProperty="Opacity" To="0"/>
+						</Storyboard>
+					</VisualState>
+					<VisualState x:Name="Indeterminate">
+						<Storyboard>
+							<DoubleAnimation Duration="0:0:0.1" 
+											 Storyboard.TargetName="contentPresenter" 
+											 Storyboard.TargetProperty="Opacity" To="0"/>
+							<DoubleAnimation Duration="0:0:0.1" 
+											 Storyboard.TargetName="contentCheckedPresenter" 
+											 Storyboard.TargetProperty="Opacity" To="0"/>
+							<DoubleAnimation Duration="0:0:0.1" 
+											 Storyboard.TargetName="contentThreeStatePresenter" 
+											 Storyboard.TargetProperty="Opacity" To="1"/>
 							<DoubleAnimation Duration="0"
 											 Storyboard.TargetName="PART_BackGround"
 											 Storyboard.TargetProperty="Opacity" To="0"/>
@@ -139,6 +161,19 @@
                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 				   Foreground="{TemplateBinding ForegroundChecked}">
 				<ContentPresenter Content="{TemplateBinding ContentChecked}"
+                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                  Margin="0"/>
+			</Label>
+			<!--第三状态内容-->
+			<Label x:Name="contentThreeStatePresenter"
+				   Margin="0"
+				   Padding="{TemplateBinding Padding}"
+				   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+				   Foreground="{TemplateBinding ForegroundChecked}">
+				<ContentPresenter Content="{TemplateBinding ContentThreeState}"
                                   ContentTemplate="{TemplateBinding ContentTemplate}"
                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
