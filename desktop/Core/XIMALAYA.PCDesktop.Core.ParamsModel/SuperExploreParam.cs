@@ -13,8 +13,6 @@ namespace XIMALAYA.PCDesktop.Core.ParamsModel
     /// <summary>
     /// 发现页接口参数
     /// </summary>
-    [Export(typeof(SuperExploreParam))]
-    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class SuperExploreParam : BaseParam
     {
         /// <summary>

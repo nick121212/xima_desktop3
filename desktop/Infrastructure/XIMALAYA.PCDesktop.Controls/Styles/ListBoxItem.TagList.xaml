@@ -17,7 +17,7 @@
                                  Margin="5"
                                  IconMargin="6"
                                  GroupName="tabGroup"
-                                 IconData="{Binding Submit,Source={x:Static MControls:PathData.Instance}}"
+                                 IconData="{Binding [submit],Source={x:Static MControls:PathData.Instance}}"
                                  Style="{StaticResource MetroMyRadioButton}"
                                  BorderBrush="{DynamicResource BlackBrush}"
 								 BorderThickness="1"

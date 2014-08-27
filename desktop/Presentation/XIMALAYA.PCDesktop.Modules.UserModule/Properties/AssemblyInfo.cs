@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过以下
 // 特性集控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("XIMALAYA.PCDesktop.Modules.SoundModule")]
+[assembly: AssemblyTitle("XIMALAYA.PCDesktop.Modules.UserModule")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("XIMALAYA.PCDesktop.Modules.SoundModule")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2014")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("XIMALAYA.PCDesktop.Modules.UserModule")]
+[assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("174ac06f-5f0d-44e1-a84c-7f1b7605b57f")]
+[assembly: Guid("4d234aec-010d-4b43-9c4e-9040ee04ae97")]
 
 // 程序集的版本信息由下面四个值组成: 
 //

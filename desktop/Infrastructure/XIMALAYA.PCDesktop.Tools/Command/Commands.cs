@@ -1,20 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Media;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.ViewModel;
 using Microsoft.Practices.ServiceLocation;
-using XIMALAYA.PCDesktop.Cache;
+using XIMALAYA.PCDesktop.Core.Models.Share;
 using XIMALAYA.PCDesktop.Core.Models.Sound;
+using XIMALAYA.PCDesktop.Core.ParamsModel;
+using XIMALAYA.PCDesktop.Core.Services;
 using XIMALAYA.PCDesktop.Events;
 using XIMALAYA.PCDesktop.Tools.Extension;
 using XIMALAYA.PCDesktop.Tools.Player;
@@ -43,6 +38,10 @@ namespace XIMALAYA.PCDesktop.Tools
         /// 事件管理器
         /// </summary>
         private IEventAggregator EventAggregator { get; set; }
+        /// <summary>
+        /// 分享服务
+        /// </summary>
+        private IShareService ShareService { get; set; }
         /// <summary>
         /// 当前播放的声音ID
         /// </summary>
@@ -95,7 +94,7 @@ namespace XIMALAYA.PCDesktop.Tools
         /// </summary>
         public Control CurrentPlayControl { get; set; }
         /// <summary>
-        /// 佔位服务
+        /// 当前声音播放列表
         /// </summary>
         public ItemCollection SoundCollection
         {
@@ -113,7 +112,7 @@ namespace XIMALAYA.PCDesktop.Tools
             }
         }
         /// <summary>
-        /// 佔位服务
+        /// 声音图片
         /// </summary>
         public string TrackImage
         {
@@ -201,7 +200,10 @@ namespace XIMALAYA.PCDesktop.Tools
         private CommandBaseSingleton()
         {
             this.EventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
+            this.ShareService = ServiceLocator.Current.GetInstance<IShareService>();
             this.SoundCollection = new ListBox().Items;
+
+            //播放声音命令，获取列表
             this.PlaySound1Command = new DelegateCommand<Control>(con =>
             {
                 var soundData = con.DataContext as SoundData;
@@ -231,7 +233,7 @@ namespace XIMALAYA.PCDesktop.Tools
                     this.PlaySoundCommand.Execute(((SoundData)this.SoundCollection.CurrentItem).TrackId);
                 }
             });
-
+            //上一首命令
             this.PrevCommand = new DelegateCommand(() =>
             {
                 if (this.SoundCollection == null) return;
@@ -248,6 +250,7 @@ namespace XIMALAYA.PCDesktop.Tools
 
                 return this.SoundCollection.CurrentPosition > 0;
             });
+            //下一首命令
             this.NextCommand = new DelegateCommand(() =>
             {
                 if (this.SoundCollection == null) return;
@@ -264,7 +267,7 @@ namespace XIMALAYA.PCDesktop.Tools
 
                 return this.SoundCollection.CurrentPosition < this.SoundCollection.Count - 1;
             });
-
+            //播放声音，无列表
             this.PlaySoundCommand = new DelegateCommand<long?>(trackID =>
             {
                 if (trackID == null) return;
@@ -283,14 +286,14 @@ namespace XIMALAYA.PCDesktop.Tools
             {
                 return true;
             });
-
+            //专辑详情命令
             this.AlbumDetailCommand = new DelegateCommand<long?>(albumID =>
             {
                 if (albumID == null) return;
 
                 this.EventAggregator.GetEvent<AlbumDetailEvent<long>>().Publish((long)albumID);
             });
-
+            //热门专辑
             this.HotAlbumListCommand = new DelegateCommand(() =>
             {
                 this.EventAggregator.GetEvent<AlbumListEvent<TagEventArgument>>().Publish(new TagEventArgument()
@@ -322,10 +325,10 @@ namespace XIMALAYA.PCDesktop.Tools
                 }
                 catch
                 {
-                    // TODO: Warn the user? Log the error? Do nothing since Witty itself is not affected?
+
                 }
             });
-
+            //分享命令
             this.ShareCommand = new DelegateCommand<object>((param) =>
             {
                 if (param != null)
@@ -336,11 +339,22 @@ namespace XIMALAYA.PCDesktop.Tools
                     }
                     object[] arr = param as object[];
 
-                    if (arr.Length != 2) return;
+                    if (arr.Length != 3) return;
                     if (arr[0].GetType() != typeof(Sites)) return;
-                    if (arr[1].GetType() != typeof(long)) return;
+                    if (arr[1].GetType() != typeof(ShareType)) return;
+                    if (arr[2].GetType() != typeof(long)) return;
 
-                    this.GetShareLink((Sites)arr[0], (long)arr[1]);
+                    switch ((ShareType)arr[1])
+                    {
+                        case ShareType.Track:
+                            this.GetShareSoundLink((Sites)arr[0], (long)arr[2]);
+                            break;
+                        case ShareType.Album:
+                            this.GetShareAlbumLink((Sites)arr[0], (long)arr[2]);
+                            break;
+                    }
+
+
                 }
             });
         }
@@ -349,20 +363,72 @@ namespace XIMALAYA.PCDesktop.Tools
 
         #region 方法
 
-        public void GetShareLink(Sites Site,long SoundID)
+        /// <summary>
+        /// 分享专辑
+        /// </summary>
+        /// <param name="Site"></param>
+        /// <param name="AlbumID"></param>
+        private void GetShareAlbumLink(Sites Site, long AlbumID)
+        {
+            if (this.ShareService == null) return;
+            if (AlbumID <= 0) return;
+
+            this.ShareService.GetData(res =>
+            {
+                var result = res as ShareResult;
+
+                if (result.Ret == 0)
+                {
+                    this.DoShare(Site, result.PicUrl, result.Content, result.Url);
+                }
+            }, new ShareParam
+            {
+                AlbumId = AlbumID,
+                tpName = "qq"
+            }, TagType.album);
+
+        }
+        /// <summary>
+        /// 分享声音
+        /// </summary>
+        /// <param name="Site"></param>
+        /// <param name="SoundID"></param>
+        private void GetShareSoundLink(Sites Site, long SoundID)
+        {
+            if (this.ShareService == null) return;
+            if (SoundID <= 0) return;
+
+            this.ShareService.GetData(res =>
+            {
+                var result = res as ShareResult;
+
+                if (result.Ret == 0)
+                {
+                    this.DoShare(Site, result.PicUrl, result.Content, result.Url);
+                }
+            }, new ShareParam
+            {
+                TrackId = SoundID,
+                tpName = "qq"
+            }, TagType.sound);
+        }
+        /// <summary>
+        /// 跳转分享链接
+        /// </summary>
+        /// <param name="Site"></param>
+        /// <param name="PicUrl"></param>
+        /// <param name="Content"></param>
+        /// <param name="url"></param>
+        private void DoShare(Sites Site, string PicUrl, string Content, string url)
         {
             Parameters parameters = new Parameters(true);
-            string url = null;
-            var SoundInfo = SoundCache.Instance[SoundID];
-
-            if (SoundInfo == null) return;
 
             switch (Site)
             {
                 case Sites.Douban:
-                    parameters["name"] = SoundInfo.Title;
-                    parameters["href"] = string.Format("http://www.ximalaya.com/sound/{0}", SoundInfo.TrackId);
-                    parameters["image"] = SoundInfo.CoverSmall;
+                    parameters["name"] = Content;
+                    parameters["href"] = url;
+                    parameters["image"] = PicUrl;
                     parameters["text"] = string.Empty;
                     parameters["desc"] = string.Empty;
                     parameters["apikey"] = "0c2e1df44f97c4eb248a59dceec74ec1";
@@ -370,47 +436,46 @@ namespace XIMALAYA.PCDesktop.Tools
                     break;
                 case Sites.Weibo:
                     parameters["appkey"] = "1075899032";
-                    parameters["url"] = string.Format("http://www.ximalaya.com/sound/{0}", SoundInfo.TrackId);
-                    parameters["title"] = SoundInfo.Title;
+                    parameters["url"] = url;
+                    parameters["title"] = Content;
                     parameters["content"] = "utf-8";
-                    parameters["pic"] = SoundInfo.CoverSmall;
+                    parameters["pic"] = PicUrl;
                     url = string.Format("http://service.t.sina.com.cn/share/share.php?{0}", parameters);
                     break;
                 case Sites.Kaixin:
-                    parameters["rurl"] = string.Format("http://www.ximalaya.com/sound/{0}", SoundInfo.TrackId);
+                    parameters["rurl"] = url;
                     parameters["rcontent"] = "";
-                    parameters["rtitle"] = SoundInfo.Title;
+                    parameters["rtitle"] = Content;
                     url = string.Format("http://www.kaixin001.com/repaste/bshare.php?{0}", parameters);
                     break;
                 case Sites.Renren:
-                    parameters["resourceUrl"] = string.Format("http://www.ximalaya.com/sound/{0}", SoundInfo.TrackId);
-                    parameters["title"] = SoundInfo.Title;
-                    parameters["pic"] = SoundInfo.CoverSmall;
+                    parameters["resourceUrl"] = url;
+                    parameters["title"] = Content;
+                    parameters["pic"] = PicUrl;
                     parameters["description"] = string.Empty;
                     parameters["charset"] = "utf-8";
                     url = string.Format("http://widget.renren.com/dialog/share?{0}", parameters);
                     break;
                 case Sites.TencentWeibo:
-                    parameters["url"] = string.Format("http://www.ximalaya.com/sound/{0}", SoundInfo.TrackId);
-                    parameters["title"] = SoundInfo.Title;
+                    parameters["url"] = url;
+                    parameters["title"] = Content;
                     parameters["site"] = "http://www.kfstorm.com/doubanfm";
-                    parameters["pic"] = SoundInfo.CoverSmall;
+                    parameters["pic"] = PicUrl;
                     parameters["appkey"] = "801098586";
                     url = string.Format("http://v.t.qq.com/share/share.php?{0}", parameters);
-                    //url = ConnectionBase.ConstructUrlWithParameters("http://v.t.qq.com/share/share.php", parameters);
                     break;
                 case Sites.Facebook:
-                    parameters["u"] = string.Format("http://www.ximalaya.com/sound/{0}", SoundInfo.TrackId);
-                    parameters["t"] = SoundInfo.Title;
+                    parameters["u"] = url;
+                    parameters["t"] = Content;
                     url = string.Format("http://www.facebook.com/sharer.php?{0}", parameters);
                     break;
                 case Sites.Twitter:
-                    parameters["status"] = SoundInfo.Title + " " + string.Format("http://www.ximalaya.com/sound/{0}", SoundInfo.TrackId);
+                    parameters["status"] = Content + " " + url;
                     url = string.Format("http://twitter.com/home?{0}", parameters);
                     break;
                 case Sites.Qzone:
-                    parameters["url"] = string.Format("http://www.ximalaya.com/sound/{0}", SoundInfo.TrackId);
-                    parameters["title"] = SoundInfo.Title;
+                    parameters["url"] = url;
+                    parameters["title"] = Content;
                     url = string.Format("http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?{0}", parameters);
                     break;
                 default:

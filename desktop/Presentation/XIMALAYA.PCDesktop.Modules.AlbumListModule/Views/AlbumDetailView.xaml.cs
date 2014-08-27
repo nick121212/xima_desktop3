@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.Composition;
 using System.Windows.Controls;
 
-namespace XIMALAYA.PCDesktop.Modules.AlbumListModule.Views
+namespace XIMALAYA.PCDesktop.Modules.AlbumModule.Views
 {
     /// <summary>
     /// AlbumDetailView.xaml 的交互逻辑

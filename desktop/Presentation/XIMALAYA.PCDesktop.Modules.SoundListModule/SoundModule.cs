@@ -5,15 +5,15 @@ using XIMALAYA.PCDesktop.Core.Models.Album;
 using XIMALAYA.PCDesktop.Events;
 using XIMALAYA.PCDesktop.Tools;
 using XIMALAYA.PCDesktop.Tools.Untils;
-using XIMALAYA.PCDesktop.Modules.SoundListModule.Views;
+using XIMALAYA.PCDesktop.Modules.SoundModule.Views;
 
-namespace XIMALAYA.PCDesktop.Modules.SoundListModule
+namespace XIMALAYA.PCDesktop.Modules.SoundModule
 {
     /// <summary>
     /// 声音列表模块
     /// </summary>
-    [ModuleExport(WellKnownModuleNames.SoundListModule, typeof(SoundListModule), InitializationMode = InitializationMode.WhenAvailable)]
-    public class SoundListModule : BaseModule
+    [ModuleExport(WellKnownModuleNames.SoundListModule, typeof(SoundModule), InitializationMode = InitializationMode.WhenAvailable)]
+    public class SoundModule : BaseModule
     {
         #region 事件
 

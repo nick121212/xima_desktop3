@@ -34,7 +34,7 @@
 								  Background="{DynamicResource BlackBrush}">
 			<MControls:MyToggleButton.Content>
 				<StackPanel>
-					<Path Data="{Binding SearchPath, Source={x:Static MControls:PathData.Instance}}" 
+					<Path Data="{Binding [search], Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{DynamicResource NavPathStyle}"
 						  HorizontalAlignment="Center"
 						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
@@ -60,7 +60,7 @@
 								  Background="{DynamicResource BlackBrush}">
 			<MControls:MyToggleButton.Content>
 				<StackPanel>
-					<Path Data="{Binding DiscoverPath, Source={x:Static MControls:PathData.Instance}}" 
+					<Path Data="{Binding [discover], Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{DynamicResource NavPathStyle}"
 						  HorizontalAlignment="Center"
 						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
@@ -87,7 +87,7 @@
 								  Background="{DynamicResource BlackBrush}">
 			<MControls:MyToggleButton.Content>
 				<StackPanel>
-					<Path Data="{Binding DownloadPath, Source={x:Static MControls:PathData.Instance}}" 
+					<Path Data="{Binding [download], Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{DynamicResource NavPathStyle}"
 						  HorizontalAlignment="Center"
 						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
@@ -106,13 +106,13 @@
 								  Margin="0 5"
 								  BorderThickness="0"
 								  BorderType="Rectangle"
-								   Foreground="{DynamicResource WhiteBrush}"
+								  Foreground="{DynamicResource WhiteBrush}"
 								  IsBackground="Visible"
 								  IsChecked="{Binding IsSettingFlyoutShow,Source={x:Static tools:FlyoutVisible.Instance}}"
 								  Background="{DynamicResource BlackBrush}">
 			<MControls:MyToggleButton.Content>
 				<StackPanel>
-					<Path Data="{Binding ToolbarSettings, Source={x:Static MControls:PathData.Instance}}" 
+					<Path Data="{Binding [setting], Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{DynamicResource NavPathStyle}"
 						  HorizontalAlignment="Center"
 						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
@@ -126,7 +126,7 @@
 			</MControls:MyToggleButton.Content>
 			<MControls:MyToggleButton.ContentChecked>
 				<StackPanel>
-					<Path Data="{Binding ToolbarSettings, Source={x:Static MControls:PathData.Instance}}" 
+					<Path Data="{Binding [setting], Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{DynamicResource NavPathStyle}"
 						  HorizontalAlignment="Center"
 						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >

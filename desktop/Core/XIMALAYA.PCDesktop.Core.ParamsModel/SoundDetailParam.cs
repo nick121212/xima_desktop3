@@ -8,8 +8,6 @@ using System.Threading.Tasks;
 
 namespace XIMALAYA.PCDesktop.Core.ParamsModel
 {
-    [Export(typeof(SuperExploreParam))]
-    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class SoundDetailParam : BaseParam
     {
         /// <summary>

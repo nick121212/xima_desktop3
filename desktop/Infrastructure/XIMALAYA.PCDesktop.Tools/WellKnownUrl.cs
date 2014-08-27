@@ -66,5 +66,15 @@ namespace XIMALAYA.PCDesktop.Tools
         /// 声音详情页
         /// </summary>
         public const string SoundInfoNew = WebPath + "/mobile/track/detail";
+
+        /// <summary>
+        /// 单个声音分享界面内容
+        /// </summary>
+        public const string ShareSoundInfo = WebPath + "/mobile/track/share/content";
+
+        /// <summary>
+        /// 单个专辑分享界面内容
+        /// </summary>
+        public const string ShareAlbumInfo = WebPath + "/mobile/album/share/content";
     }
 }

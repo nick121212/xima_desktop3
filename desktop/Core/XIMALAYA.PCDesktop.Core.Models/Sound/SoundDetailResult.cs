@@ -47,9 +47,7 @@ namespace XIMALAYA.PCDesktop.Core.Models.Sound
             this.doAddMap(() => this.PlayCount, "playtimes");
             this.doAddMap(() => this.CommentCount, "comments");
             this.doAddMap(() => this.ShareCount, "shares");
-
             this.doAddMap(() => this.TrackBlocks, "trackBlocks");
-
             this.doAddMap(() => this.User, "userInfo");
         }
     }

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.Composition;
 
-namespace XIMALAYA.PCDesktop.Modules.AlbumListModule.Views
+namespace XIMALAYA.PCDesktop.Modules.AlbumModule.Views
 {
     /// <summary>
     /// AlbumListView.xaml 的交互逻辑

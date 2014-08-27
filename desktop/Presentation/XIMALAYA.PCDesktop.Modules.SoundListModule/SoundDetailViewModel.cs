@@ -9,10 +9,10 @@ using XIMALAYA.PCDesktop.Cache;
 using XIMALAYA.PCDesktop.Core.Models.Sound;
 using XIMALAYA.PCDesktop.Core.ParamsModel;
 using XIMALAYA.PCDesktop.Core.Services;
-using XIMALAYA.PCDesktop.Modules.SoundListModule.Views;
+using XIMALAYA.PCDesktop.Modules.SoundModule.Views;
 using XIMALAYA.PCDesktop.Tools.Untils;
 
-namespace XIMALAYA.PCDesktop.Modules.SoundListModule
+namespace XIMALAYA.PCDesktop.Modules.SoundModule
 {
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]

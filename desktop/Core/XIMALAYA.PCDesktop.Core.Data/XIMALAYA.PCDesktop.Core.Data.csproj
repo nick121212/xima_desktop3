@@ -71,6 +71,7 @@
     <Compile Include="Configurations\Search\SearchResultDecorator.generated.cs" />
     <Compile Include="Configurations\Search\SearchSoundResultDecorator.generated.cs" />
     <Compile Include="Configurations\Search\SearchUserResultDecorator.generated.cs" />
+    <Compile Include="Configurations\share\ShareResultDecorator.generated.cs" />
     <Compile Include="Configurations\Sound\SoundData1Decorator.generated.cs" />
     <Compile Include="Configurations\Sound\SoundData2Decorator.generated.cs" />
     <Compile Include="Configurations\Sound\SoundData3Decorator.generated.cs" />
@@ -115,6 +116,8 @@
     <Compile Include="Respositories\Search\SearchResultRespositories.generated.cs" />
     <Compile Include="Respositories\Search\SearchSoundResultRespositories.generated.cs" />
     <Compile Include="Respositories\Search\SearchUserResultRespositories.generated.cs" />
+    <Compile Include="Respositories\share\IShareResultRespositories.generated.cs" />
+    <Compile Include="Respositories\share\ShareResultRespositories.generated.cs" />
     <Compile Include="Respositories\Sound\ISoundsResultRespositories.generated.cs" />
     <Compile Include="Respositories\Sound\SoundsResultRespositories.generated.cs" />
     <Compile Include="Respositories\Tags\CategoryTagResultRespositories.generated.cs" />
@@ -150,6 +153,7 @@
 ..\Configurations\Search\SearchResultDecorator.generated.cs
 ..\Configurations\Search\SearchSoundResultDecorator.generated.cs
 ..\Configurations\Search\SearchUserResultDecorator.generated.cs
+..\Configurations\Share\ShareResultDecorator.generated.cs
 ..\Configurations\Sound\SoundData1Decorator.generated.cs
 ..\Configurations\Sound\SoundData2Decorator.generated.cs
 ..\Configurations\Sound\SoundData3Decorator.generated.cs
@@ -184,6 +188,8 @@
 ..\Respositories\Search\SearchResultRespositories.generated.cs
 ..\Respositories\Search\SearchSoundResultRespositories.generated.cs
 ..\Respositories\Search\SearchUserResultRespositories.generated.cs
+..\Respositories\Share\IShareResultRespositories.generated.cs
+..\Respositories\Share\ShareResultRespositories.generated.cs
 ..\Respositories\Sound\ISoundsResultRespositories.generated.cs
 ..\Respositories\Sound\SoundsResultRespositories.generated.cs
 ..\Respositories\Tags\CategoryTagResultRespositories.generated.cs

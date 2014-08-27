@@ -8,20 +8,20 @@ using Microsoft.Practices.Prism.MefExtensions.Modularity;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.ServiceLocation;
-using XIMALAYA.PCDesktop.Modules.AlbumListModule.Views;
+using XIMALAYA.PCDesktop.Modules.AlbumModule.Views;
 using XIMALAYA.PCDesktop.Tools;
 using XIMALAYA.PCDesktop.Tools.Untils;
 using XIMALAYA.PCDesktop.Core.ParamsModel;
 using XIMALAYA.PCDesktop.Core.Services;
 using XIMALAYA.PCDesktop.Events;
 
-namespace XIMALAYA.PCDesktop.Modules.AlbumListModule
+namespace XIMALAYA.PCDesktop.Modules.AlbumModule
 {
     /// <summary>
     /// 声音列表模块
     /// </summary>
-    [ModuleExport(WellKnownModuleNames.AlbumListModule, typeof(AlbumListModule), InitializationMode = InitializationMode.WhenAvailable)]
-    public class AlbumListModule : BaseModule
+    [ModuleExport(WellKnownModuleNames.AlbumListModule, typeof(AlbumModule), InitializationMode = InitializationMode.WhenAvailable)]
+    public class AlbumModule : BaseModule
     {
         #region fields
 

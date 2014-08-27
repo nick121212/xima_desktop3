@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过以下
 // 特性集控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("XIMALAYA.PCDesktop.Modules.AlbumListModule")]
+[assembly: AssemblyTitle("XIMALAYA.PCDesktop.Modules.AlbumModule")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("XIMALAYA.PCDesktop.Modules.AlbumListModule")]
+[assembly: AssemblyProduct("XIMALAYA.PCDesktop.Modules.AlbumModule")]
 [assembly: AssemblyCopyright("Copyright © Microsoft 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

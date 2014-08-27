@@ -51,9 +51,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prism.MefExtensions.Desktop
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XIMALAYA.PCDesktop.Core.ParamsModel", "Core\XIMALAYA.PCDesktop.Core.ParamsModel\XIMALAYA.PCDesktop.Core.ParamsModel.csproj", "{D8A81297-8C41-4388-B4E3-CD7272B94E2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XIMALAYA.PCDesktop.Modules.SoundListModule", "Presentation\XIMALAYA.PCDesktop.Modules.SoundListModule\XIMALAYA.PCDesktop.Modules.SoundListModule.csproj", "{B5B78639-4AFE-45D5-BE38-62EA60BAFE3D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XIMALAYA.PCDesktop.Modules.SoundModule", "Presentation\XIMALAYA.PCDesktop.Modules.SoundListModule\XIMALAYA.PCDesktop.Modules.SoundModule.csproj", "{B5B78639-4AFE-45D5-BE38-62EA60BAFE3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XIMALAYA.PCDesktop.Modules.AlbumListModule", "Presentation\XIMALAYA.PCDesktop.Modules.AlbumListModule\XIMALAYA.PCDesktop.Modules.AlbumListModule.csproj", "{17E41C28-B6D2-4F56-B22C-8CA094222D87}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XIMALAYA.PCDesktop.Modules.AlbumModule", "Presentation\XIMALAYA.PCDesktop.Modules.AlbumListModule\XIMALAYA.PCDesktop.Modules.AlbumModule.csproj", "{17E41C28-B6D2-4F56-B22C-8CA094222D87}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MahApps.Metro.NET45", "Infrastructure\MahApps.Metro\MahApps.Metro\MahApps.Metro.NET45.csproj", "{942D11C4-29F5-46C4-8C14-4B976D56C637}"
 EndProject
@@ -77,6 +77,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XIMALAYA.PCDesktop.Cache", "Infrastructure\XIMALAYA.PCDesktop.Cache\XIMALAYA.PCDesktop.Cache.csproj", "{D0467CB5-7ECC-4167-9F48-F54A10F72113}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XIMALAYA.PCDesktop.Modules.Search", "Presentation\XIMALAYA.PCDesktop.Modules.Search\XIMALAYA.PCDesktop.Modules.Search.csproj", "{4930A677-F1E9-4905-A569-E2D146138ED8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XIMALAYA.PCDesktop.Modules.UserModule", "Presentation\XIMALAYA.PCDesktop.Modules.UserModule\XIMALAYA.PCDesktop.Modules.UserModule.csproj", "{C20326A5-FE2B-445A-9AAD-5B6E2C07C012}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -184,6 +186,10 @@ Global
 		{4930A677-F1E9-4905-A569-E2D146138ED8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4930A677-F1E9-4905-A569-E2D146138ED8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4930A677-F1E9-4905-A569-E2D146138ED8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C20326A5-FE2B-445A-9AAD-5B6E2C07C012}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C20326A5-FE2B-445A-9AAD-5B6E2C07C012}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C20326A5-FE2B-445A-9AAD-5B6E2C07C012}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C20326A5-FE2B-445A-9AAD-5B6E2C07C012}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -219,5 +225,6 @@ Global
 		{B8487E66-A614-4138-8429-7A3CE49BB915} = {6DE0B7E0-6E4D-49D3-B923-0B0BC143AC18}
 		{D0467CB5-7ECC-4167-9F48-F54A10F72113} = {3C6A2C1F-FF7A-4F1A-9E7C-5458C27A37AD}
 		{4930A677-F1E9-4905-A569-E2D146138ED8} = {6DE0B7E0-6E4D-49D3-B923-0B0BC143AC18}
+		{C20326A5-FE2B-445A-9AAD-5B6E2C07C012} = {6DE0B7E0-6E4D-49D3-B923-0B0BC143AC18}
 	EndGlobalSection
 EndGlobal

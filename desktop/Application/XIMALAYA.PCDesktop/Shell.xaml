@@ -93,7 +93,7 @@
 		<Controls:WindowCommands>
 			<ToggleButton ToolTip="设置" 
 						  IsChecked="{Binding IsSettingFlyoutShow,Source={x:Static tools:FlyoutVisible.Instance}}">
-				<Path Data="{Binding ToolbarSettings, Source={x:Static MControls:PathData.Instance}}" 
+				<Path Data="{Binding [setting], Source={x:Static MControls:PathData.Instance}}" 
                       Stretch="Uniform" Fill="{DynamicResource BlackColorBrush}" Width="16" Height="16" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
 					<Path.RenderTransform>
 						<TransformGroup>

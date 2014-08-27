@@ -9,10 +9,10 @@ using XIMALAYA.PCDesktop.Core.Models.Album;
 using XIMALAYA.PCDesktop.Core.Models.Sound;
 using XIMALAYA.PCDesktop.Core.ParamsModel;
 using XIMALAYA.PCDesktop.Core.Services;
-using XIMALAYA.PCDesktop.Modules.AlbumListModule.Views;
+using XIMALAYA.PCDesktop.Modules.AlbumModule.Views;
 using XIMALAYA.PCDesktop.Tools.Untils;
 
-namespace XIMALAYA.PCDesktop.Modules.AlbumListModule
+namespace XIMALAYA.PCDesktop.Modules.AlbumModule
 {
     /// <summary>
     /// 专辑详情页

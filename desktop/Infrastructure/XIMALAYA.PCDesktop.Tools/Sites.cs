@@ -56,4 +56,13 @@ namespace XIMALAYA.PCDesktop.Tools
         /// </summary>
         Qzone
     }
+    /// <summary>
+    /// 分享类型
+    /// </summary>
+    public enum ShareType
+    {
+        Track,
+        Album,
+        User
+    }
 }

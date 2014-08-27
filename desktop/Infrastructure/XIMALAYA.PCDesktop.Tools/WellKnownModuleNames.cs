@@ -50,5 +50,10 @@ namespace XIMALAYA.PCDesktop.Tools
         /// 搜索
         /// </summary>
         public const string SearchModule = "SearchModule";
+
+        /// <summary>
+        /// 用户
+        /// </summary>
+        public const string UserModule = "UserModule";
     }
 }

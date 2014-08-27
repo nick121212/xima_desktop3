@@ -45,7 +45,7 @@
 								          Background="{DynamicResource BlackBrush}"
 								          BorderBrush="{DynamicResource BlackBrush}">
 					<MControls:MyToggleButton.Content>
-						<Path Data="{Binding ToolbarPlayPath, Source={x:Static MControls:PathData.Instance}}" 
+						<Path Data="{Binding [play], Source={x:Static MControls:PathData.Instance}}" 
 						      Style="{DynamicResource PathStyle}"
 						      Width="10"
 						      Height="10"
@@ -53,7 +53,7 @@
 						      Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" />
 					</MControls:MyToggleButton.Content>
 					<MControls:MyToggleButton.ContentChecked>
-						<Path Data="{Binding ToolbarPausePath, Source={x:Static MControls:PathData.Instance}}"
+						<Path Data="{Binding [pause], Source={x:Static MControls:PathData.Instance}}"
 						      Style="{DynamicResource PathStyle}"
 						      Width="10"
 						      Height="10"
@@ -130,7 +130,7 @@
 								    Command="{Binding PlaySoundCommand,Source={x:Static tools:CommandSingleton.Instance}}"
 								    Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=ActualHeight}"
 								    Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=ActualWidth}"
-								    IconData="{Binding ToolbarPlayPath,Source={x:Static MControls:PathData.Instance}}"
+								    IconData="{Binding [play],Source={x:Static MControls:PathData.Instance}}"
 								    Style="{StaticResource MetroMyToggleButton}"
 								    BorderBrush="{DynamicResource AccentColorBrush}"
 								    IconMargin="2"

@@ -64,6 +64,7 @@
     <Compile Include="Search\SearchUserResult.cs" />
     <Compile Include="Search\SearchSoundResult.cs" />
     <Compile Include="Search\SearchResult.cs" />
+    <Compile Include="Share\ShareResult.cs" />
     <Compile Include="Sound\SoundData.cs" />
     <Compile Include="Sound\SoundData1.cs" />
     <Compile Include="Sound\SoundData2.cs" />

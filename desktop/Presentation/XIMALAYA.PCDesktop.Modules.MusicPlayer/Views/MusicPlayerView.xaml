@@ -92,14 +92,14 @@
 									  BorderBrush="{DynamicResource BlackBrush}"
 									  BorderThickness="1">
 				<MControls:MyToggleButton.Content>
-					<Path Data="{Binding VolumePath, Source={x:Static MControls:PathData.Instance}}" 
+					<Path Data="{Binding [volume], Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{StaticResource PathStyle}"
 						  Width="10" Height="10"
 						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
 					</Path>
 				</MControls:MyToggleButton.Content>
 				<MControls:MyToggleButton.ContentChecked>
-					<Path Data="{Binding MutedPath, Source={x:Static MControls:PathData.Instance}}"
+					<Path Data="{Binding [muted], Source={x:Static MControls:PathData.Instance}}"
 						  Style="{StaticResource PathStyle}"
 						  Width="10" Height="10"
 						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
@@ -130,7 +130,7 @@
 								      BorderBrush="{DynamicResource BlackBrush}"
 								      BorderThickness="1">
 				<MControls:MyToggleButton.Content>
-					<Path Data="{Binding PlayModePath1, Source={x:Static MControls:PathData.Instance}}" 
+					<Path Data="{Binding [play_mode_1], Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{StaticResource PathStyle}"
 						  Width="10"
 						  Height="10"
@@ -138,7 +138,7 @@
 					</Path>
 				</MControls:MyToggleButton.Content>
 				<MControls:MyToggleButton.ContentChecked>
-					<Path Data="{Binding PlayModePath3, Source={x:Static MControls:PathData.Instance}}"
+					<Path Data="{Binding [play_mode_2], Source={x:Static MControls:PathData.Instance}}"
 						  Style="{StaticResource PathStyle}"
 						  Width="10"
 						  Height="10"
@@ -146,7 +146,7 @@
 					</Path>
 				</MControls:MyToggleButton.ContentChecked>
 				<MControls:MyToggleButton.ContentThreeState>
-					<Path Data="{Binding PlayModePath2, Source={x:Static MControls:PathData.Instance}}"
+					<Path Data="{Binding [play_mode_3], Source={x:Static MControls:PathData.Instance}}"
 						  Style="{StaticResource PathStyle}"
 						  Width="10"
 						  Height="10"
@@ -166,13 +166,13 @@
 								      BorderBrush="{DynamicResource BlackBrush}"
 								      BorderThickness="1">
 				<MControls:MyToggleButton.Content>
-					<Path Data="{Binding ToolbarPrevPath, Source={x:Static MControls:PathData.Instance}}" 
+					<Path Data="{Binding [prev], Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{StaticResource PathStyle}"
 						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
 					</Path>
 				</MControls:MyToggleButton.Content>
 				<MControls:MyToggleButton.ContentChecked>
-					<Path Data="{Binding ToolbarPrevPath, Source={x:Static MControls:PathData.Instance}}"
+					<Path Data="{Binding [prev], Source={x:Static MControls:PathData.Instance}}"
 						  Style="{StaticResource PathStyle}"
 						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
 					</Path>
@@ -191,7 +191,7 @@
 								      BorderBrush="{DynamicResource BlackBrush}"
 								      BorderThickness="1">
 				<MControls:MyToggleButton.Content>
-					<Path Data="{Binding ToolbarPlayPath, Source={x:Static MControls:PathData.Instance}}" 
+					<Path Data="{Binding [play], Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{StaticResource PathStyle}"
 						  Margin="5 0 0 0"
 						  Width="20" Height="20"
@@ -199,7 +199,7 @@
 					</Path>
 				</MControls:MyToggleButton.Content>
 				<MControls:MyToggleButton.ContentChecked>
-					<Path Data="{Binding ToolbarPausePath, Source={x:Static MControls:PathData.Instance}}"
+					<Path Data="{Binding [pause], Source={x:Static MControls:PathData.Instance}}"
 						  Style="{StaticResource PathStyle}"
 						  Width="15" Height="20"
 						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
@@ -218,13 +218,13 @@
 								      BorderBrush="{DynamicResource BlackBrush}"
 								      BorderThickness="1">
 				<MControls:MyToggleButton.Content>
-					<Path Data="{Binding ToolbarNextPath, Source={x:Static MControls:PathData.Instance}}" 
+					<Path Data="{Binding [next], Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{StaticResource PathStyle}"
 						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
 					</Path>
 				</MControls:MyToggleButton.Content>
 				<MControls:MyToggleButton.ContentChecked>
-					<Path Data="{Binding ToolbarNextPath, Source={x:Static MControls:PathData.Instance}}"
+					<Path Data="{Binding [next], Source={x:Static MControls:PathData.Instance}}"
 						  Style="{StaticResource PathStyle}"
 						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
 					</Path>
@@ -244,13 +244,13 @@
 								      BorderBrush="{DynamicResource BlackBrush}"
 								      BorderThickness="1">
 				<MControls:MyToggleButton.Content>
-					<Path Data="{Binding ListViewPath, Source={x:Static MControls:PathData.Instance}}" 
+					<Path Data="{Binding [list_view], Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{StaticResource PathStyle}"
 						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
 					</Path>
 				</MControls:MyToggleButton.Content>
 				<MControls:MyToggleButton.ContentChecked>
-					<Path Data="{Binding ListViewPath, Source={x:Static MControls:PathData.Instance}}"
+					<Path Data="{Binding [list_view], Source={x:Static MControls:PathData.Instance}}"
 						  Style="{StaticResource PathStyle}"
 						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
 					</Path>

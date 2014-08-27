@@ -15,7 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using XIMALAYA.PCDesktop.Tools;
 
-namespace XIMALAYA.PCDesktop.Modules.SoundListModule.Views
+namespace XIMALAYA.PCDesktop.Modules.SoundModule.Views
 {
     /// <summary>
     /// SoundDetailView.xaml 的交互逻辑

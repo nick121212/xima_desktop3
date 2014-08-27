@@ -12,10 +12,10 @@ using XIMALAYA.PCDesktop.Core.Models.Tags;
 using XIMALAYA.PCDesktop.Core.ParamsModel;
 using XIMALAYA.PCDesktop.Core.Services;
 using XIMALAYA.PCDesktop.Events;
-using XIMALAYA.PCDesktop.Modules.AlbumListModule.Views;
+using XIMALAYA.PCDesktop.Modules.AlbumModule.Views;
 using XIMALAYA.PCDesktop.Tools.Untils;
 
-namespace XIMALAYA.PCDesktop.Modules.AlbumListModule
+namespace XIMALAYA.PCDesktop.Modules.AlbumModule
 {
     /// <summary>
     /// 专辑model

@@ -33,14 +33,14 @@
 										  Background="{DynamicResource BlackBrush}"
 										  BorderThickness="0">
 						<local:MyToggleButton.Content>
-							<Path Data="{Binding SearchPath, Source={x:Static local:PathData.Instance}}" 
+							<Path Data="{Binding [search], Source={x:Static local:PathData.Instance}}" 
 								  Style="{StaticResource PathStyle}"
 								  Width="20" Height="20"
 								  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type local:MyToggleButton}}}" >
 							</Path>
 						</local:MyToggleButton.Content>
 						<local:MyToggleButton.ContentChecked>
-							<Path Data="{Binding SearchPath, Source={x:Static local:PathData.Instance}}" 
+							<Path Data="{Binding [search], Source={x:Static local:PathData.Instance}}" 
 								  Style="{StaticResource PathStyle}"
 								  Width="20" Height="20"
 								  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type local:MyToggleButton}}}" >

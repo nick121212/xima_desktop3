@@ -13,8 +13,6 @@ namespace XIMALAYA.PCDesktop.Core.ParamsModel
     /// <summary>
     /// 分类接口参数
     /// </summary>
-    [Export(typeof(CategoryParam))]
-    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class CategoryParam : BaseParam
     {
         /// <summary>
