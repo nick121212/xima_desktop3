@@ -39,7 +39,7 @@ namespace XIMALAYA.PCDesktop.Modules.DiscoverPage
                     {
                         region.Remove(activeView);
                     }
-                    view.DiscoverViewModel.Initialize();
+                    view.ViewModel.Initialize();
                     region.Add(view);
                 }
             }

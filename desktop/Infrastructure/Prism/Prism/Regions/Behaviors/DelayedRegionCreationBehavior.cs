@@ -115,8 +115,11 @@ namespace Microsoft.Practices.Prism.Regions.Behaviors
                 if (!this.regionCreated)
                 {
                     string regionName = this.RegionManagerAccessor.GetRegionName(targetElement);
-                    CreateRegion(targetElement, regionName);
-                    this.regionCreated = true;
+                    if (regionName != null)
+                    {
+                        CreateRegion(targetElement, regionName);
+                        this.regionCreated = true;
+                    }
                 }
             }
         }

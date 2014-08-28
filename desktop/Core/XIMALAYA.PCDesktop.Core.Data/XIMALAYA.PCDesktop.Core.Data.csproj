@@ -89,7 +89,9 @@
     <Compile Include="Configurations\User\UserData1Decorator.cs" />
     <Compile Include="Configurations\User\UserData1Decorator.generated.cs" />
     <Compile Include="Configurations\User\UserData2Decorator.generated.cs" />
+    <Compile Include="Configurations\User\UserData3Decorator.generated.cs" />
     <Compile Include="Configurations\User\UserDataDecorator.generated.cs" />
+    <Compile Include="Configurations\User\UserResultDecorator.generated.cs" />
     <Compile Include="Decorator\ResultBase.cs" />
     <Compile Include="IRepository.cs">
       <SubType>Code</SubType>
@@ -126,6 +128,8 @@
     <Compile Include="Respositories\Tags\ITagSoundListResultRespositories.generated.cs" />
     <Compile Include="Respositories\Tags\TagAlbumsResultRespositories.generated.cs" />
     <Compile Include="Respositories\Tags\TagSoundListResultRespositories.generated.cs" />
+    <Compile Include="Respositories\User\IUserResultRespositories.generated.cs" />
+    <Compile Include="Respositories\User\UserResultRespositories.generated.cs" />
     <Compile Include="T4\CoreData.cs">
       <DependentUpon>CoreData.tt</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -169,7 +173,9 @@
 ..\Configurations\Tags\TagSoundListResultDecorator.generated.cs
 ..\Configurations\User\UserData1Decorator.generated.cs
 ..\Configurations\User\UserData2Decorator.generated.cs
+..\Configurations\User\UserData3Decorator.generated.cs
 ..\Configurations\User\UserDataDecorator.generated.cs
+..\Configurations\User\UserResultDecorator.generated.cs
 ..\Respositories\Album\AlbumInfoResult1Respositories.generated.cs
 ..\Respositories\Album\AlbumInfoResultRespositories.generated.cs
 ..\Respositories\Album\IAlbumInfoResult1Respositories.generated.cs
@@ -198,6 +204,8 @@
 ..\Respositories\Tags\ITagSoundListResultRespositories.generated.cs
 ..\Respositories\Tags\TagAlbumsResultRespositories.generated.cs
 ..\Respositories\Tags\TagSoundListResultRespositories.generated.cs
+..\Respositories\User\IUserResultRespositories.generated.cs
+..\Respositories\User\UserResultRespositories.generated.cs
 .\CoreData.cs
 </LastOutputs>
     </None>

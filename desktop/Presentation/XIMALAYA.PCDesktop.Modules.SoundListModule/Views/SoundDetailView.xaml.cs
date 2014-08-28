@@ -30,6 +30,14 @@ namespace XIMALAYA.PCDesktop.Modules.SoundModule.Views
         public SoundDetailView()
         {
             InitializeComponent();
+            this.Unloaded += SoundDetailView_Unloaded;
+        }
+
+        void SoundDetailView_Unloaded(object sender, RoutedEventArgs e)
+        {
+            this.ViewModel.Dispose();
+            //this.ViewModel = null;
+            //GC.Collect();
         }
         /// <summary>
         /// 

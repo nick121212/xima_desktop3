@@ -6,6 +6,7 @@
                       xmlns:cal="http://www.codeplex.com/prism"
                       xmlns:tools="http://ximalaya.com/xaml/tools"
                       xmlns:player="http://ximalaya.com/xaml/player"
+					  xmlns:shell="system.window.she"
                       Style="{DynamicResource CleanWindowStyle}"
                       GlowBrush="{DynamicResource AccentColorBrush}"
                       Title="{Binding WindowTitle}" 
@@ -14,10 +15,49 @@
                       MinWidth="1150"
                       Width="1150"
                       Height="850"
+					  Icon="ICO/icon_16.ico"
                       WindowStartupLocation="CenterScreen">
 	<Window.Resources>
 		<Style x:Key="CleanWindowStyle" TargetType="Controls:MetroWindow" BasedOn="{StaticResource CleanWindowStyleKey}" />
 		<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+
+		<DrawingImage x:Key="PrevImage">
+			<DrawingImage.Drawing>
+				<DrawingGroup>
+					<DrawingGroup.Children>
+						<GeometryDrawing Brush="{DynamicResource BlackBrush}" Geometry="{Binding [prev],Source={x:Static MControls:PathData.Instance}}"/>
+					</DrawingGroup.Children>
+				</DrawingGroup>
+			</DrawingImage.Drawing>
+		</DrawingImage>
+		<DrawingImage x:Key="NextImage">
+			<DrawingImage.Drawing>
+				<DrawingGroup>
+					<DrawingGroup.Children>
+						<GeometryDrawing Brush="{DynamicResource BlackBrush}" Geometry="{Binding [next],Source={x:Static MControls:PathData.Instance}}"/>
+					</DrawingGroup.Children>
+				</DrawingGroup>
+			</DrawingImage.Drawing>
+		</DrawingImage>
+		<DrawingImage x:Key="PlayImage">
+			<DrawingImage.Drawing>
+				<DrawingGroup>
+					<DrawingGroup.Children>
+						<GeometryDrawing Brush="{DynamicResource BlackBrush}" Geometry="{Binding [play],Source={x:Static MControls:PathData.Instance}}"/>
+					</DrawingGroup.Children>
+				</DrawingGroup>
+			</DrawingImage.Drawing>
+		</DrawingImage>
+		<DrawingImage x:Key="PauseImage">
+			<DrawingImage.Drawing>
+				<DrawingGroup>
+					<DrawingGroup.Children>
+						<GeometryDrawing Brush="{DynamicResource BlackBrush}" Geometry="{Binding [pause],Source={x:Static MControls:PathData.Instance}}"/>
+					</DrawingGroup.Children>
+				</DrawingGroup>
+			</DrawingImage.Drawing>
+		</DrawingImage>
+
 	</Window.Resources>
 	<!--任务栏进度条-->
 	<Controls:MetroWindow.TaskbarItemInfo>
@@ -29,21 +69,21 @@
 			<TaskbarItemInfo.ThumbButtonInfos>
 				<ThumbButtonInfoCollection>
 					<ThumbButtonInfo DismissWhenClicked="True"
-									 ImageSource="ico/prev.ico"
+									 ImageSource="{StaticResource PrevImage}"
                                      Command="{Binding PrevCommand,Source={x:Static tools:CommandSingleton.Instance}}">
 					</ThumbButtonInfo>
 					<ThumbButtonInfo DismissWhenClicked="True"
-									 ImageSource="ico/Play.ico"
+									 ImageSource="{StaticResource PlayImage}"
 									 Visibility="{Binding BassEngine.CanPlay,Converter={StaticResource BooleanToVisibilityConverter}}"
                                      Command="{Binding BassEngine.PlayCommand}">
 					</ThumbButtonInfo>
 					<ThumbButtonInfo DismissWhenClicked="True"
-									 ImageSource="ico/Pause.ico"
+									 ImageSource="{StaticResource PauseImage}"
 									 Visibility="{Binding BassEngine.CanPause,Converter={StaticResource BooleanToVisibilityConverter}}"
                                      Command="{Binding BassEngine.PlayCommand}">
 					</ThumbButtonInfo>
 					<ThumbButtonInfo DismissWhenClicked="True"
-									 ImageSource="ico/next.ico"
+									 ImageSource="{StaticResource NextImage}"
                                      Command="{Binding NextCommand,Source={x:Static tools:CommandSingleton.Instance}}">
 					</ThumbButtonInfo>
 				</ThumbButtonInfoCollection>

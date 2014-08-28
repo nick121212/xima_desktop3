@@ -26,6 +26,10 @@ namespace XIMALAYA.PCDesktop.Core.Models.User
         /// </summary>
         public string MobileLargeLogo { get; set; }
         /// <summary>
+        /// 用户中头像
+        /// </summary>
+        public string MobileMiddleLogo { get; set; }
+        /// <summary>
         /// 用户小头像
         /// </summary>
         public string MobileSmallLogo { get; set; }
@@ -119,6 +123,19 @@ namespace XIMALAYA.PCDesktop.Core.Models.User
         /// 最后更新时间
         /// </summary>
         public long LastUpdateDate { get; set; }
+        /// <summary>
+        /// 订阅专辑是否有更新
+        /// </summary>
+        public bool FavoriteAlbumIsUpdate { get; set; }
+        /// <summary>
+        /// 订阅专辑数量
+        /// </summary>
+        public long FavoriteAlbumCount { get; set; }
+
+        public bool IsMutualFollowed { get; set; }
+
+        public long TotalSpace { get; set; }
+        public long UsedSpace { get; set; }
         /// <summary>
         /// 构造
         /// </summary>

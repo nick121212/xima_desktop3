@@ -5,10 +5,15 @@
 		<Grid Width="{TemplateBinding Width}" 
 			  Height="{TemplateBinding Height}"
 			  Background="{TemplateBinding Background}">
-			<Image x:Name="PART_Image" Source="{TemplateBinding Source}" 
+			<Image x:Name="PART_Image" 
+				   Source="{TemplateBinding Source}" 
 				   Width="{TemplateBinding Width}" 
 				   Height="{TemplateBinding Height}" 
 				   Stretch="Fill" >
+				<Image.CacheMode>
+					<BitmapCache RenderAtScale="1"
+								 EnableClearType ="True"/>
+				</Image.CacheMode>
 			</Image>
 		</Grid>
 		<ControlTemplate.Triggers>

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.ComponentModel.Composition;
 using System.Windows;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
@@ -12,7 +13,7 @@ namespace XIMALAYA.PCDesktop.Tools.Untils
     /// Viewmodel 基类
     /// </summary>
     [InheritedExport]
-    public abstract class BaseViewModel : NotificationObject
+    public abstract class BaseViewModel : NotificationObject, IDisposable
     {
         #region 字段
 
@@ -206,6 +207,17 @@ namespace XIMALAYA.PCDesktop.Tools.Untils
             {
                 return !this.IsWaiting;
             });
+        }
+
+        #endregion
+
+        #region IDisposable 成员
+
+        public virtual void Dispose()
+        {
+            this.RegionManager = null;
+            this.EventAggregator = null;
+            this.Container = null;
         }
 
         #endregion

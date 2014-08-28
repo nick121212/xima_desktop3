@@ -27,53 +27,40 @@ namespace XIMALAYA.PCDesktop.Modules.DiscoverPage.Views
         public DiscoverView()
         {
             InitializeComponent();
-            this.Loaded += DiscoverView_Loaded;
+            //this.Loaded += DiscoverView_Loaded;
+            this.Unloaded += DiscoverView_Unloaded;
         }
 
-        void DiscoverView_Loaded(object sender, RoutedEventArgs e)
+        void DiscoverView_Unloaded(object sender, RoutedEventArgs e)
         {
-            this.mainScroll.AddHandler(ScrollViewer.MouseWheelEvent, new MouseWheelEventHandler(mainScroll_MouseWheel), true);
+            this.ViewModel.Dispose();
+            this.ViewModel = null;
         }
 
         [Import]
-        public DiscoverViewModel DiscoverViewModel
+        public DiscoverViewModel ViewModel
         {
             get { return this.DataContext as DiscoverViewModel; }
             set { this.DataContext = value; }
         }
 
-        private void mainScroll_MouseWheel(object sender, MouseWheelEventArgs e)
-        {
-            double offset = mainScroll.VerticalOffset - (e.Delta * 6 / 6);
-            if (offset < 0)
-            {
-                mainScroll.ScrollToVerticalOffset(0);
-            }
-            else if (offset > mainScroll.ExtentHeight)
-            {
-                mainScroll.ScrollToVerticalOffset(mainScroll.ExtentHeight);
-            }
-            else
-            {
-                mainScroll.ScrollToVerticalOffset(offset);
-            }
+        //private void mainScroll_MouseWheel(object sender, MouseWheelEventArgs e)
+        //{
+        //    double offset = mainScroll.VerticalOffset - (e.Delta * 6 / 6);
+        //    if (offset < 0)
+        //    {
+        //        mainScroll.ScrollToVerticalOffset(0);
+        //    }
+        //    else if (offset > mainScroll.ExtentHeight)
+        //    {
+        //        mainScroll.ScrollToVerticalOffset(mainScroll.ExtentHeight);
+        //    }
+        //    else
+        //    {
+        //        mainScroll.ScrollToVerticalOffset(offset);
+        //    }
 
-            e.Handled = true;
-            //double offset = mainScroll.HorizontalOffset - (e.Delta * 6 / 6);
-            //if (offset < 0)
-            //{
-            //    mainScroll.ScrollToHorizontalOffset(0);
-            //}
-            //else if (offset > mainScroll.ExtentWidth)
-            //{
-            //    mainScroll.ScrollToHorizontalOffset(mainScroll.ExtentHeight);
-            //}
-            //else
-            //{
-            //    mainScroll.ScrollToHorizontalOffset(offset);
-            //}
-
-            //e.Handled = true;
-        }
+        //    e.Handled = true;
+        //}
     }
 }

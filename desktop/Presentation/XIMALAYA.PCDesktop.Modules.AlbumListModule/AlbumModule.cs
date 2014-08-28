@@ -23,12 +23,6 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumModule
     [ModuleExport(WellKnownModuleNames.AlbumListModule, typeof(AlbumModule), InitializationMode = InitializationMode.WhenAvailable)]
     public class AlbumModule : BaseModule
     {
-        #region fields
-
-        private TagEventArgument _TagEventArgument;
-
-        #endregion
-
         #region properties
 
         /// <summary>
@@ -36,41 +30,22 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumModule
         /// </summary>
         [Import]
         private ICategoryTagAlbumsService CategoryTagAlbumsService { get; set; }
-        /// <summary>
-        /// 属性描述
-        /// </summary>
-        public TagEventArgument TagEventArgument
-        {
-            get
-            {
-                return _TagEventArgument;
-            }
-            set
-            {
-                if (value != _TagEventArgument)
-                {
-                    _TagEventArgument = value;
-                    this.OnChangeTagEventArgument();
-                    this.RaisePropertyChanged(() => this.TagEventArgument);
-                }
-            }
-        }
 
         #endregion
 
         #region actions
 
-        private void OnChangeTagEventArgument()
+        private void OnChangeTagEventArgument(TagEventArgument e)
         {
             var albumView = this.Container.GetInstance<AlbumView>();
-            string regionName = this.ContainerView.GetFlyout(this.TagEventArgument.Title);
+            string regionName = this.ContainerView.GetFlyout(e.Title);
 
             if (albumView != null)
             {
-                albumView.AlbumViewModel.DoInit(new CategoryTagAlbumParam
+                albumView.ViewModel.DoInit(new CategoryTagAlbumParam
                 {
-                    Category = this.TagEventArgument.Category,
-                    TagName = this.TagEventArgument.TagName,
+                    Category = e.Category,
+                    TagName = e.TagName,
                     Condition = ConditionAlbumType.hot,
                     Device = DeviceType.pc,
                     Page = 1,
@@ -108,16 +83,17 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumModule
                 throw new ArgumentNullException("EventAggregator");
             }
             //标签点击事件，获取专辑数据
-            this.EventAggregator.GetEvent<AlbumListEvent<TagEventArgument>>().Subscribe(e =>
-            {
-                this.TagEventArgument = e;
-            });
+            this.EventAggregator.GetEvent<AlbumListEvent<TagEventArgument>>().Subscribe(OnChangeTagEventArgument);
 
-            //标签点击事件，获取专辑详情数据
-            this.EventAggregator.GetEvent<AlbumDetailEvent<long>>().Subscribe(e =>
-            {
-                this.OnAlbumDetailEvent(e);
-            });
+            //获取专辑详情数据
+            this.EventAggregator.GetEvent<AlbumDetailEvent<long>>().Subscribe(OnAlbumDetailEvent);
+        }
+
+        public override void Dispose()
+        {
+            base.Dispose();
+            this.EventAggregator.GetEvent<AlbumDetailEvent<long>>().Unsubscribe(OnAlbumDetailEvent);
+            this.EventAggregator.GetEvent<AlbumListEvent<TagEventArgument>>().Unsubscribe(OnChangeTagEventArgument);
         }
 
         #endregion

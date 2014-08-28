@@ -21,14 +21,22 @@ namespace XIMALAYA.PCDesktop.Modules.DiscoverPage.Views
     /// </summary>
     [Export]
     [PartCreationPolicy(CreationPolicy.Shared)]
-    public partial class CategoryDetailView : UserControl
+    public partial class CategoryDetailView
     {
         public CategoryDetailView()
         {
             InitializeComponent();
+            //this.Unloaded += CategoryDetailView_Unloaded;
+        }
+
+        void CategoryDetailView_Unloaded(object sender, RoutedEventArgs e)
+        {
+            this.ViewModel.Dispose();
+            this.ViewModel = null;
+            GC.Collect();
         }
         [Import]
-        public CategoryDetailViewModel CategoryDetailViewModel
+        public CategoryDetailViewModel ViewModel
         {
             get { return this.DataContext as CategoryDetailViewModel; }
             set { this.DataContext = value; }

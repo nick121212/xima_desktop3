@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,7 +42,8 @@ namespace XIMALAYA.PCDesktop
             }
             else
             {
-                this.savedLogs.Enqueue(new Tuple<string, Category, Priority>(message, category, priority));
+                Debug.WriteLine(message, category, priority);
+                //this.savedLogs.Enqueue(new Tuple<string, Category, Priority>(message, category, priority));
             }
         }
 

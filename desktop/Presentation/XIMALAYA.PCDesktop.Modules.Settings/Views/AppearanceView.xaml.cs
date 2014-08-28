@@ -32,7 +32,7 @@ namespace XIMALAYA.PCDesktop.Modules.Settings.Views
         }
 
         [Import]
-        public ApperaranceViewModel ApperaranceViewModel
+        public ApperaranceViewModel ViewModel
         {
             get { return this.DataContext as ApperaranceViewModel; }
             set { this.DataContext = value; }

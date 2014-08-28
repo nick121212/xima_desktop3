@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.ComponentModel.Composition;
 using System.Windows.Controls;
 
 namespace XIMALAYA.PCDesktop.Modules.AlbumModule.Views
@@ -16,6 +17,13 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumModule.Views
         public AlbumDetailView()
         {
             InitializeComponent();
+            this.Unloaded += AlbumDetailView_Unloaded;
+        }
+
+        void AlbumDetailView_Unloaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            this.ViewModel.Dispose();
+            this.ViewModel = null;
         }
         /// <summary>
         /// 

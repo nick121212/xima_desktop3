@@ -19,7 +19,7 @@ namespace XIMALAYA.PCDesktop.Modules.Search
     /// <summary>
     /// 搜索页viewmodel
     /// </summary>
-    [Export]
+    [Export, PartCreationPolicy(CreationPolicy.Shared)]
     public class SearchMainViewModel : BaseViewModel
     {
         #region 字段

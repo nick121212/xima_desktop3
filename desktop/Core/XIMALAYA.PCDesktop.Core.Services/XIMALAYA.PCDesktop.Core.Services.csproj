@@ -62,8 +62,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Impl\ShareService.cs" />
+    <Compile Include="Impl\UserDetailService.cs" />
     <Compile Include="IShareService.cs" />
     <Compile Include="Impl\SoundDetailService.cs" />
+    <Compile Include="IUserDetailService.cs" />
     <Compile Include="ISoundDetailService.cs" />
     <Compile Include="ICategoryTagAlbumsService.cs" />
     <Compile Include="ICategoryTagService.cs" />

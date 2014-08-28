@@ -40,5 +40,10 @@ namespace XIMALAYA.PCDesktop.Tools
         /// The region of module AlbumListViewRegion.
         /// </summary>
         public const string AlbumListViewRegion = "AlbumListViewRegion";
+
+        /// <summary>
+        /// The region of module UserMinViewRegion.
+        /// </summary>
+        public const string UserMinViewRegion = "UserMinViewRegion";
     }
 }

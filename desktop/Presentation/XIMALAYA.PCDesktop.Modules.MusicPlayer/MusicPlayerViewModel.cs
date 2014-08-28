@@ -57,27 +57,35 @@ namespace XIMALAYA.PCDesktop.Modules.MusicPlayer
         {
             this.BassEngine.CurrentSoundUrl = string.Empty;
             this.BassEngine.PlayOverEvent += BassEngine_PlayOverEvent;
-            this.EventAggregator.GetEvent<PlayerEvent>().Subscribe((TrackId) =>
-            {
-                if (this.SoundData != null && this.SoundData.TrackId == TrackId)
-                {
-                    this.BassEngine.PlayCommand.Execute();
-                    return;
-                }
-                SoundData soundData = SoundCache.Instance[TrackId];
-                if (soundData == null) return;
-                if (soundData.PlayUrl32 == null && soundData.PlayUrl64 == null) return;
-
-                this.SoundData = soundData;
-                //CommandSingleton.Instance.TrackID = this.SoundData.TrackId;
-                //CommandSingleton.Instance.TrackTitle = this.SoundData.Title;
-                CommandSingleton.Instance.SoundData = this.SoundData;
-                this.BassEngine.OpenUrlAsync(this.SoundData.PlayUrl64 == null ? this.SoundData.PlayUrl32 : this.SoundData.PlayUrl64);
-            });
+            this.EventAggregator.GetEvent<PlayerEvent>().Subscribe(StartPlay);
             this.SoundData = new SoundData
             {
                 Title = "喜马拉雅，听我想听"
             };
+        }
+
+        public override void Dispose()
+        {
+            base.Dispose();
+            this.EventAggregator.GetEvent<PlayerEvent>().Unsubscribe(StartPlay);
+        }
+
+        void StartPlay(long TrackId)
+        {
+            if (this.SoundData != null && this.SoundData.TrackId == TrackId)
+            {
+                this.BassEngine.PlayCommand.Execute();
+                return;
+            }
+            SoundData soundData = SoundCache.Instance[TrackId];
+            if (soundData == null) return;
+            if (soundData.PlayUrl32 == null && soundData.PlayUrl64 == null) return;
+
+            this.SoundData = soundData;
+            //CommandSingleton.Instance.TrackID = this.SoundData.TrackId;
+            //CommandSingleton.Instance.TrackTitle = this.SoundData.Title;
+            CommandSingleton.Instance.SoundData = this.SoundData;
+            this.BassEngine.OpenUrlAsync(this.SoundData.PlayUrl64 == null ? this.SoundData.PlayUrl32 : this.SoundData.PlayUrl64);
         }
         /// <summary>
         /// 当前声音播放完成

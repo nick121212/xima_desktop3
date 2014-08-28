@@ -76,5 +76,10 @@ namespace XIMALAYA.PCDesktop.Tools
         /// 单个专辑分享界面内容
         /// </summary>
         public const string ShareAlbumInfo = WebPath + "/mobile/album/share/content";
+
+        /// <summary>
+        /// 单个用户的详细信息
+        /// </summary>
+        public const string UserDetailInfo = WebPath + "/mobile/others/homePage";
     }
 }

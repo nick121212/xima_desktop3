@@ -42,12 +42,15 @@ namespace XIMALAYA.PCDesktop.Modules.SoundModule
         public override void Initialize()
         {
             //标签点击事件，获取专辑详情数据
-            this.EventAggregator.GetEvent<SoundDetailEvent<long>>().Subscribe(e =>
-            {
-                this.OnSoundDetailEvent(e);
-            });
+            this.EventAggregator.GetEvent<SoundDetailEvent<long>>().Subscribe(OnSoundDetailEvent);
 
-            this.EventAggregator.GetEvent<SoundDetailEvent<long>>().Publish(352374);
+            //this.EventAggregator.GetEvent<SoundDetailEvent<long>>().Publish(352374);
+        }
+
+        public override void Dispose()
+        {
+            base.Dispose();
+            this.EventAggregator.GetEvent<SoundDetailEvent<long>>().Unsubscribe(OnSoundDetailEvent);
         }
 
         #endregion

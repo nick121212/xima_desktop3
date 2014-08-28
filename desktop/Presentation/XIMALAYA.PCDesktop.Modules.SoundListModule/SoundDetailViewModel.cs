@@ -9,13 +9,14 @@ using XIMALAYA.PCDesktop.Cache;
 using XIMALAYA.PCDesktop.Core.Models.Sound;
 using XIMALAYA.PCDesktop.Core.ParamsModel;
 using XIMALAYA.PCDesktop.Core.Services;
+using XIMALAYA.PCDesktop.Events;
 using XIMALAYA.PCDesktop.Modules.SoundModule.Views;
+using XIMALAYA.PCDesktop.Tools;
 using XIMALAYA.PCDesktop.Tools.Untils;
 
 namespace XIMALAYA.PCDesktop.Modules.SoundModule
 {
-    [Export]
-    [PartCreationPolicy(CreationPolicy.NonShared)]
+    [Export, PartCreationPolicy(CreationPolicy.NonShared)]
     public class SoundDetailViewModel : BaseViewModel
     {
         #region 字段
@@ -75,6 +76,11 @@ namespace XIMALAYA.PCDesktop.Modules.SoundModule
                     {
                         SoundCache.Instance[result.TrackId] = result;
                         this.SoundData = result;
+                        this.EventAggregator.GetEvent<UserMinEvent>().Publish(new UserEventArgument
+                        {
+                            RegionName = string.Format("UserMinViewRegion_{0}", this.SoundData.TrackId),
+                            UID = this.SoundData.UID
+                        });
                         return;
                     }
                     DialogManager.ShowMessageAsync(Application.Current.MainWindow as MetroWindow, "喜马拉雅", "获取声音数据失败！");
@@ -84,6 +90,11 @@ namespace XIMALAYA.PCDesktop.Modules.SoundModule
                 TrackId = this.TrackID
             });
             base.GetData(isClear);
+        }
+        public override void Dispose()
+        {
+            this.RegionManager.Regions.Remove(string.Format("UserMinViewRegion_{0}", this.SoundData.TrackId));
+            base.Dispose();
         }
 
         #endregion

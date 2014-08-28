@@ -1,9 +1,11 @@
 ﻿using System;
 using System.ComponentModel.Composition;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
+using System.Windows.Threading;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Practices.Prism.Commands;
@@ -21,6 +23,9 @@ namespace XIMALAYA.PCDesktop
     [Export]
     public partial class Shell : IFlyoutFactory
     {
+        [DllImport("kernel32.dll")]
+        public static extern bool SetProcessWorkingSetSize(IntPtr proc, int min, int max);
+
         #region 属性
 
         [Import(AllowRecomposition = false)]
@@ -36,6 +41,8 @@ namespace XIMALAYA.PCDesktop
         private Flyout CurrentFlyout { get; set; }
         private ResourceDictionary ResourceDic { get; set; }
 
+        private readonly DispatcherTimer ClearMembryTimer = new DispatcherTimer();
+
         #endregion
 
         #region 构造
@@ -48,6 +55,14 @@ namespace XIMALAYA.PCDesktop
             InitializeComponent();
             this.Loaded += Shell_Loaded;
             this.Closed += Shell_Closed;
+            this.ClearMembryTimer.Interval = TimeSpan.FromSeconds(50);
+            this.ClearMembryTimer.Tick += ClearMembryTimer_Tick;
+            this.ClearMembryTimer.IsEnabled = true;
+        }
+
+        void ClearMembryTimer_Tick(object sender, EventArgs e)
+        {
+            SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
         }
 
         #endregion
@@ -56,6 +71,7 @@ namespace XIMALAYA.PCDesktop
 
         void Shell_Closed(object sender, EventArgs e)
         {
+            this.ClearMembryTimer.IsEnabled = false;
             this.MainViewModel.Dispose();
         }
 
@@ -85,6 +101,7 @@ namespace XIMALAYA.PCDesktop
         {
             RegionManager.SetRegionManager(this.testFlyout, this.regionManager);
             this.ResourceDic = ThemeInfoManager.Instance.FindResourceDictionary(@"/MahApps.Metro;component/Styles/Colors.xaml");
+
             //taskBar.ProgressState = TaskbarItemProgressState.Normal;
             //taskBar.ProgressValue = 0.4;
         }
@@ -202,33 +219,20 @@ namespace XIMALAYA.PCDesktop
 
             return regionName;
         }
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        //void flyout_IsOpenChanged(object sender, EventArgs e)
-        //{
-        //    Flyout flyout = sender as Flyout;
-
-        //    if (flyout.IsOpen == false)
-        //    {
-        //        if (LastFlyout != null)
-        //        {
-        //            this.Flyouts.Items.Remove(LastFlyout);
-        //            LastFlyout = null;
-        //        }
-        //        LastFlyout = flyout;
-        //        LastFlyout.Content = null;
-        //    }
-        //}
 
         void CurrentFlyout_IsHideComplete(object sender, EventArgs e)
         {
-            var flyout = sender as Flyout;
+            Flyout flyout = sender as Flyout;
+            string regionName = string.Empty;
+
+            regionName = RegionManager.GetRegionName(flyout);
+            this.regionManager.Regions.Remove(regionName);
 
             flyout.Content = null;
+            flyout.DataContext = null;
             this.ContainerGrid.Items.Remove(flyout);
+            flyout = null;
+            GC.Collect();
         }
 
         #endregion

@@ -9,6 +9,7 @@ using XIMALAYA.PCDesktop.Core.Models.Album;
 using XIMALAYA.PCDesktop.Core.Models.Sound;
 using XIMALAYA.PCDesktop.Core.ParamsModel;
 using XIMALAYA.PCDesktop.Core.Services;
+using XIMALAYA.PCDesktop.Events;
 using XIMALAYA.PCDesktop.Modules.AlbumModule.Views;
 using XIMALAYA.PCDesktop.Tools.Untils;
 
@@ -107,10 +108,12 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumModule
 
                     if (albumInfo.Ret == 0)
                     {
-                        if (this.AlbumData == null)
+                        this.AlbumData = albumInfo.Album;
+                        this.EventAggregator.GetEvent<UserMinEvent>().Publish(new UserEventArgument
                         {
-                            this.AlbumData = albumInfo.Album;
-                        }
+                            RegionName = string.Format("AlbumUserMinViewRegion_{0}", this.AlbumData.AlbumID),
+                            UID = this.AlbumData.Uid
+                        });
                         this.Total = albumInfo.SoundsResult.TotalCount;
                         foreach (SoundData sound in albumInfo.SoundsResult.Sounds)
                         {
@@ -147,7 +150,11 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumModule
                 this.CurrentPage = 1;
             }
         }
-
+        public override void Dispose()
+        {
+            this.RegionManager.Regions.Remove(string.Format("AlbumUserMinViewRegion_{0}", this.AlbumData.AlbumID));
+            base.Dispose();
+        }
         #endregion
     }
 }

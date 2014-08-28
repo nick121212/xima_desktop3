@@ -10,64 +10,64 @@
              xmlns:tools="clr-namespace:XIMALAYA.PCDesktop.Tools;assembly=XIMALAYA.PCDesktop.Tools"
              HorizontalAlignment="Center">
 
-	<ScrollViewer x:Name="mainScroll"
+	<!--<ScrollViewer x:Name="mainScroll"
 				  Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Grid}, Path=ActualWidth}" 
 				  Style="{StaticResource for_scrollviewer}"
                   HorizontalScrollBarVisibility="Auto" 
-                  VerticalScrollBarVisibility="Auto">
-		<Grid Margin="0 5" HorizontalAlignment="Center">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="Auto"/>
-			</Grid.RowDefinitions>
-			<!--焦点图-->
-			<GroupBox Header=" "
+                  VerticalScrollBarVisibility="Auto">-->
+	<Grid Margin="0 5" HorizontalAlignment="Center">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+		<!--焦点图-->
+		<GroupBox Header=" "
                       Style="{StaticResource MyMetroGroupBox}"
 					  Margin="0"
 					  Height="Auto"
 					  HorizontalContentAlignment="Left">
-				<ListBox Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=GroupBox}, Path=Width}"
+			<ListBox Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=GroupBox}, Path=Width}"
                          Background="Transparent"
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                          FocusVisualStyle="{x:Null}"
                          ItemContainerStyle="{StaticResource MetroFocusImageStyle}"
                          ItemsSource="{Binding FocusImageList}">
-					<ListBox.ItemsPanel>
-						<ItemsPanelTemplate>
-							<MControls:TilePanel TileHeight="30" 
+				<ListBox.ItemsPanel>
+					<ItemsPanelTemplate>
+						<MControls:TilePanel TileHeight="30" 
                                                  TileWidth="30" 
 												 Orientation="Vertical"
                                                  TileCount="15"
                                                  TileMargin="2"/>
-						</ItemsPanelTemplate>
-					</ListBox.ItemsPanel>
-				</ListBox>
-			</GroupBox>
-			<!--分类列表-->
-			<GroupBox Header=" "
+					</ItemsPanelTemplate>
+				</ListBox.ItemsPanel>
+			</ListBox>
+		</GroupBox>
+		<!--分类列表-->
+		<GroupBox Header=" "
                       Style="{StaticResource MyMetroGroupBox}"
 					  Margin="0 0 0 0"
 					  Grid.Row="1"
 					  Height="Auto"
                       Grid.Column="1">
-				<ListBox Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=GroupBox}, Path=Width}"
+			<ListBox Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=GroupBox}, Path=Width}"
                          Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=GroupBox}, Path=Height}"
                          Background="Transparent"
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                          ItemContainerStyle="{StaticResource MetroCategoryStyle}"
                          ItemsSource="{x:Static local:DiscoverViewModel.CategoryList}">
-					<ListBox.ItemsPanel>
-						<ItemsPanelTemplate>
-							<MControls:TilePanel TileHeight="96" 
+				<ListBox.ItemsPanel>
+					<ItemsPanelTemplate>
+						<MControls:TilePanel TileHeight="96" 
                                                  TileWidth="96" 
 												 Orientation="Vertical"
                                                  TileMargin="2"
                                                  TileCount="2"/>
-						</ItemsPanelTemplate>
-					</ListBox.ItemsPanel>
-				</ListBox>
-			</GroupBox>
-		</Grid>
-	</ScrollViewer>
+					</ItemsPanelTemplate>
+				</ListBox.ItemsPanel>
+			</ListBox>
+		</GroupBox>
+	</Grid>
+	<!--</ScrollViewer>-->
 
 </UserControl>
