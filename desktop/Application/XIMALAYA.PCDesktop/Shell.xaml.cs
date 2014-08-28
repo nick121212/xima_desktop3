@@ -23,8 +23,19 @@ namespace XIMALAYA.PCDesktop
     [Export]
     public partial class Shell : IFlyoutFactory
     {
+        #region Dll
+
+        /// <summary>
+        /// 释放内存在虚拟内存
+        /// </summary>
+        /// <param name="proc"></param>
+        /// <param name="min"></param>
+        /// <param name="max"></param>
+        /// <returns></returns>
         [DllImport("kernel32.dll")]
         public static extern bool SetProcessWorkingSetSize(IntPtr proc, int min, int max);
+
+        #endregion
 
         #region 属性
 
