@@ -36,7 +36,7 @@
 						           Width="60" 
 						           Height="60" 
 						           Source="{Binding MobileSmallLogo}"
-						           DefaultSource="person.jpg">
+						           DefaultSource="loading_img.png">
 					<MControls:MyImage.Clip>
 						<EllipseGeometry Center="30,30" RadiusX="30" RadiusY="30"/>
 					</MControls:MyImage.Clip>

@@ -113,7 +113,7 @@
 						           Width="50" 
 						           Height="50" 
 						           Source="{Binding CoverSmall}"
-						           DefaultSource="track.jpg"/>
+						           DefaultSource="loading_img.png"/>
 			</Grid>
 		</MControls:MyRadioButton>
 	</DataTemplate>

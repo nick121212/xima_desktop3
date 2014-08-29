@@ -25,7 +25,8 @@
 			<DrawingImage.Drawing>
 				<DrawingGroup>
 					<DrawingGroup.Children>
-						<GeometryDrawing Brush="{DynamicResource BlackBrush}" Geometry="{Binding [prev],Source={x:Static MControls:PathData.Instance}}"/>
+						<GeometryDrawing Brush="{DynamicResource BlackBrush}"
+										 Geometry="{Binding [prev],Source={x:Static MControls:PathData.Instance}}"/>
 					</DrawingGroup.Children>
 				</DrawingGroup>
 			</DrawingImage.Drawing>
@@ -34,7 +35,8 @@
 			<DrawingImage.Drawing>
 				<DrawingGroup>
 					<DrawingGroup.Children>
-						<GeometryDrawing Brush="{DynamicResource BlackBrush}" Geometry="{Binding [next],Source={x:Static MControls:PathData.Instance}}"/>
+						<GeometryDrawing Brush="{DynamicResource BlackBrush}" 
+										 Geometry="{Binding [next],Source={x:Static MControls:PathData.Instance}}"/>
 					</DrawingGroup.Children>
 				</DrawingGroup>
 			</DrawingImage.Drawing>
@@ -43,7 +45,8 @@
 			<DrawingImage.Drawing>
 				<DrawingGroup>
 					<DrawingGroup.Children>
-						<GeometryDrawing Brush="{DynamicResource BlackBrush}" Geometry="{Binding [play],Source={x:Static MControls:PathData.Instance}}"/>
+						<GeometryDrawing Brush="{DynamicResource BlackBrush}" 
+										 Geometry="{Binding [play],Source={x:Static MControls:PathData.Instance}}"/>
 					</DrawingGroup.Children>
 				</DrawingGroup>
 			</DrawingImage.Drawing>
@@ -52,7 +55,8 @@
 			<DrawingImage.Drawing>
 				<DrawingGroup>
 					<DrawingGroup.Children>
-						<GeometryDrawing Brush="{DynamicResource BlackBrush}" Geometry="{Binding [pause],Source={x:Static MControls:PathData.Instance}}"/>
+						<GeometryDrawing Brush="{DynamicResource BlackBrush}" 
+										 Geometry="{Binding [pause],Source={x:Static MControls:PathData.Instance}}"/>
 					</DrawingGroup.Children>
 				</DrawingGroup>
 			</DrawingImage.Drawing>

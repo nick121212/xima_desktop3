@@ -30,12 +30,10 @@
 						<RowDefinition Height="*"/>
 						<RowDefinition Height="Auto"/>
 					</Grid.RowDefinitions>
-					<Image Width="96" 
-						   Height="96" 
-						   Stretch="Uniform" 
-						   VerticalAlignment="Center"
-						   Source="{Binding CoverPath}">
-					</Image>
+					<MControls:MyImage Width="96" 
+									   Height="96" 
+									   VerticalAlignment="Center"
+									   Source="{Binding CoverPath}"/>
 				</Grid>
 			</MControls:MyRadioButton.Content>
 		</MControls:MyRadioButton>

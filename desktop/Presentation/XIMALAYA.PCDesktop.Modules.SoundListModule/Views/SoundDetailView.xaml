@@ -37,7 +37,7 @@
 						   Height="180" 
 						   VerticalAlignment="Top"
 						   Source="{Binding SoundData.CoverLarge}"
-						   DefaultSource="track.jpg">
+						   DefaultSource="loading_img.png">
 			</MControls:MyImage>
 
 			<Grid Grid.Column="1">

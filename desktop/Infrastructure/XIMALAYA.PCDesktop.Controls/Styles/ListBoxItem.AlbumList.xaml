@@ -32,7 +32,7 @@
 									   Width="180" 
 									   Height="180" 
 									   Source="{Binding AlbumCoverUrl290}"
-									   DefaultSource="album.png"/>
+									   DefaultSource="loading_img.png"/>
 					<!--标题-->
 					<WrapPanel Orientation="Vertical" 
 							   Background="{DynamicResource WhiteBrush}"
@@ -113,7 +113,7 @@
 						           Width="60" 
 						           Height="60" 
 						           Source="{Binding CoverPath}"
-						           DefaultSource="album.png"/>
+						           DefaultSource="loading_img.png"/>
 				<!--声音信息-->
 				<Grid Grid.Column="1" 
 					  ClipToBounds="True">

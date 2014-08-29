@@ -21,7 +21,7 @@
 					<MControls:MyImage VerticalAlignment="Top" 
 									   Source="{Binding Pic}"
 									   x:Name="FocusCommand"
-									   DefaultSource="banner.png"
+									   DefaultSource="focusimage_img.png"
 									   Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=ActualHeight}"
 									   Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=ActualWidth}"/>
 					<Label VerticalAlignment="Bottom" 
