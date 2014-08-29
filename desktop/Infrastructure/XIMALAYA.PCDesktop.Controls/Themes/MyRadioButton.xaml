@@ -74,7 +74,7 @@
                         </Rectangle.RenderTransform>
                     </Rectangle>
 
-                    <Path x:Name="IconDataPath" 
+                    <!--<Path x:Name="IconDataPath" 
                           VerticalAlignment="Top"
                           HorizontalAlignment="Right" 
                           Opacity="0"
@@ -85,9 +85,19 @@
                           Stretch="Fill"
                           Margin="{TemplateBinding IconMargin}"
                           UseLayoutRounding="False">
-                    </Path>
+                    </Path>-->
 
-                    <ContentPresenter x:Name="contentPresenter"
+					<ContentPresenter x:Name="IconDataPath" 
+									  VerticalAlignment="Top"
+									  HorizontalAlignment="Right" 
+									  Width="{TemplateBinding IconWidth}"
+									  Height="{TemplateBinding IconHeight}"
+									  Margin="{TemplateBinding IconMargin}"
+									  Content="{TemplateBinding SuperScriptContent}"
+									  UseLayoutRounding="False"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"/>
+
+					<ContentPresenter x:Name="contentPresenter"
                                       Panel.ZIndex="-1"
                                       Content="{TemplateBinding Content}"
                                       ContentTemplate="{TemplateBinding ContentTemplate}"

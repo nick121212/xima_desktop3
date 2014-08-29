@@ -120,12 +120,36 @@
 	<!--窗体级FLYOUT-->
 	<Controls:MetroWindow.Flyouts>
 		<Controls:FlyoutsControl>
-			<Controls:Flyout x:Name="testFlyout"
+			<Controls:Flyout x:Name="settingFlyout"
                              Position="Bottom"  
                              Theme="Adapt"
                              cal:RegionManager.RegionName="{x:Static tools:WellKnownRegionNames.SettingsModuleRegion}"  
                              IsOpen="{Binding IsSettingFlyoutShow,Source={x:Static tools:FlyoutVisible.Instance}}"
                              AnimateOnPositionChange="True"/>
+
+			<Controls:Flyout Position="Right"  
+                             Theme="Adapt"
+							 Width="300"
+							 Header="当前播放列表"
+                             IsOpen="{Binding IsShowListView,Source={x:Static tools:FlyoutVisible.Instance}}"
+                             AnimateOnPositionChange="True">
+				<ListBox BorderBrush="{DynamicResource AccentColorBrush}"
+						 BorderThickness="0"
+						 VerticalAlignment="Top"
+						 HorizontalAlignment="Left"
+						 ItemContainerStyle="{StaticResource PlayingListStyle}"
+						 ItemsSource="{Binding SoundCollection,Source={x:Static tools:CommandSingleton.Instance}}">
+					<ListBox.ItemsPanel>
+						<ItemsPanelTemplate>
+							<MControls:TilePanel TileHeight="50" 
+                                              TileWidth="280" 
+                                              TileMargin="0 2"
+                                              TileCount="1"/>
+						</ItemsPanelTemplate>
+					</ListBox.ItemsPanel>
+				</ListBox>
+			</Controls:Flyout>
+
 		</Controls:FlyoutsControl>
 	</Controls:MetroWindow.Flyouts>
 	<!--右侧按钮-->
@@ -153,7 +177,7 @@
 		<Grid DockPanel.Dock="Bottom" MaxHeight="70" ClipToBounds="False">
 			<ContentControl cal:RegionManager.RegionName="{x:Static tools:WellKnownRegionNames.MusicPlayerModuleRegion}"/>
 		</Grid>
-		
+
 		<Border x:Name="LeftContainer" 
 				DockPanel.Dock="Left" 
 				Width="100"
@@ -168,27 +192,6 @@
 			<Controls:FlyoutsControl Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Grid}, Path=ActualWidth}" 
 									 Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Grid}, Path=ActualHeight}" 
 									 x:Name="ContainerGrid"/>
-			<ListBox Width="300" 
-					 Height="300"
-					 BorderBrush="{DynamicResource AccentColorBrush}"
-					 BorderThickness="0"
-					 Visibility="{Binding IsShowListView,Source={x:Static tools:FlyoutVisible.Instance},Converter={StaticResource BooleanToVisibilityConverter}}"
-					 VerticalAlignment="Bottom"
-					 HorizontalAlignment="Right"
-					 ItemContainerStyle="{StaticResource PlayingListStyle}"
-					 ItemsSource="{Binding SoundCollection,Source={x:Static tools:CommandSingleton.Instance}}">
-				<ListBox.ItemsPanel>
-					<ItemsPanelTemplate>
-						<MControls:TilePanel TileHeight="50" 
-                                             TileWidth="280" 
-                                             TileMargin="0 2"
-                                             TileCount="1"/>
-					</ItemsPanelTemplate>
-				</ListBox.ItemsPanel>
-				<ListBox.Triggers>
-
-				</ListBox.Triggers>
-			</ListBox>
 		</Grid>
 	</DockPanel>
 

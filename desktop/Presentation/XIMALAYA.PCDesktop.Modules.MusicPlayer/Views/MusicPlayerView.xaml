@@ -124,6 +124,7 @@
 								      Height="20"
 								      BorderType="Ellipse"
 									  IsThreeState="True"
+									  Visibility="Collapsed"
 								      Foreground="{DynamicResource WhiteBrush}"
 								      BackgroundChecked="{DynamicResource GrayBrush10}"
 								      Background="{DynamicResource BlackBrush}"

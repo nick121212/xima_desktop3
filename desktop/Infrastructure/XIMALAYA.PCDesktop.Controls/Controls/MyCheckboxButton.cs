@@ -34,6 +34,19 @@ namespace XIMALAYA.PCDesktop.Controls
         public static readonly DependencyProperty SuperScriptSizeProperty =
             DependencyProperty.Register("SuperScriptSize", typeof(double), typeof(MyCheckboxButton), new PropertyMetadata(10D));
         /// <summary>
+        /// 
+        /// </summary>
+        public object SuperScriptContent
+        {
+            get { return (object)GetValue(SuperScriptContentProperty); }
+            set { SetValue(SuperScriptContentProperty, value); }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public static readonly DependencyProperty SuperScriptContentProperty =
+            DependencyProperty.Register("SuperScriptContent", typeof(object), typeof(MyCheckboxButton), new PropertyMetadata(null));
+        /// <summary>
         /// 图标的path
         /// </summary>
         public Geometry IconData

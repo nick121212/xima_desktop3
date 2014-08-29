@@ -110,7 +110,7 @@ namespace XIMALAYA.PCDesktop
 
         void Shell_Loaded(object sender, RoutedEventArgs e)
         {
-            RegionManager.SetRegionManager(this.testFlyout, this.regionManager);
+            RegionManager.SetRegionManager(this.settingFlyout, this.regionManager);
             this.ResourceDic = ThemeInfoManager.Instance.FindResourceDictionary(@"/MahApps.Metro;component/Styles/Colors.xaml");
 
             //taskBar.ProgressState = TaskbarItemProgressState.Normal;
