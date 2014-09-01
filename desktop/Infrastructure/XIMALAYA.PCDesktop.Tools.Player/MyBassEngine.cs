@@ -30,11 +30,12 @@ namespace XIMALAYA.PCDesktop.Tools.Player
         private TimeSpan _TotalTime = TimeSpan.Zero;
         private TimeSpan _CurrentTime = TimeSpan.Zero;
         private int _SampleFrequency = 44100;
-        private bool _CanPlay = false;
-        private bool _CanPause = false;
-        private bool _IsPlaying = false;
+        private bool _CanPlay;
+        private bool _CanPause;
+        private bool _IsPlaying;
+        private bool _IsLoading;
         private float _Volume = 0.5F;
-        private bool _IsMuted = false;
+        private bool _IsMuted;
         private readonly int maxFFT = (int)(Un4seen.Bass.BASSData.BASS_DATA_AVAILABLE | Un4seen.Bass.BASSData.BASS_DATA_FFT4096);
         private float _Process = 0F;
         private long _trackID;
@@ -341,6 +342,25 @@ namespace XIMALAYA.PCDesktop.Tools.Player
         /// 下载文件的流
         /// </summary>
         public FileStream FileStream { get; set; }
+        /// <summary>
+        /// 是否在等待状态
+        /// </summary>
+        public bool IsLoading
+        {
+            get
+            {
+                return _IsLoading;
+            }
+            set
+            {
+                if (value != _IsLoading)
+                {
+                    _IsLoading = value;
+                    this.RaisePropertyChanged(() => this.IsLoading);
+                }
+            }
+        }
+        
 
         #endregion
 
@@ -436,6 +456,7 @@ namespace XIMALAYA.PCDesktop.Tools.Player
             {
                 handle = Bass.BASS_StreamCreateURL(this.CurrentSoundUrl, 0, BASSFlag.BASS_DEFAULT, this.DownloadProc, IntPtr.Zero);
                 this.ActiveStreamHandle = handle;
+                this.IsLoading = false;
                 if (handle == 0)
                 {
                     Debug.WriteLine("打开声音错误！", DateTime.Now);
@@ -500,6 +521,7 @@ namespace XIMALAYA.PCDesktop.Tools.Player
                     throw new ArgumentException("Error establishing End Sync on file stream.", "path");
                 //this.GenerateWaveformData(filename);
                 this.CanPlay = true;
+                this.IsLoading = false;
                 this.Process = 1;
                 this.Play();
             }
@@ -655,6 +677,7 @@ namespace XIMALAYA.PCDesktop.Tools.Player
                     if (buffer == IntPtr.Zero)
                     {
                         this.Process = 1;
+                        this.IsLoading = false;
                         //this.GenerateWaveformData(this.CurrentSoundUrl);
                     }
                     else
@@ -663,7 +686,8 @@ namespace XIMALAYA.PCDesktop.Tools.Player
                             Bass.BASS_StreamGetFilePosition(this.ActiveStreamHandle, BASSStreamFilePosition.BASS_FILEPOS_DOWNLOAD)
                             ) / this.TotalSize;
                     }
-                    if (this.Process > 0.1 && !this.IsAutoPlayed)
+                    this.IsLoading = this.Process <= 0.1;
+                    if (this.Process > 0.05 && !this.IsAutoPlayed)
                     {
                         this.IsAutoPlayed = true;
                         this.Play();

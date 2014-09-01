@@ -26,16 +26,16 @@ namespace XIMALAYA.PCDesktop.Tools.Converter
         /// <returns></returns>
         public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            bool result = false;
+            bool result = false, isLoading = false;
             long first = 0;
 
-            if (values.Length > 2)
+            if (values.Length >= 2)
             {
                 switch (parameter.ToString())
                 {
                     case "0":
                         result = (bool)values[0];
-                        if (long.TryParse(values[1].ToString(), out first))
+                        if (values.Length > 1 && long.TryParse(values[1].ToString(), out first))
                         {
                             for (int i = 1; i < values.Length && result; i++)
                             {
@@ -44,7 +44,27 @@ namespace XIMALAYA.PCDesktop.Tools.Converter
                                 if (!result) break;
                             }
                         }
-                        break;
+                        return result;
+                    case "1":
+                        result = (bool)values[0];
+                        isLoading = (bool)values[1];
+
+                        if (values.Length > 2 && long.TryParse(values[2].ToString(), out first))
+                        {
+                            for (int i = 2; i < values.Length && result; i++)
+                            {
+                                result = first == (long)values[i];
+
+                                if (!result) break;
+                            }
+                        }
+
+                        if (result && isLoading)
+                        {
+                            return null;
+                        }
+
+                        return result;
                 }
             }
 

@@ -14,6 +14,7 @@
 			<converter:TimeSpanConverter x:Key="TimeSpanConverter"/>
 			<BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
 			<converter:ToTransparentColorConverter x:Key="ToTransparentColorConverter"/>
+			<converter:MutiBoolConverter x:Key="MutiBoolConverter" />
 		</ResourceDictionary>
 	</UserControl.Resources>
 
@@ -183,14 +184,24 @@
 			<MControls:MyToggleButton Width="40" 
 								      Height="40"
 								      BorderType="Ellipse"
+									  IsThreeState="True"
 								      Foreground="{DynamicResource WhiteBrush}"
-									  IsChecked="{Binding BassEngine.IsPlaying,Mode=OneWay}"
                                       Command="{Binding BassEngine.PlayCommand}"
                                       CommandParameter="{Binding Source={RelativeSource Self},Path=IsChecked}"
 								      BackgroundChecked="{DynamicResource GrayBrush10}"
 								      Background="{DynamicResource BlackBrush}"
 								      BorderBrush="{DynamicResource BlackBrush}"
 								      BorderThickness="1">
+				<MControls:MyToggleButton.IsChecked>
+					<MultiBinding Converter="{StaticResource MutiBoolConverter}" 
+								  ConverterParameter="1" 
+								  Mode="OneWay">
+						<MultiBinding.Bindings>
+							<Binding Path="BassEngine.IsPlaying" />
+							<Binding Path="BassEngine.IsLoading" />
+						</MultiBinding.Bindings>
+					</MultiBinding>
+				</MControls:MyToggleButton.IsChecked>
 				<MControls:MyToggleButton.Content>
 					<Path Data="{Binding [play], Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{StaticResource PathStyle}"
@@ -206,6 +217,12 @@
 						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
 					</Path>
 				</MControls:MyToggleButton.ContentChecked>
+				<MControls:MyToggleButton.ContentThreeState>
+					<Controls:ProgressRing IsActive="True"
+										   Foreground="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
+										   Width="30"
+										   Height="30"/>
+				</MControls:MyToggleButton.ContentThreeState>
 			</MControls:MyToggleButton>
 			<!--下一首-->
 			<MControls:MyToggleButton Width="30" 
@@ -236,6 +253,7 @@
 									  Width="30" 
 								      Height="30"
 									  Margin="5"
+									  IsThreeState="True"
 								      BorderType="Ellipse"
 								      Foreground="{DynamicResource WhiteBrush}"
 									  IsBackground="Visible"
@@ -256,6 +274,9 @@
 						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
 					</Path>
 				</MControls:MyToggleButton.ContentChecked>
+				<MControls:MyToggleButton.ContentThreeState>
+					<Controls:ProgressRing IsActive="True" />
+				</MControls:MyToggleButton.ContentThreeState>
 			</MControls:MyToggleButton>
 		</StackPanel>
 		<!--人物头像-->
