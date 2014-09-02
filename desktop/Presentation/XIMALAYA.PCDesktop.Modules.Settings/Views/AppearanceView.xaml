@@ -3,56 +3,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
-             xmlns:theme="clr-namespace:XIMALAYA.PCDesktop.Tools.Themes;assembly=XIMALAYA.PCDesktop.Tools"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="500">
+			 xmlns:theme="clr-namespace:XIMALAYA.PCDesktop.Tools.Themes;assembly=XIMALAYA.PCDesktop.Tools">
+	<StackPanel MinWidth="150" Margin="10">
 
-    <Controls:MetroAnimatedSingleRowTabControl TabStripPlacement="Right">
-        <TabItem Header="外观设置" Width="180">
-            <ScrollViewer>
-                <StackPanel MinWidth="150">
+		<ComboBox Grid.Column="1" 
+                  DisplayMemberPath="Name"
+                  ItemsSource="{Binding Source={x:Static theme:ThemeInfoManager.Instance},Path=AppThemes}"  
+                  SelectedItem="{Binding SelectedTheme, Mode=TwoWay}" 
+                  VerticalAlignment="Center" Margin="0,16,0,4" />
 
-                    <ComboBox Grid.Column="1" 
-                                  DisplayMemberPath="Name"
-                                  ItemsSource="{Binding Source={x:Static theme:ThemeInfoManager.Instance},Path=AppThemes}"  
-                                  SelectedItem="{Binding SelectedTheme, Mode=TwoWay}" 
-                                  VerticalAlignment="Center" Margin="0,16,0,4" />
-
-                    <ListBox ItemsSource="{Binding Source={x:Static theme:ThemeInfoManager.Instance},Path=AccentColors}"
-                         SelectedItem="{Binding SelectedAccentColor, Mode=TwoWay}"
-                         Margin="0,16,0,16"
-                         ScrollViewer.HorizontalScrollBarVisibility="Auto">
-                        <ListBox.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal" />
-                            </ItemsPanelTemplate>
-                        </ListBox.ItemsPanel>
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Rectangle Width="40" Height="40" Margin="0 4 4 4" 
-                                           Stroke="{Binding BorderColorBrush}" 
-                                           Fill="{Binding ColorBrush}">
-                                </Rectangle>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-
-                    <Grid HorizontalAlignment="Left">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition MinWidth="120"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                    </Grid>
-                </StackPanel>
-            </ScrollViewer>
-        </TabItem>
-        <!--<TabItem Header="OTHERS" Width="180">
-           
-        </TabItem>-->
-    </Controls:MetroAnimatedSingleRowTabControl>
+		<ListBox ItemsSource="{Binding Source={x:Static theme:ThemeInfoManager.Instance},Path=AccentColors}"
+                 SelectedItem="{Binding SelectedAccentColor, Mode=TwoWay}"
+                 Margin="0,16,0,16"
+                 ScrollViewer.HorizontalScrollBarVisibility="Auto">
+			<ListBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<StackPanel Orientation="Horizontal" />
+				</ItemsPanelTemplate>
+			</ListBox.ItemsPanel>
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<Rectangle Width="40" 
+							   Height="40" 
+							   Margin="0 4 4 4" 
+                               Stroke="{Binding BorderColorBrush}" 
+                               Fill="{Binding ColorBrush}">
+					</Rectangle>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+		
+	</StackPanel>
 </UserControl>

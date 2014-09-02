@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DigitalIdeaSolutions.Collections, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\DigitalIdeaSolutions.Collections.dll</HintPath>
+    </Reference>
     <Reference Include="MahApps.Metro, Version=0.13.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\MahApps.Metro.dll</HintPath>
@@ -54,6 +58,7 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -111,6 +116,9 @@
     <Compile Include="HttpWebRequestOpt.cs" />
     <Compile Include="Untils\BaseModule.cs" />
     <Compile Include="Untils\BaseViewModel.cs" />
+    <Compile Include="Untils\AeroHelper.cs" />
+    <Compile Include="Untils\HotKey.cs" />
+    <Compile Include="Untils\HotKeysManager.cs" />
     <Compile Include="Untils\Parameters.cs" />
     <Compile Include="Untils\IFlyoutFactory.cs" />
     <Compile Include="T4\T4ModelInfo.cs" />

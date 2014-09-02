@@ -30,7 +30,7 @@ namespace XIMALAYA.PCDesktop.Modules
         {
             if (this.RegionManager.Regions.ContainsRegionWithName(WellKnownRegionNames.SettingsModuleRegion))
             {
-                var view = this.Container.GetInstance<AppearanceView>();
+                var view = this.Container.GetInstance<SettingsView>();
                 var region = this.RegionManager.Regions[WellKnownRegionNames.SettingsModuleRegion];
 
                 region.Add(view, WellKnownModuleNames.SettingsModule);

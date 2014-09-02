@@ -9,7 +9,6 @@ using XIMALAYA.PCDesktop.Core.Models.Album;
 using XIMALAYA.PCDesktop.Core.Models.Category;
 using XIMALAYA.PCDesktop.Core.Models.Discover;
 using XIMALAYA.PCDesktop.Core.Models.FocusImage;
-using XIMALAYA.PCDesktop.Core.Models.Search;
 using XIMALAYA.PCDesktop.Core.Models.Subject;
 using XIMALAYA.PCDesktop.Core.ParamsModel;
 using XIMALAYA.PCDesktop.Core.Services;

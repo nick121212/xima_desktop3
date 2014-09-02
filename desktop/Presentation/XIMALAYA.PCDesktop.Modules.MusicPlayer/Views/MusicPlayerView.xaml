@@ -18,7 +18,7 @@
 		</ResourceDictionary>
 	</UserControl.Resources>
 
-	<Grid VerticalAlignment="Center" Margin="0 5">
+	<Grid VerticalAlignment="Center" Margin="0">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="*"/>
@@ -38,7 +38,7 @@
 			  Grid.Row="1"
 			  Margin="0" 
 			  VerticalAlignment="Bottom" 
-			  Opacity="0.5">
+			  Opacity="0.4">
 			<Grid.Effect>
 				<BlurEffect Radius="7"/>
 			</Grid.Effect>
@@ -344,6 +344,5 @@
 					   VerticalAlignment="Center"
 					   Text="{Binding Duration,ElementName=metroSlider,Converter={StaticResource TimeSpanConverter}}"/>
 		</Grid>
-
 	</Grid>
 </UserControl>

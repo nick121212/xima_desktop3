@@ -33,12 +33,11 @@
 
 			<!--声音图片-->
 			<MControls:MyImage Margin="5"
-						   Width="180" 
-						   Height="180" 
-						   VerticalAlignment="Top"
-						   Source="{Binding SoundData.CoverLarge}"
-						   DefaultSource="loading_img.png">
-			</MControls:MyImage>
+							   Width="180" 
+							   Height="180" 
+							   VerticalAlignment="Top"
+							   Source="{Binding SoundData.CoverLarge}"/>
+
 
 			<Grid Grid.Column="1">
 				<Grid.RowDefinitions>
@@ -101,43 +100,11 @@
 						</MControls:MyToggleButton.Content>
 					</MControls:MyToggleButton>
 					<!--播放按钮-->
-					<MControls:MyToggleButton Width="20" 
-								          Height="20"
-									      Margin="5"
-										  Padding="0"
-									      IsSingle="True"
-								          BorderType="Ellipse"
-										  BorderThickness="1"
-										  Command="{Binding PlaySoundCommand,Source={x:Static tools:CommandSingleton.Instance}}"
-										  CommandParameter="{Binding SoundData.TrackId}"
-								          Foreground="{DynamicResource WhiteBrush}"
-								          Background="{DynamicResource BlackBrush}"
-								          BorderBrush="{DynamicResource BlackBrush}">
-						<MControls:MyToggleButton.Content>
-							<Path Data="{Binding [play], Source={x:Static MControls:PathData.Instance}}" 
-								  Style="{DynamicResource PathStyle}"
-								  Width="10"
-								  Height="10"
-								  Margin="3 0 0 0"
-								  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" />
-						</MControls:MyToggleButton.Content>
-						<MControls:MyToggleButton.ContentChecked>
-							<Path Data="{Binding [pause], Source={x:Static MControls:PathData.Instance}}"
-						      Style="{DynamicResource PathStyle}"
-						      Width="10"
-						      Height="10"
-						      Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" />
-						</MControls:MyToggleButton.ContentChecked>
-						<MControls:MyToggleButton.IsChecked>
-							<MultiBinding Converter="{StaticResource MutiBoolConverter}" ConverterParameter="0" Mode="OneWay">
-								<MultiBinding.Bindings>
-									<Binding Path="BassEngine.IsPlaying" Source="{x:Static tools:CommandSingleton.Instance}" />
-									<Binding Path="SoundData.TrackId"/>
-									<Binding Path="SoundData.TrackId" Source="{x:Static tools:CommandSingleton.Instance}"/>
-								</MultiBinding.Bindings>
-							</MultiBinding>
-						</MControls:MyToggleButton.IsChecked>
-					</MControls:MyToggleButton>
+					<Label Template="{StaticResource PlayBtnStyleSingle}">
+						<Label.DataContext>
+							<Binding Path="SoundData"/>
+						</Label.DataContext>
+					</Label>
 				</StackPanel>
 				<!--分享-->
 				<Label Margin="5 0"

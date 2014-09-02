@@ -1,19 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.Composition;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using XIMALAYA.PCDesktop.Controls;
 
 namespace XIMALAYA.PCDesktop.Modules.DiscoverPage.Views
 {
@@ -28,7 +14,7 @@ namespace XIMALAYA.PCDesktop.Modules.DiscoverPage.Views
         {
             InitializeComponent();
             //this.Loaded += DiscoverView_Loaded;
-            this.Unloaded += DiscoverView_Unloaded;
+            //this.Unloaded += DiscoverView_Unloaded;
         }
 
         void DiscoverView_Unloaded(object sender, RoutedEventArgs e)

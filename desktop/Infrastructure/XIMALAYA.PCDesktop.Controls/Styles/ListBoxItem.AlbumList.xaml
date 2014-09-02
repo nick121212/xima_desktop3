@@ -31,8 +31,7 @@
 					<MControls:MyImage ToolTip="{Binding Title}" 
 									   Width="180" 
 									   Height="180" 
-									   Source="{Binding AlbumCoverUrl290}"
-									   DefaultSource="loading_img.png"/>
+									   Source="{Binding AlbumCoverUrl290}"/>
 					<!--标题-->
 					<WrapPanel Orientation="Vertical" 
 							   Background="{DynamicResource WhiteBrush}"
@@ -112,8 +111,7 @@
 						           VerticalAlignment="Center"
 						           Width="60" 
 						           Height="60" 
-						           Source="{Binding CoverPath}"
-						           DefaultSource="loading_img.png"/>
+						           Source="{Binding CoverPath}"/>
 				<!--声音信息-->
 				<Grid Grid.Column="1" 
 					  ClipToBounds="True">

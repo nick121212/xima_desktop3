@@ -192,6 +192,26 @@ namespace XIMALAYA.PCDesktop.Tools
         /// 分享命令
         /// </summary>
         public DelegateCommand<object> ShareCommand { get; set; }
+        /// <summary>
+        /// 提高音量
+        /// </summary>
+        public DelegateCommand VolumeUpCommand { get; set; }
+        /// <summary>
+        /// 减小音量
+        /// </summary>
+        public DelegateCommand VolumeDownCommand { get; set; }
+        /// <summary>
+        /// 退出程序命令
+        /// </summary>
+        public DelegateCommand CloseCommand { get; set; }
+        /// <summary>
+        /// 最小化命令
+        /// </summary>
+        public DelegateCommand MinisizeCommand { get; set; }
+        /// <summary>
+        /// 最大化
+        /// </summary>
+        public DelegateCommand MaxisizeCommand { get; set; }
 
         #endregion
 
@@ -202,6 +222,7 @@ namespace XIMALAYA.PCDesktop.Tools
             this.EventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
             this.ShareService = ServiceLocator.Current.GetInstance<IShareService>();
             this.SoundCollection = new ListBox().Items;
+            this.SoundData = new SoundData();
 
             //播放声音命令，获取列表
             this.PlaySound1Command = new DelegateCommand<Control>(con =>
@@ -243,6 +264,11 @@ namespace XIMALAYA.PCDesktop.Tools
                     {
                         this.PlaySoundCommand.Execute(((SoundData)this.SoundCollection.CurrentItem).TrackId);
                     }
+                    else if (this.SoundCollection.IsCurrentAfterLast)
+                    {
+                        this.SoundCollection.MoveCurrentToLast();
+                        this.PlaySoundCommand.Execute(((SoundData)this.SoundCollection.CurrentItem).TrackId);
+                    }
                 }), null);
             }, () =>
             {
@@ -258,6 +284,11 @@ namespace XIMALAYA.PCDesktop.Tools
                 {
                     if (this.SoundCollection.MoveCurrentToNext())
                     {
+                        this.PlaySoundCommand.Execute(((SoundData)this.SoundCollection.CurrentItem).TrackId);
+                    }
+                    else if (this.SoundCollection.IsCurrentBeforeFirst)
+                    {
+                        this.SoundCollection.MoveCurrentToFirst();
                         this.PlaySoundCommand.Execute(((SoundData)this.SoundCollection.CurrentItem).TrackId);
                     }
                 }), null);
@@ -353,8 +384,72 @@ namespace XIMALAYA.PCDesktop.Tools
                             this.GetShareAlbumLink((Sites)arr[0], (long)arr[2]);
                             break;
                     }
+                }
+            });
+            //提高音量命令
+            this.VolumeUpCommand = new DelegateCommand(() =>
+            {
+                if (this.BassEngine.Volume + 0.1F < 1)
+                {
+                    this.BassEngine.Volume += 0.1F;
+                }
+                else
+                {
+                    this.BassEngine.Volume = 1;
+                }
+            }, () =>
+            {
+                return this.BassEngine.Volume < 1;
+            });
+            //提高音量命令
+            this.VolumeDownCommand = new DelegateCommand(() =>
+            {
+                if (this.BassEngine.Volume - 0.1F > 0)
+                {
+                    this.BassEngine.Volume -= 0.1F;
+                }
+                else
+                {
+                    this.BassEngine.Volume = 0;
+                }
+            }, () =>
+            {
+                return this.BassEngine.Volume > 0;
+            });
 
+            this.CloseCommand = new DelegateCommand(() =>
+            {
+                SystemCommands.CloseWindow(Application.Current.MainWindow);
+            });
+            this.MinisizeCommand = new DelegateCommand(() =>
+            {
+                var parentWindow = Application.Current.MainWindow;
+                if (parentWindow == null)
+                    return;
 
+                if (parentWindow.WindowState == WindowState.Normal)
+                {
+                    SystemCommands.MinimizeWindow(parentWindow);
+                }
+                else
+                {
+                    SystemCommands.RestoreWindow(parentWindow);
+                }
+                
+            });
+            this.MaxisizeCommand = new DelegateCommand(() =>
+            {
+                var parentWindow = Application.Current.MainWindow;
+                if (parentWindow == null)
+                    return;
+
+                if (parentWindow.WindowState == WindowState.Normal )
+                {
+                    SystemCommands.MaximizeWindow(parentWindow);
+                }
+                else
+                {
+                    SystemCommands.RestoreWindow(parentWindow);
                 }
             });
         }
@@ -488,7 +583,7 @@ namespace XIMALAYA.PCDesktop.Tools
         #endregion
     }
     /// <summary>
-    /// 按钮
+    /// 命令
     /// </summary>
     public class CommandSingleton : Singleton<CommandBaseSingleton> { }
 }

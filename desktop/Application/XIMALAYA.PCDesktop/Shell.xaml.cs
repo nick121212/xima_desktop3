@@ -71,6 +71,13 @@ namespace XIMALAYA.PCDesktop
             this.ClearMembryTimer.IsEnabled = true;
         }
 
+
+        protected override void OnSourceInitialized(EventArgs e)
+        {
+            base.OnSourceInitialized(e);
+            //AeroHelper.ExtendGlassFrame(this, new Thickness(-1));
+        }
+
         void ClearMembryTimer_Tick(object sender, EventArgs e)
         {
             SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
@@ -113,8 +120,15 @@ namespace XIMALAYA.PCDesktop
             RegionManager.SetRegionManager(this.settingFlyout, this.regionManager);
             this.ResourceDic = ThemeInfoManager.Instance.FindResourceDictionary(@"/MahApps.Metro;component/Styles/Colors.xaml");
 
-            //taskBar.ProgressState = TaskbarItemProgressState.Normal;
-            //taskBar.ProgressValue = 0.4;
+            HotKeysManagerSingleton.Instance.AddKey(System.Windows.Forms.Keys.F5, HotKeysManager.CommandKeys.Play);
+            HotKeysManagerSingleton.Instance.AddKey(System.Windows.Forms.Keys.Right, HotKeysManager.CommandKeys.Next);
+            HotKeysManagerSingleton.Instance.AddKey(System.Windows.Forms.Keys.Left, HotKeysManager.CommandKeys.Prev);
+            HotKeysManagerSingleton.Instance.AddKey(System.Windows.Forms.Keys.Up, HotKeysManager.CommandKeys.VolumeUp);
+            HotKeysManagerSingleton.Instance.AddKey(System.Windows.Forms.Keys.Down, HotKeysManager.CommandKeys.VolumeDown);
+
+            HotKeysManagerSingleton.Instance.AddKey(System.Windows.Forms.Keys.C, HotKeysManager.CommandKeys.Close);
+            HotKeysManagerSingleton.Instance.AddKey(System.Windows.Forms.Keys.M, HotKeysManager.CommandKeys.Minisize);
+            HotKeysManagerSingleton.Instance.AddKey(System.Windows.Forms.Keys.N, HotKeysManager.CommandKeys.Maxisize);
         }
 
         #endregion

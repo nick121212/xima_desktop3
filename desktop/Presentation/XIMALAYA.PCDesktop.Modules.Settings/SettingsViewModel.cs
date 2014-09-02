@@ -16,8 +16,8 @@ namespace XIMALAYA.PCDesktop.Modules.Settings
     /// <summary>
     /// 设置中样式的model
     /// </summary>
-    [Export(typeof(ApperaranceViewModel))]
-    public class ApperaranceViewModel : BaseViewModel
+    [Export(typeof(SettingsViewModel))]
+    public class SettingsViewModel : BaseViewModel
     {
         private AccentColorMenuData _SelectedAccentColor = null;
         /// <summary>
@@ -65,7 +65,7 @@ namespace XIMALAYA.PCDesktop.Modules.Settings
         /// <summary>
         /// 构造
         /// </summary>
-        public ApperaranceViewModel()
+        public SettingsViewModel()
         {
             this.SelectedTheme = ThemeInfoManager.Instance.Theme;
             this.SelectedAccentColor = ThemeInfoManager.Instance.AccentColor;

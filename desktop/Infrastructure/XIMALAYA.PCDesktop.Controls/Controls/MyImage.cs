@@ -58,6 +58,20 @@ namespace XIMALAYA.PCDesktop.Controls
             d.SetValue(Control.BackgroundProperty, ib);
         }
 
+
+
+        public bool IsActive
+        {
+            get { return (bool)GetValue(IsActiveProperty); }
+            set { SetValue(IsActiveProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsActive.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsActiveProperty =
+            DependencyProperty.Register("IsActive", typeof(bool), typeof(MyImage), new PropertyMetadata(false));
+
+
+
         private Image Image { get; set; }
 
         /// <summary>

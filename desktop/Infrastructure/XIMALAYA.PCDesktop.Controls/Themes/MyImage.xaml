@@ -1,10 +1,14 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
                     xmlns:local="clr-namespace:XIMALAYA.PCDesktop.Controls">
 	<ControlTemplate x:Key="MyImageTemplate" TargetType="local:MyImage">
-		<Grid Width="{TemplateBinding Width}" 
+		<Grid x:Name="PART_Container"
+			  Width="{TemplateBinding Width}" 
 			  Height="{TemplateBinding Height}"
 			  Background="{TemplateBinding Background}">
+
+			<!--<controls:ProgressRing IsActive="{TemplateBinding IsActive}" x:Name="PART_Process"/>-->
 			<Image x:Name="PART_Image" 
 				   Source="{TemplateBinding Source}" 
 				   Width="{TemplateBinding Width}" 
@@ -14,6 +18,18 @@
 					<BitmapCache RenderAtScale="1"
 								 EnableClearType ="True"/>
 				</Image.CacheMode>
+				<!--<Image.Triggers>
+					<EventTrigger RoutedEvent="Loaded">
+						<BeginStoryboard>
+							<Storyboard>
+								<DoubleAnimation Storyboard.TargetProperty="Opacity"
+										         Storyboard.TargetName="PART_Process"
+												 Duration="0"
+										         To="0" />
+							</Storyboard>
+						</BeginStoryboard>
+					</EventTrigger>
+				</Image.Triggers>-->
 			</Image>
 		</Grid>
 		<ControlTemplate.Triggers>
@@ -21,7 +37,7 @@
 				<BeginStoryboard >
 					<Storyboard>
 						<DoubleAnimation Storyboard.TargetProperty="Opacity"
-										 Storyboard.TargetName="PART_Image"
+										 Storyboard.TargetName="PART_Container"
 										 To="0" />
 					</Storyboard>
 				</BeginStoryboard>
@@ -31,6 +47,7 @@
 
 	<Style TargetType="local:MyImage">
 		<Setter Property="Template" Value="{StaticResource MyImageTemplate}"/>
+		<Setter Property="DefaultSource" Value="loading_img.png"/>
 	</Style>
 
 </ResourceDictionary>

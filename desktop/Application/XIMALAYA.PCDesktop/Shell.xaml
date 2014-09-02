@@ -6,7 +6,8 @@
                       xmlns:cal="http://www.codeplex.com/prism"
                       xmlns:tools="http://ximalaya.com/xaml/tools"
                       xmlns:player="http://ximalaya.com/xaml/player"
-					  xmlns:shell="system.window.she"
+					  xmlns:shell="Microsoft.Windows.Shell"
+					  xmlns:tb="http://www.hardcodet.net/taskbar"
                       Style="{DynamicResource CleanWindowStyle}"
                       GlowBrush="{DynamicResource AccentColorBrush}"
                       Title="{Binding WindowTitle}" 
@@ -125,12 +126,12 @@
 	<Controls:MetroWindow.Flyouts>
 		<Controls:FlyoutsControl>
 			<Controls:Flyout x:Name="settingFlyout"
-                             Position="Bottom"  
+                             Position="Right"  
                              Theme="Adapt"
+							 Header="系统设置"
                              cal:RegionManager.RegionName="{x:Static tools:WellKnownRegionNames.SettingsModuleRegion}"  
                              IsOpen="{Binding IsSettingFlyoutShow,Source={x:Static tools:FlyoutVisible.Instance}}"
                              AnimateOnPositionChange="True"/>
-
 			<Controls:Flyout Position="Right"  
                              Theme="Adapt"
 							 Width="300"
@@ -153,7 +154,6 @@
 					</ListBox.ItemsPanel>
 				</ListBox>
 			</Controls:Flyout>
-
 		</Controls:FlyoutsControl>
 	</Controls:MetroWindow.Flyouts>
 	<!--右侧按钮-->
@@ -178,6 +178,29 @@
 	<!--内容框架-->
 	<DockPanel>
 
+		<tb:TaskbarIcon IconSource="/ICO/icon_16.ico"
+                        ToolTipText="{Binding WindowTitle}"
+						LeftClickCommand="{Binding ShowOrHideCommand}">
+			<tb:TaskbarIcon.TrayToolTip>
+				<Label Content="fagaeg"/>
+			</tb:TaskbarIcon.TrayToolTip>
+			<tb:TaskbarIcon.ContextMenu>
+				<ContextMenu>
+					<MenuItem IsCheckable="True" Header="播放/暂停" />
+					<MenuItem Header="退出" 
+							  FocusManager.IsFocusScope="True">
+						<MenuItem.Icon>
+							<Path Data="{Binding [exit],Source={x:Static MControls:PathData.Instance}}" 
+								  Fill="{DynamicResource BlackBrush}"
+								  Stretch="Fill"
+								  Width="16"
+								  Height="16"/>
+						</MenuItem.Icon>
+					</MenuItem>
+				</ContextMenu>
+			</tb:TaskbarIcon.ContextMenu>
+		</tb:TaskbarIcon>
+
 		<Grid DockPanel.Dock="Bottom" MaxHeight="70" ClipToBounds="False">
 			<ContentControl cal:RegionManager.RegionName="{x:Static tools:WellKnownRegionNames.MusicPlayerModuleRegion}"/>
 		</Grid>
@@ -197,6 +220,9 @@
 									 Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Grid}, Path=ActualHeight}" 
 									 x:Name="ContainerGrid"/>
 		</Grid>
+
+
+
 	</DockPanel>
 
 </Controls:MetroWindow>

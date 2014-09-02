@@ -42,7 +42,6 @@
 			<MControls:MyImage Grid.RowSpan="4" 
 							   VerticalAlignment="Top"
 							   Source="{Binding AlbumData.AlbumCoverUrl140}"
-							   DefaultSource="loading_img.png"
 							   Width="140"
 							   Height="140"/>
 			<!--专辑标题-->

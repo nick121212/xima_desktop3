@@ -33,6 +33,8 @@
 					<MControls:MyImage Width="96" 
 									   Height="96" 
 									   VerticalAlignment="Center"
+									   DefaultSource=""
+									   IsActive="True"
 									   Source="{Binding CoverPath}"/>
 				</Grid>
 			</MControls:MyRadioButton.Content>

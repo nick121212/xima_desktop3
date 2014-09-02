@@ -33,7 +33,7 @@
 					 Controls:TextboxHelper.MouseOverBorderBrush="{DynamicResource AccentColorBrush}"
 					 Controls:TextboxHelper.IsWaitingForData="{Binding IsWaiting}"
 					 Controls:TextboxHelper.Watermark="搜索条件"
-					 BorderBrush="{DynamicResource AccentColorBrush3}"
+					 BorderBrush="{DynamicResource BlackBrush}"
 					 FontSize="18"
 					 HorizontalAlignment="Stretch"
 					 VerticalContentAlignment="Center"
@@ -48,8 +48,8 @@
 					Grid.Row="1" 
 					SelectedItem="{Binding CurrentTab}"
 					Style="{DynamicResource StandardTabControl1}">
-			<Controls:MetroTabItem Foreground="{DynamicResource BlackBrush}" Header="全部" HorizontalAlignment="Center" Tag="all"/>
-			<Controls:MetroTabItem Foreground="{DynamicResource BlackBrush}" Header="找专辑" Tag="album">
+			<Controls:MetroTabItem Header="全部" HorizontalAlignment="Center" Tag="all"/>
+			<Controls:MetroTabItem Header="找专辑" Tag="album">
 				<StackPanel Margin="10 10 0 0"  Orientation="Horizontal" Width="Auto">
 					<RadioButton GroupName="Condition" 
 								 Margin="5"
@@ -68,7 +68,7 @@
 						         Content="最新上传"/>
 				</StackPanel>
 			</Controls:MetroTabItem>
-			<Controls:MetroTabItem Foreground="{DynamicResource BlackBrush}" Header="找人" Tag="user">
+			<Controls:MetroTabItem Header="找人" Tag="user">
 				<StackPanel Margin="10 10 0 0"  Orientation="Horizontal" Width="Auto">
 					<RadioButton GroupName="Condition" 
 								 Margin="5"
@@ -92,7 +92,7 @@
 						         Content="最近更新"/>
 				</StackPanel>
 			</Controls:MetroTabItem>
-			<Controls:MetroTabItem Foreground="{DynamicResource BlackBrush}" Header="找声音" Tag="voice">
+			<Controls:MetroTabItem Header="找声音" Tag="voice">
 				<StackPanel Margin="10 10 0 0"  Orientation="Horizontal" Width="Auto">
 					<RadioButton GroupName="Condition" 
 								 Margin="5"
@@ -115,7 +115,7 @@
 		<!--搜索进度条-->
 		<Controls:MetroProgressBar Grid.Row="2" 
 								   Background="Transparent"
-								   Foreground="{DynamicResource AccentColorBrush}"
+								   Foreground="{DynamicResource BlackBrush}"
 								   Margin="0 0 0 2" 
 								   IsIndeterminate="{Binding IsWaiting}" />
 		<!--搜索数据-->

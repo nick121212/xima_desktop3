@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,29 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Microsoft.Practices.Prism.Events;
-using XIMALAYA.PCDesktop.Events;
-using XIMALAYA.PCDesktop.Tools;
 
 namespace XIMALAYA.PCDesktop.Modules.Settings.Views
 {
     /// <summary>
-    /// Settings.xaml 的交互逻辑
+    /// Appearance.xaml 的交互逻辑
     /// </summary>
-    [Export]
-    [PartCreationPolicy(CreationPolicy.Shared)]
-    public partial class AppearanceView
+    public partial class AppearanceView : UserControl
     {
         public AppearanceView()
         {
             InitializeComponent();
-        }
-
-        [Import]
-        public ApperaranceViewModel ViewModel
-        {
-            get { return this.DataContext as ApperaranceViewModel; }
-            set { this.DataContext = value; }
         }
     }
 }

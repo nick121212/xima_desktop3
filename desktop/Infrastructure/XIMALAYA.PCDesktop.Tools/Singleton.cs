@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using System.Windows;
 
 namespace XIMALAYA.PCDesktop.Tools
 {
@@ -30,11 +31,20 @@ namespace XIMALAYA.PCDesktop.Tools
 
                 return (T)ctor.Invoke(null);
             });
-
+        static bool IsInDesignMode
+        {
+            get
+            {
+                return (bool)DesignerProperties.IsInDesignModeProperty
+                            .GetMetadata(typeof(DependencyObject)).DefaultValue;
+            }
+        }
         public static T Instance
         {
             get
             {
+                if (_instance == null || IsInDesignMode) return null;
+                
                 return _instance.Value;
             }
         }

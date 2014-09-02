@@ -41,7 +41,6 @@
 					</Grid.RowDefinitions>
 
 					<MControls:MyImage Source="{Binding CoverPath}"
-									   DefaultSource="loading_img.png"
 									   Width="180" 
 									   Height="160" />
 										 

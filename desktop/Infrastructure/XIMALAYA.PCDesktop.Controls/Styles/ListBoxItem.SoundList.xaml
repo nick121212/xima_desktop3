@@ -13,6 +13,110 @@
 		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/Path.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 
+	<!--声音播放按钮样式 start-->
+
+	<!--播放按钮-->
+	<ControlTemplate x:Key="PlayBtnStyleNormal" >
+		<MControls:MyToggleButton Width="20" 
+								  Height="20"
+								  Margin="5"
+								  Padding="0"
+								  IsSingle="True"
+								  BorderType="Ellipse"
+								  BorderThickness="1"
+								  IsThreeState="True"
+								  Command="{Binding PlaySound1Command,Source={x:Static tools:CommandSingleton.Instance}}" 
+								  CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
+								  Foreground="{DynamicResource WhiteBrush}"
+								  Background="{DynamicResource BlackBrush}"
+								  BorderBrush="{DynamicResource BlackBrush}">
+			<MControls:MyToggleButton.Content>
+				<Path Data="{Binding [play], Source={x:Static MControls:PathData.Instance}}" 
+					  Style="{DynamicResource PathStyle}"
+					  Width="10"
+					  Height="10"
+					  Margin="3 0 0 0"
+					  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" />
+			</MControls:MyToggleButton.Content>
+			<MControls:MyToggleButton.ContentChecked>
+				<Path Data="{Binding [pause], Source={x:Static MControls:PathData.Instance}}"
+					  Style="{DynamicResource PathStyle}"
+					  Width="10"
+					  Height="10"
+					  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" />
+			</MControls:MyToggleButton.ContentChecked>
+			<MControls:MyToggleButton.ContentThreeState>
+				<Controls:ProgressRing IsActive="True"
+									   Foreground="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
+									   Width="20"
+									   Height="20"/>
+			</MControls:MyToggleButton.ContentThreeState>
+			<MControls:MyToggleButton.IsChecked>
+				<MultiBinding Converter="{StaticResource MutiBoolConverter}" 
+							  ConverterParameter="1" 
+							  Mode="OneWay">
+					<MultiBinding.Bindings>
+						<Binding Path="BassEngine.IsPlaying" Source="{x:Static tools:CommandSingleton.Instance}" />
+						<Binding Path="BassEngine.IsLoading" Source="{x:Static tools:CommandSingleton.Instance}" />
+						<Binding Path="TrackId"/>
+						<Binding Path="SoundData.TrackId" Source="{x:Static tools:CommandSingleton.Instance}"/>
+					</MultiBinding.Bindings>
+				</MultiBinding>
+			</MControls:MyToggleButton.IsChecked>
+		</MControls:MyToggleButton>
+	</ControlTemplate>
+	<ControlTemplate x:Key="PlayBtnStyleSingle" >
+		<MControls:MyToggleButton Width="20" 
+								  Height="20"
+								  Margin="5"
+								  Padding="0"
+								  IsSingle="True"
+								  BorderType="Ellipse"
+								  BorderThickness="1"
+								  IsThreeState="True"
+								  Command="{Binding PlaySoundCommand,Source={x:Static tools:CommandSingleton.Instance}}"
+								  CommandParameter="{Binding TrackId}"
+								  Foreground="{DynamicResource WhiteBrush}"
+								  Background="{DynamicResource BlackBrush}"
+								  BorderBrush="{DynamicResource BlackBrush}">
+			<MControls:MyToggleButton.Content>
+				<Path Data="{Binding [play], Source={x:Static MControls:PathData.Instance}}" 
+					  Style="{DynamicResource PathStyle}"
+					  Width="10"
+					  Height="10"
+					  Margin="3 0 0 0"
+					  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" />
+			</MControls:MyToggleButton.Content>
+			<MControls:MyToggleButton.ContentChecked>
+				<Path Data="{Binding [pause], Source={x:Static MControls:PathData.Instance}}"
+					  Style="{DynamicResource PathStyle}"
+					  Width="10"
+					  Height="10"
+					  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" />
+			</MControls:MyToggleButton.ContentChecked>
+			<MControls:MyToggleButton.ContentThreeState>
+				<Controls:ProgressRing IsActive="True"
+									   Foreground="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
+									   Width="20"
+									   Height="20"/>
+			</MControls:MyToggleButton.ContentThreeState>
+			<MControls:MyToggleButton.IsChecked>
+				<MultiBinding Converter="{StaticResource MutiBoolConverter}" 
+							  ConverterParameter="1" 
+							  Mode="OneWay">
+					<MultiBinding.Bindings>
+						<Binding Path="BassEngine.IsPlaying" Source="{x:Static tools:CommandSingleton.Instance}" />
+						<Binding Path="BassEngine.IsLoading" Source="{x:Static tools:CommandSingleton.Instance}" />
+						<Binding Path="TrackId"/>
+						<Binding Path="SoundData.TrackId" Source="{x:Static tools:CommandSingleton.Instance}"/>
+					</MultiBinding.Bindings>
+				</MultiBinding>
+			</MControls:MyToggleButton.IsChecked>
+		</MControls:MyToggleButton>
+	</ControlTemplate>
+	<!--声音播放按钮样式 end-->
+
+
 	<!--默认声音列表样式 start-->
 
 	<DataTemplate x:Key="NormalSoundItemTemplate" DataType="{x:Type ListBoxItem}">
@@ -34,56 +138,7 @@
 					<ColumnDefinition Width="Auto"/>
 				</Grid.ColumnDefinitions>
 				<!--播放按钮-->
-				<MControls:MyToggleButton Width="20" 
-								          Height="20"
-									      Margin="5"
-										  Padding="0"
-									      IsSingle="True"
-								          BorderType="Ellipse"
-										  BorderThickness="1"
-										  IsThreeState="True"
-								          Foreground="{DynamicResource WhiteBrush}"
-								          Background="{DynamicResource BlackBrush}"
-								          BorderBrush="{DynamicResource BlackBrush}">
-					<MControls:MyToggleButton.Content>
-						<Path Data="{Binding [play], Source={x:Static MControls:PathData.Instance}}" 
-						      Style="{DynamicResource PathStyle}"
-						      Width="10"
-						      Height="10"
-						      Margin="3 0 0 0"
-						      Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" />
-					</MControls:MyToggleButton.Content>
-					<MControls:MyToggleButton.ContentChecked>
-						<Path Data="{Binding [pause], Source={x:Static MControls:PathData.Instance}}"
-						      Style="{DynamicResource PathStyle}"
-						      Width="10"
-						      Height="10"
-						      Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" />
-					</MControls:MyToggleButton.ContentChecked>
-					<MControls:MyToggleButton.ContentThreeState>
-						<Controls:ProgressRing IsActive="True"
-											   Foreground="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
-											   Width="10"
-											   Height="10"/>
-					</MControls:MyToggleButton.ContentThreeState>
-					<MControls:MyToggleButton.IsChecked>
-						<MultiBinding Converter="{StaticResource MutiBoolConverter}" ConverterParameter="1" Mode="OneWay">
-							<MultiBinding.Bindings>
-								<Binding Path="BassEngine.IsPlaying" Source="{x:Static tools:CommandSingleton.Instance}" />
-								<Binding Path="BassEngine.IsLoading" Source="{x:Static tools:CommandSingleton.Instance}" />
-								<Binding Path="TrackId"/>
-								<Binding Path="SoundData.TrackId" Source="{x:Static tools:CommandSingleton.Instance}"/>
-							</MultiBinding.Bindings>
-						</MultiBinding>
-					</MControls:MyToggleButton.IsChecked>
-					<i:Interaction.Triggers>
-						<i:EventTrigger EventName="Click">
-							<i:InvokeCommandAction Command="{Binding PlaySound1Command,Source={x:Static tools:CommandSingleton.Instance}}" 
-											       CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}}">
-							</i:InvokeCommandAction>
-						</i:EventTrigger>
-					</i:Interaction.Triggers>
-				</MControls:MyToggleButton>
+				<Label Template="{StaticResource PlayBtnStyleNormal}"/>
 				<!--声音信息-->
 				<Grid Grid.Column="1" 
 					  ClipToBounds="True">
@@ -120,8 +175,7 @@
 						           VerticalAlignment="Center"
 						           Width="50" 
 						           Height="50" 
-						           Source="{Binding CoverSmall}"
-						           DefaultSource="loading_img.png"/>
+						           Source="{Binding CoverSmall}"/>
 			</Grid>
 		</MControls:MyRadioButton>
 	</DataTemplate>
@@ -167,9 +221,16 @@
 						<ColumnDefinition Width="Auto"/>
 					</Grid.ColumnDefinitions>
 
-					<TextBlock Grid.Column="0" Margin="5 0" Foreground="{DynamicResource BlackBrush}" Text="{Binding Title}"/>
-					<TextBlock Grid.Column="1" Margin="5 0" Foreground="{DynamicResource BlackBrush}" Text="{Binding Duration,Converter={StaticResource TimeSpanConverter},ConverterParameter=1}"/>
-
+					<!--声音title-->
+					<TextBlock Grid.Column="0" 
+							   Margin="5 0" 
+							   Foreground="{DynamicResource BlackBrush}" 
+							   Text="{Binding Title}"/>
+					<!--声音时长-->
+					<TextBlock Grid.Column="1" 
+							   Margin="5 0" 
+							   Foreground="{DynamicResource BlackBrush}" 
+							   Text="{Binding Duration,Converter={StaticResource TimeSpanConverter},ConverterParameter=1}"/>
 				</Grid>
 			</MControls:MyCheckboxButton.Content>
 		</MControls:MyCheckboxButton>

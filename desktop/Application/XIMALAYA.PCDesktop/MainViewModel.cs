@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Windows;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
-using System.Windows.Forms;
+using System.Windows;
+using System.Windows.Interop;
+using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.ViewModel;
@@ -13,6 +13,7 @@ using XIMALAYA.PCDesktop.Events;
 using XIMALAYA.PCDesktop.Tools;
 using XIMALAYA.PCDesktop.Tools.Player;
 using XIMALAYA.PCDesktop.Tools.Themes;
+using XIMALAYA.PCDesktop.Tools.Untils;
 
 namespace XIMALAYA.PCDesktop
 {
@@ -49,10 +50,6 @@ namespace XIMALAYA.PCDesktop
             }
         }
         /// <summary>
-        /// 系统托盘
-        /// </summary>
-        private NotifyIcon NotifyIcon { get; set; }
-        /// <summary>
         /// 调用模块方法集合
         /// </summary>
         private Dictionary<string, Action> Actions { get; set; }
@@ -88,6 +85,15 @@ namespace XIMALAYA.PCDesktop
 
         #endregion
 
+        #region command
+
+        /// <summary>
+        /// 显示隐藏界面
+        /// </summary>
+        public DelegateCommand ShowOrHideCommand { get; set; }
+
+        #endregion
+
         #region ctor
 
         /// <summary>
@@ -109,7 +115,18 @@ namespace XIMALAYA.PCDesktop
             this.EventAggregator = eventAggregator;
 
             this.WindowTitle = @"喜马拉雅-听我想听";
-            this.InitialTray();
+
+            this.ShowOrHideCommand = new DelegateCommand(() =>
+            {
+                if (Application.Current.MainWindow.Visibility == Visibility.Visible)
+                {
+                    Application.Current.MainWindow.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    Application.Current.MainWindow.Visibility = Visibility.Visible;
+                }
+            });
 
             //订阅加载模块事件
             if (this.EventAggregator != null)
@@ -125,44 +142,6 @@ namespace XIMALAYA.PCDesktop
 
         #region methods
 
-        /// <summary>
-        /// 初始化系统托盘
-        /// </summary>
-        private void InitialTray()
-        {
-            //设置托盘的各个属性
-            this.NotifyIcon = new NotifyIcon();
-            this.NotifyIcon.BalloonTipText = this.WindowTitle;
-            this.NotifyIcon.Text = this.WindowTitle;
-            this.NotifyIcon.Icon = Icon.ExtractAssociatedIcon(System.Windows.Forms.Application.ExecutablePath);
-            this.NotifyIcon.Visible = true;
-            this.NotifyIcon.ShowBalloonTip(2000);
-
-            this.NotifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler((sender, MouseEventAtrs) =>
-            {
-                Window win = System.Windows.Application.Current.MainWindow;
-                win.Visibility = win.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
-                if (win.Visibility == Visibility.Visible)
-                {
-                    win.Focus();
-                }
-            });
-
-            //this.NotifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(notifyIcon_MouseClick);
-
-            ////设置菜单项
-            //System.Windows.Forms.MenuItem menu1 = new System.Windows.Forms.MenuItem("菜单项1");
-            //System.Windows.Forms.MenuItem menu2 = new System.Windows.Forms.MenuItem("菜单项2");
-            //System.Windows.Forms.MenuItem menu = new System.Windows.Forms.MenuItem("菜单", new System.Windows.Forms.MenuItem[] { menu1 , menu2 });
-
-            ////退出菜单项
-            //System.Windows.Forms.MenuItem exit = new System.Windows.Forms.MenuItem("exit");
-            //exit.Click += new EventHandler(exit_Click);
-
-            ////关联托盘控件
-            //System.Windows.Forms.MenuItem[] childen = new System.Windows.Forms.MenuItem[] { menu , exit };
-            //this.NotifyIcon.ContextMenu = new System.Windows.Forms.ContextMenu(childen);
-        }
         /// <summary>
         /// 模块加载管理
         /// </summary>
@@ -235,9 +214,11 @@ namespace XIMALAYA.PCDesktop
         /// </summary>
         public void Dispose()
         {
-            this.NotifyIcon.Visible = false;
-            this.NotifyIcon.Dispose();
-            this.NotifyIcon = null;
+            this.Actions.Clear();
+            this.Actions = null;
+            this.ModuleManager = null;
+            this.ModuleCatalog = null;
+            this.EventAggregator = null;
         }
 
         #endregion

@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:tools="http://ximalaya.com/xaml/tools"
+					xmlns:converter="http://ximalaya.com/xaml/tools/converter"
+					xmlns:local="clr-namespace:XIMALAYA.PCDesktop.Controls">
+
+	<Style TargetType="local:HotKeyTextbox">
+		<Setter Property="Template" >
+			<Setter.Value>
+				<ControlTemplate TargetType="local:HotKeyTextbox">
+					<Grid Background="{TemplateBinding Background}">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto"/>
+							<ColumnDefinition/>
+							<ColumnDefinition Width="Auto"/>
+						</Grid.ColumnDefinitions>
+						<ContentPresenter/>
+						<TextBox x:Name="PART_HotKeyText" Grid.Column="1" Margin="10,0" IsReadOnly="True" IsReadOnlyCaretVisible="True"/>
+						<Button x:Name="PART_Clear" Grid.Column="2" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+</ResourceDictionary>

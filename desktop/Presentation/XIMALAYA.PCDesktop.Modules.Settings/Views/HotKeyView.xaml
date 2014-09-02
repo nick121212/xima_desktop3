@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="XIMALAYA.PCDesktop.Modules.Settings.Views.HotKeyView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:MControls="http://ximalaya.com/xaml/controls"
+			 xmlns:until="http://ximalaya.com/xaml/tools/untils">
+	<Grid>
+		<ListBox x:Name="list"
+				 Background="Transparent"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 ItemsSource="{Binding Keys,Source={x:Static until:HotKeysManagerSingleton.Instance }}">
+			<ListBox.ItemContainerStyle>
+				<Style TargetType="{x:Type ListBoxItem}">
+					<Setter Property="ContentTemplate" >
+						<Setter.Value>
+							<DataTemplate DataType="{x:Type ListBoxItem}">
+								<MControls:HotKeyTextbox CommandKey="{Binding Value}" 
+														 HotKey="{Binding Key}"
+														 Width="200"/>
+							</DataTemplate>
+						</Setter.Value>
+					</Setter>
+				</Style>
+			</ListBox.ItemContainerStyle>
+			<ListBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<StackPanel Orientation="Vertical"/>
+				</ItemsPanelTemplate>
+			</ListBox.ItemsPanel>
+		</ListBox>
+
+	</Grid>
+</UserControl>

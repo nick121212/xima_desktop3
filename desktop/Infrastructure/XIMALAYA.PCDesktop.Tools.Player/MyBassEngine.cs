@@ -454,9 +454,9 @@ namespace XIMALAYA.PCDesktop.Tools.Player
             this.SetSoundPath(url);
             this.OnlineFileWorker = new Thread(() =>
             {
+                this.IsLoading = false;
                 handle = Bass.BASS_StreamCreateURL(this.CurrentSoundUrl, 0, BASSFlag.BASS_DEFAULT, this.DownloadProc, IntPtr.Zero);
                 this.ActiveStreamHandle = handle;
-                this.IsLoading = false;
                 if (handle == 0)
                 {
                     Debug.WriteLine("打开声音错误！", DateTime.Now);
@@ -677,7 +677,6 @@ namespace XIMALAYA.PCDesktop.Tools.Player
                     if (buffer == IntPtr.Zero)
                     {
                         this.Process = 1;
-                        this.IsLoading = false;
                         //this.GenerateWaveformData(this.CurrentSoundUrl);
                     }
                     else
@@ -686,13 +685,13 @@ namespace XIMALAYA.PCDesktop.Tools.Player
                             Bass.BASS_StreamGetFilePosition(this.ActiveStreamHandle, BASSStreamFilePosition.BASS_FILEPOS_DOWNLOAD)
                             ) / this.TotalSize;
                     }
-                    this.IsLoading = this.Process <= 0.1;
                     if (this.Process > 0.05 && !this.IsAutoPlayed)
                     {
                         this.IsAutoPlayed = true;
                         this.Play();
                     }
                 }
+                this.IsLoading = this.Process <= 0.05;
             });
             this.CurrentPositionTimer = new DispatcherTimer();
             this.CurrentPositionTimer.Interval = TimeSpan.FromMilliseconds(50);
