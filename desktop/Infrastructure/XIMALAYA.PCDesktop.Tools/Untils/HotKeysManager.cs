@@ -124,7 +124,7 @@ namespace XIMALAYA.PCDesktop.Tools.Untils
                         switch (errorCode)
                         {
                             case 1409:
-                                msg = "热键已经注册！";
+                                msg = "热键[" + keyF .ToString()+ "]已经注册！";
                                 break;
                             default:
                                 msg = errorCode.ToString();

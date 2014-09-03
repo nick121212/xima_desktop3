@@ -8,6 +8,7 @@
                       xmlns:player="http://ximalaya.com/xaml/player"
 					  xmlns:shell="Microsoft.Windows.Shell"
 					  xmlns:tb="http://www.hardcodet.net/taskbar"
+					  xmlns:local="clr-namespace:XIMALAYA.PCDesktop"
                       Style="{DynamicResource CleanWindowStyle}"
                       GlowBrush="{DynamicResource AccentColorBrush}"
                       Title="{Binding WindowTitle}" 
@@ -182,13 +183,23 @@
                         ToolTipText="{Binding WindowTitle}"
 						LeftClickCommand="{Binding ShowOrHideCommand}">
 			<tb:TaskbarIcon.TrayToolTip>
-				<Label Content="fagaeg"/>
+				<local:BalloonSongInfo >
+					<local:BalloonSongInfo.DataContext>
+						<Binding Path="SoundData" Source="{x:Static tools:CommandSingleton.Instance}" />
+					</local:BalloonSongInfo.DataContext>
+				</local:BalloonSongInfo>
 			</tb:TaskbarIcon.TrayToolTip>
 			<tb:TaskbarIcon.ContextMenu>
 				<ContextMenu>
-					<MenuItem IsCheckable="True" Header="播放/暂停" />
+					<ContextMenu.Template>
+						<ControlTemplate>
+							<Label Foreground="Red" Background="Black" Content="MENU"/>
+						</ControlTemplate>
+					</ContextMenu.Template>
+					<!--<MenuItem Header="播放/暂停" 
+							  Command="{Binding PlayCommand,Source=BassEngine}" />
 					<MenuItem Header="退出" 
-							  FocusManager.IsFocusScope="True">
+							  Command="{Binding }">
 						<MenuItem.Icon>
 							<Path Data="{Binding [exit],Source={x:Static MControls:PathData.Instance}}" 
 								  Fill="{DynamicResource BlackBrush}"
@@ -196,7 +207,7 @@
 								  Width="16"
 								  Height="16"/>
 						</MenuItem.Icon>
-					</MenuItem>
+					</MenuItem>-->
 				</ContextMenu>
 			</tb:TaskbarIcon.ContextMenu>
 		</tb:TaskbarIcon>

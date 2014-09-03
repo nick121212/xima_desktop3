@@ -15,8 +15,37 @@
 			<BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
 			<converter:ToTransparentColorConverter x:Key="ToTransparentColorConverter"/>
 			<converter:MutiBoolConverter x:Key="MutiBoolConverter" />
+
+			<Storyboard x:Key="OnVolumeControlMouseEnter">
+				<DoubleAnimation Duration="0:0:0.2" 
+								 Storyboard.TargetName="BdVolumeControl"
+								 Storyboard.TargetProperty="(FrameworkElement.Width)" To="94">
+					<DoubleAnimation.EasingFunction>
+						<CircleEase/>
+					</DoubleAnimation.EasingFunction>
+				</DoubleAnimation>
+			</Storyboard>
+			<Storyboard x:Key="OnVolumeControlMouseLeave">
+				<DoubleAnimation Duration="0:0:0.1" 
+								 Storyboard.TargetName="BdVolumeControl"
+								 Storyboard.TargetProperty="(FrameworkElement.Width)" To="20">
+					<DoubleAnimation.EasingFunction>
+						<CircleEase/>
+					</DoubleAnimation.EasingFunction>
+				</DoubleAnimation>
+			</Storyboard>
+
 		</ResourceDictionary>
 	</UserControl.Resources>
+
+	<UserControl.Triggers>
+		<EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="BdVolumeControl">
+			<BeginStoryboard x:Name="OnVolumeControlMouseEnter_BeginStoryboard" Storyboard="{StaticResource OnVolumeControlMouseEnter}"/>
+		</EventTrigger>
+		<EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="BdVolumeControl">
+			<BeginStoryboard x:Name="OnVolumeControlMouseLeave_BeginStoryboard" Storyboard="{StaticResource OnVolumeControlMouseLeave}"/>
+		</EventTrigger>
+	</UserControl.Triggers>
 
 	<Grid VerticalAlignment="Center" Margin="0">
 		<Grid.RowDefinitions>
@@ -82,8 +111,12 @@
 					<Binding Path="SoundData"/>
 				</MControls:SharePanel.DataContext>
 			</MControls:SharePanel>
-			<!--静音-->
-			<MControls:MyToggleButton Width="20" 
+			<!--音量控制-->
+			<StackPanel Width="20" x:Name="BdVolumeControl" 
+						Background="{DynamicResource WhiteBrush}" 
+						Orientation="Horizontal">
+				<!--静音-->
+				<MControls:MyToggleButton Width="20" 
 									  Height="20"
 									  IsChecked="{Binding BassEngine.IsMuted,Mode=TwoWay}"
 									  BorderType="Ellipse"
@@ -92,34 +125,35 @@
 									  Background="{DynamicResource BlackBrush}"
 									  BorderBrush="{DynamicResource BlackBrush}"
 									  BorderThickness="1">
-				<MControls:MyToggleButton.Content>
-					<Path Data="{Binding [volume], Source={x:Static MControls:PathData.Instance}}" 
+					<MControls:MyToggleButton.Content>
+						<Path Data="{Binding [volume], Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{StaticResource PathStyle}"
 						  Width="10" Height="10"
 						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-					</Path>
-				</MControls:MyToggleButton.Content>
-				<MControls:MyToggleButton.ContentChecked>
-					<Path Data="{Binding [muted], Source={x:Static MControls:PathData.Instance}}"
+						</Path>
+					</MControls:MyToggleButton.Content>
+					<MControls:MyToggleButton.ContentChecked>
+						<Path Data="{Binding [muted], Source={x:Static MControls:PathData.Instance}}"
 						  Style="{StaticResource PathStyle}"
 						  Width="10" Height="10"
 						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-					</Path>
-				</MControls:MyToggleButton.ContentChecked>
-			</MControls:MyToggleButton>
-			<!--音量条-->
-			<Slider x:Name="volumeSlider"
-					Margin="2"
-					Width="70" 
-					Height="5"
-					Maximum="1"
-					Minimum="0"
-					LargeChange="0.2"
-					SmallChange="0.1"
-					BorderBrush="{DynamicResource GrayBrush8}"
-					Foreground="{DynamicResource BlackBrush}"
-					Value="{Binding BassEngine.Volume}"
-					Style="{DynamicResource FlatSlider}" />
+						</Path>
+					</MControls:MyToggleButton.ContentChecked>
+				</MControls:MyToggleButton>
+				<!--音量条-->
+				<Slider x:Name="volumeSlider"
+						Width="70" 
+						Margin="2"
+						Height="5"
+						Maximum="1"
+						Minimum="0"
+						LargeChange="0.2"
+						SmallChange="0.1"
+						BorderBrush="{DynamicResource GrayBrush8}"
+						Foreground="{DynamicResource BlackBrush}"
+						Value="{Binding BassEngine.Volume}"
+						Style="{DynamicResource FlatSlider}" />
+			</StackPanel>
 			<!--播放模式-->
 			<MControls:MyToggleButton Width="20" 
 								      Height="20"
@@ -252,7 +286,7 @@
 			<MControls:MyToggleButton x:Name="btnShowList"
 									  Width="30" 
 								      Height="30"
-									  Margin="5"
+									  Margin="2"
 									  IsThreeState="True"
 								      BorderType="Ellipse"
 								      Foreground="{DynamicResource WhiteBrush}"

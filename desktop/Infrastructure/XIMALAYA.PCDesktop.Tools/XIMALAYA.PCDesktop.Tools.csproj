@@ -118,6 +118,7 @@
     <Compile Include="Untils\BaseModule.cs" />
     <Compile Include="Untils\BaseViewModel.cs" />
     <Compile Include="Untils\AeroHelper.cs" />
+    <Compile Include="Untils\ColorFunctions.cs" />
     <Compile Include="Untils\HotKey.cs" />
     <Compile Include="Untils\HotKeysManager.cs" />
     <Compile Include="Untils\Parameters.cs" />

@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlbumListEvent.cs" />
+    <Compile Include="ChangeCoverEvent.cs" />
     <Compile Include="ContentChangeEvent.cs" />
     <Compile Include="SoundListEvent.cs" />
     <Compile Include="TagEvent.cs" />

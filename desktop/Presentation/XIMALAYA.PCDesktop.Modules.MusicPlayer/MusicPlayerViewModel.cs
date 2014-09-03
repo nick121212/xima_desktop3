@@ -82,8 +82,7 @@ namespace XIMALAYA.PCDesktop.Modules.MusicPlayer
             if (soundData.PlayUrl32 == null && soundData.PlayUrl64 == null) return;
 
             this.SoundData = soundData;
-            //CommandSingleton.Instance.TrackID = this.SoundData.TrackId;
-            //CommandSingleton.Instance.TrackTitle = this.SoundData.Title;
+            this.EventAggregator.GetEvent<ChangeCoverEvent>().Publish(this.SoundData.CoverLarge);
             CommandSingleton.Instance.SoundData = this.SoundData;
             this.BassEngine.OpenUrlAsync(this.SoundData.PlayUrl64 == null ? this.SoundData.PlayUrl32 : this.SoundData.PlayUrl64);
         }

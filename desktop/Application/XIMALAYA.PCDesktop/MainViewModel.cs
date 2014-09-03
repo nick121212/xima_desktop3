@@ -4,7 +4,9 @@ using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
-using System.Windows.Interop;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Modularity;
@@ -96,6 +98,8 @@ namespace XIMALAYA.PCDesktop
 
         #region ctor
 
+        DispatcherTimer ClearMembryTimer = new DispatcherTimer();
+
         /// <summary>
         /// 构造
         /// </summary>
@@ -131,17 +135,98 @@ namespace XIMALAYA.PCDesktop
             //订阅加载模块事件
             if (this.EventAggregator != null)
             {
+                //注册加载模块事件
                 this.EventAggregator.GetEvent<ModulesManagerEvent>().Subscribe(moduleinfo =>
                 {
                     this.LoadModule(moduleinfo.ModuleName, moduleinfo.Action);
                 });
+
+                
+                //注册更换cover图事件
+                this.EventAggregator.GetEvent<ChangeCoverEvent>().Subscribe(cover =>
+                {
+                    ClearMembryTimer.IsEnabled = true;
+                });
+
+                ClearMembryTimer.Tick += new EventHandler((o, e) =>
+                {
+                    ClearMembryTimer.IsEnabled = false;
+                    ChangeCover(CommandSingleton.Instance.SoundData.CoverLarge);
+                });
+                ClearMembryTimer.Interval = TimeSpan.FromMilliseconds(1000);
+                ClearMembryTimer.IsEnabled = false;
             }
+            //注册程序错误事件
+            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler((sender, e) =>
+            {
+                Debug.WriteLine("**********************************************************************");
+                Debug.WriteLine("喜马拉雅出现错误：" + DateTime.Now.ToShortDateString());
+                Debug.WriteLine("**********************************************************************");
+
+                Process.GetCurrentProcess().Kill();
+            });
         }
 
         #endregion
 
         #region methods
 
+        void ChangeCover(string url)
+        {
+            try
+            {
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.CreateOptions = BitmapCreateOptions.IgnoreColorProfile;
+                bitmap.UriSource = new Uri(url);// new Uri(url);
+                bitmap.EndInit();
+
+                //判断图片是否正在下载
+                if (bitmap.IsDownloading)
+                {
+                    //图片下载完成
+                    bitmap.DownloadCompleted += new EventHandler((o, e) =>
+                    {
+                        if (bitmap.CanFreeze) bitmap.Freeze();
+                        Application.Current.Dispatcher.Invoke(new Action(() =>
+                        {
+                            try
+                            {
+                                if (((BitmapImage)o).UriSource.AbsoluteUri == new Uri(url).AbsoluteUri)
+                                {
+                                    ChangeBackground((BitmapImage)o);
+                                }
+                            }
+                            catch { }
+                        }));
+                    });
+                    //图片下载失败
+                    bitmap.DownloadFailed += new EventHandler<ExceptionEventArgs>((o, e) =>
+                    {
+                        if (bitmap.CanFreeze) bitmap.Freeze();
+                    });
+                }
+                else
+                {
+                    if (bitmap.CanFreeze) bitmap.Freeze();
+                    ChangeBackground(bitmap);
+                }
+            }
+            catch
+            {
+
+            }
+        }
+        void ChangeBackground(BitmapSource NewCover)
+        {
+            ColorFunctions.GetImageColorForBackgroundAsync(NewCover, new ColorFunctions.ComputeCompleteCallback((color) =>
+            {
+                Application.Current.Dispatcher.Invoke(new Action(() =>
+                {
+                    CommandSingleton.Instance.CurrentSoundCoverColor = color;
+                }));
+            }));
+        }
         /// <summary>
         /// 模块加载管理
         /// </summary>

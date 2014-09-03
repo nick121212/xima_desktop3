@@ -2,10 +2,13 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.ViewModel;
 using Microsoft.Practices.ServiceLocation;
+using XIMALAYA.PCDesktop.Cache;
 using XIMALAYA.PCDesktop.Core.Models.Share;
 using XIMALAYA.PCDesktop.Core.Models.Sound;
 using XIMALAYA.PCDesktop.Core.ParamsModel;
@@ -29,6 +32,7 @@ namespace XIMALAYA.PCDesktop.Tools
         private string _TrackImage;
         private long _TrackID;
         private SoundData _SoundData;
+        private Color _CurrentSoundCoverColor;
 
         #endregion
 
@@ -147,6 +151,24 @@ namespace XIMALAYA.PCDesktop.Tools
                 }
             }
         }
+        /// <summary>
+        /// 当前声音的封面图颜色
+        /// </summary>
+        public Color CurrentSoundCoverColor
+        {
+            get
+            {
+                return _CurrentSoundCoverColor;
+            }
+            set
+            {
+                if (value != _CurrentSoundCoverColor)
+                {
+                    _CurrentSoundCoverColor = value;
+                    this.RaisePropertyChanged(() => this.CurrentSoundCoverColor);
+                }
+            }
+        }
 
         #endregion
 
@@ -223,6 +245,7 @@ namespace XIMALAYA.PCDesktop.Tools
             this.ShareService = ServiceLocator.Current.GetInstance<IShareService>();
             this.SoundCollection = new ListBox().Items;
             this.SoundData = new SoundData();
+            this.CurrentSoundCoverColor = Colors.Blue;
 
             //播放声音命令，获取列表
             this.PlaySound1Command = new DelegateCommand<Control>(con =>
@@ -435,7 +458,7 @@ namespace XIMALAYA.PCDesktop.Tools
                 {
                     SystemCommands.RestoreWindow(parentWindow);
                 }
-                
+
             });
             this.MaxisizeCommand = new DelegateCommand(() =>
             {
@@ -443,7 +466,7 @@ namespace XIMALAYA.PCDesktop.Tools
                 if (parentWindow == null)
                     return;
 
-                if (parentWindow.WindowState == WindowState.Normal )
+                if (parentWindow.WindowState == WindowState.Normal)
                 {
                     SystemCommands.MaximizeWindow(parentWindow);
                 }
