@@ -40,6 +40,16 @@ namespace XIMALAYA.PCDesktop.Tools.Untils
             int id
             );
 
+        //PHOT_KEY_ITEM FindHotKey(  
+        //   PTHREADINFO ptiCurrent,  
+        //   PWND pwnd,  
+        //   int id,  
+        //   UINT fsModifiers,  
+        //   UINT vk,  
+        //   BOOL fUnregister,  
+        //   PBOOL pfKeysExist)  
+
+
         [DllImport("kernel32", SetLastError = true)]
         public static extern short GlobalAddAtom(string lpString);
 

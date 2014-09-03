@@ -1,0 +1,30 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                                 xmlns:tools="http://ximalaya.com/xaml/tools"
+                                 xmlns:converter="http://ximalaya.com/xaml/tools/converter"
+                                 xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+                                 xmlns:MControls="clr-namespace:XIMALAYA.PCDesktop.Controls">
+
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/Converter.xaml" />
+		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/ListBoxItem.Common.xaml" />
+	</ResourceDictionary.MergedDictionaries>
+
+	<!--标签下的专辑列表 start-->
+
+	<DataTemplate x:Key="HotKeysTemplate" DataType="{x:Type ListBoxItem}">
+		<MControls:HotKeyTextbox CommandKey="{Binding Value}" 
+								 HotKey="{Binding Key}"
+								 Margin="5"
+								 Width="600">
+			<Label Content="{Binding Value}" Width="100" ContentStringFormat="{}{0} : " />
+		</MControls:HotKeyTextbox>
+	</DataTemplate>
+
+	<Style x:Key="HotKeysStyle" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource ListItemBaseTemp}">
+		<Setter Property="ContentTemplate" Value="{StaticResource HotKeysTemplate}"/>
+	</Style>
+	
+	<!--默认专辑列表样式 end-->
+
+</ResourceDictionary>

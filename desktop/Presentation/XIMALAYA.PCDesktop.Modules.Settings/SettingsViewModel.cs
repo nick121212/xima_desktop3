@@ -19,7 +19,15 @@ namespace XIMALAYA.PCDesktop.Modules.Settings
     [Export(typeof(SettingsViewModel))]
     public class SettingsViewModel : BaseViewModel
     {
+        #region 字段
+
         private AccentColorMenuData _SelectedAccentColor = null;
+        private AppThemeMenuData _SelectedTheme = null;
+
+        #endregion
+
+        #region 属性
+
         /// <summary>
         /// 挡圈选中的颜色
         /// </summary>
@@ -40,8 +48,6 @@ namespace XIMALAYA.PCDesktop.Modules.Settings
                 }
             }
         }
-
-        private AppThemeMenuData _SelectedTheme = null;
         /// <summary>
         /// 当前选中的样式
         /// </summary>
@@ -62,6 +68,11 @@ namespace XIMALAYA.PCDesktop.Modules.Settings
                 }
             }
         }
+
+        #endregion
+
+        #region 构造
+
         /// <summary>
         /// 构造
         /// </summary>
@@ -70,5 +81,7 @@ namespace XIMALAYA.PCDesktop.Modules.Settings
             this.SelectedTheme = ThemeInfoManager.Instance.Theme;
             this.SelectedAccentColor = ThemeInfoManager.Instance.AccentColor;
         }
+
+        #endregion
     }
 }

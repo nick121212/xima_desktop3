@@ -2,8 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:tools="http://ximalaya.com/xaml/tools"
 					xmlns:converter="http://ximalaya.com/xaml/tools/converter"
+					xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
 					xmlns:local="clr-namespace:XIMALAYA.PCDesktop.Controls">
 
+	<converter:KeysToStringConverter x:Key="KeysToStringConverter"/>
+	
 	<Style TargetType="local:HotKeyTextbox">
 		<Setter Property="Template" >
 			<Setter.Value>
@@ -12,11 +15,31 @@
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="Auto"/>
 							<ColumnDefinition/>
-							<ColumnDefinition Width="Auto"/>
+							<!--<ColumnDefinition Width="Auto"/>-->
 						</Grid.ColumnDefinitions>
 						<ContentPresenter/>
-						<TextBox x:Name="PART_HotKeyText" Grid.Column="1" Margin="10,0" IsReadOnly="True" IsReadOnlyCaretVisible="True"/>
-						<Button x:Name="PART_Clear" Grid.Column="2" />
+						<TextBox x:Name="PART_HotKeyText"
+								 controls:TextboxHelper.ButtonCommand="{TemplateBinding ClearHotKeyCommand}"
+								 controls:TextboxHelper.ClearTextButton="False"
+							     Grid.Column="1" 
+								 Margin="10,0" 
+								 IsReadOnly="True"
+								 Text="{TemplateBinding HotKey,Converter={StaticResource KeysToStringConverter}}"
+								 IsReadOnlyCaretVisible="True">
+							<TextBox.Style>
+								<Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MetroTextBox}">
+									<Style.Triggers>
+										<Trigger Property="controls:TextboxHelper.HasText" Value="False">
+											<Setter Property="controls:TextboxHelper.ClearTextButton" Value="False" />
+										</Trigger>
+										<Trigger Property="controls:TextboxHelper.HasText" Value="True">
+											<Setter Property="controls:TextboxHelper.ClearTextButton" Value="True" />
+										</Trigger>
+									</Style.Triggers>
+								</Style>
+							</TextBox.Style>
+						</TextBox>
+						<!--<Button x:Name="PART_Clear" Grid.Column="2" />-->
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>

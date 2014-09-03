@@ -97,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Behaviors\AutoPopulateExportedViewsBehavior.cs" />
+    <Compile Include="Converter\KeysToStringConverter.cs" />
     <Compile Include="Converter\MutiParamConverter.cs" />
     <Compile Include="Sites.cs" />
     <Compile Include="Command\Commands.cs" />
