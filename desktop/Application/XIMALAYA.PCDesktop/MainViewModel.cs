@@ -115,8 +115,6 @@ namespace XIMALAYA.PCDesktop
             IModuleCatalog moduleCatalog,
             IEventAggregator eventAggregator)
         {
-            var AccentColors = ThemeInfoManager.Instance.AccentColor;
-
             this.Actions = new Dictionary<string, Action>();
             this.ModuleManager = moduleManager;
             this.ModuleCatalog = moduleCatalog;
@@ -158,9 +156,6 @@ namespace XIMALAYA.PCDesktop
 
                 Process.GetCurrentProcess().Kill();
             });
-
-            
-
         }
 
         #endregion

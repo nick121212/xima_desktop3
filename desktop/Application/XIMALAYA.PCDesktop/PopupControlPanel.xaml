@@ -23,12 +23,12 @@
 							 TileCount="4">
 			<!--上一首-->
 			<MControls:MyToggleButton BorderType="Rectangle"
-								  Opacity="0.8"
-								  Command="{Binding PrevCommand,Source={x:Static tools:CommandSingleton.Instance}}"
-								  Foreground="{DynamicResource WhiteBrush}"
-								  Background="{DynamicResource WhiteBrush}"
-								  BorderBrush="{DynamicResource BlackBrush}"
-								  Style="{StaticResource MyToggleButtonStyle1}">
+								      Opacity="0.8"
+								      Command="{Binding PrevCommand,Source={x:Static tools:CommandSingleton.Instance}}"
+								      Foreground="{DynamicResource WhiteBrush}"
+								      Background="{DynamicResource WhiteBrush}"
+								      BorderBrush="{DynamicResource BlackBrush}"
+								      Style="{StaticResource MyToggleButtonStyle1}">
 				<MControls:MyToggleButton.Content>
 					<Grid Height="85" Width="120" Margin="0 5 0 0">
 						<Grid.RowDefinitions>
@@ -426,7 +426,6 @@
 				</MControls:MyToggleButton.ContentChecked>
 			</MControls:MyToggleButton>
 		</MControls:TilePanel>
-		
 	</Grid>
 
 </UserControl>

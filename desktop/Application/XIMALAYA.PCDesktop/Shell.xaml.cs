@@ -118,11 +118,9 @@ namespace XIMALAYA.PCDesktop
 
         void Shell_Loaded(object sender, RoutedEventArgs e)
         {
-            this.ResourceDic = ThemeInfoManager.Instance.FindResourceDictionary(@"/MahApps.Metro;component/Styles/Colors.xaml");
-
-            RegionManager.SetRegionManager(this.settingFlyout, this.regionManager);
-
             XMSetting set = XMSetting.Instance;
+            //this.ResourceDic = ThemeInfoManager.Instance.FindResourceDictionary(@"/MahApps.Metro;component/Styles/Colors.xaml");
+            RegionManager.SetRegionManager(this.settingFlyout, this.regionManager);
         }
 
         #endregion
@@ -166,10 +164,8 @@ namespace XIMALAYA.PCDesktop
                     }
                 });
             }
-            if (this.ResourceDic != null)
-            {
-                this.CurrentFlyout.Background = this.ResourceDic["WhiteBrush"] as Brush;
-            }
+
+            //this.CurrentFlyout.Background = new SolidColorBrush(Colors.Black);
 
             rs = new RelativeSource(RelativeSourceMode.FindAncestor);
             rs.AncestorType = typeof(Grid);

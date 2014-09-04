@@ -106,6 +106,11 @@ namespace XIMALAYA.PCDesktop.Controls
                 {
 
                 }
+                //NUM0-NUM9
+                else if (keyCode >= 74 && keyCode <= 83)
+                {
+
+                }
                 else
                 {
                     return;

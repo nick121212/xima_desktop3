@@ -35,8 +35,8 @@ namespace XIMALAYA.PCDesktop.Tools.Setting
 
         public AppearanceSetting()
         {
-            this.ThemeName = "BaseDark";
-            this.AccentColorName = "Blue";
+            //this.ThemeName = "BaseDark";
+            //this.AccentColorName = "Blue";
         }
 
         public override void Init()

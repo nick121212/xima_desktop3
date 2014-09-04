@@ -7,7 +7,7 @@ namespace XIMALAYA.PCDesktop
     /// <summary>
     /// PopupControlPanel.xaml 的交互逻辑
     /// </summary>
-    [Export,PartCreationPolicy(CreationPolicy.Shared)]
+    //[Export,PartCreationPolicy(CreationPolicy.Shared)]
     public partial class PopupControlPanel : UserControl
     {
         public PopupControlPanel()
