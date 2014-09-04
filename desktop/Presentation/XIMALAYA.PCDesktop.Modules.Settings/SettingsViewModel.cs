@@ -44,7 +44,7 @@ namespace XIMALAYA.PCDesktop.Modules.Settings
                     _SelectedAccentColor = value;
                     ThemeInfoManager.Instance.AccentColor = value;
                     //_SelectedAccentColor.ChangeAccentCommand.Execute(_SelectedAccentColor);
-                    this.RaisePropertyChanged(() => this.SelectedAccentColor);
+                    //this.RaisePropertyChanged(() => this.SelectedAccentColor);
                 }
             }
         }
@@ -64,7 +64,7 @@ namespace XIMALAYA.PCDesktop.Modules.Settings
                     _SelectedTheme = value;
                     ThemeInfoManager.Instance.Theme = value;
                     //_SelectedTheme.ChangeAccentCommand.Execute(_SelectedTheme);
-                    this.RaisePropertyChanged(() => this.SelectedTheme);
+                    //this.RaisePropertyChanged(() => this.SelectedTheme);
                 }
             }
         }

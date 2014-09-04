@@ -117,14 +117,14 @@
 						Orientation="Horizontal">
 				<!--静音-->
 				<MControls:MyToggleButton Width="20" 
-									  Height="20"
-									  IsChecked="{Binding BassEngine.IsMuted,Mode=TwoWay}"
-									  BorderType="Ellipse"
-									  Foreground="{DynamicResource WhiteBrush}"
-									  BackgroundChecked="{DynamicResource GrayBrush10}"
-									  Background="{DynamicResource BlackBrush}"
-									  BorderBrush="{DynamicResource BlackBrush}"
-									  BorderThickness="1">
+										  Height="20"
+										  IsChecked="{Binding BassEngine.IsMuted,Mode=TwoWay}"
+										  BorderType="Ellipse"
+										  Foreground="{DynamicResource WhiteBrush}"
+										  BackgroundChecked="{DynamicResource GrayBrush10}"
+										  Background="{DynamicResource BlackBrush}"
+										  BorderBrush="{DynamicResource BlackBrush}"
+										  BorderThickness="1">
 					<MControls:MyToggleButton.Content>
 						<Path Data="{Binding [volume], Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{StaticResource PathStyle}"

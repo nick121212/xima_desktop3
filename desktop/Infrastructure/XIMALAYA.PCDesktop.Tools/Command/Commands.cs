@@ -3,12 +3,10 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.ViewModel;
 using Microsoft.Practices.ServiceLocation;
-using XIMALAYA.PCDesktop.Cache;
 using XIMALAYA.PCDesktop.Core.Models.Share;
 using XIMALAYA.PCDesktop.Core.Models.Sound;
 using XIMALAYA.PCDesktop.Core.ParamsModel;
@@ -244,8 +242,11 @@ namespace XIMALAYA.PCDesktop.Tools
             this.EventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
             this.ShareService = ServiceLocator.Current.GetInstance<IShareService>();
             this.SoundCollection = new ListBox().Items;
-            this.SoundData = new SoundData();
-            this.CurrentSoundCoverColor = Colors.Blue;
+            this.SoundData = new SoundData
+            {
+                Title = "喜马拉雅"
+            };
+            this.CurrentSoundCoverColor = Colors.Black;
 
             //播放声音命令，获取列表
             this.PlaySound1Command = new DelegateCommand<Control>(con =>
@@ -442,7 +443,12 @@ namespace XIMALAYA.PCDesktop.Tools
 
             this.CloseCommand = new DelegateCommand(() =>
             {
-                SystemCommands.CloseWindow(Application.Current.MainWindow);
+                var parentWindow = Application.Current.MainWindow;
+                if (parentWindow == null)
+                    return;
+
+                parentWindow.Close();
+                //SystemCommands.CloseWindow(Application.Current.MainWindow);
             });
             this.MinisizeCommand = new DelegateCommand(() =>
             {
@@ -450,15 +456,19 @@ namespace XIMALAYA.PCDesktop.Tools
                 if (parentWindow == null)
                     return;
 
-                if (parentWindow.WindowState == WindowState.Normal)
+                parentWindow.Dispatcher.Invoke(new Action(() =>
                 {
-                    SystemCommands.MinimizeWindow(parentWindow);
-                }
-                else
-                {
-                    SystemCommands.RestoreWindow(parentWindow);
-                }
-
+                    if (parentWindow.WindowState == WindowState.Normal)
+                    {
+                        parentWindow.WindowState = WindowState.Minimized;
+                        //SystemCommands.MinimizeWindow(parentWindow);
+                    }
+                    else
+                    {
+                        parentWindow.WindowState = WindowState.Normal;
+                        //SystemCommands.RestoreWindow(parentWindow);
+                    }
+                }));
             });
             this.MaxisizeCommand = new DelegateCommand(() =>
             {

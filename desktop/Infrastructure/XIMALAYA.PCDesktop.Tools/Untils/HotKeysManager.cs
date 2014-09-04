@@ -12,11 +12,13 @@ using DigitalIdeaSolutions.Collections.Generic;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Practices.Prism.ViewModel;
+using XIMALAYA.PCDesktop.Tools.MyType;
 
 namespace XIMALAYA.PCDesktop.Tools.Untils
 {
     public class HotKeysManager : NotificationObject, IDisposable
     {
+        [Serializable]
         public enum CommandKeys
         {
             None,
@@ -30,7 +32,7 @@ namespace XIMALAYA.PCDesktop.Tools.Untils
             Close
         }
 
-        public ObservableDictionary<System.Windows.Input.Key, CommandKeys> Keys { get; set; }
+        public SerializableDictionary<System.Windows.Input.Key, CommandKeys> Keys { get; set; }
         public ObservableDictionary<CommandKeys, ICommand> Commands { get; set; }
         public HotKey.KeyModifiers KeyModifiers { get; set; }
         private IntPtr Handle { get; set; }
@@ -45,7 +47,7 @@ namespace XIMALAYA.PCDesktop.Tools.Untils
             //添加处理程序
             hWndSource.AddHook(MainWindowProc);
             this.KeyModifiers = HotKey.KeyModifiers.Alt;
-            this.Keys = new ObservableDictionary<System.Windows.Input.Key, CommandKeys>();
+            this.Keys = new SerializableDictionary<System.Windows.Input.Key, CommandKeys>();
             this.Commands = new ObservableDictionary<CommandKeys, ICommand>();
 
             this.Commands.Add(CommandKeys.Play, CommandSingleton.Instance.BassEngine.PlayCommand);
@@ -139,8 +141,10 @@ namespace XIMALAYA.PCDesktop.Tools.Untils
                     return false;
                 }
             }
-
-            this.Keys.Add(key, command);
+            if (!this.Keys.ContainsKey(key))
+            {
+                this.Keys.Add(key, command);
+            }
             return true;
         }
 

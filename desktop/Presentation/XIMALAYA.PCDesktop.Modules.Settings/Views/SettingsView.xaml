@@ -29,6 +29,7 @@
 								  Width="80" 
 								  Height="30"
 								  Margin="20"
+								  Visibility="Hidden"
 								  IsSingle="True"
 								  BorderType="Rectangle"
 								  Foreground="{DynamicResource WhiteBrush}"

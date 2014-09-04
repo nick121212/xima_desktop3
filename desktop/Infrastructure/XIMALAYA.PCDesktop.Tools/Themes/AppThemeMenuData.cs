@@ -8,6 +8,7 @@ using MahApps.Metro;
 
 namespace XIMALAYA.PCDesktop.Tools.Themes
 {
+    [Serializable]
     /// <summary>
     /// metro 样式操作
     /// </summary>

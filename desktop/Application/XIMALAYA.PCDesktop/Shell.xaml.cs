@@ -12,6 +12,7 @@ using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Regions;
 using XIMALAYA.PCDesktop.Tools;
 using XIMALAYA.PCDesktop.Tools.Player;
+using XIMALAYA.PCDesktop.Tools.Setting;
 using XIMALAYA.PCDesktop.Tools.Themes;
 using XIMALAYA.PCDesktop.Tools.Untils;
 
@@ -117,17 +118,11 @@ namespace XIMALAYA.PCDesktop
 
         void Shell_Loaded(object sender, RoutedEventArgs e)
         {
-            RegionManager.SetRegionManager(this.settingFlyout, this.regionManager);
             this.ResourceDic = ThemeInfoManager.Instance.FindResourceDictionary(@"/MahApps.Metro;component/Styles/Colors.xaml");
 
-            HotKeysManagerSingleton.Instance.AddKey(System.Windows.Input.Key.F5, HotKeysManager.CommandKeys.Play);
-            HotKeysManagerSingleton.Instance.AddKey(System.Windows.Input.Key.Right, HotKeysManager.CommandKeys.Next);
-            HotKeysManagerSingleton.Instance.AddKey(System.Windows.Input.Key.Left, HotKeysManager.CommandKeys.Prev);
-            HotKeysManagerSingleton.Instance.AddKey(System.Windows.Input.Key.Up, HotKeysManager.CommandKeys.VolumeUp);
-            HotKeysManagerSingleton.Instance.AddKey(System.Windows.Input.Key.Down, HotKeysManager.CommandKeys.VolumeDown);
-            HotKeysManagerSingleton.Instance.AddKey(System.Windows.Input.Key.C, HotKeysManager.CommandKeys.Close);
-            HotKeysManagerSingleton.Instance.AddKey(System.Windows.Input.Key.M, HotKeysManager.CommandKeys.Minisize);
-            HotKeysManagerSingleton.Instance.AddKey(System.Windows.Input.Key.N, HotKeysManager.CommandKeys.Maxisize);
+            RegionManager.SetRegionManager(this.settingFlyout, this.regionManager);
+
+            XMSetting set = XMSetting.Instance;
         }
 
         #endregion

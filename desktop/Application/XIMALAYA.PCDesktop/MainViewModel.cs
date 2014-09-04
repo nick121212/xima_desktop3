@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Threading;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Modularity;
@@ -14,6 +15,7 @@ using Microsoft.Practices.Prism.ViewModel;
 using XIMALAYA.PCDesktop.Events;
 using XIMALAYA.PCDesktop.Tools;
 using XIMALAYA.PCDesktop.Tools.Player;
+using XIMALAYA.PCDesktop.Tools.Setting;
 using XIMALAYA.PCDesktop.Tools.Themes;
 using XIMALAYA.PCDesktop.Tools.Untils;
 
@@ -84,6 +86,10 @@ namespace XIMALAYA.PCDesktop
                 return PlayerSingleton.Instance;
             }
         }
+        /// <summary>
+        /// 简版界面
+        /// </summary>
+        public List<TileSet> TileSets { get; set; }
 
         #endregion
 
@@ -97,8 +103,6 @@ namespace XIMALAYA.PCDesktop
         #endregion
 
         #region ctor
-
-        DispatcherTimer ClearMembryTimer = new DispatcherTimer();
 
         /// <summary>
         /// 构造
@@ -117,9 +121,7 @@ namespace XIMALAYA.PCDesktop
             this.ModuleManager = moduleManager;
             this.ModuleCatalog = moduleCatalog;
             this.EventAggregator = eventAggregator;
-
             this.WindowTitle = @"喜马拉雅-听我想听";
-
             this.ShowOrHideCommand = new DelegateCommand(() =>
             {
                 if (Application.Current.MainWindow.Visibility == Visibility.Visible)
@@ -131,7 +133,6 @@ namespace XIMALAYA.PCDesktop
                     Application.Current.MainWindow.Visibility = Visibility.Visible;
                 }
             });
-
             //订阅加载模块事件
             if (this.EventAggregator != null)
             {
@@ -141,20 +142,12 @@ namespace XIMALAYA.PCDesktop
                     this.LoadModule(moduleinfo.ModuleName, moduleinfo.Action);
                 });
 
-                
+
                 //注册更换cover图事件
                 this.EventAggregator.GetEvent<ChangeCoverEvent>().Subscribe(cover =>
                 {
-                    ClearMembryTimer.IsEnabled = true;
+                    DownloadImage(cover);
                 });
-
-                ClearMembryTimer.Tick += new EventHandler((o, e) =>
-                {
-                    ClearMembryTimer.IsEnabled = false;
-                    ChangeCover(CommandSingleton.Instance.SoundData.CoverLarge);
-                });
-                ClearMembryTimer.Interval = TimeSpan.FromMilliseconds(1000);
-                ClearMembryTimer.IsEnabled = false;
             }
             //注册程序错误事件
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler((sender, e) =>
@@ -165,57 +158,44 @@ namespace XIMALAYA.PCDesktop
 
                 Process.GetCurrentProcess().Kill();
             });
+
+            
+
         }
 
         #endregion
 
         #region methods
 
-        void ChangeCover(string url)
+        async void DownloadImage(string url)
         {
-            try
+            var request = WebRequest.Create(url);
+            using (var response = await request.GetResponseAsync())
+            using (var destStream = new MemoryStream())
             {
-                BitmapImage bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.CreateOptions = BitmapCreateOptions.IgnoreColorProfile;
-                bitmap.UriSource = new Uri(url);// new Uri(url);
-                bitmap.EndInit();
-
-                //判断图片是否正在下载
-                if (bitmap.IsDownloading)
-                {
-                    //图片下载完成
-                    bitmap.DownloadCompleted += new EventHandler((o, e) =>
-                    {
-                        if (bitmap.CanFreeze) bitmap.Freeze();
-                        Application.Current.Dispatcher.Invoke(new Action(() =>
-                        {
-                            try
-                            {
-                                if (((BitmapImage)o).UriSource.AbsoluteUri == new Uri(url).AbsoluteUri)
-                                {
-                                    ChangeBackground((BitmapImage)o);
-                                }
-                            }
-                            catch { }
-                        }));
-                    });
-                    //图片下载失败
-                    bitmap.DownloadFailed += new EventHandler<ExceptionEventArgs>((o, e) =>
-                    {
-                        if (bitmap.CanFreeze) bitmap.Freeze();
-                    });
-                }
-                else
-                {
-                    if (bitmap.CanFreeze) bitmap.Freeze();
-                    ChangeBackground(bitmap);
-                }
+                var responseStream = response.GetResponseStream();
+                var downloadTask = responseStream.CopyToAsync(destStream);
+                RefreshUI(downloadTask, destStream);
+                await downloadTask;
             }
-            catch
+        }
+        async void RefreshUI(Task downloadTask, MemoryStream stream)
+        {
+            await Task.WhenAny(downloadTask, Task.Delay(1000));
+
+            var data = stream.ToArray();
+            var tmpStream = new MemoryStream(data);
+            var bmp = new BitmapImage();
+
+            bmp.BeginInit();
+            bmp.StreamSource = tmpStream;
+            bmp.EndInit();
+
+            if (downloadTask.IsCompleted)
             {
-
+                ChangeBackground(bmp);
             }
+
         }
         void ChangeBackground(BitmapSource NewCover)
         {

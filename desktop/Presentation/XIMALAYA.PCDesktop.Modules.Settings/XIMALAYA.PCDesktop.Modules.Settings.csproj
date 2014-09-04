@@ -71,6 +71,10 @@
     <Reference Include="XIMALAYA.PCDesktop.Tools">
       <HintPath>..\..\build\XIMALAYA.PCDesktop.Tools.dll</HintPath>
     </Reference>
+    <Reference Include="XIMALAYA.PCDesktop.Tools.Setting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\XIMALAYA.PCDesktop.Tools.Setting.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SettingsModule.cs" />

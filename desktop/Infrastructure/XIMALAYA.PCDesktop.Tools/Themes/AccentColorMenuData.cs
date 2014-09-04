@@ -11,6 +11,7 @@ using Microsoft.Practices.Prism.Commands;
 
 namespace XIMALAYA.PCDesktop.Tools.Themes
 {
+    [Serializable]
     /// <summary>
     /// metro 色彩集合操作
     /// </summary>

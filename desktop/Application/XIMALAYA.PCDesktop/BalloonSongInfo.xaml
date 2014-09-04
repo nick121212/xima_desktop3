@@ -2,25 +2,32 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:tools="http://ximalaya.com/xaml/tools"
+			 MaxWidth="300"
 			 xmlns:MControls="http://ximalaya.com/xaml/controls">
 
 	<UserControl.Background>
-		<SolidColorBrush Color="{Binding CurrentSoundCoverColor,Source={x:Static tools:CommandSingleton.Instance}}" Opacity="0.3"/>
+		<SolidColorBrush Color="{Binding CurrentSoundCoverColor,Source={x:Static tools:CommandSingleton.Instance}}" Opacity="0.8"/>
 	</UserControl.Background>
 
-
-	<Grid Width="300" Height="150">
+	<Grid Height="80" Margin="0 0 15 0 ">
 		
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="120"/>
+			<ColumnDefinition Width="80"/>
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 		
 		<MControls:MyImage VerticalAlignment="Center"
-						   Width="100" 
-						   Height="100" 
+						   Width="64" 
+						   Height="64" 
 						   Source="{Binding CoverSmall}"
 						   DefaultSource="track.jpg"/>
+		
+		<StackPanel Grid.Column="1" 
+					VerticalAlignment="Center">
+			<Label Content="{Binding Title}" 
+				   FontSize="16"/>
+			<Label Content="{Binding NickName}" />
+		</StackPanel>
 		
 	</Grid>
 </UserControl>

@@ -41,6 +41,7 @@
 		<!--保存按钮-->
 		<MControls:MyToggleButton Width="80" 
 								  Height="30"
+								  Visibility="Hidden"
 								  BorderType="Rectangle"
 								  IsSingle="True"
 								  Foreground="{DynamicResource WhiteBrush}"
