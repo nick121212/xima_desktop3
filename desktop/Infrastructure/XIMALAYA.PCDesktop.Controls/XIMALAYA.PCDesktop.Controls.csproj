@@ -72,6 +72,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ArrowPopGrid.cs" />
     <Compile Include="Controls\AutoSizeRichTextBox.cs" />
     <Compile Include="Controls\HotKeyTextbox.cs" />
     <Compile Include="Controls\ImageAttached.cs" />
@@ -173,6 +174,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\TextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\ArrowPopGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

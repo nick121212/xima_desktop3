@@ -4,24 +4,39 @@
 			 xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:MControls="http://ximalaya.com/xaml/controls"
 			 xmlns:tools="http://ximalaya.com/xaml/tools"
+			 Background="Transparent"
 			 xmlns:converter="http://ximalaya.com/xaml/tools/converter">
 
-	<UserControl.Background>
+	<!--<UserControl.Background>
 		<SolidColorBrush Color="{Binding CurrentSoundCoverColor,Source={x:Static tools:CommandSingleton.Instance}}" Opacity="0.8"/>
-	</UserControl.Background>
+	</UserControl.Background>-->
 	
 	<UserControl.Resources>
 		<converter:MutiParamConverter x:Key="MutiParamConverter"/>
 		<converter:MutiBoolConverter x:Key="MutiBoolConverter" />
 	</UserControl.Resources>
+
+
 	
-	<Grid Width="496">
+	
+	<MControls:ArrowPopGrid Width="200" 
+							Margin="0 0 0 0 "
+							Height="250"
+							ArrowPositionSize="100"
+							CornerRadius="2"
+							BorderBrush="Red" 
+							Background="{Binding CurrentSoundCoverColor,Source={x:Static tools:CommandSingleton.Instance}}"
+							BorderThickness="2">
+		agaegaegaeg
+	</MControls:ArrowPopGrid>
+	
+	<!--<Grid Width="496">
 		<MControls:TilePanel TileHeight="90" 
 							 TileWidth="120" 
 							 Orientation="Horizontal"
 							 TileMargin="2"
 							 TileCount="4">
-			<!--上一首-->
+			--><!--上一首--><!--
 			<MControls:MyToggleButton BorderType="Rectangle"
 								      Opacity="0.8"
 								      Command="{Binding PrevCommand,Source={x:Static tools:CommandSingleton.Instance}}"
@@ -76,7 +91,7 @@
 					</Grid>
 				</MControls:MyToggleButton.ContentChecked>
 			</MControls:MyToggleButton>
-			<!--下一首-->
+			--><!--下一首--><!--
 			<MControls:MyToggleButton BorderType="Rectangle"
 								  Opacity="0.8"
 								  Command="{Binding NextCommand,Source={x:Static tools:CommandSingleton.Instance}}"
@@ -131,7 +146,7 @@
 					</Grid>
 				</MControls:MyToggleButton.ContentChecked>
 			</MControls:MyToggleButton>
-			<!--当前播放-->
+			--><!--当前播放--><!--
 			<MControls:MyToggleButton BorderType="Rectangle"
 								  Opacity="0.8"
 								  MControls:TilePanel.HeightPix="2"
@@ -206,7 +221,7 @@
 									   Height="30"/>
 				</MControls:MyToggleButton.ContentThreeState>
 			</MControls:MyToggleButton>
-			<!--显示/隐藏-->
+			--><!--显示/隐藏--><!--
 			<MControls:MyToggleButton BorderType="Rectangle"
 								  Opacity="0.8"
 								  Command="{Binding MinisizeCommand,Source={x:Static tools:CommandSingleton.Instance}}"
@@ -261,7 +276,7 @@
 					</Grid>
 				</MControls:MyToggleButton.ContentChecked>
 			</MControls:MyToggleButton>
-			<!--静音-->
+			--><!--静音--><!--
 			<MControls:MyToggleButton BorderType="Rectangle"
 								  Opacity="0.8"
 								  IsChecked="{Binding BassEngine.IsMuted,Mode=TwoWay}"
@@ -316,7 +331,7 @@
 					</Grid>
 				</MControls:MyToggleButton.ContentChecked>
 			</MControls:MyToggleButton>
-			<!--播放列表-->
+			--><!--播放列表--><!--
 			<MControls:MyToggleButton BorderType="Rectangle"
 								      Opacity="0.8"
 								      Foreground="{DynamicResource WhiteBrush}"
@@ -370,7 +385,7 @@
 					</Grid>
 				</MControls:MyToggleButton.ContentChecked>
 			</MControls:MyToggleButton>
-			<!--退出-->
+			--><!--退出--><!--
 			<MControls:MyToggleButton BorderType="Rectangle"
 								  Opacity="0.8"
 								  Command="{Binding CloseCommand,Source={x:Static tools:CommandSingleton.Instance}}"
@@ -426,6 +441,6 @@
 				</MControls:MyToggleButton.ContentChecked>
 			</MControls:MyToggleButton>
 		</MControls:TilePanel>
-	</Grid>
+	</Grid>-->
 
 </UserControl>
