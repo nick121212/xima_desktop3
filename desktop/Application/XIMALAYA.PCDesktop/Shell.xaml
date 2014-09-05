@@ -99,30 +99,18 @@
 	<!--ICON模板-->
 	<Controls:MetroWindow.IconTemplate>
 		<DataTemplate>
-			<TextBlock ToolTip="{Binding WindowTitle}" TextDecorations="{x:Null}">
-                <!--<Hyperlink NavigateUri="http://www.ximalaya.com"
+			<StackPanel Orientation="Horizontal" Margin="5 0">
+				<!--<Image Width="16" Height="16" Source="ICO/icon_16.ico" />-->
+				<TextBlock ToolTip="{Binding WindowTitle}" TextDecorations="{x:Null}">
+                <Hyperlink NavigateUri="http://www.ximalaya.com"
                            ToolTip="{Binding WindowTitle}"
-                           TextDecorations="{x:Null}">
-                    <Path Data="M31.027067,45.113998C31.027067,45.113998,44.055798,48.21682,45.296997,60.626999L0,60.626999C0,60.626999,3.7252283,46.97591,14.894232,45.735003L17.919939,58.688187 20.141448,58.669544 22.670208,52.035686 20.308999,47.946999 25.026001,47.946999 22.765199,52.14386 25.649364,58.623329 27.38246,58.608788z M42.811302,19.344999L44.342602,19.344999C45.190903,19.344999,45.461002,20.259099,45.461002,21.187399L45.461002,32.933499C45.461002,33.860599,45.190903,35.344999,44.342602,35.344999L42.811302,35.344999C41.963001,35.344999,41.461002,33.860599,41.461002,32.933499L41.461002,21.187399C41.461002,20.259099,41.963001,19.344999,42.811302,19.344999z M1.6071873,19.344999L3.1390486,19.344999C3.98738,19.344999,4.1280003,20.259099,4.1279998,21.187399L4.1279998,32.933499C4.1280003,33.860599,3.98738,35.344999,3.1390486,35.344999L1.6071873,35.344999C0.75953197,35.344999,0.12800026,33.860599,0.12800026,32.933499L0.12800026,21.187399C0.12800026,20.259099,0.75953197,19.344999,1.6071873,19.344999z M22.332533,18.633C29.242361,18.632999 34.838001,24.228045 34.838001,31.135599 34.838001,38.037745 29.242361,43.637999 22.332533,43.637999 15.431603,43.637999 9.8330008,38.037745 9.8330014,31.135599 9.8330008,24.228045 15.431603,18.632999 22.332533,18.633z M22.922424,0C33.85601,0,42.8606,7.3453102,44.092999,16.679L41.164602,16.679C39.949104,10.012 32.257713,2.565136 22.922424,2.565136 13.587136,2.565136 5.8957551,10.012 4.6770067,16.679L1.7480001,16.679C2.9836488,7.3453102,11.988838,0,22.922424,0z"
-                          Stretch="Uniform" 
-						  Fill="{DynamicResource BlackColorBrush}" 
-						  Width="24" 
-						  Height="24" 
-						  Margin="5,3,0,0" 
-						  RenderTransformOrigin="0.5,0.5">
-						<Path.RenderTransform>
-							<TransformGroup>
-								<TransformGroup.Children>
-									<RotateTransform Angle="0" />
-									<ScaleTransform ScaleX="1" ScaleY="1" />
-								</TransformGroup.Children>
-							</TransformGroup>
-						</Path.RenderTransform>
-					</Path>
-                </Hyperlink>-->
-			</TextBlock>
+                           TextDecorations="{x:Null}"/>
+
+				</TextBlock>
+			</StackPanel>
 		</DataTemplate>
 	</Controls:MetroWindow.IconTemplate>
+
 	<!--窗体级FLYOUT-->
 	<Controls:MetroWindow.Flyouts>
 		<Controls:FlyoutsControl>
@@ -184,34 +172,18 @@
 						Visibility="Visible"
                         ToolTipText="{Binding WindowTitle}">
 			<tb:TaskbarIcon.TrayToolTip>
-				<local:BalloonSongInfo >
-					<local:BalloonSongInfo.DataContext>
-						<Binding Path="SoundData" Source="{x:Static tools:CommandSingleton.Instance}" />
-					</local:BalloonSongInfo.DataContext>
-				</local:BalloonSongInfo>
+				<local:BalloonSongInfo />
 			</tb:TaskbarIcon.TrayToolTip>
-			<tb:TaskbarIcon.TrayPopup>
+			<!--<tb:TaskbarIcon.TrayPopup>
 				<local:PopupControlPanel/>
-			</tb:TaskbarIcon.TrayPopup>
+			</tb:TaskbarIcon.TrayPopup>-->
 			<tb:TaskbarIcon.ContextMenu>
 				<ContextMenu>
 					<ContextMenu.Template>
 						<ControlTemplate>
-							<Label Foreground="Red" Background="Black" Content="MENU"/>
+							<local:PopupControlPanel/>
 						</ControlTemplate>
 					</ContextMenu.Template>
-					<!--<MenuItem Header="播放/暂停" 
-							  Command="{Binding PlayCommand,Source=BassEngine}" />
-					<MenuItem Header="退出" 
-							  Command="{Binding }">
-						<MenuItem.Icon>
-							<Path Data="{Binding [exit],Source={x:Static MControls:PathData.Instance}}" 
-								  Fill="{DynamicResource BlackBrush}"
-								  Stretch="Fill"
-								  Width="16"
-								  Height="16"/>
-						</MenuItem.Icon>
-					</MenuItem>-->
 				</ContextMenu>
 			</tb:TaskbarIcon.ContextMenu>
 		</tb:TaskbarIcon>

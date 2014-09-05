@@ -10,7 +10,6 @@
 
 			<!--<controls:ProgressRing IsActive="{TemplateBinding IsActive}" x:Name="PART_Process"/>-->
 			<Image x:Name="PART_Image" 
-				   Source="{TemplateBinding Source}" 
 				   Width="{TemplateBinding Width}" 
 				   Height="{TemplateBinding Height}" 
 				   Stretch="Fill" >

@@ -100,6 +100,7 @@
     <Compile Include="Behaviors\AutoPopulateExportedViewsBehavior.cs" />
     <Compile Include="Converter\KeysToStringConverter.cs" />
     <Compile Include="Converter\MutiParamConverter.cs" />
+    <Compile Include="MyType\SerializableDictionary.cs" />
     <Compile Include="Sites.cs" />
     <Compile Include="Command\Commands.cs" />
     <Compile Include="Converter\ActualSizeFixedConverter.cs" />
@@ -116,10 +117,10 @@
     <Compile Include="Converter\LongToDateConverter.cs" />
     <Compile Include="Extension\TypeExtensions.cs" />
     <Compile Include="HttpWebRequestOpt.cs" />
-    <Compile Include="MyType\Class1.cs" />
     <Compile Include="Untils\BaseModule.cs" />
     <Compile Include="Untils\BaseViewModel.cs" />
     <Compile Include="Untils\AeroHelper.cs" />
+    <Compile Include="Untils\MD5Until.cs" />
     <Compile Include="Untils\XmlUtil.cs" />
     <Compile Include="Untils\ColorFunctions.cs" />
     <Compile Include="Untils\HotKey.cs" />
@@ -198,6 +199,9 @@
   <ItemGroup>
     <Resource Include="Resources\Images\defaults\focusimage_img.png" />
     <Resource Include="Resources\Images\defaults\loading_img.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\defaults\logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

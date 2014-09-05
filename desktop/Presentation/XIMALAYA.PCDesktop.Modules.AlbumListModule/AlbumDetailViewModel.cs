@@ -111,7 +111,7 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumModule
                         this.AlbumData = albumInfo.Album;
                         this.EventAggregator.GetEvent<UserMinEvent>().Publish(new UserEventArgument
                         {
-                            RegionName = string.Format("AlbumUserMinViewRegion_{0}", this.AlbumData.AlbumID),
+                            RegionName = this.RegionName,
                             UID = this.AlbumData.Uid
                         });
                         this.Total = albumInfo.SoundsResult.TotalCount;
@@ -152,7 +152,7 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumModule
         }
         public override void Dispose()
         {
-            this.RegionManager.Regions.Remove(string.Format("AlbumUserMinViewRegion_{0}", this.AlbumData.AlbumID));
+            this.RegionManager.Regions.Remove(this.RegionName);
             base.Dispose();
         }
         #endregion

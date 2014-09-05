@@ -72,8 +72,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\AutoSizeRichTextBox.cs" />
     <Compile Include="Controls\HotKeyTextbox.cs" />
     <Compile Include="Controls\ImageAttached.cs" />
+    <Compile Include="Controls\Marquee.cs" />
     <Compile Include="Controls\MyCheckboxButton.cs" />
     <Compile Include="Controls\MyImage.cs" />
     <Compile Include="Controls\MyRadioButton.cs" />

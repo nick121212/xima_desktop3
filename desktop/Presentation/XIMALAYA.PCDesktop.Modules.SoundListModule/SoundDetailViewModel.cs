@@ -78,9 +78,13 @@ namespace XIMALAYA.PCDesktop.Modules.SoundModule
                         this.SoundData = result;
                         this.EventAggregator.GetEvent<UserMinEvent>().Publish(new UserEventArgument
                         {
-                            RegionName = string.Format("UserMinViewRegion_{0}", this.SoundData.TrackId),
+                            RegionName = this.RegionName,
                             UID = this.SoundData.UID
                         });
+                        if (CommandSingleton.Instance.SoundData.TrackId != this.SoundData.TrackId)
+                        {
+                            this.EventAggregator.GetEvent<PlayerEvent>().Publish(this.SoundData.TrackId);
+                        }
                         return;
                     }
                     DialogManager.ShowMessageAsync(Application.Current.MainWindow as MetroWindow, "喜马拉雅", "获取声音数据失败！");
@@ -93,7 +97,7 @@ namespace XIMALAYA.PCDesktop.Modules.SoundModule
         }
         public override void Dispose()
         {
-            this.RegionManager.Regions.Remove(string.Format("UserMinViewRegion_{0}", this.SoundData.TrackId));
+            this.RegionManager.Regions.Remove(this.RegionName);
             base.Dispose();
         }
 

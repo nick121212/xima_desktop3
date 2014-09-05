@@ -17,11 +17,11 @@
 	<StackPanel Orientation="Vertical" 
 				Margin="0 10 0 0"
 				FocusManager.IsFocusScope="True">
-		<Image Width="60" Source="pack://application:,,,/XIMALAYA.PCDesktop.Tools;component/Resources/Images/logo.png"/>
+		<!--<Image Width="60" Source="pack://application:,,,/XIMALAYA.PCDesktop.Tools;component/Resources/Images/logo.png"/>
 		<Label Content="喜马拉雅" 
 			   Margin="0 0 0 20"
 			   Foreground="{DynamicResource BlackBrush}"
-			   HorizontalContentAlignment="Center"/>
+			   HorizontalContentAlignment="Center"/>-->
 		
 		<MControls:MyToggleButton Width="100" 
 								  Height="90" 

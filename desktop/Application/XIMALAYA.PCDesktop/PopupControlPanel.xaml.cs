@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Controls;
+using Hardcodet.Wpf.TaskbarNotification;
 
 namespace XIMALAYA.PCDesktop
 {
@@ -13,6 +14,13 @@ namespace XIMALAYA.PCDesktop
         public PopupControlPanel()
         {
             InitializeComponent();
+            TaskbarIcon.AddBalloonClosingHandler(this, OnBalloonClosing);
         }
+
+        private void OnBalloonClosing(object sender, RoutedEventArgs e)
+        {
+            e.Handled = true;
+        }
+
     }
 }

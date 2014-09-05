@@ -141,7 +141,7 @@
                                 </VisualState>
                                 <VisualState x:Name="RightTransition">
                                     <Storyboard>
-                                        <!-- new right transition = -->
+                                        <!-- new right transition =========================================== -->
 
                                         <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
                                                                        Storyboard.TargetProperty="(UIElement.Opacity)"
@@ -185,7 +185,7 @@
                                             </EasingDoubleKeyFrame>
                                         </DoubleAnimationUsingKeyFrames>
 
-                                        <!-- old right transition = -->
+                                        <!-- old right transition =========================================== -->
                                         
                                         <!--<DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
                                                                        Storyboard.TargetName="CurrentContentPresentationSite"
@@ -226,7 +226,7 @@
                                 </VisualState>
                                 <VisualState x:Name="LeftTransition">
                                     <Storyboard>
-                                        <!-- new left transition = -->
+                                        <!-- new left transition =========================================== -->
                                         
                                         <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
                                                                        Storyboard.TargetProperty="(UIElement.Opacity)"
@@ -270,7 +270,7 @@
                                             </EasingDoubleKeyFrame>
                                         </DoubleAnimationUsingKeyFrames>
                                         
-                                        <!-- old left transition = -->
+                                        <!-- old left transition =========================================== -->
 
                                         <!--<DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
                                                                        Storyboard.TargetName="CurrentContentPresentationSite"

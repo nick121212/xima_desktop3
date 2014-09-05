@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Hardcodet.Wpf.TaskbarNotification;
 
 namespace XIMALAYA.PCDesktop
 {
@@ -24,26 +25,6 @@ namespace XIMALAYA.PCDesktop
         {
             InitializeComponent();
 
-            this.Loaded += BalloonSongInfo_Loaded;
-            this.Unloaded += BalloonSongInfo_Unloaded;
-        }
-
-        public MainViewModel ViewModel
-        {
-            get
-            {
-                return this.DataContext as MainViewModel;
-            }
-        }
-
-        void BalloonSongInfo_Unloaded(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        void BalloonSongInfo_Loaded(object sender, RoutedEventArgs e)
-        {
-            
         }
     }
 }

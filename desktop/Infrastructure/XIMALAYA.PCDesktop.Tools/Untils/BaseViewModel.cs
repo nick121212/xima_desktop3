@@ -28,6 +28,10 @@ namespace XIMALAYA.PCDesktop.Tools.Untils
         #region 属性
 
         /// <summary>
+        /// flyout容器
+        /// </summary>
+        public string RegionName { get; private set; }
+        /// <summary>
         /// 佔位服务
         /// </summary>
         [Import]
@@ -199,6 +203,7 @@ namespace XIMALAYA.PCDesktop.Tools.Untils
         /// </summary>
         public BaseViewModel()
         {
+            this.RegionName = "regionname_" + DateTime.Now.ToString("yyyyMMddhhmmssffff");
             this.NextPageCommand = new DelegateCommand(() =>
             {
                 this.PreNextData();

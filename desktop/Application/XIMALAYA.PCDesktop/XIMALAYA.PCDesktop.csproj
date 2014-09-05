@@ -38,8 +38,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>ICO\icon_16.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Hardcodet.Wpf.TaskbarNotification, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">

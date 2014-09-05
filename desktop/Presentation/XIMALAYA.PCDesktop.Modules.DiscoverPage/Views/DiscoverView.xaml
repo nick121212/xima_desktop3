@@ -10,11 +10,6 @@
              xmlns:tools="clr-namespace:XIMALAYA.PCDesktop.Tools;assembly=XIMALAYA.PCDesktop.Tools"
              HorizontalAlignment="Center">
 
-	<!--<ScrollViewer x:Name="mainScroll"
-				  Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Grid}, Path=ActualWidth}" 
-				  Style="{StaticResource for_scrollviewer}"
-                  HorizontalScrollBarVisibility="Auto" 
-                  VerticalScrollBarVisibility="Auto">-->
 	<Grid Margin="0 5" HorizontalAlignment="Center">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
@@ -68,6 +63,6 @@
 			</ListBox>
 		</GroupBox>
 	</Grid>
-	<!--</ScrollViewer>-->
+
 
 </UserControl>

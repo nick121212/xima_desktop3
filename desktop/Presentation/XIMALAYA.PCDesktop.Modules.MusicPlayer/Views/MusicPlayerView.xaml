@@ -113,7 +113,7 @@
 			</MControls:SharePanel>
 			<!--音量控制-->
 			<StackPanel Width="20" x:Name="BdVolumeControl" 
-						Background="{DynamicResource WhiteBrush}" 
+						Background="Transparent" 
 						Orientation="Horizontal">
 				<!--静音-->
 				<MControls:MyToggleButton Width="20" 

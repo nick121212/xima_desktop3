@@ -31,7 +31,7 @@ namespace XIMALAYA.PCDesktop.Tools.Untils
                     return xmldes.Deserialize(sr);
                 }
             }
-            catch (Exception e)
+            catch 
             {
                 return null;
             }
@@ -100,7 +100,7 @@ namespace XIMALAYA.PCDesktop.Tools.Untils
 
                     return XmlLoad.DocumentElement.SelectSingleNode(stringRoot).InnerXml.Trim();
                 }
-                catch (Exception ex)
+                catch 
                 {
 
                 }

@@ -40,19 +40,35 @@ namespace XIMALAYA.PCDesktop
 
         #region 属性
 
+        /// <summary>
+        /// 容器管理器
+        /// </summary>
         [Import(AllowRecomposition = false)]
         private IRegionManager regionManager { get; set; }
+        /// <summary>
+        /// viewmodel
+        /// </summary>
         [Import]
         public MainViewModel MainViewModel
         {
             get { return this.DataContext as MainViewModel; }
             set { this.DataContext = value; }
         }
+        /// <summary>
+        /// flyout的索引号
+        /// </summary>
         public int Count { get; set; }
-        private Flyout LastFlyout { get; set; }
+        /// <summary>
+        /// 当前的flyout
+        /// </summary>
         private Flyout CurrentFlyout { get; set; }
+        /// <summary>
+        /// 资源目录
+        /// </summary>
         private ResourceDictionary ResourceDic { get; set; }
-
+        /// <summary>
+        /// 定时器，用于清理内存
+        /// </summary>
         private readonly DispatcherTimer ClearMembryTimer = new DispatcherTimer();
 
         #endregion
@@ -65,28 +81,28 @@ namespace XIMALAYA.PCDesktop
         public Shell()
         {
             InitializeComponent();
+
             this.Loaded += Shell_Loaded;
             this.Closed += Shell_Closed;
             this.ClearMembryTimer.Interval = TimeSpan.FromSeconds(50);
-            this.ClearMembryTimer.Tick += ClearMembryTimer_Tick;
+            this.ClearMembryTimer.Tick += new EventHandler((o, e) =>
+            {
+                SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
+            });
             this.ClearMembryTimer.IsEnabled = true;
-        }
-
-
-        protected override void OnSourceInitialized(EventArgs e)
-        {
-            base.OnSourceInitialized(e);
-            //AeroHelper.ExtendGlassFrame(this, new Thickness(-1));
-        }
-
-        void ClearMembryTimer_Tick(object sender, EventArgs e)
-        {
-            SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
         }
 
         #endregion
 
         #region 事件
+
+        void Shell_Loaded(object sender, RoutedEventArgs e)
+        {
+            XMSetting set = XMSetting.Instance;
+            this.ResourceDic = ThemeInfoManager.Instance.FindResourceDictionary(@"/MahApps.Metro;component/Styles/Colors.xaml");
+            RegionManager.SetRegionManager(this.settingFlyout, this.regionManager);
+            this.MainViewModel.NotifyIcon = NotifyIcon;
+        }
 
         void Shell_Closed(object sender, EventArgs e)
         {
@@ -116,13 +132,6 @@ namespace XIMALAYA.PCDesktop
             }
         }
 
-        void Shell_Loaded(object sender, RoutedEventArgs e)
-        {
-            XMSetting set = XMSetting.Instance;
-            //this.ResourceDic = ThemeInfoManager.Instance.FindResourceDictionary(@"/MahApps.Metro;component/Styles/Colors.xaml");
-            RegionManager.SetRegionManager(this.settingFlyout, this.regionManager);
-        }
-
         #endregion
 
         #region IFlyoutFactory 成员
@@ -145,6 +154,7 @@ namespace XIMALAYA.PCDesktop
             RelativeSource rs;
 
             this.CurrentFlyout = new Flyout();
+            this.CurrentFlyout.IsOpen = false;
             this.CurrentFlyout.AnimateOnPositionChange = true;
             this.CurrentFlyout.Theme = FlyoutTheme.Adapt;
             if (header != string.Empty)
@@ -165,7 +175,10 @@ namespace XIMALAYA.PCDesktop
                 });
             }
 
-            //this.CurrentFlyout.Background = new SolidColorBrush(Colors.Black);
+            if (this.ResourceDic != null)
+            {
+                this.CurrentFlyout.Background = this.ResourceDic["WhiteBrush"] as Brush;
+            }
 
             rs = new RelativeSource(RelativeSourceMode.FindAncestor);
             rs.AncestorType = typeof(Grid);
@@ -176,10 +189,29 @@ namespace XIMALAYA.PCDesktop
             RegionManager.SetRegionName(this.CurrentFlyout, regionName);
             this.ContainerGrid.Items.Add(this.CurrentFlyout);
             this.CurrentFlyout.ApplyTemplate();
-            this.CurrentFlyout.IsHideComplete += CurrentFlyout_IsHideComplete;
+            this.CurrentFlyout.IsVisibleChanged += CurrentFlyout_IsVisibleChanged;
             this.CurrentFlyout.Position = Position.Right;
 
             return regionName;
+        }
+
+        void CurrentFlyout_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            Flyout flyout = sender as Flyout;
+
+            if (flyout.Visibility == System.Windows.Visibility.Hidden)
+            {
+                string regionName = string.Empty;
+
+                regionName = RegionManager.GetRegionName(flyout);
+                this.regionManager.Regions.Remove(regionName);
+
+                flyout.Content = null;
+                flyout.DataContext = null;
+                this.ContainerGrid.Items.Remove(flyout);
+                flyout = null;
+                GC.Collect();
+            }
         }
 
         /// <summary>
@@ -233,21 +265,6 @@ namespace XIMALAYA.PCDesktop
             this.CurrentFlyout.IsOpen = true;
 
             return regionName;
-        }
-
-        void CurrentFlyout_IsHideComplete(object sender, EventArgs e)
-        {
-            Flyout flyout = sender as Flyout;
-            string regionName = string.Empty;
-
-            regionName = RegionManager.GetRegionName(flyout);
-            this.regionManager.Regions.Remove(regionName);
-
-            flyout.Content = null;
-            flyout.DataContext = null;
-            this.ContainerGrid.Items.Remove(flyout);
-            flyout = null;
-            GC.Collect();
         }
 
         #endregion

@@ -7,7 +7,9 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media.Imaging;
+using Hardcodet.Wpf.TaskbarNotification;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Modularity;
@@ -90,6 +92,10 @@ namespace XIMALAYA.PCDesktop
         /// 简版界面
         /// </summary>
         public List<TileSet> TileSets { get; set; }
+        /// <summary>
+        /// 托盘服务
+        /// </summary>
+        public TaskbarIcon NotifyIcon { get; set; }
 
         #endregion
 
@@ -140,22 +146,26 @@ namespace XIMALAYA.PCDesktop
                     this.LoadModule(moduleinfo.ModuleName, moduleinfo.Action);
                 });
 
-
                 //注册更换cover图事件
                 this.EventAggregator.GetEvent<ChangeCoverEvent>().Subscribe(cover =>
                 {
                     DownloadImage(cover);
+
+                    //Application.Current.Dispatcher.Invoke(() =>
+                    //{
+                    //    this.NotifyIcon.ShowCustomBalloon(new BalloonSongInfo(), PopupAnimation.Fade, 5000);
+                    //});
                 });
             }
             //注册程序错误事件
-            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler((sender, e) =>
-            {
-                Debug.WriteLine("**********************************************************************");
-                Debug.WriteLine("喜马拉雅出现错误：" + DateTime.Now.ToShortDateString());
-                Debug.WriteLine("**********************************************************************");
+            //AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler((sender, e) =>
+            //{
+            //    Debug.WriteLine("**********************************************************************");
+            //    Debug.WriteLine("喜马拉雅出现错误：" + DateTime.Now.ToShortDateString());
+            //    Debug.WriteLine("**********************************************************************");
 
-                Process.GetCurrentProcess().Kill();
-            });
+            //    Process.GetCurrentProcess().Kill();
+            //});
         }
 
         #endregion
@@ -190,7 +200,6 @@ namespace XIMALAYA.PCDesktop
             {
                 ChangeBackground(bmp);
             }
-
         }
         void ChangeBackground(BitmapSource NewCover)
         {
