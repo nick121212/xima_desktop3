@@ -39,6 +39,8 @@ namespace XIMALAYA.PCDesktop.Controls
         {
             var myImage = d as MyImage;
 
+            if (myImage.Image == null) return;
+
             if (myImage.Source != string.Empty && myImage.Source != null)
             {
                 string appStartupPath = System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);

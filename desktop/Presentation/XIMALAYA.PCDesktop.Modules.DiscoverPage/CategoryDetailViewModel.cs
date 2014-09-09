@@ -124,10 +124,18 @@ namespace XIMALAYA.PCDesktop.Modules.DiscoverPage
                                 CoverPath = "pack://application:,,,/XIMALAYA.PCDesktop.Tools;component/Resources/Images/tagall.jpg",
                                 TagName = "全部"
                             });
-                            foreach (var tag in tagResult.List)
+                            try
                             {
-                                this.TagDataList.Add(tag);
+                                foreach (var tag in tagResult.List)
+                                {
+                                    this.TagDataList.Add(tag);
+                                }
                             }
+                            catch
+                            {
+
+                            }
+                            
                         }
                     }));
                 }, new CategoryTagParam

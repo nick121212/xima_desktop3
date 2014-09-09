@@ -12,6 +12,7 @@
 	<UserControl.Resources>
 		<converter:MutiBoolConverter x:Key="MutiBoolConverter" />
 		<converter:EqualConverter x:Key="EqualConverter"/>
+		<converter:TimeSpanConverter x:Key="TimeSpanConverter"/>
 	</UserControl.Resources>
 
 	<Grid Margin="10 30">
@@ -38,8 +39,6 @@
 							   Height="180" 
 							   VerticalAlignment="Top"
 							   Source="{Binding SoundData.CoverLarge}"/>
-
-
 			<Grid Grid.Column="1">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto"/>
@@ -106,6 +105,12 @@
 							<Binding Path="SoundData"/>
 						</Label.DataContext>
 					</Label>
+					<!--时长-->
+					<Label Margin="2 0"
+						   HorizontalAlignment="Center" 
+						   VerticalAlignment="Center"
+						   ContentStringFormat="时长：{0}"
+						   Content="{Binding SoundData.Duration,Converter={StaticResource TimeSpanConverter}}"/>
 				</StackPanel>
 				<!--分享-->
 				<Label Margin="5 0"

@@ -146,7 +146,7 @@
 		</Controls:FlyoutsControl>
 	</Controls:MetroWindow.Flyouts>
 	<!--右侧按钮-->
-	<Controls:MetroWindow.RightWindowCommands>
+	<!--<Controls:MetroWindow.RightWindowCommands>
 		<Controls:WindowCommands>
 			<ToggleButton ToolTip="设置" 
 						  IsChecked="{Binding IsSettingFlyoutShow,Source={x:Static tools:FlyoutVisible.Instance}}">
@@ -163,7 +163,7 @@
 				</Path>
 			</ToggleButton>
 		</Controls:WindowCommands>
-	</Controls:MetroWindow.RightWindowCommands>
+	</Controls:MetroWindow.RightWindowCommands>-->
 	<!--内容框架-->
 	<DockPanel>
 		<!--托盘提示-->

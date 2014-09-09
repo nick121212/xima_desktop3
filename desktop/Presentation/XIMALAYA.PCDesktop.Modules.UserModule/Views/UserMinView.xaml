@@ -102,7 +102,6 @@
 			<Label Content="关注"/>
 			<Label Content="粉丝"/>
 			<Label Content="听过"/>
-			<Label Content="听过"/>
 		</StackPanel>
 
 	</Grid>

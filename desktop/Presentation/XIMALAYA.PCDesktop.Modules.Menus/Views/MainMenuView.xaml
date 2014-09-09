@@ -27,12 +27,11 @@
 								  Height="90" 
 								  Padding="0 5 0 0"
 								  Margin="0 5"
-								  BorderThickness="0"
-								  BorderType="Rectangle"
-								  Foreground="{DynamicResource WhiteBrush}"
+								  BorderType="None"
 								  IsSingle="True"
 								  Command="{Binding ShowContentCommand,Source={x:Static tools:CommandSingleton.Instance}}"
 								  CommandParameter="{x:Static tools:WellKnownModuleNames.SearchModule}"
+								  Foreground="{DynamicResource GrayBrush6}"
 								  Background="{DynamicResource BlackBrush}">
 			<MControls:MyToggleButton.Content>
 				<StackPanel>
@@ -54,11 +53,11 @@
 								  Padding="0 5 0 0"
 								  Margin="0 5"
 								  BorderThickness="0"
-								  BorderType="Rectangle"
-								  Foreground="{DynamicResource WhiteBrush}"
+								  BorderType="None"
 								  IsSingle="True"
 								  Command="{Binding ShowContentCommand,Source={x:Static tools:CommandSingleton.Instance}}"
 								  CommandParameter="{x:Static tools:WellKnownModuleNames.DiscoverModule}"
+								  Foreground="{DynamicResource GrayBrush6}"
 								  Background="{DynamicResource BlackBrush}">
 			<MControls:MyToggleButton.Content>
 				<StackPanel>
@@ -80,12 +79,12 @@
 								  Padding="0 5 0 0"
 								  Margin="0 5"
 								  BorderThickness="0"
-								  BorderType="Rectangle"
+								  BorderType="None"
 								  IsBackground="Hidden"
 								  IsSingle="True"
 								  Command="{Binding RedirectCommand,Source={x:Static tools:CommandSingleton.Instance}}"
 								  CommandParameter="http://www.ximalaya.com/download"
-								  Foreground="{DynamicResource WhiteBrush}"
+								  Foreground="{DynamicResource GrayBrush6}"
 								  Background="{DynamicResource BlackBrush}">
 			<MControls:MyToggleButton.Content>
 				<StackPanel>
@@ -107,10 +106,10 @@
 								  Padding="0 5 0 0"
 								  Margin="0 5"
 								  BorderThickness="0"
-								  BorderType="Rectangle"
-								  Foreground="{DynamicResource WhiteBrush}"
-								  IsBackground="Visible"
+								  BorderType="None"
+								  IsBackground="Hidden"
 								  IsChecked="{Binding IsSettingFlyoutShow,Source={x:Static tools:FlyoutVisible.Instance}}"
+								  Foreground="{DynamicResource GrayBrush6}"
 								  Background="{DynamicResource BlackBrush}">
 			<MControls:MyToggleButton.Content>
 				<StackPanel>

@@ -357,6 +357,7 @@ namespace XIMALAYA.PCDesktop.Tools.Player
                 {
                     _IsLoading = value;
                     this.RaisePropertyChanged(() => this.IsLoading);
+                    this.PlayCommand.RaiseCanExecuteChanged();
                 }
             }
         }
@@ -383,6 +384,7 @@ namespace XIMALAYA.PCDesktop.Tools.Player
         }
         private bool CanPlayCommand()
         {
+            if (this.IsLoading) return false;
             if (this.IsPlaying)
             {
                 return this.CanPause;

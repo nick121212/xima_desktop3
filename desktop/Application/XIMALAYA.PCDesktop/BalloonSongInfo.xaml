@@ -76,7 +76,7 @@
 											   HorizontalAlignment="Left"
 											   HorizontalContentAlignment="Left"
 											   IsReadOnly="True"
-											   ContainerWidth="{Binding ActualWidth,RelativeSource={RelativeSource AncestorType= StackPanel}}"
+											   ContainerWidth="{Binding ActualWidth,RelativeSource={RelativeSource AncestorType=Label}}"
 											   BorderThickness="0">
 					<FlowDocument>
 						<Paragraph FontSize="16">

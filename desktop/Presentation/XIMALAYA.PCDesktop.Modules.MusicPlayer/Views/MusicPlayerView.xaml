@@ -121,7 +121,6 @@
 										  IsChecked="{Binding BassEngine.IsMuted,Mode=TwoWay}"
 										  BorderType="Ellipse"
 										  Foreground="{DynamicResource WhiteBrush}"
-										  BackgroundChecked="{DynamicResource GrayBrush10}"
 										  Background="{DynamicResource BlackBrush}"
 										  BorderBrush="{DynamicResource BlackBrush}"
 										  BorderThickness="1">
@@ -161,7 +160,6 @@
 									  IsThreeState="True"
 									  Visibility="Collapsed"
 								      Foreground="{DynamicResource WhiteBrush}"
-								      BackgroundChecked="{DynamicResource GrayBrush10}"
 								      Background="{DynamicResource BlackBrush}"
 								      BorderBrush="{DynamicResource BlackBrush}"
 								      BorderThickness="1">
@@ -195,10 +193,9 @@
 								      Height="30"
 									  Margin="5"
 								      BorderType="Ellipse"
-								      Foreground="{DynamicResource WhiteBrush}"
 									  Command="{Binding PrevCommand,Source={x:Static tools:CommandSingleton.Instance}}"
-								      BackgroundChecked="{DynamicResource GrayBrush10}"
-								      Background="{DynamicResource BlackBrush}"
+								      Foreground="{DynamicResource WhiteBrush}"
+									  Background="{DynamicResource BlackBrush}"
 								      BorderBrush="{DynamicResource BlackBrush}"
 								      BorderThickness="1">
 				<MControls:MyToggleButton.Content>
@@ -219,10 +216,9 @@
 								      Height="40"
 								      BorderType="Ellipse"
 									  IsThreeState="True"
-								      Foreground="{DynamicResource WhiteBrush}"
                                       Command="{Binding BassEngine.PlayCommand}"
                                       CommandParameter="{Binding Source={RelativeSource Self},Path=IsChecked}"
-								      BackgroundChecked="{DynamicResource GrayBrush10}"
+								      Foreground="{DynamicResource WhiteBrush}"
 								      Background="{DynamicResource BlackBrush}"
 								      BorderBrush="{DynamicResource BlackBrush}"
 								      BorderThickness="1">
@@ -263,9 +259,8 @@
 								      Height="30"
 									  Margin="5"
 								      BorderType="Ellipse"
-								      Foreground="{DynamicResource WhiteBrush}"
 									  Command="{Binding NextCommand,Source={x:Static tools:CommandSingleton.Instance}}"
-								      BackgroundChecked="{DynamicResource GrayBrush10}"
+								      Foreground="{DynamicResource WhiteBrush}"
 								      Background="{DynamicResource BlackBrush}"
 								      BorderBrush="{DynamicResource BlackBrush}"
 								      BorderThickness="1">
@@ -289,10 +284,9 @@
 									  Margin="2"
 									  IsThreeState="True"
 								      BorderType="Ellipse"
-								      Foreground="{DynamicResource WhiteBrush}"
 									  IsBackground="Visible"
 									  IsChecked="{Binding IsShowListView,Source={x:Static tools:FlyoutVisible.Instance}}"
-								      BackgroundChecked="{DynamicResource GrayBrush10}"
+								      Foreground="{DynamicResource WhiteBrush}"
 								      Background="{DynamicResource BlackBrush}"
 								      BorderBrush="{DynamicResource BlackBrush}"
 								      BorderThickness="1">

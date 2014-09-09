@@ -81,6 +81,7 @@ namespace XIMALAYA.PCDesktop.Modules.SoundModule
                     if (result.TrackId > 0)
                     {
                         SoundCache.Instance[result.TrackId] = result;
+                        result.Duration *= 1000;
                         this.SoundData = result;
                         this.EventAggregator.GetEvent<UserMinEvent>().Publish(new UserEventArgument
                         {

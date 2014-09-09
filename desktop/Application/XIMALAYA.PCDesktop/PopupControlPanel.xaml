@@ -28,12 +28,9 @@
 										  Height="30"
 										  Margin="5"
 										  BorderType="None"
-										  Foreground="{DynamicResource WhiteBrush}"
 										  Command="{Binding PrevCommand,Source={x:Static tools:CommandSingleton.Instance}}"
-										  BackgroundChecked="{DynamicResource GrayBrush10}"
-										  Background="{DynamicResource BlackBrush}"
-										  BorderBrush="{DynamicResource BlackBrush}"
-										  BorderThickness="1">
+										  Foreground="{DynamicResource GrayBrush6}"
+										  Background="{DynamicResource BlackBrush}">
 					<MControls:MyToggleButton.Content>
 						<Path Data="{Binding [prev], Source={x:Static MControls:PathData.Instance}}" 
 							  Style="{StaticResource PathStyle}"
@@ -52,13 +49,10 @@
 										  Height="40"
 										  BorderType="None"
 										  IsThreeState="True"
-										  Foreground="{DynamicResource WhiteBrush}"
 										  Command="{Binding BassEngine.PlayCommand}"
 										  CommandParameter="{Binding Source={RelativeSource Self},Path=IsChecked}"
-										  BackgroundChecked="{DynamicResource GrayBrush10}"
-										  Background="{DynamicResource BlackBrush}"
-										  BorderBrush="{DynamicResource BlackBrush}"
-										  BorderThickness="1">
+										  Foreground="{DynamicResource GrayBrush6}"
+										  Background="{DynamicResource BlackBrush}">
 					<MControls:MyToggleButton.IsChecked>
 						<MultiBinding Converter="{StaticResource MutiBoolConverter}" 
 								      ConverterParameter="1" 
@@ -96,12 +90,9 @@
 										  Height="30"
 										  Margin="5"
 										  BorderType="None"
-										  Foreground="{DynamicResource WhiteBrush}"
 										  Command="{Binding NextCommand,Source={x:Static tools:CommandSingleton.Instance}}"
-										  BackgroundChecked="{DynamicResource GrayBrush10}"
-										  Background="{DynamicResource BlackBrush}"
-										  BorderBrush="{DynamicResource BlackBrush}"
-										  BorderThickness="1">
+										  Foreground="{DynamicResource GrayBrush6}"
+										  Background="{DynamicResource BlackBrush}">
 					<MControls:MyToggleButton.Content>
 						<Path Data="{Binding [next], Source={x:Static MControls:PathData.Instance}}" 
 						      Style="{StaticResource PathStyle}"
@@ -148,11 +139,8 @@
 										  Height="30"
 										  IsChecked="{Binding BassEngine.IsMuted,Mode=TwoWay}"
 										  BorderType="None"
-										  Foreground="{DynamicResource WhiteBrush}"
-										  BackgroundChecked="{DynamicResource GrayBrush10}"
-										  Background="{DynamicResource BlackBrush}"
-										  BorderBrush="{DynamicResource BlackBrush}"
-										  BorderThickness="1">
+										  Foreground="{DynamicResource GrayBrush6}"
+										  Background="{DynamicResource BlackBrush}">
 					<MControls:MyToggleButton.Content>
 						<Path Data="{Binding [volume], Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{StaticResource PathStyle}"

@@ -22,7 +22,6 @@ namespace XIMALAYA.PCDesktop.Controls
             set { SetValue(ContainerWidthProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for ContainerWidth.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ContainerWidthProperty =
             DependencyProperty.Register("ContainerWidth", typeof(double), typeof(AutoSizeRichTextBox), new PropertyMetadata(0D));
 
@@ -33,14 +32,13 @@ namespace XIMALAYA.PCDesktop.Controls
             set { SetValue(PaddingLeftFixedProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for PaddingLeftFixed.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PaddingLeftFixedProperty =
             DependencyProperty.Register("PaddingLeftFixed", typeof(double), typeof(AutoSizeRichTextBox), new PropertyMetadata(-1D));
 
 
         public AutoSizeRichTextBox()
         {
-            Height = Double.NaN;//set to nan to enable auto-height
+            Height = Double.NaN;
             Loaded += ((sender, args) => AdjustSizeByConent());
 
             DispatcherTimer.Interval = TimeSpan.FromMilliseconds(50);
