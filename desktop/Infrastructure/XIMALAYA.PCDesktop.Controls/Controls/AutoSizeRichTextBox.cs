@@ -73,10 +73,12 @@ namespace XIMALAYA.PCDesktop.Controls
 
             if (this.ContainerWidth > 0 && Width > this.ContainerWidth + 5)
             {
+                this.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
                 DispatcherTimer.IsEnabled = true;
             }
             else
             {
+                this.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
                 DispatcherTimer.IsEnabled = false;
             }
         }

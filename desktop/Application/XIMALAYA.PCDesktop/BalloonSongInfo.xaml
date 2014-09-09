@@ -60,15 +60,18 @@
 				<ColumnDefinition Width="5"/>
 			</Grid.ColumnDefinitions>
 			
+			<!--声音的封面图-->
 			<MControls:MyImage VerticalAlignment="Center"
 							   Width="64" 
 							   Height="64" 
 							   Source="{Binding SoundData.CoverSmall,Source={x:Static tools:CommandSingleton.Instance}}"
 							   DefaultSource="logo.png"/>
 
-			<StackPanel Grid.Column="1" 
-						VerticalAlignment="Center"
-						ClipToBounds="True">
+			<!--声音标题-->
+			<Label Grid.Column="1" 
+				   Width="150"
+				   VerticalAlignment="Center"
+				   ClipToBounds="True">
 				<MControls:AutoSizeRichTextBox Background="Transparent"
 											   HorizontalAlignment="Left"
 											   HorizontalContentAlignment="Left"
@@ -77,11 +80,12 @@
 											   BorderThickness="0">
 					<FlowDocument>
 						<Paragraph FontSize="16">
-							<Run Text="{Binding SoundData.Title,Source={x:Static tools:CommandSingleton.Instance}}"/>
+							<Run Foreground="{DynamicResource BlackBrush}" 
+								 Text="{Binding SoundData.Title,Source={x:Static tools:CommandSingleton.Instance}}"/>
 						</Paragraph>
 					</FlowDocument>
 				</MControls:AutoSizeRichTextBox>
-			</StackPanel>
+			</Label>
 
 		</Grid>
 	</Border>

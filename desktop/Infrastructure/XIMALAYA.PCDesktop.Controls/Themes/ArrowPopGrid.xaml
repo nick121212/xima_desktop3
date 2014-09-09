@@ -14,12 +14,13 @@
 						   Height="{TemplateBinding ArrowSize}"
 						   VerticalAlignment="Top"
 						   HorizontalAlignment="Right"
-						   Margin="0 -14 50 0"
+						   Margin="0 -18 50 0"
 						   StrokeThickness="{Binding BorderThickness.Left,RelativeSource={RelativeSource TemplatedParent}}"
 						   Fill="{TemplateBinding Background}">
-
 					<Rectangle.LayoutTransform>
-						<RotateTransform Angle="45"/>
+						<TransformGroup>
+							<RotateTransform Angle="45"/>
+						</TransformGroup>
 					</Rectangle.LayoutTransform>
 				</Rectangle>
 				<Grid Background="{TemplateBinding Background}">

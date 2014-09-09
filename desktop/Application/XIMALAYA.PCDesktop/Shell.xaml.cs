@@ -84,12 +84,7 @@ namespace XIMALAYA.PCDesktop
 
             this.Loaded += Shell_Loaded;
             this.Closed += Shell_Closed;
-            this.ClearMembryTimer.Interval = TimeSpan.FromSeconds(50);
-            this.ClearMembryTimer.Tick += new EventHandler((o, e) =>
-            {
-                SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
-            });
-            this.ClearMembryTimer.IsEnabled = true;
+            
         }
 
         #endregion
@@ -102,6 +97,20 @@ namespace XIMALAYA.PCDesktop
             this.ResourceDic = ThemeInfoManager.Instance.FindResourceDictionary(@"/MahApps.Metro;component/Styles/Colors.xaml");
             RegionManager.SetRegionManager(this.settingFlyout, this.regionManager);
             this.MainViewModel.NotifyIcon = NotifyIcon;
+            //定时清理内存
+            this.ClearMembryTimer.Interval = TimeSpan.FromSeconds(50);
+            this.ClearMembryTimer.Tick += new EventHandler((o, e1) =>
+            {
+                SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
+            });
+            this.ClearMembryTimer.IsEnabled = true;
+
+            this.StateChanged += Shell_StateChanged;
+        }
+
+        void Shell_StateChanged(object sender, EventArgs e)
+        {
+            CommandSingleton.Instance.IsWindowShow = this.WindowState != System.Windows.WindowState.Minimized;
         }
 
         void Shell_Closed(object sender, EventArgs e)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Threading;
@@ -7,6 +8,7 @@ using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Practices.Prism.Regions;
 using XIMALAYA.PCDesktop.Cache;
 using XIMALAYA.PCDesktop.Core.Models.Sound;
+using XIMALAYA.PCDesktop.Core.Models.User;
 using XIMALAYA.PCDesktop.Core.ParamsModel;
 using XIMALAYA.PCDesktop.Core.Services;
 using XIMALAYA.PCDesktop.Events;
@@ -54,6 +56,10 @@ namespace XIMALAYA.PCDesktop.Modules.SoundModule
         /// </summary>
         [Import]
         private ISoundDetailService SoundDetailService { get; set; }
+        /// <summary>
+        /// 喜欢改声音的用户列表
+        /// </summary>
+        public ObservableCollection<UserData> LikedUsers { get; set; }
 
         #endregion
 
@@ -93,6 +99,22 @@ namespace XIMALAYA.PCDesktop.Modules.SoundModule
             {
                 TrackId = this.TrackID
             });
+            this.SoundDetailService.GetLikedUsers(res =>
+            {
+                var result = res as LikedSoundUserResult;
+                Application.Current.Dispatcher.InvokeAsync(new Action(() =>
+                {
+                    this.Total = result.TotalCount;
+
+                    foreach (UserData user in result.Users)
+                    {
+                        this.LikedUsers.Add(user);
+                    }
+                }), DispatcherPriority.Background);
+            }, new SoundDetailParam
+            {
+                TrackId = this.TrackID
+            });
             base.GetData(isClear);
         }
         public override void Dispose()
@@ -115,6 +137,7 @@ namespace XIMALAYA.PCDesktop.Modules.SoundModule
         {
             if (this.RegionManager != null && this.RegionManager.Regions.ContainsRegionWithName(regionName))
             {
+                this.LikedUsers = new ObservableCollection<UserData>();
                 this.RegionManager.AddToRegion(regionName, soundDetailView);
                 this.TrackID = trackID;
                 this.GetData(true);

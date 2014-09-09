@@ -170,6 +170,7 @@
 		<tb:TaskbarIcon x:Name="NotifyIcon"
 						IconSource="/ICO/icon_16.ico"
 						Visibility="Visible"
+						LeftClickCommand="{Binding MinisizeCommand,Source={x:Static tools:CommandSingleton.Instance}}"
                         ToolTipText="{Binding WindowTitle}">
 			<tb:TaskbarIcon.TrayToolTip>
 				<local:BalloonSongInfo />

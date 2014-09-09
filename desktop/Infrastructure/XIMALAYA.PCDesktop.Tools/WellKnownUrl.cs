@@ -81,5 +81,10 @@ namespace XIMALAYA.PCDesktop.Tools
         /// 单个用户的详细信息
         /// </summary>
         public const string UserDetailInfo = WebPath + "/mobile/others/homePage";
+
+        /// <summary>
+        /// 喜欢声音的用户列表
+        /// </summary>
+        public const string LikedSoundUsers = WebPath + "/mobile/track/lovers";
     }
 }

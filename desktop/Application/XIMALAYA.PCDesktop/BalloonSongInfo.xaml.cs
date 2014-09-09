@@ -24,7 +24,6 @@ namespace XIMALAYA.PCDesktop
         public BalloonSongInfo()
         {
             InitializeComponent();
-
         }
     }
 }

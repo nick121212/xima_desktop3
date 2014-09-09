@@ -19,6 +19,7 @@
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 		
@@ -124,7 +125,7 @@
 					 BorderThickness="0"
 					 Padding="10"
 					 ScrollViewer.VerticalScrollBarVisibility="Auto"
-					 Height="100"
+					 Height="Auto"
 					 Background="Transparent"
 					 IsReadOnly="True">
 			<FlowDocument>
@@ -133,6 +134,18 @@
 				</Paragraph>
 			</FlowDocument>
 		</RichTextBox>
+		<!--喜欢该声音的用户数量-->
+		<Label Grid.Row="3"
+			   FontSize="18" 
+			   ContentStringFormat="喜欢该声音的用户数量（{0}）" 
+			   Content="{Binding Total}"/>
+		<!--用户列表-->
+		<ListBox Grid.Row="4"
+				 ItemsSource="{Binding Path=LikedUsers}"
+				 Background="Transparent"
+				 ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+				 ScrollViewer.VerticalScrollBarVisibility="Auto"
+				 ItemContainerStyle="{DynamicResource NormalUserItemStyle}"/>
 	</Grid>
 
 </UserControl>

@@ -126,16 +126,16 @@ namespace XIMALAYA.PCDesktop.Controls
 
         async void DownloadImage(string url)
         {
+            var uri = new Uri(url);
+
+            if (uri.Scheme == "pack")
+            {
+                this.Image.Source = new BitmapImage(uri);
+                return;
+            }
+
             try
             {
-                var uri = new Uri(url);
-
-                if (uri.Scheme == "pack")
-                {
-                    this.Image.Source = new BitmapImage(uri);
-                    return;
-                }
-
                 var request = WebRequest.Create(uri);
 
                 using (var response = await request.GetResponseAsync())
@@ -176,13 +176,15 @@ namespace XIMALAYA.PCDesktop.Controls
                     Directory.CreateDirectory(Path.Combine(appStartupPath, "images"));
                 }
 
-                FileStream dumpFile = new FileStream(Path.Combine(appStartupPath, "images", MD5Until.GetMD5_32(this.Source)), FileMode.Create, FileAccess.ReadWrite);
+                if (!File.Exists(Path.Combine(appStartupPath, "images", MD5Until.GetMD5_32(this.Source))))
+                {
+                    FileStream dumpFile = new FileStream(Path.Combine(appStartupPath, "images", MD5Until.GetMD5_32(this.Source)), FileMode.Create, FileAccess.ReadWrite);
 
-                stream.WriteTo(dumpFile);
-
-                dumpFile.Close();
-                dumpFile.Dispose();
-                dumpFile = null;
+                    stream.WriteTo(dumpFile);
+                    dumpFile.Close();
+                    dumpFile.Dispose();
+                    dumpFile = null;
+                }
             }
         }
 

@@ -113,9 +113,8 @@ namespace XIMALAYA.PCDesktop.Controls
             //对角线长度/2
             double halfDiagonal = Math.Sqrt(2 * Math.Pow(this.ArrowSize, 2)) / 2;
 
-            halfDiagonal = Math.Floor(halfDiagonal);
+            halfDiagonal = Math.Floor(halfDiagonal) + 2;
             halfDiagonal -= this.BorderThickness.Top;
-
 
             switch (this.ArrowPosition)
             {
@@ -150,14 +149,6 @@ namespace XIMALAYA.PCDesktop.Controls
             pathFigure.Segments.Add(new LineSegment(new Point(this.ArrowSize, 0), false));
 
             this.Rect.Clip = pathGeometry;
-
-            //<PathFigure StartPoint="0,0" IsClosed="True">
-            //            <LineSegment Point="0,100" />
-            //            <LineSegment Point="100,0" />
-            //        </PathFigure>
-            //    </PathGeometry.Figures>
-            //</PathGeometry>
-
         }
     }
 }

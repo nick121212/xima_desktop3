@@ -31,6 +31,7 @@ namespace XIMALAYA.PCDesktop.Tools
         private long _TrackID;
         private SoundData _SoundData;
         private Color _CurrentSoundCoverColor;
+        private bool _IsWindowShow = true;
 
         #endregion
 
@@ -164,6 +165,24 @@ namespace XIMALAYA.PCDesktop.Tools
                 {
                     _CurrentSoundCoverColor = value;
                     this.RaisePropertyChanged(() => this.CurrentSoundCoverColor);
+                }
+            }
+        }
+        /// <summary>
+        /// 窗体是否为显示状态
+        /// </summary>
+        public bool IsWindowShow
+        {
+            get
+            {
+                return _IsWindowShow;
+            }
+            set
+            {
+                if (value != _IsWindowShow)
+                {
+                    _IsWindowShow = value;
+                    this.RaisePropertyChanged(() => this.IsWindowShow);
                 }
             }
         }

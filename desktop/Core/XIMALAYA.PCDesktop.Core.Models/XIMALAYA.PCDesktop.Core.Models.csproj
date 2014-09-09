@@ -78,6 +78,8 @@
     <Compile Include="Tags\TagData.cs" />
     <Compile Include="Tags\TagAlbumsResult.cs" />
     <Compile Include="Tags\TagSoundListResult.cs" />
+    <Compile Include="User\LikedSoundUserResult.cs" />
+    <Compile Include="User\UserData4.cs" />
     <Compile Include="User\UserResult.cs" />
     <Compile Include="User\UserData3.cs" />
     <Compile Include="User\UserData2.cs" />
