@@ -156,11 +156,6 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumModule
         {
             if (this.CategoryTagAlbumsService != null)
             {
-                if (isClear)
-                {
-                    this.Albums.Clear();
-                }
-
                 this.Params.Page = this.CurrentPage;
                 base.GetData(isClear);
                 this.CategoryTagAlbumsService.GetData(result =>
@@ -169,9 +164,14 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumModule
                     Application.Current.Dispatcher.InvokeAsync(new Action(() =>
                     {
                         this.IsWaiting = false;
+
                         if (tagAlbumsResult.Ret == 0)
                         {
                             this.Total = tagAlbumsResult.Count;
+                            if (isClear)
+                            {
+                                this.Albums.Clear();
+                            }
                             foreach (var album in tagAlbumsResult.List)
                             {
                                 this.Albums.Add(album);

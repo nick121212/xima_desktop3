@@ -160,7 +160,7 @@
 						Height="5"
 						Maximum="1"
 						Minimum="0"
-						LargeChange="0.2"
+						LargeChange="0.1"
 						SmallChange="0.1"
 						BorderBrush="{DynamicResource GrayBrush8}"
 						Foreground="{DynamicResource BlackBrush}"

@@ -238,12 +238,15 @@ namespace XIMALAYA.PCDesktop.Modules.Search
             this.WidthAlbum = new GridLength(0);
             this.WidthUser = new GridLength(0);
             this.WidthSound = new GridLength(0);
+            this.IsNextPageVisibled = true;
             switch (this.Param.Scope)
             {
                 case TagType.all:
                     this.WidthAlbum = new GridLength(33.3, GridUnitType.Star);
                     this.WidthUser = new GridLength(33.3, GridUnitType.Star);
                     this.WidthSound = new GridLength(33.3, GridUnitType.Star);
+                    this.Total = 0;
+                    this.IsNextPageVisibled = false;
                     break;
                 case TagType.user:
                     this.WidthUser = new GridLength(100, GridUnitType.Star);
@@ -294,20 +297,13 @@ namespace XIMALAYA.PCDesktop.Modules.Search
             {
                 return;
             }
-            if (isClear)
-            {
-                this.UserDatas.Clear();
-                this.AlbumDatas.Clear();
-                this.SoundDatas.Clear();
-            }
-            //this.IsNextPageVisibled = false;
+
             this.CanResearch = false;
             this.Param.Page = this.CurrentPage;
             base.GetData(isClear);
             switch (this.Param.Scope)
             {
                 case TagType.all:
-                    this.IsNextPageVisibled = false;
                     this.SearchAllData();
                     break;
                 case TagType.voice:
@@ -366,7 +362,6 @@ namespace XIMALAYA.PCDesktop.Modules.Search
 
                 Application.Current.Dispatcher.InvokeAsync(new Action(() =>
                 {
-                    this.IsNextPageVisibled = true;
                     this.IsWaiting = false;
                     if (result == null) return;
                     if (result.Ret == 0)
@@ -374,6 +369,7 @@ namespace XIMALAYA.PCDesktop.Modules.Search
                         this.Total = result.TotalCount;
                         if (this.Total > 0)
                         {
+                            this.SoundDatas.Clear();
                             foreach (var sound in result.Sounds)
                             {
                                 sound.Duration *= 1000;
@@ -402,7 +398,6 @@ namespace XIMALAYA.PCDesktop.Modules.Search
 
                 Application.Current.Dispatcher.InvokeAsync(new Action(() =>
                 {
-                    this.IsNextPageVisibled = true;
                     this.IsWaiting = false;
                     if (result == null) return;
                     if (result.Ret == 0)
@@ -410,6 +405,7 @@ namespace XIMALAYA.PCDesktop.Modules.Search
                         this.Total = result.TotalCount;
                         if (this.Total > 0)
                         {
+                            this.AlbumDatas.Clear();
                             foreach (var album in result.Albums)
                             {
                                 this.AlbumDatas.Add(album);
@@ -437,7 +433,6 @@ namespace XIMALAYA.PCDesktop.Modules.Search
 
                 Application.Current.Dispatcher.InvokeAsync(new Action(() =>
                 {
-                    this.IsNextPageVisibled = true;
                     this.IsWaiting = false;
                     if (result == null) return;
                     if (result.Ret == 0)
@@ -445,6 +440,7 @@ namespace XIMALAYA.PCDesktop.Modules.Search
                         this.Total = result.TotalCount;
                         if (this.Total > 0)
                         {
+                            this.UserDatas.Clear();
                             foreach (var user in result.Users)
                             {
                                 this.UserDatas.Add(user);

@@ -60,6 +60,10 @@ namespace XIMALAYA.PCDesktop.Modules.SoundModule
         /// 喜欢改声音的用户列表
         /// </summary>
         public ObservableCollection<UserData> LikedUsers { get; set; }
+        /// <summary>
+        /// 参数
+        /// </summary>
+        private SoundDetailParam Param { get; set; }
 
         #endregion
 
@@ -73,50 +77,54 @@ namespace XIMALAYA.PCDesktop.Modules.SoundModule
         {
             if (this.SoundDetailService == null) return;
 
-            this.SoundDetailService.GetData(res =>
+            if (this.SoundData == null)
             {
-                var result = res as SoundData;
-                Application.Current.Dispatcher.InvokeAsync(new Action(() =>
+                this.SoundDetailService.GetData(res =>
                 {
-                    if (result.TrackId > 0)
+                    var result = res as SoundData;
+                    Application.Current.Dispatcher.InvokeAsync(new Action(() =>
                     {
-                        SoundCache.Instance[result.TrackId] = result;
-                        result.Duration *= 1000;
-                        this.SoundData = result;
-                        this.EventAggregator.GetEvent<UserMinEvent>().Publish(new UserEventArgument
+                        if (result.TrackId > 0)
                         {
-                            RegionName = this.RegionName,
-                            UID = this.SoundData.UID
-                        });
-                        if (CommandSingleton.Instance.SoundData.TrackId != this.SoundData.TrackId)
-                        {
-                            this.EventAggregator.GetEvent<PlayerEvent>().Publish(this.SoundData.TrackId);
+                            SoundCache.Instance[result.TrackId] = result;
+                            result.Duration *= 1000;
+                            this.SoundData = result;
+                            this.EventAggregator.GetEvent<UserMinEvent>().Publish(new UserEventArgument
+                            {
+                                RegionName = this.RegionName,
+                                UID = this.SoundData.UID
+                            });
+                            if (CommandSingleton.Instance.SoundData.TrackId != this.SoundData.TrackId)
+                            {
+                                this.EventAggregator.GetEvent<PlayerEvent>().Publish(this.SoundData.TrackId);
+                            }
+                            return;
                         }
-                        return;
-                    }
-                    DialogManager.ShowMessageAsync(Application.Current.MainWindow as MetroWindow, "喜马拉雅", "获取声音数据失败！");
-                }), DispatcherPriority.Background);
-            }, new SoundDetailParam
-            {
-                TrackId = this.TrackID
-            });
+                        DialogManager.ShowMessageAsync(Application.Current.MainWindow as MetroWindow, "喜马拉雅", "获取声音数据失败！");
+                    }), DispatcherPriority.Background);
+                }, this.Param);
+            }
+
+            base.GetData(isClear);
+            this.Param.Page = this.CurrentPage;
+            this.Param.PerPage = this.PageSize;
             this.SoundDetailService.GetLikedUsers(res =>
             {
                 var result = res as LikedSoundUserResult;
                 Application.Current.Dispatcher.InvokeAsync(new Action(() =>
                 {
                     this.Total = result.TotalCount;
-
+                    this.IsWaiting = false;
+                    if (isClear)
+                    {
+                        this.LikedUsers.Clear();
+                    }
                     foreach (UserData user in result.Users)
                     {
                         this.LikedUsers.Add(user);
                     }
                 }), DispatcherPriority.Background);
-            }, new SoundDetailParam
-            {
-                TrackId = this.TrackID
-            });
-            base.GetData(isClear);
+            }, this.Param);
         }
         public override void Dispose()
         {
@@ -140,8 +148,12 @@ namespace XIMALAYA.PCDesktop.Modules.SoundModule
             {
                 this.LikedUsers = new ObservableCollection<UserData>();
                 this.RegionManager.AddToRegion(regionName, soundDetailView);
-                this.TrackID = trackID;
-                this.GetData(true);
+                this.PageSize = 15;
+                this.Param = new SoundDetailParam
+                {
+                    TrackId = trackID
+                };
+                this.CurrentPage = 1;
             }
         }
 

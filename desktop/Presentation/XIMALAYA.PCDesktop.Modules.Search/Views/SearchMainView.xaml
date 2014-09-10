@@ -157,7 +157,7 @@
 							  HorizontalAlignment="Center"
 							  Grid.Row="4" 
 							  Margin="3"
-							  Visibility="{Binding IsNextPageVisibled,Converter={StaticResource BooleanToVisibilityConverter}}"
+							  Visibility="{Binding IsNextPageVisibled,Converter={StaticResource BooleanToVisibilityConverter},Mode=OneWay}"
 							  IsEnabled="{Binding IsEnable}"
 							  CurrentPage="{Binding CurrentPage,Mode=TwoWay}"
 							  Total="{Binding Total}"/>

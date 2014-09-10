@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Threading;
 
 namespace XIMALAYA.PCDesktop.Controls
@@ -35,7 +36,6 @@ namespace XIMALAYA.PCDesktop.Controls
         public static readonly DependencyProperty PaddingLeftFixedProperty =
             DependencyProperty.Register("PaddingLeftFixed", typeof(double), typeof(AutoSizeRichTextBox), new PropertyMetadata(-1D));
 
-
         public AutoSizeRichTextBox()
         {
             Height = Double.NaN;
@@ -56,7 +56,7 @@ namespace XIMALAYA.PCDesktop.Controls
         protected override void OnTextChanged(TextChangedEventArgs e)
         {
             base.OnTextChanged(e);
-            DispatcherTimer.IsEnabled = false;
+            //DispatcherTimer.IsEnabled = false;
             AdjustSizeByConent();
         }
 

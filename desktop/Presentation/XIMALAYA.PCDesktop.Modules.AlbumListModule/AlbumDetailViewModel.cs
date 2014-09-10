@@ -91,11 +91,7 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumModule
             {
                 throw new NullReferenceException();
             }
-            if (isClear)
-            {
-                this.Sounds.Clear();
-            }
-
+           
             this.Params.Page = this.CurrentPage;
             base.GetData(isClear);
             this.AlbumDetailService.GetData(result =>
@@ -105,7 +101,10 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumModule
                 Application.Current.Dispatcher.InvokeAsync(new Action(() =>
                 {
                     this.IsWaiting = false;
-
+                    if (isClear)
+                    {
+                        this.Sounds.Clear();
+                    }
                     if (albumInfo.Ret == 0)
                     {
                         this.AlbumData = albumInfo.Album;

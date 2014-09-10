@@ -291,7 +291,7 @@ namespace XIMALAYA.PCDesktop.Controls
             this.TotalPage = (int)Math.Ceiling((double)this.Total / this.PageSize);
             if (this.TotalPage == 1)
             {
-                this.IsShowNextPrevBtn = System.Windows.Visibility.Collapsed;
+                this.IsShowNextPrevBtn = System.Windows.Visibility.Hidden;
             }
             else
             {
@@ -308,7 +308,7 @@ namespace XIMALAYA.PCDesktop.Controls
             this.StackPanel.Children.Clear();
             if (this.Total <= 0)
             {
-                this.Visibility = System.Windows.Visibility.Hidden;
+                this.Visibility = System.Windows.Visibility.Collapsed;
                 return;
             }
             if (this.CurrentPage <= 0)
@@ -323,7 +323,7 @@ namespace XIMALAYA.PCDesktop.Controls
             }
             if (this.TotalPage < 2)
             {
-                this.Visibility = System.Windows.Visibility.Hidden;
+                this.Visibility = System.Windows.Visibility.Collapsed;
                 return;
             }
             this.Visibility = System.Windows.Visibility.Visible;

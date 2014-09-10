@@ -46,7 +46,7 @@ namespace XIMALAYA.PCDesktop.Core.ParamsModel
         public override string ToString()
         {
             StringBuilder sReturn = new StringBuilder();
-            List<PropertyInfo> properties = this.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public)
+            List<PropertyInfo> properties = this.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.OptionalParamBinding)
                 .Where(p => p.GetCustomAttributes(typeof(DataMemberAttribute)).Count() > 0).OrderBy(p => p.GetCustomAttribute<DataMemberAttribute>().Order).ToList();
             int index = 0;
             object val;

@@ -21,7 +21,9 @@
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 		
 		<!--用户详情-->
@@ -144,13 +146,26 @@
 			   FontSize="18" 
 			   ContentStringFormat="喜欢该声音的用户数量（{0}）" 
 			   Content="{Binding Total}"/>
+		<!--进度条-->
+		<Controls:MetroProgressBar Grid.Row="4" 
+								   Background="Transparent"
+								   Foreground="{DynamicResource AccentColorBrush}"
+								   Margin="0 0 0 2" 
+								   IsIndeterminate="{Binding IsWaiting}" />
 		<!--用户列表-->
-		<ListBox Grid.Row="4"
+		<ListBox Grid.Row="5"
 				 ItemsSource="{Binding Path=LikedUsers}"
 				 Background="Transparent"
 				 ScrollViewer.HorizontalScrollBarVisibility="Hidden"
 				 ScrollViewer.VerticalScrollBarVisibility="Auto"
 				 ItemContainerStyle="{DynamicResource NormalUserItemStyle}"/>
+		<!--分页控件-->
+		<MControls:Pagination Grid.Row="6" 
+							  PageSize="{Binding PageSize}"
+							  HorizontalAlignment="Center"
+							  IsEnabled="{Binding IsEnable}"
+							  CurrentPage="{Binding CurrentPage,Mode=TwoWay}"
+							  Total="{Binding Total}"/>
 	</Grid>
 
 </UserControl>

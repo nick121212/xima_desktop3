@@ -16,7 +16,7 @@
 		<converter:LongToDateConverter x:Key="LongToDateConverter"/>
 	</UserControl.Resources>
 
-	<Grid Margin="10 30">
+	<Grid Margin="10 30 10 0">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="Auto"/>
