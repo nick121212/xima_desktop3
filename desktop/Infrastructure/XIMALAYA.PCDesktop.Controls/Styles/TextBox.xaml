@@ -14,6 +14,7 @@
 					<Setter.Value>
 						<ControlTemplate>
 							<Controls:ProgressRing IsActive="True"
+												   Foreground="{DynamicResource BlackBrush}"
                                                    Width="35"
                                                    Height="35" />
 						</ControlTemplate>

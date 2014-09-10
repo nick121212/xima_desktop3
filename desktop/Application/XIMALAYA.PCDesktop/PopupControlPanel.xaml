@@ -156,7 +156,7 @@
 				</MControls:MyToggleButton>
 				<!--音量条-->
 				<Slider Margin="2"
-						Width="150"
+						Width="100"
 						Height="5"
 						Maximum="1"
 						Minimum="0"

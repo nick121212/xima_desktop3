@@ -21,7 +21,7 @@
 
 		<Controls:MetroProgressBar Grid.Row="1" 
 								   Background="Transparent"
-								   Foreground="{DynamicResource AccentColorBrush}"
+								   Foreground="{DynamicResource BlackBrush}"
 								   Margin="0 0 0 2" 
 								   IsIndeterminate="{Binding IsWaiting}" />
 

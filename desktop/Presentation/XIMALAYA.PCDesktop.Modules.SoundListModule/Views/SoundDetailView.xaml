@@ -149,7 +149,7 @@
 		<!--进度条-->
 		<Controls:MetroProgressBar Grid.Row="4" 
 								   Background="Transparent"
-								   Foreground="{DynamicResource AccentColorBrush}"
+								   Foreground="{DynamicResource BlackBrush}"
 								   Margin="0 0 0 2" 
 								   IsIndeterminate="{Binding IsWaiting}" />
 		<!--用户列表-->

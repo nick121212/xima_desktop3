@@ -330,6 +330,9 @@ namespace XIMALAYA.PCDesktop.Modules.Search
                     if (result == null) return;
                     if (result.Ret == 0)
                     {
+                        this.UserDatas.Clear();
+                        this.AlbumDatas.Clear();
+                        this.SoundDatas.Clear();
                         foreach (var sound in result.SoundData.Sounds)
                         {
                             sound.Duration *= 1000;

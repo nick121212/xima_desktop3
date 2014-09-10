@@ -29,8 +29,8 @@
 					 x:Name="searchBox"
 					 Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Canvas}, Path=ActualWidth,Converter={StaticResource ActualSizeFixedConverter},ConverterParameter='-,20'}"
 					 Text="{Binding ConditionString,UpdateSourceTrigger=PropertyChanged}"
-					 Controls:TextboxHelper.FocusBorderBrush="{DynamicResource AccentColorBrush}"
-					 Controls:TextboxHelper.MouseOverBorderBrush="{DynamicResource AccentColorBrush}"
+					 Controls:TextboxHelper.FocusBorderBrush="{DynamicResource BlackBrush}"
+					 Controls:TextboxHelper.MouseOverBorderBrush="{DynamicResource BlackBrush}"
 					 Controls:TextboxHelper.IsWaitingForData="{Binding IsWaiting}"
 					 Controls:TextboxHelper.Watermark="搜索条件"
 					 BorderBrush="{DynamicResource BlackBrush}"
@@ -113,11 +113,11 @@
 			</Controls:MetroTabItem>
 		</TabControl>
 		<!--搜索进度条-->
-		<Controls:MetroProgressBar Grid.Row="2" 
+		<!--<Controls:MetroProgressBar Grid.Row="2" 
 								   Background="Transparent"
 								   Foreground="{DynamicResource BlackBrush}"
 								   Margin="0 0 0 2" 
-								   IsIndeterminate="{Binding IsWaiting}" />
+								   IsIndeterminate="{Binding IsWaiting}" />-->
 		<!--搜索数据-->
 		<Grid Grid.Row="3">
 			<Grid.ColumnDefinitions>
