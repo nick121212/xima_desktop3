@@ -7,18 +7,14 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls.Primitives;
 using System.Windows.Media.Imaging;
 using Hardcodet.Wpf.TaskbarNotification;
-using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.ViewModel;
 using XIMALAYA.PCDesktop.Events;
 using XIMALAYA.PCDesktop.Tools;
 using XIMALAYA.PCDesktop.Tools.Player;
-using XIMALAYA.PCDesktop.Tools.Setting;
-using XIMALAYA.PCDesktop.Tools.Themes;
 using XIMALAYA.PCDesktop.Tools.Untils;
 
 namespace XIMALAYA.PCDesktop
