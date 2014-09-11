@@ -184,10 +184,10 @@ namespace XIMALAYA.PCDesktop
                 });
             }
 
-            if (this.ResourceDic != null)
-            {
-                this.CurrentFlyout.Background = this.ResourceDic["WhiteBrush"] as Brush;
-            }
+            //if (this.ResourceDic != null)
+            //{
+            //    this.CurrentFlyout.Background = this.ResourceDic["WhiteBrush"] as Brush;
+            //}
 
             rs = new RelativeSource(RelativeSourceMode.FindAncestor);
             rs.AncestorType = typeof(Grid);

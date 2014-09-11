@@ -29,13 +29,13 @@ namespace XIMALAYA.PCDesktop
     [Export(typeof(MainViewModel))]
     public class MainViewModel : NotificationObject, IPartImportsSatisfiedNotification, IDisposable
     {
-        #region fields
+        #region 字段
 
         private string _WindowTitle = string.Empty;
 
         #endregion
 
-        #region properties
+        #region 属性
 
         /// <summary>
         /// 窗体标题
@@ -99,16 +99,16 @@ namespace XIMALAYA.PCDesktop
 
         #endregion
 
-        #region command
+        #region 命令
 
         /// <summary>
         /// 显示隐藏界面
         /// </summary>
-        public DelegateCommand ShowOrHideCommand { get; set; }
+        //public DelegateCommand ShowOrHideCommand { get; set; }
 
         #endregion
 
-        #region ctor
+        #region 构造
 
         /// <summary>
         /// 构造
@@ -126,17 +126,17 @@ namespace XIMALAYA.PCDesktop
             this.ModuleCatalog = moduleCatalog;
             this.EventAggregator = eventAggregator;
             this.WindowTitle = @"喜马拉雅-听我想听";
-            this.ShowOrHideCommand = new DelegateCommand(() =>
-            {
-                if (Application.Current.MainWindow.Visibility == Visibility.Visible)
-                {
-                    Application.Current.MainWindow.Visibility = Visibility.Hidden;
-                }
-                else
-                {
-                    Application.Current.MainWindow.Visibility = Visibility.Visible;
-                }
-            });
+            //this.ShowOrHideCommand = new DelegateCommand(() =>
+            //{
+            //    if (Application.Current.MainWindow.Visibility == Visibility.Visible)
+            //    {
+            //        Application.Current.MainWindow.Visibility = Visibility.Hidden;
+            //    }
+            //    else
+            //    {
+            //        Application.Current.MainWindow.Visibility = Visibility.Visible;
+            //    }
+            //});
             //订阅加载模块事件
             if (this.EventAggregator != null)
             {
@@ -170,19 +170,23 @@ namespace XIMALAYA.PCDesktop
 
         #endregion
 
-        #region methods
+        #region 方法
 
         async void DownloadImage(string url)
         {
-            var request = WebRequest.Create(url);
-            using (var response = await request.GetResponseAsync())
-            using (var destStream = new MemoryStream())
+            try
             {
-                var responseStream = response.GetResponseStream();
-                var downloadTask = responseStream.CopyToAsync(destStream);
-                RefreshUI(downloadTask, destStream);
-                await downloadTask;
+                var request = WebRequest.Create(url);
+                using (var response = await request.GetResponseAsync())
+                using (var destStream = new MemoryStream())
+                {
+                    var responseStream = response.GetResponseStream();
+                    var downloadTask = responseStream.CopyToAsync(destStream);
+                    RefreshUI(downloadTask, destStream);
+                    await downloadTask;
+                }
             }
+            catch { }
         }
         async void RefreshUI(Task downloadTask, MemoryStream stream)
         {
@@ -276,7 +280,7 @@ namespace XIMALAYA.PCDesktop
 
         #endregion
 
-        #region interface method
+        #region IDisposable接口
 
         /// <summary>
         /// 销毁

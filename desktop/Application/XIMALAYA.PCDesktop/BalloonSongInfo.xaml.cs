@@ -24,6 +24,11 @@ namespace XIMALAYA.PCDesktop
         public BalloonSongInfo()
         {
             InitializeComponent();
+            TaskbarIcon.AddBalloonClosingHandler(this, OnBalloonClosing);
+        }
+        private void OnBalloonClosing(object sender, RoutedEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }

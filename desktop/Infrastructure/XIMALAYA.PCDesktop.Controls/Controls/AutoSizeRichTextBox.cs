@@ -15,51 +15,49 @@ namespace XIMALAYA.PCDesktop.Controls
 {
     public class AutoSizeRichTextBox : RichTextBox
     {
-        private readonly DispatcherTimer DispatcherTimer = new DispatcherTimer();
+        private Storyboard StoryBoard = new Storyboard();
 
         public double ContainerWidth
         {
             get { return (double)GetValue(ContainerWidthProperty); }
             set { SetValue(ContainerWidthProperty, value); }
         }
-
         public static readonly DependencyProperty ContainerWidthProperty =
             DependencyProperty.Register("ContainerWidth", typeof(double), typeof(AutoSizeRichTextBox), new PropertyMetadata(0D));
-
-
-        public double PaddingLeftFixed
-        {
-            get { return (double)GetValue(PaddingLeftFixedProperty); }
-            set { SetValue(PaddingLeftFixedProperty, value); }
-        }
-
-        public static readonly DependencyProperty PaddingLeftFixedProperty =
-            DependencyProperty.Register("PaddingLeftFixed", typeof(double), typeof(AutoSizeRichTextBox), new PropertyMetadata(-1D));
-
         public AutoSizeRichTextBox()
         {
-            Height = Double.NaN;
-            Loaded += ((sender, args) => AdjustSizeByConent());
-
-            DispatcherTimer.Interval = TimeSpan.FromMilliseconds(50);
-            DispatcherTimer.Tick += new EventHandler((o, e) =>
-            {
-                if (Math.Abs(this.Margin.Left) >= this.Width - this.ContainerWidth || this.Margin.Left == 5)
-                {
-                    this.PaddingLeftFixed *= -1;
-                }
-                this.Margin = new Thickness(this.Margin.Left + this.PaddingLeftFixed, this.Margin.Top, this.Margin.Right, this.Margin.Bottom);
+            this.Height = Double.NaN;
+            this.StoryBoard = new Storyboard();
+            this.Loaded += ((sender, args) => AdjustSizeByConent());
+            this.Unloaded += ((sender, args) => {
+                this.StoryBoard.Stop();
             });
-            DispatcherTimer.IsEnabled = false;
         }
 
         protected override void OnTextChanged(TextChangedEventArgs e)
         {
             base.OnTextChanged(e);
-            //DispatcherTimer.IsEnabled = false;
             AdjustSizeByConent();
         }
+        private void StoryBoardInit(double left)
+        {
+            QuinticEase SineEase = new QuinticEase { EasingMode = EasingMode.EaseIn };
+            ThicknessAnimationUsingKeyFrames keyFrames = new ThicknessAnimationUsingKeyFrames();
+            EasingThicknessKeyFrame keyFrame = new EasingThicknessKeyFrame(new Thickness(left, this.Margin.Top, this.Margin.Right, this.Margin.Bottom), KeyTime.FromTimeSpan(TimeSpan.FromSeconds(3)), SineEase);
+            EasingThicknessKeyFrame keyFrame1 = new EasingThicknessKeyFrame(new Thickness(0, this.Margin.Top, this.Margin.Right, this.Margin.Bottom), KeyTime.FromTimeSpan(TimeSpan.FromSeconds(6)), SineEase);
 
+            this.Margin = new Thickness(0,this.Margin.Top,this.Margin.Right,this.Margin.Bottom);
+            keyFrames.RepeatBehavior = RepeatBehavior.Forever;
+            StoryBoard.Children.Clear();
+            keyFrames.KeyFrames.Add(keyFrame);
+            keyFrames.KeyFrames.Add(keyFrame1);
+            StoryBoard.Children.Add(keyFrames);
+            Storyboard.SetTargetProperty(keyFrames, new PropertyPath("(FrameworkElement.Margin)"));
+            Storyboard.SetTarget(keyFrames, this);
+
+            StoryBoard.FillBehavior = FillBehavior.HoldEnd;
+            StoryBoard.Begin();
+        }
         public void AdjustSizeByConent()
         {
             var formattedText = GetFormattedText(Document);
@@ -69,18 +67,17 @@ namespace XIMALAYA.PCDesktop.Controls
 
             Width = Math.Min(MaxWidth, Math.Max(MinWidth, formattedText.WidthIncludingTrailingWhitespace + remainW));
 
+            StoryBoard.Stop();
             if (this.ContainerWidth > 0 && Width > this.ContainerWidth + 5)
             {
                 this.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
-                DispatcherTimer.IsEnabled = true;
+                this.StoryBoardInit(this.ContainerWidth - Width);
             }
             else
             {
                 this.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
-                DispatcherTimer.IsEnabled = false;
             }
         }
-
         private static FormattedText GetFormattedText(FlowDocument doc)
         {
             var output = new FormattedText(
@@ -119,7 +116,6 @@ namespace XIMALAYA.PCDesktop.Controls
 
             return output;
         }
-
         private static IEnumerable<TextElement> GetRunsAndParagraphs(FlowDocument doc)
         {
             for (TextPointer position = doc.ContentStart;
@@ -155,7 +151,6 @@ namespace XIMALAYA.PCDesktop.Controls
                 }
             }
         }
-
         private static string GetText(FlowDocument doc)
         {
             var sb = new StringBuilder();
