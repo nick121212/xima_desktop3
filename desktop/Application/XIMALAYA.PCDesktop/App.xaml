@@ -25,4 +25,17 @@
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
     </Application.Resources>
+
+	<JumpList.JumpList>
+		<JumpList x:Name="jumpList" 
+				  ShowRecentCategory="True"
+                  ShowFrequentCategory="True">
+			<JumpTask ApplicationPath="http://www.ximalaya.com/"
+                      CustomCategory="网址"
+                      Description="喜马拉雅官网"
+                      Title="喜马拉雅官网"
+                      IconResourcePath="C:\\Program Files\\Internet Explorer\\iexplore.exe" />
+		</JumpList>
+	</JumpList.JumpList>
+	
 </Application>

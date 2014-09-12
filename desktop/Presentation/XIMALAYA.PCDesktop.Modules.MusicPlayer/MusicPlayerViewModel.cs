@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.Composition;
 using Microsoft.Practices.Prism.Modularity;
+using Microsoft.WindowsAPICodePack.Taskbar;
 using XIMALAYA.PCDesktop.Cache;
 using XIMALAYA.PCDesktop.Core.Models.Sound;
 using XIMALAYA.PCDesktop.Events;

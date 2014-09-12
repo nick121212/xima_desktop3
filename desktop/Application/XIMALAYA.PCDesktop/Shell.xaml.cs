@@ -1,17 +1,17 @@
 ﻿using System;
 using System.ComponentModel.Composition;
-using System.Runtime.InteropServices;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Media;
-using System.Windows.Threading;
+using System.Windows.Interop;
+using System.Windows.Media.Imaging;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Regions;
+using Microsoft.WindowsAPICodePack.Taskbar;
 using XIMALAYA.PCDesktop.Tools;
-using XIMALAYA.PCDesktop.Tools.Player;
 using XIMALAYA.PCDesktop.Tools.Setting;
 using XIMALAYA.PCDesktop.Tools.Themes;
 using XIMALAYA.PCDesktop.Tools.Untils;
@@ -24,20 +24,6 @@ namespace XIMALAYA.PCDesktop
     [Export]
     public partial class Shell : IFlyoutFactory
     {
-        #region Dll
-
-        /// <summary>
-        /// 释放内存在虚拟内存
-        /// </summary>
-        /// <param name="proc"></param>
-        /// <param name="min"></param>
-        /// <param name="max"></param>
-        /// <returns></returns>
-        [DllImport("kernel32.dll")]
-        public static extern bool SetProcessWorkingSetSize(IntPtr proc, int min, int max);
-
-        #endregion
-
         #region 属性
 
         /// <summary>
@@ -62,14 +48,6 @@ namespace XIMALAYA.PCDesktop
         /// 当前的flyout
         /// </summary>
         private Flyout CurrentFlyout { get; set; }
-        /// <summary>
-        /// 资源目录
-        /// </summary>
-        private ResourceDictionary ResourceDic { get; set; }
-        /// <summary>
-        /// 定时器，用于清理内存
-        /// </summary>
-        private readonly DispatcherTimer ClearMembryTimer = new DispatcherTimer();
 
         #endregion
 
@@ -84,7 +62,6 @@ namespace XIMALAYA.PCDesktop
 
             this.Loaded += Shell_Loaded;
             this.Closed += Shell_Closed;
-            
         }
 
         #endregion
@@ -94,17 +71,9 @@ namespace XIMALAYA.PCDesktop
         void Shell_Loaded(object sender, RoutedEventArgs e)
         {
             XMSetting set = XMSetting.Instance;
-            this.ResourceDic = ThemeInfoManager.Instance.FindResourceDictionary(@"/MahApps.Metro;component/Styles/Colors.xaml");
             RegionManager.SetRegionManager(this.settingFlyout, this.regionManager);
-            this.MainViewModel.NotifyIcon = NotifyIcon;
             //定时清理内存
-            this.ClearMembryTimer.Interval = TimeSpan.FromSeconds(50);
-            this.ClearMembryTimer.Tick += new EventHandler((o, e1) =>
-            {
-                SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
-            });
-            this.ClearMembryTimer.IsEnabled = true;
-
+            this.MainViewModel.Init(NotifyIcon, this);
             this.StateChanged += Shell_StateChanged;
         }
 
@@ -115,7 +84,6 @@ namespace XIMALAYA.PCDesktop
 
         void Shell_Closed(object sender, EventArgs e)
         {
-            this.ClearMembryTimer.IsEnabled = false;
             this.MainViewModel.Dispose();
         }
 
@@ -183,11 +151,6 @@ namespace XIMALAYA.PCDesktop
                     }
                 });
             }
-
-            //if (this.ResourceDic != null)
-            //{
-            //    this.CurrentFlyout.Background = this.ResourceDic["WhiteBrush"] as Brush;
-            //}
 
             rs = new RelativeSource(RelativeSourceMode.FindAncestor);
             rs.AncestorType = typeof(Grid);

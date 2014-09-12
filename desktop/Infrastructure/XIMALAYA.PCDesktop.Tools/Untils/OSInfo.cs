@@ -108,16 +108,6 @@ namespace XIMALAYA.PCDesktop.Tools.Untils
             {
             }
 
-
-            //if (osInfor == OsVer.Windows7.GetHashCode().ToString())
-            //{
-            //    iniPath = System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            //}
-            //if (osInfor == OsVer.WindowsXP.GetHashCode().ToString())
-            //{
-            //    iniPath = System.Environment.GetFolderPath(Environment.SpecialFolder.System);
-            //}
-
             return iniPath;
         }
     }

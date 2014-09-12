@@ -308,7 +308,7 @@
 			</MControls:MyToggleButton>
 		</StackPanel>
 		<!--人物头像-->
-		<MControls:MyImage Grid.Column="0"
+		<MControls:MyImage x:Name="coverPath" Grid.Column="0"
 						   Grid.Row="1"
 						   Margin="5"
 						   VerticalAlignment="Center"

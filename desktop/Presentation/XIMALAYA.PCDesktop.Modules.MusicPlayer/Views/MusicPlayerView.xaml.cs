@@ -14,7 +14,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using Microsoft.WindowsAPICodePack.Taskbar;
 using XIMALAYA.PCDesktop.Tools.Player;
+using XIMALAYA.PCDesktop.Tools.Untils;
 
 namespace XIMALAYA.PCDesktop.Modules.MusicPlayer.Views
 {
@@ -33,6 +35,14 @@ namespace XIMALAYA.PCDesktop.Modules.MusicPlayer.Views
         void MusicPlayerView_Loaded(object sender, RoutedEventArgs e)
         {
             this.SpectrumAnalyzer.RegisterSoundPlayer(this.ViewModel.BassEngine);
+
+            //if (!TaskbarManager.Instance.TabbedThumbnail.IsThumbnailPreviewAdded(coverPath))
+            //{
+            //    Vector peekOffect = Utilities.GetOffset(Application.Current.MainWindow, coverPath);
+            //    TabbedThumbnail newPreview = new TabbedThumbnail(Application.Current.MainWindow, coverPath, peekOffect);
+            //    TaskbarManager.Instance.TabbedThumbnail.AddThumbnailPreview(newPreview);
+            //    TaskbarManager.Instance.TabbedThumbnail.SetActiveTab(newPreview);
+            //}
         }
 
         [Import]

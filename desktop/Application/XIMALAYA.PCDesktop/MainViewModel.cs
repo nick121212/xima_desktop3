@@ -5,13 +5,17 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Interop;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using Hardcodet.Wpf.TaskbarNotification;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.ViewModel;
+using Microsoft.WindowsAPICodePack.Taskbar;
 using XIMALAYA.PCDesktop.Events;
 using XIMALAYA.PCDesktop.Tools;
 using XIMALAYA.PCDesktop.Tools.Player;
@@ -25,9 +29,27 @@ namespace XIMALAYA.PCDesktop
     [Export(typeof(MainViewModel))]
     public class MainViewModel : NotificationObject, IPartImportsSatisfiedNotification, IDisposable
     {
+        #region Dll
+
+        /// <summary>
+        /// 释放内存在虚拟内存
+        /// </summary>
+        /// <param name="proc"></param>
+        /// <param name="min"></param>
+        /// <param name="max"></param>
+        /// <returns></returns>
+        [DllImport("kernel32.dll")]
+        public static extern bool SetProcessWorkingSetSize(IntPtr proc, int min, int max);
+
+        #endregion
+
         #region 字段
 
         private string _WindowTitle = string.Empty;
+        /// <summary>
+        /// 定时器，用于清理内存
+        /// </summary>
+        private DispatcherTimer ClearMemeryTimer = new DispatcherTimer();
 
         #endregion
 
@@ -84,10 +106,6 @@ namespace XIMALAYA.PCDesktop
                 return PlayerSingleton.Instance;
             }
         }
-        /// <summary>
-        /// 简版界面
-        /// </summary>
-        public List<TileSet> TileSets { get; set; }
         /// <summary>
         /// 托盘服务
         /// </summary>
@@ -168,6 +186,25 @@ namespace XIMALAYA.PCDesktop
 
         #region 方法
 
+        public void Init(TaskbarIcon notifyIcon, Window mainWindow)
+        {
+            this.NotifyIcon = notifyIcon;
+            this.ClearMemeory();
+        }
+        private void ClearMemeory()
+        {
+            this.ClearMemeryTimer.Interval = TimeSpan.FromSeconds(50);
+            this.ClearMemeryTimer.Tick += new EventHandler((o, e1) =>
+            {
+                SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
+            });
+            this.ClearMemeryTimer.IsEnabled = true;
+        }
+
+        /// <summary>
+        /// 下载图片
+        /// </summary>
+        /// <param name="url"></param>
         async void DownloadImage(string url)
         {
             try
@@ -184,6 +221,11 @@ namespace XIMALAYA.PCDesktop
             }
             catch { }
         }
+        /// <summary>
+        /// 更新UI
+        /// </summary>
+        /// <param name="downloadTask"></param>
+        /// <param name="stream"></param>
         async void RefreshUI(Task downloadTask, MemoryStream stream)
         {
             await Task.WhenAny(downloadTask, Task.Delay(1000));
@@ -201,6 +243,10 @@ namespace XIMALAYA.PCDesktop
                 ChangeBackground(bmp);
             }
         }
+        /// <summary>
+        /// 更改背景色
+        /// </summary>
+        /// <param name="NewCover"></param>
         void ChangeBackground(BitmapSource NewCover)
         {
             ColorFunctions.GetImageColorForBackgroundAsync(NewCover, new ColorFunctions.ComputeCompleteCallback((color) =>
@@ -288,6 +334,8 @@ namespace XIMALAYA.PCDesktop
             this.ModuleManager = null;
             this.ModuleCatalog = null;
             this.EventAggregator = null;
+            this.ClearMemeryTimer.IsEnabled = false;
+            this.ClearMemeryTimer = null;
         }
 
         #endregion
