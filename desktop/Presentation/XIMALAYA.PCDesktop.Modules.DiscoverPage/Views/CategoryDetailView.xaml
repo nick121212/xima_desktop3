@@ -23,6 +23,7 @@
         <ListBox ItemsSource="{Binding TagDataList}" 
                  Grid.Row="1"
                  Padding="20"
+				 Background="Transparent"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  ItemContainerStyle="{StaticResource TagListStyle}">
             <ListBox.ItemsPanel>

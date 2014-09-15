@@ -108,7 +108,7 @@
 			<!--分享条-->
 			<MControls:SharePanel Margin="5 0">
 				<MControls:SharePanel.DataContext>
-					<Binding Path="SoundData"/>
+					<Binding Path="SoundData" Source="{x:Static tools:GlobalDataSingleton.Instance}"/>
 				</MControls:SharePanel.DataContext>
 			</MControls:SharePanel>
 			<!--音量控制-->
@@ -118,7 +118,7 @@
 				<!--静音-->
 				<MControls:MyToggleButton Width="20" 
 										  Height="20"
-										  IsChecked="{Binding BassEngine.IsMuted,Mode=TwoWay}"
+										  IsChecked="{Binding BassEngine.IsMuted,Mode=TwoWay,Source={x:Static tools:GlobalDataSingleton.Instance}}"
 										  BorderType="Ellipse"
 										  Foreground="{DynamicResource WhiteBrush}"
 										  Background="{DynamicResource BlackBrush}"
@@ -150,7 +150,7 @@
 						SmallChange="0.1"
 						BorderBrush="{DynamicResource GrayBrush8}"
 						Foreground="{DynamicResource BlackBrush}"
-						Value="{Binding BassEngine.Volume}"
+						Value="{Binding BassEngine.Volume,Source={x:Static tools:GlobalDataSingleton.Instance}}"
 						Style="{DynamicResource FlatSlider}" />
 			</StackPanel>
 			<!--播放模式-->
@@ -216,7 +216,7 @@
 								      Height="40"
 								      BorderType="Ellipse"
 									  IsThreeState="True"
-                                      Command="{Binding BassEngine.PlayCommand}"
+                                      Command="{Binding BassEngine.PlayCommand,Source={x:Static tools:GlobalDataSingleton.Instance}}"
                                       CommandParameter="{Binding Source={RelativeSource Self},Path=IsChecked}"
 								      Foreground="{DynamicResource WhiteBrush}"
 								      Background="{DynamicResource BlackBrush}"
@@ -227,8 +227,8 @@
 								  ConverterParameter="1" 
 								  Mode="OneWay">
 						<MultiBinding.Bindings>
-							<Binding Path="BassEngine.IsPlaying" />
-							<Binding Path="BassEngine.IsLoading" />
+							<Binding Path="BassEngine.IsPlaying" Source="{x:Static tools:GlobalDataSingleton.Instance}" />
+							<Binding Path="BassEngine.IsLoading" Source="{x:Static tools:GlobalDataSingleton.Instance}"/>
 						</MultiBinding.Bindings>
 					</MultiBinding>
 				</MControls:MyToggleButton.IsChecked>
@@ -285,7 +285,7 @@
 									  IsThreeState="True"
 								      BorderType="Ellipse"
 									  IsBackground="Visible"
-									  IsChecked="{Binding IsShowListView,Source={x:Static tools:FlyoutVisible.Instance}}"
+									  IsChecked="{Binding IsShowListView,Source={x:Static tools:GlobalDataSingleton.Instance}}"
 								      Foreground="{DynamicResource WhiteBrush}"
 								      Background="{DynamicResource BlackBrush}"
 								      BorderBrush="{DynamicResource BlackBrush}"
@@ -314,14 +314,14 @@
 						   VerticalAlignment="Center"
 						   Width="32" 
 						   Height="32" 
-						   Source="{Binding SoundData.CoverSmall}"
+						   Source="{Binding SoundData.CoverSmall,Source={x:Static tools:GlobalDataSingleton.Instance}}"
 						   DefaultSource="track.jpg"/>
 		<!--声音信息-->
 		<Grid Grid.Row="1" Grid.Column="1">
 			<TextBlock TextWrapping="Wrap"
 					   Margin="0 0 100 0"
 					   FontSize="14"
-					   Text="{Binding SoundData.Title}" 
+					   Text="{Binding SoundData.Title,Source={x:Static tools:GlobalDataSingleton.Instance}}" 
 					   VerticalAlignment="Center"/>
 			<!--<StackPanel Orientation="Horizontal"
 						HorizontalAlignment="Right" 
@@ -358,9 +358,9 @@
                                    TrackBackgroundBack="{DynamicResource GrayBrush9}"
                                    TrackBackgroundFront="{DynamicResource GrayBrush2}"
                                    TotalTimeSpan="{Binding RelativeSource={RelativeSource Self},Path=Value}"
-                                   Duration="{Binding BassEngine.TotalTime,Converter={StaticResource TimeSpanToDoubleConverter}}"
-                                   Value="{Binding BassEngine.CurrentTime,Converter={StaticResource TimeSpanToDoubleConverter}}"
-                                   Process="{Binding BassEngine.Process}"
+                                   Duration="{Binding BassEngine.TotalTime,Converter={StaticResource TimeSpanToDoubleConverter},Source={x:Static tools:GlobalDataSingleton.Instance}}"
+                                   Value="{Binding BassEngine.CurrentTime,Converter={StaticResource TimeSpanToDoubleConverter},Source={x:Static tools:GlobalDataSingleton.Instance}}"
+                                   Process="{Binding BassEngine.Process,Source={x:Static tools:GlobalDataSingleton.Instance}}"
 								   Margin="3 0"
                                    Panel.ZIndex="10"
                                    LargeChange="5000"

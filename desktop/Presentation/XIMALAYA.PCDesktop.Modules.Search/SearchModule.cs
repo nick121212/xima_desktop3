@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Practices.Prism.MefExtensions.Modularity;
-using XIMALAYA.PCDesktop.Events;
+﻿using Microsoft.Practices.Prism.MefExtensions.Modularity;
+using XIMALAYA.PCDesktop.Common;
+using XIMALAYA.PCDesktop.Common.Events;
 using XIMALAYA.PCDesktop.Modules.Search.Views;
 using XIMALAYA.PCDesktop.Tools;
-using XIMALAYA.PCDesktop.Tools.Untils;
+using XIMALAYA.PCDesktop.Untils;
 
 namespace XIMALAYA.PCDesktop.Modules.Search
 {

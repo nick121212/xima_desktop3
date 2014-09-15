@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using XIMALAYA.PCDesktop.Tools.Untils;
+﻿using System.ComponentModel.Composition;
+using XIMALAYA.PCDesktop.Common;
 
 namespace XIMALAYA.PCDesktop.Modules.Menus
 {

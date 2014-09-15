@@ -14,22 +14,22 @@ namespace XIMALAYA.PCDesktop.Tools.Setting
         {
             get
             {
-                return ThemeInfoManager.Instance.ThemeName;
+                return ThemeInfoManagerSingleton.Instance.ThemeName;
             }
             set
             {
-                ThemeInfoManager.Instance.ThemeName = value;
+                ThemeInfoManagerSingleton.Instance.ThemeName = value;
             }
         }
         public string AccentColorName
         {
             get
             {
-                return ThemeInfoManager.Instance.AccentColorName;
+                return ThemeInfoManagerSingleton.Instance.AccentColorName;
             }
             set
             {
-                ThemeInfoManager.Instance.AccentColorName = value;
+                ThemeInfoManagerSingleton.Instance.AccentColorName = value;
             }
         }
 

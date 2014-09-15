@@ -6,8 +6,9 @@ using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Prism.ViewModel;
 using Microsoft.Practices.ServiceLocation;
+using XIMALAYA.PCDesktop.Untils;
 
-namespace XIMALAYA.PCDesktop.Tools.Untils
+namespace XIMALAYA.PCDesktop.Common
 {
     /// <summary>
     /// Viewmodel 基类

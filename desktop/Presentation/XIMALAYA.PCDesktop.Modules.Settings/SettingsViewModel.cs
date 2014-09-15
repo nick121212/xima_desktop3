@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
-using MahApps.Metro;
-using Microsoft.Practices.Prism.ViewModel;
+﻿using System.ComponentModel.Composition;
+using XIMALAYA.PCDesktop.Common;
 using XIMALAYA.PCDesktop.Tools;
 using XIMALAYA.PCDesktop.Tools.Themes;
-using XIMALAYA.PCDesktop.Tools.Untils;
 
 namespace XIMALAYA.PCDesktop.Modules.Settings
 {
@@ -42,9 +34,7 @@ namespace XIMALAYA.PCDesktop.Modules.Settings
                 if (value != _SelectedAccentColor)
                 {
                     _SelectedAccentColor = value;
-                    ThemeInfoManager.Instance.AccentColor = value;
-                    //_SelectedAccentColor.ChangeAccentCommand.Execute(_SelectedAccentColor);
-                    //this.RaisePropertyChanged(() => this.SelectedAccentColor);
+                    ThemeInfoManagerSingleton.Instance.AccentColor = value;
                 }
             }
         }
@@ -62,9 +52,7 @@ namespace XIMALAYA.PCDesktop.Modules.Settings
                 if (value != _SelectedTheme)
                 {
                     _SelectedTheme = value;
-                    ThemeInfoManager.Instance.Theme = value;
-                    //_SelectedTheme.ChangeAccentCommand.Execute(_SelectedTheme);
-                    //this.RaisePropertyChanged(() => this.SelectedTheme);
+                    ThemeInfoManagerSingleton.Instance.Theme = value;
                 }
             }
         }
@@ -78,8 +66,8 @@ namespace XIMALAYA.PCDesktop.Modules.Settings
         /// </summary>
         public SettingsViewModel()
         {
-            this.SelectedTheme = ThemeInfoManager.Instance.Theme;
-            this.SelectedAccentColor = ThemeInfoManager.Instance.AccentColor;
+            this.SelectedTheme = ThemeInfoManagerSingleton.Instance.Theme;
+            this.SelectedAccentColor = ThemeInfoManagerSingleton.Instance.AccentColor;
         }
 
         #endregion

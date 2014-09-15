@@ -1,7 +1,8 @@
 ﻿using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.ViewModel;
 using Microsoft.Practices.ServiceLocation;
-using XIMALAYA.PCDesktop.Events;
+using XIMALAYA.PCDesktop.Common.Events;
+using XIMALAYA.PCDesktop.Untils;
 
 namespace XIMALAYA.PCDesktop.Tools
 {
@@ -79,11 +80,5 @@ namespace XIMALAYA.PCDesktop.Tools
 
         #endregion
     }
-    /// <summary>
-    /// 全局单例
-    /// </summary>
-    public sealed class FlyoutVisible : Singleton<FlyoutVisibleBase>
-    {
 
-    }
 }

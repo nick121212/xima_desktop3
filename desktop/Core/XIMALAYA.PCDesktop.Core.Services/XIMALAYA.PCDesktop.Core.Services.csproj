@@ -55,9 +55,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\XIMALAYA.PCDesktop.Core.ParamsModel.dll</HintPath>
     </Reference>
-    <Reference Include="XIMALAYA.PCDesktop.Tools, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="XIMALAYA.PCDesktop.Untils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\build\XIMALAYA.PCDesktop.Tools.dll</HintPath>
+      <HintPath>..\..\build\XIMALAYA.PCDesktop.Untils.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

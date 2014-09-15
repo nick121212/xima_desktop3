@@ -6,6 +6,7 @@ using XIMALAYA.PCDesktop.Core.Data.Decorator;
 using XIMALAYA.PCDesktop.Core.Models.Share;
 using XIMALAYA.PCDesktop.Core.ParamsModel;
 using XIMALAYA.PCDesktop.Tools;
+using XIMALAYA.PCDesktop.Untils;
 
 namespace XIMALAYA.PCDesktop.Core.Services
 {

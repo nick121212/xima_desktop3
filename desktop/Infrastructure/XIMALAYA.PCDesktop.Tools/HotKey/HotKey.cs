@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XIMALAYA.PCDesktop.Tools.Untils
+namespace XIMALAYA.PCDesktop.Tools.HotKey
 {
     public class HotKey
     {

@@ -2,13 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
                     xmlns:local="clr-namespace:XIMALAYA.PCDesktop.Controls">
-	<ControlTemplate x:Key="MyImageTemplate" TargetType="local:MyImage">
+	<ControlTemplate x:Key="MyImageTemplate" TargetType="local:MyImage">		
 		<Grid x:Name="PART_Container"
 			  Width="{TemplateBinding Width}" 
 			  Height="{TemplateBinding Height}"
 			  Background="{TemplateBinding Background}">
 
-			<!--<controls:ProgressRing IsActive="{TemplateBinding IsActive}" x:Name="PART_Process"/>-->
 			<Image x:Name="PART_Image" 
 				   Width="{TemplateBinding Width}" 
 				   Height="{TemplateBinding Height}" 
@@ -17,31 +16,28 @@
 					<BitmapCache RenderAtScale="1"
 								 EnableClearType ="True"/>
 				</Image.CacheMode>
-				<!--<Image.Triggers>
-					<EventTrigger RoutedEvent="Loaded">
-						<BeginStoryboard>
-							<Storyboard>
-								<DoubleAnimation Storyboard.TargetProperty="Opacity"
-										         Storyboard.TargetName="PART_Process"
-												 Duration="0"
-										         To="0" />
-							</Storyboard>
-						</BeginStoryboard>
-					</EventTrigger>
-				</Image.Triggers>-->
+				<Image.Resources>
+					<Storyboard x:Key="LoadingStory">
+						<DoubleAnimation Duration="0:0:0.5" 
+										 Storyboard.TargetName="PART_Image"
+										 Storyboard.TargetProperty="Opacity" To="0">
+							<DoubleAnimation.EasingFunction>
+								<CircleEase/>
+							</DoubleAnimation.EasingFunction>
+						</DoubleAnimation>
+					</Storyboard>
+					<Storyboard x:Key="LoadedStory">
+						<DoubleAnimation Duration="0:0:0.5" 
+										 Storyboard.TargetName="PART_Image"
+										 Storyboard.TargetProperty="Opacity" To="1">
+							<DoubleAnimation.EasingFunction>
+								<CircleEase/>
+							</DoubleAnimation.EasingFunction>
+						</DoubleAnimation>
+					</Storyboard>
+				</Image.Resources>
 			</Image>
 		</Grid>
-		<ControlTemplate.Triggers>
-			<!--<EventTrigger RoutedEvent="FrameworkElement.Loaded">
-				<BeginStoryboard >
-					<Storyboard>
-						<DoubleAnimation Storyboard.TargetProperty="Opacity"
-										 Storyboard.TargetName="PART_Container"
-										 To="0" />
-					</Storyboard>
-				</BeginStoryboard>
-			</EventTrigger>-->
-		</ControlTemplate.Triggers>
 	</ControlTemplate>
 
 	<Style TargetType="local:MyImage">

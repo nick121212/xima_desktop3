@@ -1,16 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using MS.Internal.PresentationFramework;
-using XIMALAYA.PCDesktop.Controls;
 
 namespace XIMALAYA.PCDesktop.Controls
 {

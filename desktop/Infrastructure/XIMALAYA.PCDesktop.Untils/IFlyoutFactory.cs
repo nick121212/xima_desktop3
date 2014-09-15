@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XIMALAYA.PCDesktop.Tools.Untils
+namespace XIMALAYA.PCDesktop.Untils
 {
     /// <summary>
     /// 面板接口

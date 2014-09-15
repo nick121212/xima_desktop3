@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Isam.Esent.Collections.Generic;
 using XIMALAYA.PCDesktop.Tools;
 using XIMALAYA.PCDesktop.Tools.Untils;
+using XIMALAYA.PCDesktop.Untils;
 
 namespace XIMALAYA.PCDesktop.Tools.Setting
 {

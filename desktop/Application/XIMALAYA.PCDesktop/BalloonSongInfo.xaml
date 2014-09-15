@@ -9,7 +9,7 @@
 			 TextOptions.TextFormattingMode="Display">
 
 	<UserControl.Background>
-		<SolidColorBrush Color="{Binding CurrentSoundCoverColor,Source={x:Static tools:CommandSingleton.Instance}}" Opacity="0.8"/>
+		<SolidColorBrush Color="{Binding CurrentSoundCoverColor,Source={x:Static tools:GlobalDataSingleton.Instance}}" Opacity="0.8"/>
 	</UserControl.Background>
 
 	<UserControl.Resources>
@@ -64,7 +64,7 @@
 			<MControls:MyImage VerticalAlignment="Center"
 							   Width="64" 
 							   Height="64" 
-							   Source="{Binding SoundData.CoverSmall,Source={x:Static tools:CommandSingleton.Instance}}"
+							   Source="{Binding SoundData.CoverSmall,Source={x:Static tools:GlobalDataSingleton.Instance}}"
 							   DefaultSource="logo.png"/>
 
 			<!--声音标题-->
@@ -81,7 +81,7 @@
 					<FlowDocument>
 						<Paragraph FontSize="16">
 							<Run Foreground="{DynamicResource BlackBrush}" 
-								 Text="{Binding SoundData.Title,Source={x:Static tools:CommandSingleton.Instance}}"/>
+								 Text="{Binding SoundData.Title,Source={x:Static tools:GlobalDataSingleton.Instance}}"/>
 						</Paragraph>
 					</FlowDocument>
 				</MControls:AutoSizeRichTextBox>

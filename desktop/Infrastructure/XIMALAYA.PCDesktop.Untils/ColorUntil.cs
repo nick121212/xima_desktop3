@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace XIMALAYA.PCDesktop.Tools.Untils
+namespace XIMALAYA.PCDesktop.Untils
 {
     /// <summary>
     /// 有关颜色的方法类
     /// 主要用于计算窗口背景
     /// </summary>
-    public class ColorFunctions
+    public class ColorUntil
     {
         /// <summary>
         /// 两种颜色不同的阀值

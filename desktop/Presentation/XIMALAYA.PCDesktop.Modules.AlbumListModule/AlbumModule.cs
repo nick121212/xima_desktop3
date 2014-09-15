@@ -1,19 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Practices.Prism.MefExtensions.Modularity;
 using Microsoft.Practices.Prism.Modularity;
-using Microsoft.Practices.Prism.Regions;
-using Microsoft.Practices.ServiceLocation;
-using XIMALAYA.PCDesktop.Modules.AlbumModule.Views;
-using XIMALAYA.PCDesktop.Tools;
-using XIMALAYA.PCDesktop.Tools.Untils;
+using XIMALAYA.PCDesktop.Common;
+using XIMALAYA.PCDesktop.Common.Events;
 using XIMALAYA.PCDesktop.Core.ParamsModel;
 using XIMALAYA.PCDesktop.Core.Services;
-using XIMALAYA.PCDesktop.Events;
+using XIMALAYA.PCDesktop.Modules.AlbumModule.Views;
+using XIMALAYA.PCDesktop.Tools;
+using XIMALAYA.PCDesktop.Untils;
 
 namespace XIMALAYA.PCDesktop.Modules.AlbumModule
 {

@@ -7,14 +7,14 @@ using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Practices.Prism.Regions;
 using XIMALAYA.PCDesktop.Cache;
+using XIMALAYA.PCDesktop.Common;
+using XIMALAYA.PCDesktop.Common.Events;
 using XIMALAYA.PCDesktop.Core.Models.Sound;
 using XIMALAYA.PCDesktop.Core.Models.User;
 using XIMALAYA.PCDesktop.Core.ParamsModel;
 using XIMALAYA.PCDesktop.Core.Services;
-using XIMALAYA.PCDesktop.Events;
 using XIMALAYA.PCDesktop.Modules.SoundModule.Views;
 using XIMALAYA.PCDesktop.Tools;
-using XIMALAYA.PCDesktop.Tools.Untils;
 
 namespace XIMALAYA.PCDesktop.Modules.SoundModule
 {
@@ -47,10 +47,6 @@ namespace XIMALAYA.PCDesktop.Modules.SoundModule
                 }
             }
         }
-        /// <summary>
-        /// 当前声音ID
-        /// </summary>
-        private long TrackID { get; set; }
         /// <summary>
         /// 声音详情页接口
         /// </summary>
@@ -94,9 +90,9 @@ namespace XIMALAYA.PCDesktop.Modules.SoundModule
                                 RegionName = this.RegionName,
                                 UID = this.SoundData.UID
                             });
-                            if (CommandSingleton.Instance.SoundData.TrackId != this.SoundData.TrackId)
+                            if (GlobalDataSingleton.Instance.SoundData.TrackId != this.SoundData.TrackId)
                             {
-                                this.EventAggregator.GetEvent<PlayerEvent>().Publish(this.SoundData.TrackId);
+                                CommandSingleton.Instance.PlaySoundCommand.Execute(this.SoundData.TrackId);
                             }
                             return;
                         }

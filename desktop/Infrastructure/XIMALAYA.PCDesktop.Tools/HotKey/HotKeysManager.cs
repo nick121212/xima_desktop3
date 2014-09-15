@@ -13,8 +13,9 @@ using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Practices.Prism.ViewModel;
 using XIMALAYA.PCDesktop.Tools.MyType;
+using XIMALAYA.PCDesktop.Untils;
 
-namespace XIMALAYA.PCDesktop.Tools.Untils
+namespace XIMALAYA.PCDesktop.Tools.HotKey
 {
     public class HotKeysManager : NotificationObject, IDisposable
     {
@@ -50,7 +51,7 @@ namespace XIMALAYA.PCDesktop.Tools.Untils
             this.Keys = new SerializableDictionary<System.Windows.Input.Key, CommandKeys>();
             this.Commands = new ObservableDictionary<CommandKeys, ICommand>();
 
-            this.Commands.Add(CommandKeys.Play, CommandSingleton.Instance.BassEngine.PlayCommand);
+            this.Commands.Add(CommandKeys.Play, GlobalDataSingleton.Instance.BassEngine.PlayCommand);
             this.Commands.Add(CommandKeys.Next, CommandSingleton.Instance.NextCommand);
             this.Commands.Add(CommandKeys.Prev, CommandSingleton.Instance.PrevCommand);
             this.Commands.Add(CommandKeys.VolumeUp, CommandSingleton.Instance.VolumeUpCommand);
@@ -162,8 +163,5 @@ namespace XIMALAYA.PCDesktop.Tools.Untils
 
         #endregion
     }
-    /// <summary>
-    /// 全局热键管理
-    /// </summary>
-    public class HotKeysManagerSingleton : Singleton<HotKeysManager> { }
+
 }

@@ -5,14 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Practices.Prism.Events;
 
-namespace XIMALAYA.PCDesktop.Events
+namespace XIMALAYA.PCDesktop.Common.Events
 {
     public class UserEventArgument
     {
         public string RegionName { get; set; }
         public long UID { get; set; }
     }
-
 
     public class UserEvent<T> : CompositePresentationEvent<T> { }
     public class UserMinEvent : UserEvent<UserEventArgument> { }

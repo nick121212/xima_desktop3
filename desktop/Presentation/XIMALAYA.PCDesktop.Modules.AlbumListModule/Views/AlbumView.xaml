@@ -60,6 +60,7 @@
 		<ListBox ItemsSource="{Binding Albums}" 
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  Grid.Row="2"
+				 Background="Transparent"
                  ItemContainerStyle="{StaticResource AlbumListStyle}">
 			<ListBox.ItemsPanel>
 				<ItemsPanelTemplate>

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:MControls="http://ximalaya.com/xaml/controls" 
+			 xmlns:untils="http://ximalaya.com/xaml/untils"
 			 xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:tools="http://ximalaya.com/xaml/tools">
 	
@@ -17,12 +18,6 @@
 	<StackPanel Orientation="Vertical" 
 				Margin="0 10 0 0"
 				FocusManager.IsFocusScope="True">
-		<!--<Image Width="60" Source="pack://application:,,,/XIMALAYA.PCDesktop.Tools;component/Resources/Images/logo.png"/>
-		<Label Content="喜马拉雅" 
-			   Margin="0 0 0 20"
-			   Foreground="{DynamicResource BlackBrush}"
-			   HorizontalContentAlignment="Center"/>-->
-		
 		<MControls:MyToggleButton Width="100" 
 								  Height="90" 
 								  Padding="0 5 0 0"
@@ -30,7 +25,7 @@
 								  BorderType="None"
 								  IsSingle="True"
 								  Command="{Binding ShowContentCommand,Source={x:Static tools:CommandSingleton.Instance}}"
-								  CommandParameter="{x:Static tools:WellKnownModuleNames.SearchModule}"
+								  CommandParameter="{x:Static untils:WellKnownModuleNames.SearchModule}"
 								  Foreground="{DynamicResource GrayBrush6}"
 								  Background="{DynamicResource BlackBrush}">
 			<MControls:MyToggleButton.Content>
@@ -56,7 +51,7 @@
 								  BorderType="None"
 								  IsSingle="True"
 								  Command="{Binding ShowContentCommand,Source={x:Static tools:CommandSingleton.Instance}}"
-								  CommandParameter="{x:Static tools:WellKnownModuleNames.DiscoverModule}"
+								  CommandParameter="{x:Static untils:WellKnownModuleNames.DiscoverModule}"
 								  Foreground="{DynamicResource GrayBrush6}"
 								  Background="{DynamicResource BlackBrush}">
 			<MControls:MyToggleButton.Content>
@@ -108,7 +103,7 @@
 								  BorderThickness="0"
 								  BorderType="None"
 								  IsBackground="Hidden"
-								  IsChecked="{Binding IsSettingFlyoutShow,Source={x:Static tools:FlyoutVisible.Instance}}"
+								  IsChecked="{Binding IsSettingFlyoutShow,Source={x:Static tools:GlobalDataSingleton.Instance}}"
 								  Foreground="{DynamicResource GrayBrush6}"
 								  Background="{DynamicResource BlackBrush}">
 			<MControls:MyToggleButton.Content>

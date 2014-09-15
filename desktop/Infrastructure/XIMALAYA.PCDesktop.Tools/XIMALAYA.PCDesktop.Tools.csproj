@@ -83,6 +83,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\XIMALAYA.PCDesktop.Cache.dll</HintPath>
     </Reference>
+    <Reference Include="XIMALAYA.PCDesktop.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\XIMALAYA.PCDesktop.Common.dll</HintPath>
+    </Reference>
     <Reference Include="XIMALAYA.PCDesktop.Core.Models, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\XIMALAYA.PCDesktop.Core.Models.dll</HintPath>
@@ -95,21 +99,23 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\XIMALAYA.PCDesktop.Core.Services.dll</HintPath>
     </Reference>
-    <Reference Include="XIMALAYA.PCDesktop.Events, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\build\XIMALAYA.PCDesktop.Events.dll</HintPath>
-    </Reference>
     <Reference Include="XIMALAYA.PCDesktop.Tools.Player, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\XIMALAYA.PCDesktop.Tools.Player.dll</HintPath>
     </Reference>
+    <Reference Include="XIMALAYA.PCDesktop.Untils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\XIMALAYA.PCDesktop.Untils.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Behaviors\AutoPopulateExportedViewsBehavior.cs" />
+    <Compile Include="Converter\BigNumberToSmallConverter.cs" />
     <Compile Include="Converter\KeysToStringConverter.cs" />
     <Compile Include="Converter\MutiParamConverter.cs" />
+    <Compile Include="GlobalData.cs" />
     <Compile Include="MyType\SerializableDictionary.cs" />
-    <Compile Include="Sites.cs" />
+    <Compile Include="Enum\Sites.cs" />
     <Compile Include="Command\Commands.cs" />
     <Compile Include="Converter\ActualSizeFixedConverter.cs" />
     <Compile Include="Converter\ToTransparentColorConverter.cs" />
@@ -120,29 +126,16 @@
     <Compile Include="Extension\DateTimeExtensions.cs" />
     <Compile Include="Extension\VisualTreeHelperExtensions.cs" />
     <Compile Include="FlyoutVisible.cs" />
-    <Compile Include="Player.cs" />
     <Compile Include="Converter\StringToBoolConverter.cs" />
     <Compile Include="Converter\LongToDateConverter.cs" />
     <Compile Include="Extension\TypeExtensions.cs" />
-    <Compile Include="HttpWebRequestOpt.cs" />
-    <Compile Include="Untils\BaseModule.cs" />
-    <Compile Include="Untils\BaseViewModel.cs" />
-    <Compile Include="Untils\AeroHelper.cs" />
-    <Compile Include="Untils\Utilities.cs" />
-    <Compile Include="Untils\MD5Until.cs" />
-    <Compile Include="Untils\XmlUtil.cs" />
-    <Compile Include="Untils\ColorFunctions.cs" />
-    <Compile Include="Untils\HotKey.cs" />
-    <Compile Include="Untils\HotKeysManager.cs" />
-    <Compile Include="Untils\Parameters.cs" />
-    <Compile Include="Untils\IFlyoutFactory.cs" />
+    <Compile Include="HotKey\HotKey.cs" />
+    <Compile Include="HotKey\HotKeysManager.cs" />
+    <Compile Include="MyType\Parameters.cs" />
+    <Compile Include="Singleton.cs" />
     <Compile Include="T4\T4ModelInfo.cs" />
-    <Compile Include="Untils\OSInfo.cs" />
-    <Compile Include="Untils\TileSet.cs" />
-    <Compile Include="WellKnownUrl.cs" />
     <Compile Include="Themes\AccentColorMenuData.cs" />
     <Compile Include="Themes\AppThemeMenuData.cs" />
-    <Compile Include="Singleton.cs" />
     <Compile Include="Converter\ErrorConverter.cs" />
     <Compile Include="Converter\TimeSpanToDoubleConverter.cs" />
     <Compile Include="Converter\TimeSpanConverter.cs" />
@@ -152,8 +145,6 @@
     <Compile Include="RegionAdapter\StackPanelRegionAdapter.cs" />
     <Compile Include="Themes\ThemeInfoManager.cs" />
     <Compile Include="Attributes\ViewExportAttribute.cs" />
-    <Compile Include="WellKnownRegionNames.cs" />
-    <Compile Include="WellKnownModuleNames.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -6,13 +6,13 @@ using System.Windows;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Regions;
+using XIMALAYA.PCDesktop.Common;
+using XIMALAYA.PCDesktop.Common.Events;
 using XIMALAYA.PCDesktop.Core.Models.Category;
 using XIMALAYA.PCDesktop.Core.Models.Tags;
 using XIMALAYA.PCDesktop.Core.ParamsModel;
 using XIMALAYA.PCDesktop.Core.Services;
-using XIMALAYA.PCDesktop.Events;
 using XIMALAYA.PCDesktop.Modules.DiscoverPage.Views;
-using XIMALAYA.PCDesktop.Tools.Untils;
 
 namespace XIMALAYA.PCDesktop.Modules.DiscoverPage
 {

@@ -9,7 +9,7 @@ using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Regions;
 using XIMALAYA.PCDesktop.Tools;
 using XIMALAYA.PCDesktop.Tools.Setting;
-using XIMALAYA.PCDesktop.Tools.Untils;
+using XIMALAYA.PCDesktop.Untils;
 
 namespace XIMALAYA.PCDesktop
 {
@@ -74,7 +74,7 @@ namespace XIMALAYA.PCDesktop
 
         void Shell_StateChanged(object sender, EventArgs e)
         {
-            CommandSingleton.Instance.IsWindowShow = this.WindowState != System.Windows.WindowState.Minimized;
+            GlobalDataSingleton.Instance.IsWindowShow = this.WindowState != System.Windows.WindowState.Minimized;
         }
 
         void Shell_Closed(object sender, EventArgs e)

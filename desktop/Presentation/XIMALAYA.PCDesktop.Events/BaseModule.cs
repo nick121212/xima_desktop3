@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Practices.Prism.Modularity;
 
-namespace XIMALAYA.PCDesktop.Tools.Untils
+namespace XIMALAYA.PCDesktop.Common
 {
     /// <summary>
     /// 
@@ -18,8 +18,9 @@ namespace XIMALAYA.PCDesktop.Tools.Untils
         /// <summary>
         /// 
         /// </summary>
-        public virtual void Dispose()
+        public override void Dispose()
         {
+            base.Dispose();
             this.RegionManager = null;
             this.Container = null;
         }

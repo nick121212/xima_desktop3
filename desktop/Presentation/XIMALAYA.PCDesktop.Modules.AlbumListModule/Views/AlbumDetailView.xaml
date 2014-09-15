@@ -14,6 +14,7 @@
 		<converter:MutiBoolConverter x:Key="MutiBoolConverter" />
 		<converter:TimeSpanConverter x:Key="TimeSpanConverter"/>
 		<converter:LongToDateConverter x:Key="LongToDateConverter"/>
+		<converter:BigNumberToSmallConverter x:Key="BigNumberToSmallConverter"/>
 	</UserControl.Resources>
 
 	<Grid Margin="10 30 10 0">
@@ -57,22 +58,6 @@
 						Margin="10 0 0 0"
 						Grid.Column="1"
 						Grid.Row="1">
-				<MControls:MyToggleButton Width="30" 
-										  Height="30"
-										  Margin="5"
-										  Visibility="Collapsed"
-								          BorderType="Ellipse"
-								          Foreground="{DynamicResource WhiteBrush}"
-										  IsSingle="True"
-								          Background="{DynamicResource BlackBrush}"
-								          BorderBrush="{DynamicResource BlackBrush}">
-					<MControls:MyToggleButton.Content>
-						<Path Data="{Binding [vistor_user], Source={x:Static MControls:PathData.Instance}}" 
-							  Style="{DynamicResource PathStyle}"
-							  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-						</Path>
-					</MControls:MyToggleButton.Content>
-				</MControls:MyToggleButton>
 				<!--播放数-->
 				<MControls:MyToggleButton Width="Auto" 
 										  IsEnabled="False"
@@ -82,15 +67,18 @@
 								          Background="{DynamicResource BlackBrush}">
 					<MControls:MyToggleButton.Content>
 						<Grid>
-							<Path Data="{Binding [track_count], Source={x:Static MControls:PathData.Instance}}" 
+							<Path Data="{Binding [play], Source={x:Static MControls:PathData.Instance}}" 
 								  Style="{DynamicResource PathStyle}"
+								  Width="10"
+								  Height="10"
 								  HorizontalAlignment="Left"
 								  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
 							</Path>
 							<Label Margin="15 0 0 0" 
 								   HorizontalAlignment="Left" 
+								   Foreground="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
 								   ContentStringFormat="{}{0}次播放"
-								   Content="{Binding AlbumData.PlayCount}"/>
+								   Content="{Binding AlbumData.PlayCount,Converter={StaticResource BigNumberToSmallConverter}}"/>
 						</Grid>
 
 					</MControls:MyToggleButton.Content>
@@ -131,7 +119,6 @@
 					</MControls:MyToggleButton.ContentChecked>
 				</MControls:MyToggleButton>
 			</StackPanel>
-
 			<!--分享-->
 			<Label Margin="5 0"
 				   Height="30"

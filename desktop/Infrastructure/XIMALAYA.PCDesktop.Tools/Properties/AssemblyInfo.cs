@@ -30,7 +30,7 @@ using System.Windows.Markup;
 
 [assembly: XmlnsDefinition("http://ximalaya.com/xaml/tools", "XIMALAYA.PCDesktop.Tools")]
 
-[assembly: XmlnsDefinition("http://ximalaya.com/xaml/tools/untils", "XIMALAYA.PCDesktop.Tools.Untils")]
+[assembly: XmlnsDefinition("http://ximalaya.com/xaml/tools/hotkey", "XIMALAYA.PCDesktop.Tools.HotKey")]
 
 // 将 ComVisible 设置为 false 使此程序集中的类型
 // 对 COM 组件不可见。  如果需要从 COM 访问此程序集中的类型，

@@ -1,5 +1,5 @@
 ﻿
-namespace XIMALAYA.PCDesktop.Tools
+namespace XIMALAYA.PCDesktop.Untils
 {
     /// <summary>
     /// 模块名称

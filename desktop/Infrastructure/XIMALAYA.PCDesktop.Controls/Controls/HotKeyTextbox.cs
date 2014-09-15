@@ -2,7 +2,8 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
-using XIMALAYA.PCDesktop.Tools.Untils;
+using XIMALAYA.PCDesktop.Tools;
+using XIMALAYA.PCDesktop.Tools.HotKey;
 
 namespace XIMALAYA.PCDesktop.Controls
 {

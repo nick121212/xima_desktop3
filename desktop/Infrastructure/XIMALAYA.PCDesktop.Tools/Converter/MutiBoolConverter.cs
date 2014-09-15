@@ -29,53 +29,56 @@ namespace XIMALAYA.PCDesktop.Tools.Converter
             bool result = false, isLoading = false, isPlaying = false;
             long first = 0;
 
-            if (values.Length >= 2)
+            try
             {
-                switch (parameter.ToString())
+                if (values.Length >= 2)
                 {
-                    case "0":
-                        result = (bool)values[0];
-                        if (values.Length > 1 && long.TryParse(values[1].ToString(), out first))
-                        {
-                            for (int i = 1; i < values.Length && result; i++)
+                    switch (parameter.ToString())
+                    {
+                        case "0":
+                            result = (bool)values[0];
+                            if (values.Length > 1 && long.TryParse(values[1].ToString(), out first))
                             {
-                                result = first == (long)values[i];
+                                for (int i = 1; i < values.Length && result; i++)
+                                {
+                                    result = first == (long)values[i];
 
-                                if (!result) break;
+                                    if (!result) break;
+                                }
                             }
-                        }
-                        return result;
-                    case "1":
-                        isPlaying = (bool)values[0];
-                        isLoading = (bool)values[1];
+                            return result;
+                        case "1":
+                            isPlaying = (bool)values[0];
+                            isLoading = (bool)values[1];
 
-                        if (values.Length > 2 && long.TryParse(values[2].ToString(), out first))
-                        {
-                            for (int i = 2; i < values.Length; i++)
+                            if (values.Length > 2 && long.TryParse(values[2].ToString(), out first))
                             {
-                                result = first == (long)values[i];
+                                for (int i = 2; i < values.Length; i++)
+                                {
+                                    result = first == (long)values[i];
 
-                                if (!result) break;
+                                    if (!result) break;
+                                }
                             }
-                        }
-                        else
-                        {
-                            result = true;
-                        }
-
-                        if (result)
-                        {
-                            if (isLoading)
+                            else
                             {
-                                return null;
+                                result = true;
                             }
-                            return result && isPlaying;
-                        }
 
-                        return result;
+                            if (result)
+                            {
+                                if (isLoading)
+                                {
+                                    return null;
+                                }
+                                return result && isPlaying;
+                            }
+
+                            return result;
+                    }
                 }
             }
-
+            catch { }
             return result;
         }
         /// <summary>

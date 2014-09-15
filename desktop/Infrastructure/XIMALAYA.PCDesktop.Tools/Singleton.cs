@@ -1,52 +1,37 @@
 ﻿using System;
-using System.ComponentModel;
+using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Windows;
+using System.Text;
+using System.Threading.Tasks;
+using XIMALAYA.PCDesktop.Tools.HotKey;
+using XIMALAYA.PCDesktop.Tools.Player;
+using XIMALAYA.PCDesktop.Tools.Themes;
+using XIMALAYA.PCDesktop.Untils;
 
 namespace XIMALAYA.PCDesktop.Tools
 {
+    ///// <summary>
+    ///// 全局flyout显示隐藏控制类
+    ///// </summary>
+    //public sealed class FlyoutVisibleSingleton : Singleton<FlyoutVisibleBase> { }
     /// <summary>
-    /// 泛型单例
+    /// 全局热键管理
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public abstract class Singleton<T> where T : class
-    {
-        private static readonly Lazy<T> _instance =
-            new Lazy<T>(() =>
-            {
-                var ctors = typeof(T).GetConstructors(BindingFlags.Instance 
-                    | BindingFlags.NonPublic 
-                    | BindingFlags.Public);
-
-                if (ctors.Count() != 1)
-                {
-                    throw new InvalidOperationException("只能有一个构造函数！");
-                }
-                var ctor = ctors.SingleOrDefault(c => c.GetParameters().Count() == 0 && c.IsPrivate);
-                if (ctor == null)
-                {
-                    throw new InvalidOperationException("必须得有私有且不带参数的构造函数");
-                }
-
-                return (T)ctor.Invoke(null);
-            });
-        static bool IsInDesignMode
-        {
-            get
-            {
-                return (bool)DesignerProperties.IsInDesignModeProperty
-                            .GetMetadata(typeof(DependencyObject)).DefaultValue;
-            }
-        }
-        public static T Instance
-        {
-            get
-            {
-                if (_instance == null || IsInDesignMode) return null;
-                
-                return _instance.Value;
-            }
-        }
-    }
+    public sealed class HotKeysManagerSingleton : Singleton<HotKeysManager> { }
+    /// <summary>
+    /// 全局样式控制类
+    /// </summary>
+    public sealed class ThemeInfoManagerSingleton : Singleton<ThemeInfoManagerBase> { }
+    /// <summary>
+    /// 全局命令
+    /// </summary>
+    public sealed class CommandSingleton : Singleton<CommandBaseSingleton> { }
+    /// <summary>
+    /// 全局播放器
+    /// </summary>
+    public class PlayerSingleton : Singleton<BassEngine> { }
+    /// <summary>
+    /// 全局数据
+    /// </summary>
+    public class GlobalDataSingleton : Singleton<GlobalData> { }
 }

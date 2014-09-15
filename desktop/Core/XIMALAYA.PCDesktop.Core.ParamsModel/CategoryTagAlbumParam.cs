@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
-using XIMALAYA.PCDesktop.Tools.Attributes;
+
 using System.Runtime.Serialization;
 
 namespace XIMALAYA.PCDesktop.Core.ParamsModel

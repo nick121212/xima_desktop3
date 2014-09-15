@@ -7,7 +7,6 @@ using System.Net;
 using XIMALAYA.PCDesktop.Core.Models;
 using XIMALAYA.PCDesktop.Tools;
 
-
 namespace XIMALAYA.PCDesktop.Core.Data
 {
     /// <summary>

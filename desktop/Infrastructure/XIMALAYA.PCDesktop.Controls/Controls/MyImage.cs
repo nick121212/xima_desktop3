@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using XIMALAYA.PCDesktop.Tools.Untils;
+using XIMALAYA.PCDesktop.Untils;
 
 namespace XIMALAYA.PCDesktop.Controls
 {
@@ -40,6 +37,7 @@ namespace XIMALAYA.PCDesktop.Controls
             var myImage = d as MyImage;
 
             if (myImage.Image == null) return;
+            if (myImage.LoadingStory != null) myImage.LoadingStory.Begin();
 
             if (myImage.Source != string.Empty && myImage.Source != null)
             {
@@ -54,6 +52,7 @@ namespace XIMALAYA.PCDesktop.Controls
                         if (myImage.Image != null)
                         {
                             myImage.Image.Source = new BitmapImage(uri);
+                            if (myImage.LoadedStory != null) myImage.LoadedStory.Begin();
                         }
                     }
                     catch
@@ -115,6 +114,8 @@ namespace XIMALAYA.PCDesktop.Controls
             DependencyProperty.Register("IsActive", typeof(bool), typeof(MyImage), new PropertyMetadata(false));
 
         private Image Image { get; set; }
+        private Storyboard LoadingStory { get; set; }
+        private Storyboard LoadedStory { get; set; }
 
         /// <summary>
         /// 
@@ -123,6 +124,12 @@ namespace XIMALAYA.PCDesktop.Controls
         {
             base.OnApplyTemplate();
             this.Image = GetTemplateChild("PART_Image") as Image;
+            if (this.Image != null)
+            {
+                this.LoadingStory = this.Image.FindResource("LoadingStory") as Storyboard;
+                this.LoadedStory = this.Image.FindResource("LoadedStory") as Storyboard;
+            }
+            
             OnSourceChanged(this, new DependencyPropertyChangedEventArgs());
         }
 
@@ -133,6 +140,7 @@ namespace XIMALAYA.PCDesktop.Controls
             if (uri.Scheme == "pack")
             {
                 this.Image.Source = new BitmapImage(uri);
+                if (this.LoadedStory != null) this.LoadedStory.Begin();
                 return;
             }
 
@@ -154,7 +162,7 @@ namespace XIMALAYA.PCDesktop.Controls
             }
             catch
             {
-                
+
             }
         }
         async void RefreshUI(Task downloadTask, MemoryStream stream)
@@ -172,6 +180,7 @@ namespace XIMALAYA.PCDesktop.Controls
             if (downloadTask.IsCompleted)
             {
                 this.Image.Source = bmp;
+                if (this.LoadedStory != null) this.LoadedStory.Begin();
                 string appStartupPath = System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
                 if (!Directory.Exists(Path.Combine(appStartupPath, "images")))
                 {

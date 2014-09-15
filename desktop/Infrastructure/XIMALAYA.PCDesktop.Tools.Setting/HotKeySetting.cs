@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using DigitalIdeaSolutions.Collections.Generic;
 using Microsoft.Isam.Esent.Collections.Generic;
+using XIMALAYA.PCDesktop.Tools.HotKey;
 using XIMALAYA.PCDesktop.Tools.MyType;
-using XIMALAYA.PCDesktop.Tools.Untils;
 
 namespace XIMALAYA.PCDesktop.Tools.Setting
 {

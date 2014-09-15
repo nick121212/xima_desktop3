@@ -56,10 +56,10 @@
 							  ConverterParameter="1" 
 							  Mode="OneWay">
 					<MultiBinding.Bindings>
-						<Binding Path="BassEngine.IsPlaying" Source="{x:Static tools:CommandSingleton.Instance}" />
-						<Binding Path="BassEngine.IsLoading" Source="{x:Static tools:CommandSingleton.Instance}" />
+						<Binding Path="BassEngine.IsPlaying" Source="{x:Static tools:GlobalDataSingleton.Instance}" />
+						<Binding Path="BassEngine.IsLoading" Source="{x:Static tools:GlobalDataSingleton.Instance}" />
 						<Binding Path="TrackId"/>
-						<Binding Path="SoundData.TrackId" Source="{x:Static tools:CommandSingleton.Instance}"/>
+						<Binding Path="SoundData.TrackId" Source="{x:Static tools:GlobalDataSingleton.Instance}"/>
 					</MultiBinding.Bindings>
 				</MultiBinding>
 			</MControls:MyToggleButton.IsChecked>
@@ -105,10 +105,10 @@
 							  ConverterParameter="1" 
 							  Mode="OneWay">
 					<MultiBinding.Bindings>
-						<Binding Path="BassEngine.IsPlaying" Source="{x:Static tools:CommandSingleton.Instance}" />
-						<Binding Path="BassEngine.IsLoading" Source="{x:Static tools:CommandSingleton.Instance}" />
+						<Binding Path="BassEngine.IsPlaying" Source="{x:Static tools:GlobalDataSingleton.Instance}" />
+						<Binding Path="BassEngine.IsLoading" Source="{x:Static tools:GlobalDataSingleton.Instance}" />
 						<Binding Path="TrackId"/>
-						<Binding Path="SoundData.TrackId" Source="{x:Static tools:CommandSingleton.Instance}"/>
+						<Binding Path="SoundData.TrackId" Source="{x:Static tools:GlobalDataSingleton.Instance}"/>
 					</MultiBinding.Bindings>
 				</MultiBinding>
 			</MControls:MyToggleButton.IsChecked>
@@ -207,9 +207,9 @@
 			<MControls:MyCheckboxButton.IsChecked>
 				<MultiBinding Converter="{StaticResource MutiBoolConverter}"  ConverterParameter="0" Mode="OneWay">
 					<MultiBinding.Bindings>
-						<Binding Path="BassEngine.IsPlaying" Source="{x:Static tools:CommandSingleton.Instance}" />
+						<Binding Path="BassEngine.IsPlaying" Source="{x:Static tools:GlobalDataSingleton.Instance}" />
 						<Binding Path="TrackId"/>
-						<Binding Path="SoundData.TrackId" Source="{x:Static tools:CommandSingleton.Instance}"/>
+						<Binding Path="SoundData.TrackId" Source="{x:Static tools:GlobalDataSingleton.Instance}"/>
 					</MultiBinding.Bindings>
 				</MultiBinding>
 			</MControls:MyCheckboxButton.IsChecked>

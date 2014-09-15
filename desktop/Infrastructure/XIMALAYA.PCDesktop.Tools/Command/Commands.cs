@@ -11,10 +11,12 @@ using XIMALAYA.PCDesktop.Core.Models.Share;
 using XIMALAYA.PCDesktop.Core.Models.Sound;
 using XIMALAYA.PCDesktop.Core.ParamsModel;
 using XIMALAYA.PCDesktop.Core.Services;
-using XIMALAYA.PCDesktop.Events;
+using XIMALAYA.PCDesktop.Common.Events;
 using XIMALAYA.PCDesktop.Tools.Extension;
 using XIMALAYA.PCDesktop.Tools.Player;
 using XIMALAYA.PCDesktop.Tools.Untils;
+using XIMALAYA.PCDesktop.Untils;
+using XIMALAYA.PCDesktop.Cache;
 
 namespace XIMALAYA.PCDesktop.Tools
 {
@@ -23,18 +25,6 @@ namespace XIMALAYA.PCDesktop.Tools
     /// </summary>
     public class CommandBaseSingleton : NotificationObject
     {
-        #region 字段
-
-        private ItemCollection _SoundCollection;
-        private string _TrackTitle;
-        private string _TrackImage;
-        private long _TrackID;
-        private SoundData _SoundData;
-        private Color _CurrentSoundCoverColor;
-        private bool _IsWindowShow = true;
-
-        #endregion
-
         #region 属性
 
         /// <summary>
@@ -45,148 +35,7 @@ namespace XIMALAYA.PCDesktop.Tools
         /// 分享服务
         /// </summary>
         private IShareService ShareService { get; set; }
-        /// <summary>
-        /// 当前播放的声音ID
-        /// </summary>
-        public long TrackID
-        {
-            get
-            {
-                return _TrackID;
-            }
-            set
-            {
-                if (value != _TrackID)
-                {
-                    _TrackID = value;
-                    this.RaisePropertyChanged(() => this.TrackID);
-                    this.PlaySoundCommand.RaiseCanExecuteChanged();
-                }
-            }
-        }
-        /// <summary>
-        /// 当前播放的声音Title
-        /// </summary>
-        public string TrackTitle
-        {
-            get
-            {
-                return _TrackTitle;
-            }
-            set
-            {
-                if (value != _TrackTitle)
-                {
-                    _TrackTitle = value;
-                    this.RaisePropertyChanged(() => this.TrackTitle);
-                }
-            }
-        }
-        /// <summary>
-        /// 全局播放
-        /// </summary>
-        public BassEngine BassEngine
-        {
-            get
-            {
-                return PlayerSingleton.Instance;
-            }
-        }
-        /// <summary>
-        /// 当前点击播放的声音行
-        /// </summary>
-        public Control CurrentPlayControl { get; set; }
-        /// <summary>
-        /// 当前声音播放列表
-        /// </summary>
-        public ItemCollection SoundCollection
-        {
-            get
-            {
-                return _SoundCollection;
-            }
-            set
-            {
-                if (value != _SoundCollection)
-                {
-                    _SoundCollection = value;
-                    this.RaisePropertyChanged(() => this.SoundCollection);
-                }
-            }
-        }
-        /// <summary>
-        /// 声音图片
-        /// </summary>
-        public string TrackImage
-        {
-            get
-            {
-                return _TrackImage;
-            }
-            set
-            {
-                if (value != _TrackImage)
-                {
-                    _TrackImage = value;
-                    this.RaisePropertyChanged(() => this.TrackImage);
-                }
-            }
-        }
-        /// <summary>
-        /// 当前播放的声音
-        /// </summary>
-        public SoundData SoundData
-        {
-            get
-            {
-                return _SoundData;
-            }
-            set
-            {
-                if (value != _SoundData)
-                {
-                    _SoundData = value;
-                    this.RaisePropertyChanged(() => this.SoundData);
-                }
-            }
-        }
-        /// <summary>
-        /// 当前声音的封面图颜色
-        /// </summary>
-        public Color CurrentSoundCoverColor
-        {
-            get
-            {
-                return _CurrentSoundCoverColor;
-            }
-            set
-            {
-                if (value != _CurrentSoundCoverColor)
-                {
-                    _CurrentSoundCoverColor = value;
-                    this.RaisePropertyChanged(() => this.CurrentSoundCoverColor);
-                }
-            }
-        }
-        /// <summary>
-        /// 窗体是否为显示状态
-        /// </summary>
-        public bool IsWindowShow
-        {
-            get
-            {
-                return _IsWindowShow;
-            }
-            set
-            {
-                if (value != _IsWindowShow)
-                {
-                    _IsWindowShow = value;
-                    this.RaisePropertyChanged(() => this.IsWindowShow);
-                }
-            }
-        }
-
+       
         #endregion
 
         #region 命令
@@ -260,12 +109,7 @@ namespace XIMALAYA.PCDesktop.Tools
         {
             this.EventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
             this.ShareService = ServiceLocator.Current.GetInstance<IShareService>();
-            this.SoundCollection = new ListBox().Items;
-            this.SoundData = new SoundData
-            {
-                Title = "喜马拉雅"
-            };
-            this.CurrentSoundCoverColor = Colors.Black;
+            
 
             //播放声音命令，获取列表
             this.PlaySound1Command = new DelegateCommand<Control>(con =>
@@ -273,15 +117,14 @@ namespace XIMALAYA.PCDesktop.Tools
                 var soundData = con.DataContext as SoundData;
 
                 if (soundData == null) return;
-
-                this.SoundCollection.Clear();
+                GlobalDataSingleton.Instance.SoundCollection.Clear();
                 if (con.GetType() == typeof(ListBoxItem))
                 {
                     var listBox = VisualTreeHelperExtensions.FindAncestor<ListBox>(con);
                     var sounds = new SoundData[listBox.Items.Count];
 
                     listBox.Items.CopyTo(sounds, 0);
-                    sounds.ToList().ForEach(sound => this.SoundCollection.Add(sound));
+                    sounds.ToList().ForEach(sound => GlobalDataSingleton.Instance.SoundCollection.Add(sound));
                 }
                 else
                 {
@@ -289,62 +132,74 @@ namespace XIMALAYA.PCDesktop.Tools
                     var sounds = new SoundData[dataGrid.Items.Count];
 
                     dataGrid.Items.CopyTo(sounds, 0);
-                    sounds.ToList().ForEach(sound => this.SoundCollection.Add(sound));
+                    sounds.ToList().ForEach(sound => GlobalDataSingleton.Instance.SoundCollection.Add(sound));
                 }
 
-                if (this.SoundCollection.MoveCurrentTo(soundData))
+                if (GlobalDataSingleton.Instance.SoundCollection.MoveCurrentTo(soundData))
                 {
-                    this.PlaySoundCommand.Execute(((SoundData)this.SoundCollection.CurrentItem).TrackId);
+                    this.PlaySoundCommand.Execute(((SoundData)GlobalDataSingleton.Instance.SoundCollection.CurrentItem).TrackId);
                 }
             });
             //上一首命令
             this.PrevCommand = new DelegateCommand(() =>
             {
-                if (this.SoundCollection == null) return;
+                if (GlobalDataSingleton.Instance.SoundCollection == null) return;
                 Application.Current.Dispatcher.Invoke(new Action(() =>
                 {
-                    if (this.SoundCollection.MoveCurrentToPrevious())
+                    if (GlobalDataSingleton.Instance.SoundCollection.MoveCurrentToPrevious())
                     {
-                        this.PlaySoundCommand.Execute(((SoundData)this.SoundCollection.CurrentItem).TrackId);
+                        this.PlaySoundCommand.Execute(((SoundData)GlobalDataSingleton.Instance.SoundCollection.CurrentItem).TrackId);
                     }
-                    else if (this.SoundCollection.IsCurrentAfterLast)
+                    else if (GlobalDataSingleton.Instance.SoundCollection.IsCurrentAfterLast)
                     {
-                        this.SoundCollection.MoveCurrentToLast();
-                        this.PlaySoundCommand.Execute(((SoundData)this.SoundCollection.CurrentItem).TrackId);
+                        GlobalDataSingleton.Instance.SoundCollection.MoveCurrentToLast();
+                        this.PlaySoundCommand.Execute(((SoundData)GlobalDataSingleton.Instance.SoundCollection.CurrentItem).TrackId);
                     }
                 }), null);
             }, () =>
             {
-                if (this.SoundCollection == null) return false;
+                if (GlobalDataSingleton.Instance.SoundCollection == null) return false;
 
-                return this.SoundCollection.CurrentPosition > 0;
+                return GlobalDataSingleton.Instance.SoundCollection.CurrentPosition > 0;
             });
             //下一首命令
             this.NextCommand = new DelegateCommand(() =>
             {
-                if (this.SoundCollection == null) return;
+                if (GlobalDataSingleton.Instance.SoundCollection == null) return;
                 Application.Current.Dispatcher.Invoke(new Action(() =>
                 {
-                    if (this.SoundCollection.MoveCurrentToNext())
+                    if (GlobalDataSingleton.Instance.SoundCollection.MoveCurrentToNext())
                     {
-                        this.PlaySoundCommand.Execute(((SoundData)this.SoundCollection.CurrentItem).TrackId);
+                        this.PlaySoundCommand.Execute(((SoundData)GlobalDataSingleton.Instance.SoundCollection.CurrentItem).TrackId);
                     }
-                    else if (this.SoundCollection.IsCurrentBeforeFirst)
+                    else if (GlobalDataSingleton.Instance.SoundCollection.IsCurrentBeforeFirst)
                     {
-                        this.SoundCollection.MoveCurrentToFirst();
-                        this.PlaySoundCommand.Execute(((SoundData)this.SoundCollection.CurrentItem).TrackId);
+                        GlobalDataSingleton.Instance.SoundCollection.MoveCurrentToFirst();
+                        this.PlaySoundCommand.Execute(((SoundData)GlobalDataSingleton.Instance.SoundCollection.CurrentItem).TrackId);
                     }
                 }), null);
             }, () =>
             {
-                if (this.SoundCollection == null) return false;
+                if (GlobalDataSingleton.Instance.SoundCollection == null) return false;
 
-                return this.SoundCollection.CurrentPosition < this.SoundCollection.Count - 1;
+                return GlobalDataSingleton.Instance.SoundCollection.CurrentPosition < GlobalDataSingleton.Instance.SoundCollection.Count - 1;
             });
             //播放声音，无列表
             this.PlaySoundCommand = new DelegateCommand<long?>(trackID =>
             {
-                if (trackID == null) return;
+                if (trackID == null || !trackID.HasValue) return;
+
+                SoundData soundData = SoundCache.Instance[(long)trackID];
+
+                if (soundData != null)
+                {
+                    if (!GlobalDataSingleton.Instance.SoundCollection.Contains(soundData))
+                    {
+                        GlobalDataSingleton.Instance.SoundCollection.Clear();
+                        GlobalDataSingleton.Instance.SoundCollection.Add(soundData);
+                        this.RaisePropertyChanged(() => GlobalDataSingleton.Instance.SoundCollection);
+                    }
+                }
 
                 this.PrevCommand.RaiseCanExecuteChanged();
                 this.NextCommand.RaiseCanExecuteChanged();
@@ -432,32 +287,32 @@ namespace XIMALAYA.PCDesktop.Tools
             //提高音量命令
             this.VolumeUpCommand = new DelegateCommand(() =>
             {
-                if (this.BassEngine.Volume + 0.1F < 1)
+                if (GlobalDataSingleton.Instance.BassEngine.Volume + 0.1F < 1)
                 {
-                    this.BassEngine.Volume += 0.1F;
+                    GlobalDataSingleton.Instance.BassEngine.Volume += 0.1F;
                 }
                 else
                 {
-                    this.BassEngine.Volume = 1;
+                    GlobalDataSingleton.Instance.BassEngine.Volume = 1;
                 }
             }, () =>
             {
-                return this.BassEngine.Volume < 1;
+                return GlobalDataSingleton.Instance.BassEngine.Volume < 1;
             });
             //提高音量命令
             this.VolumeDownCommand = new DelegateCommand(() =>
             {
-                if (this.BassEngine.Volume - 0.1F > 0)
+                if (GlobalDataSingleton.Instance.BassEngine.Volume - 0.1F > 0)
                 {
-                    this.BassEngine.Volume -= 0.1F;
+                    GlobalDataSingleton.Instance.BassEngine.Volume -= 0.1F;
                 }
                 else
                 {
-                    this.BassEngine.Volume = 0;
+                    GlobalDataSingleton.Instance.BassEngine.Volume = 0;
                 }
             }, () =>
             {
-                return this.BassEngine.Volume > 0;
+                return GlobalDataSingleton.Instance.BassEngine.Volume > 0;
             });
 
             this.CloseCommand = new DelegateCommand(() =>
@@ -467,7 +322,6 @@ namespace XIMALAYA.PCDesktop.Tools
                     return;
 
                 parentWindow.Close();
-                //SystemCommands.CloseWindow(Application.Current.MainWindow);
             });
             this.MinisizeCommand = new DelegateCommand(() =>
             {
@@ -480,12 +334,10 @@ namespace XIMALAYA.PCDesktop.Tools
                     if (parentWindow.WindowState == WindowState.Normal)
                     {
                         parentWindow.WindowState = WindowState.Minimized;
-                        //SystemCommands.MinimizeWindow(parentWindow);
                     }
                     else
                     {
                         parentWindow.WindowState = WindowState.Normal;
-                        //SystemCommands.RestoreWindow(parentWindow);
                     }
                 }));
             });
@@ -634,8 +486,4 @@ namespace XIMALAYA.PCDesktop.Tools
 
         #endregion
     }
-    /// <summary>
-    /// 命令
-    /// </summary>
-    public class CommandSingleton : Singleton<CommandBaseSingleton> { }
 }

@@ -4,7 +4,7 @@ using FluentJson;
 using XIMALAYA.PCDesktop.Core.Data;
 using XIMALAYA.PCDesktop.Core.Data.Decorator;
 using XIMALAYA.PCDesktop.Core.Models.Album;
-using XIMALAYA.PCDesktop.Tools;
+using XIMALAYA.PCDesktop.Untils;
 
 namespace XIMALAYA.PCDesktop.Core.Services
 {

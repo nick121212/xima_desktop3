@@ -7,7 +7,7 @@
 			 xmlns:converter="http://ximalaya.com/xaml/tools/converter">
 
 	<UserControl.Background>
-		<SolidColorBrush Color="{Binding CurrentSoundCoverColor,Source={x:Static tools:CommandSingleton.Instance}}" Opacity="0.8"/>
+		<SolidColorBrush Color="{Binding CurrentSoundCoverColor,Source={x:Static tools:GlobalDataSingleton.Instance}}" Opacity="0.8"/>
 	</UserControl.Background>
 
 	<UserControl.Resources>
@@ -49,7 +49,7 @@
 										  Height="40"
 										  BorderType="None"
 										  IsThreeState="True"
-										  Command="{Binding BassEngine.PlayCommand}"
+										  Command="{Binding BassEngine.PlayCommand,Source={x:Static tools:GlobalDataSingleton.Instance}}"
 										  CommandParameter="{Binding Source={RelativeSource Self},Path=IsChecked}"
 										  Foreground="{DynamicResource GrayBrush6}"
 										  Background="{DynamicResource BlackBrush}">
@@ -121,7 +121,7 @@
 					<FlowDocument>
 						<Paragraph FontSize="14">
 							<Run Foreground="{DynamicResource BlackBrush}" 
-								 Text="{Binding SoundData.Title,Source={x:Static tools:CommandSingleton.Instance}}"/>
+								 Text="{Binding SoundData.Title,Source={x:Static tools:GlobalDataSingleton.Instance}}"/>
 						</Paragraph>
 					</FlowDocument>
 				</MControls:AutoSizeRichTextBox>
@@ -137,7 +137,7 @@
 				<!--静音-->
 				<MControls:MyToggleButton Width="30" 
 										  Height="30"
-										  IsChecked="{Binding BassEngine.IsMuted,Mode=TwoWay}"
+										  IsChecked="{Binding BassEngine.IsMuted,Mode=TwoWay,Source={x:Static tools:GlobalDataSingleton.Instance}}"
 										  BorderType="None"
 										  Foreground="{DynamicResource GrayBrush6}"
 										  Background="{DynamicResource BlackBrush}">
@@ -164,7 +164,7 @@
 						SmallChange="0.1"
 						BorderBrush="{DynamicResource GrayBrush8}"
 						Foreground="{DynamicResource BlackBrush}"
-						Value="{Binding BassEngine.Volume}"
+						Value="{Binding BassEngine.Volume,Source={x:Static tools:GlobalDataSingleton.Instance}}"
 						Style="{DynamicResource FlatSlider}" />
 			</StackPanel>
 			<!--分割线-->
@@ -178,7 +178,7 @@
 									  Margin="10 5"
 									  BorderType="Rectangle"
 									  IsSingle="True"
-									  IsChecked="{Binding IsWindowShow,Source={x:Static tools:CommandSingleton.Instance},Mode=OneWay}"
+									  IsChecked="{Binding IsWindowShow,Source={x:Static tools:GlobalDataSingleton.Instance},Mode=OneWay}"
 									  Command="{Binding MinisizeCommand,Source={x:Static tools:CommandSingleton.Instance}}"
 									  Foreground="{DynamicResource WhiteBrush}"
 									  BackgroundChecked="{DynamicResource GrayBrush10}"

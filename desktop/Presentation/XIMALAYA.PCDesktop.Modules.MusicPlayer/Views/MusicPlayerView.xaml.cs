@@ -1,22 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.Composition;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Threading;
-using Microsoft.WindowsAPICodePack.Taskbar;
-using XIMALAYA.PCDesktop.Tools.Player;
-using XIMALAYA.PCDesktop.Tools.Untils;
+using XIMALAYA.PCDesktop.Tools;
 
 namespace XIMALAYA.PCDesktop.Modules.MusicPlayer.Views
 {
@@ -34,7 +18,7 @@ namespace XIMALAYA.PCDesktop.Modules.MusicPlayer.Views
 
         void MusicPlayerView_Loaded(object sender, RoutedEventArgs e)
         {
-            this.SpectrumAnalyzer.RegisterSoundPlayer(this.ViewModel.BassEngine);
+            this.SpectrumAnalyzer.RegisterSoundPlayer(GlobalDataSingleton.Instance.BassEngine);
 
             //if (!TaskbarManager.Instance.TabbedThumbnail.IsThumbnailPreviewAdded(coverPath))
             //{

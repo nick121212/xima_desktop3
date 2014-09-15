@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
 			 xmlns:MControls="http://ximalaya.com/xaml/controls"
-			 xmlns:theme="clr-namespace:XIMALAYA.PCDesktop.Tools.Themes;assembly=XIMALAYA.PCDesktop.Tools">
+			 xmlns:tools="http://ximalaya.com/xaml/tools">
 	
 	<UserControl.Resources>
 		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Themes/Generic.xaml" />
@@ -14,11 +14,11 @@
 		<!--设置色调，黑色和白色-->
 		<ComboBox Grid.Column="1" 
                   DisplayMemberPath="Name"
-                  ItemsSource="{Binding Source={x:Static theme:ThemeInfoManager.Instance},Path=AppThemes}"  
+                  ItemsSource="{Binding Source={x:Static tools:ThemeInfoManagerSingleton.Instance},Path=AppThemes}"  
                   SelectedItem="{Binding SelectedTheme, Mode=TwoWay}" 
                   VerticalAlignment="Center" Margin="0,16,0,4" />
 		<!--设置色值-->
-		<ListBox ItemsSource="{Binding Source={x:Static theme:ThemeInfoManager.Instance},Path=AccentColors}"
+		<ListBox ItemsSource="{Binding Source={x:Static tools:ThemeInfoManagerSingleton.Instance},Path=AccentColors}"
                  SelectedItem="{Binding SelectedAccentColor, Mode=TwoWay}"
                  Margin="0,16,0,16"
                  ScrollViewer.HorizontalScrollBarVisibility="Auto">

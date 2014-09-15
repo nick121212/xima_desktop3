@@ -9,6 +9,7 @@ using System.Windows.Media;
 using MahApps.Metro;
 using Microsoft.Practices.Prism.ViewModel;
 using XIMALAYA.PCDesktop.Tools;
+using XIMALAYA.PCDesktop.Untils;
 
 namespace XIMALAYA.PCDesktop.Tools.Themes
 {
@@ -174,7 +175,4 @@ namespace XIMALAYA.PCDesktop.Tools.Themes
 
         #endregion
     }
-
-
-    public class ThemeInfoManager : Singleton<ThemeInfoManagerBase> { }
 }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Practices.Prism.Events;
 
-namespace XIMALAYA.PCDesktop.Events
+namespace XIMALAYA.PCDesktop.Common.Events
 {
     /// <summary>
     /// 模块事件参数

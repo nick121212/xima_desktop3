@@ -1,11 +1,10 @@
 ﻿using Microsoft.Practices.Prism.MefExtensions.Modularity;
 using Microsoft.Practices.Prism.Modularity;
-using System;
-using XIMALAYA.PCDesktop.Core.Models.Album;
-using XIMALAYA.PCDesktop.Events;
-using XIMALAYA.PCDesktop.Tools;
-using XIMALAYA.PCDesktop.Tools.Untils;
+using XIMALAYA.PCDesktop.Common;
+using XIMALAYA.PCDesktop.Common.Events;
 using XIMALAYA.PCDesktop.Modules.SoundModule.Views;
+using XIMALAYA.PCDesktop.Tools;
+using XIMALAYA.PCDesktop.Untils;
 
 namespace XIMALAYA.PCDesktop.Modules.SoundModule
 {

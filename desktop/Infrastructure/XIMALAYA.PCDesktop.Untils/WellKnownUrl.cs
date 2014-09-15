@@ -1,5 +1,5 @@
 ﻿
-namespace XIMALAYA.PCDesktop.Tools
+namespace XIMALAYA.PCDesktop.Untils
 {
     /// <summary>
     /// 地址引用
