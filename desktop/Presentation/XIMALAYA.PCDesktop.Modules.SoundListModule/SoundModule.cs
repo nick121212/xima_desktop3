@@ -31,6 +31,20 @@ namespace XIMALAYA.PCDesktop.Modules.SoundModule
             }
         }
 
+        private void OnArgument(string argument)
+        {
+            string[] args = argument.Split('_');
+            long id = 0;
+
+            if (args.Length == 2)
+            {
+                if (args[0] == "sound" && long.TryParse(args[1], out id))
+                {
+                    this.OnSoundDetailEvent(id);
+                }
+            }
+        }
+
         #endregion
 
         #region 方法
@@ -42,7 +56,7 @@ namespace XIMALAYA.PCDesktop.Modules.SoundModule
         {
             //标签点击事件，获取专辑详情数据
             this.EventAggregator.GetEvent<SoundDetailEvent<long>>().Subscribe(OnSoundDetailEvent);
-
+            this.EventAggregator.GetEvent<JumplistEvent<string>>().Subscribe(OnArgument);
             //this.EventAggregator.GetEvent<SoundDetailEvent<long>>().Publish(352374);
         }
 
@@ -50,6 +64,7 @@ namespace XIMALAYA.PCDesktop.Modules.SoundModule
         {
             base.Dispose();
             this.EventAggregator.GetEvent<SoundDetailEvent<long>>().Unsubscribe(OnSoundDetailEvent);
+            this.EventAggregator.GetEvent<JumplistEvent<string>>().Unsubscribe(OnArgument);
         }
 
         #endregion

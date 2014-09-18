@@ -12,6 +12,7 @@ using XIMALAYA.PCDesktop.Core.Models.Sound;
 using XIMALAYA.PCDesktop.Core.ParamsModel;
 using XIMALAYA.PCDesktop.Core.Services;
 using XIMALAYA.PCDesktop.Modules.AlbumModule.Views;
+using XIMALAYA.PCDesktop.Tools;
 
 namespace XIMALAYA.PCDesktop.Modules.AlbumModule
 {
@@ -91,7 +92,7 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumModule
             {
                 throw new NullReferenceException();
             }
-           
+
             this.Params.Page = this.CurrentPage;
             base.GetData(isClear);
             this.AlbumDetailService.GetData(result =>
@@ -112,6 +113,12 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumModule
                         {
                             RegionName = this.RegionName,
                             UID = this.AlbumData.Uid
+                        });
+                        CommandSingleton.Instance.AddToJumpListCommand.Execute(new JumpListEventArgs
+                        {
+                            Title = this.AlbumData.Title,
+                            Arguments = "album_" + this.AlbumData.AlbumID,
+                            Category = "最近听过的专辑"
                         });
                         this.Total = albumInfo.SoundsResult.TotalCount;
                         foreach (SoundData sound in albumInfo.SoundsResult.Sounds)

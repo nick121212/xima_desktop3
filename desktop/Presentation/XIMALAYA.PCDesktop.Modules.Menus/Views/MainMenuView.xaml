@@ -76,33 +76,6 @@
 								  BorderThickness="0"
 								  BorderType="None"
 								  IsBackground="Hidden"
-								  IsSingle="True"
-								  Command="{Binding RedirectCommand,Source={x:Static tools:CommandSingleton.Instance}}"
-								  CommandParameter="http://www.ximalaya.com/download"
-								  Foreground="{DynamicResource GrayBrush6}"
-								  Background="{DynamicResource BlackBrush}">
-			<MControls:MyToggleButton.Content>
-				<StackPanel>
-					<Path Data="{Binding [download], Source={x:Static MControls:PathData.Instance}}" 
-						  Style="{DynamicResource NavPathStyle}"
-						  HorizontalAlignment="Center"
-						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-					</Path>
-					<Label Foreground="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
-						   HorizontalAlignment="Center" 
-						   FontSize="16"
-						   FontWeight="Bold"
-						   Content="下载"/>
-				</StackPanel>
-			</MControls:MyToggleButton.Content>
-		</MControls:MyToggleButton>
-		<MControls:MyToggleButton Width="100" 
-								  Height="90" 
-								  Padding="0 5 0 0"
-								  Margin="0 5"
-								  BorderThickness="0"
-								  BorderType="None"
-								  IsBackground="Hidden"
 								  IsChecked="{Binding IsSettingFlyoutShow,Source={x:Static tools:GlobalDataSingleton.Instance}}"
 								  Foreground="{DynamicResource GrayBrush6}"
 								  Background="{DynamicResource BlackBrush}">
@@ -132,6 +105,71 @@
 						   FontSize="16"
 						   FontWeight="Bold"
 						   Content="设置"/>
+				</StackPanel>
+			</MControls:MyToggleButton.ContentChecked>
+		</MControls:MyToggleButton>
+		<MControls:MyToggleButton Width="100" 
+								  Height="90" 
+								  Padding="0 5 0 0"
+								  Margin="0 5"
+								  BorderThickness="0"
+								  BorderType="None"
+								  IsBackground="Hidden"
+								  IsSingle="True"
+								  Command="{Binding RedirectCommand,Source={x:Static tools:CommandSingleton.Instance}}"
+								  CommandParameter="http://www.ximalaya.com/download?tag=thirdpartfx"
+								  Foreground="{DynamicResource GrayBrush6}"
+								  Background="{DynamicResource BlackBrush}">
+			<MControls:MyToggleButton.Content>
+				<StackPanel>
+					<Path Data="{Binding [download], Source={x:Static MControls:PathData.Instance}}" 
+						  Style="{DynamicResource NavPathStyle}"
+						  HorizontalAlignment="Center"
+						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
+					</Path>
+					<Label Foreground="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
+						   HorizontalAlignment="Center" 
+						   FontSize="16"
+						   FontWeight="Bold"
+						   Content="下载"/>
+				</StackPanel>
+			</MControls:MyToggleButton.Content>
+		</MControls:MyToggleButton>
+		<MControls:MyToggleButton Width="100" 
+								  Height="90" 
+								  Padding="0 5 0 0"
+								  Margin="0 5"
+								  BorderThickness="0"
+								  BorderType="None"
+								  IsBackground="Hidden"
+								  Foreground="{DynamicResource GrayBrush6}"
+								  Background="{DynamicResource BlackBrush}">
+			<MControls:MyToggleButton.Content>
+				<StackPanel>
+					<Path Data="{Binding [aboutme], Source={x:Static MControls:PathData.Instance}}" 
+						  Style="{DynamicResource NavPathStyle}"
+						  HorizontalAlignment="Center"
+						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
+					</Path>
+					<Label Foreground="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
+						   HorizontalAlignment="Center" 
+						   FontSize="16"
+						   FontWeight="Bold"
+						   Content="关于"/>
+				</StackPanel>
+			</MControls:MyToggleButton.Content>
+			<MControls:MyToggleButton.ContentChecked>
+				<StackPanel>
+					<Path Data="{Binding [aboutme], Source={x:Static MControls:PathData.Instance}}" 
+						  Style="{DynamicResource NavPathStyle}"
+						  HorizontalAlignment="Center"
+						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
+					</Path>
+					<Label Foreground="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
+						   HorizontalAlignment="Center" 
+						   FontSize="16"
+						   FontWeight="Bold"
+						   Content="关于"/>
 				</StackPanel>
 			</MControls:MyToggleButton.ContentChecked>
 		</MControls:MyToggleButton>

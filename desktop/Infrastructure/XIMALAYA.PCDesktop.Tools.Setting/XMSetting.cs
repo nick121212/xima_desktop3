@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Shell;
 using Microsoft.Isam.Esent.Collections.Generic;
 using XIMALAYA.PCDesktop.Tools;
 using XIMALAYA.PCDesktop.Tools.Untils;
@@ -29,6 +31,10 @@ namespace XIMALAYA.PCDesktop.Tools.Setting
         /// 外观相关设置
         /// </summary>
         public AppearanceSetting Appearance { get; private set; }
+        /// <summary>
+        /// jumplist列表
+        /// </summary>
+        public JumpListSetting Jumplist { get; private set; }
 
         private XMSetting()
         {
@@ -37,10 +43,31 @@ namespace XIMALAYA.PCDesktop.Tools.Setting
             this.InitPlayerSetting();
             this.InitHotKeySetting();
             this.InitAppearanceSetting();
+            this.InitJumpListSetting();
         }
-        ~XMSetting()
+
+        private void InitJumpListSetting()
         {
-            this.Dispose();
+            Type type = typeof(JumpListSetting);
+
+            if (this.Dictionary.ContainsKey(type.Name))
+            {
+                try
+                {
+                    string val = this.Dictionary[type.Name];
+
+                    this.Jumplist = XmlUtil.Deserialize(type, val) as JumpListSetting;
+                }
+                catch
+                {
+                    this.Dictionary.Remove(type.Name);
+                }
+            }
+            if (this.Jumplist == null)
+            {
+                this.Jumplist = new JumpListSetting();
+            }
+            this.Jumplist.Init();
         }
         private void InitHotKeySetting()
         {
@@ -151,11 +178,25 @@ namespace XIMALAYA.PCDesktop.Tools.Setting
             }
             catch { }
         }
+        private void SaveJumpListSetting()
+        {
+            Type type = typeof(JumpListSetting);
+
+            try
+            {
+                this.Jumplist.JumpItemList = this.Jumplist.Jumplist.JumpItems;
+                string val = XmlUtil.Serializer(type, this.Jumplist);
+
+                this.Dictionary[type.Name] = val;
+            }
+            catch { }
+        }
         public void Save()
         {
             this.SaveHotKeySetting();
             this.SaveAppearanceSetting();
             this.SavePlayerSetting();
+            this.SaveJumpListSetting();
         }
 
         #region IDisposable 成员

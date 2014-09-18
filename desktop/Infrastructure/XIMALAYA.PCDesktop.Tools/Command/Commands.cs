@@ -35,7 +35,7 @@ namespace XIMALAYA.PCDesktop.Tools
         /// 分享服务
         /// </summary>
         private IShareService ShareService { get; set; }
-       
+
         #endregion
 
         #region 命令
@@ -100,6 +100,10 @@ namespace XIMALAYA.PCDesktop.Tools
         /// 最大化
         /// </summary>
         public DelegateCommand MaxisizeCommand { get; set; }
+        /// <summary>
+        /// 添加到跳转列表
+        /// </summary>
+        public DelegateCommand<JumpListEventArgs> AddToJumpListCommand { get; set; }
 
         #endregion
 
@@ -109,7 +113,7 @@ namespace XIMALAYA.PCDesktop.Tools
         {
             this.EventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
             this.ShareService = ServiceLocator.Current.GetInstance<IShareService>();
-            
+
 
             //播放声音命令，获取列表
             this.PlaySound1Command = new DelegateCommand<Control>(con =>
@@ -314,7 +318,7 @@ namespace XIMALAYA.PCDesktop.Tools
             {
                 return GlobalDataSingleton.Instance.BassEngine.Volume > 0;
             });
-
+            //关闭窗体命令
             this.CloseCommand = new DelegateCommand(() =>
             {
                 var parentWindow = Application.Current.MainWindow;
@@ -323,6 +327,7 @@ namespace XIMALAYA.PCDesktop.Tools
 
                 parentWindow.Close();
             });
+            //最小化命令
             this.MinisizeCommand = new DelegateCommand(() =>
             {
                 var parentWindow = Application.Current.MainWindow;
@@ -341,6 +346,7 @@ namespace XIMALAYA.PCDesktop.Tools
                     }
                 }));
             });
+            //最大化命令
             this.MaxisizeCommand = new DelegateCommand(() =>
             {
                 var parentWindow = Application.Current.MainWindow;
@@ -355,6 +361,11 @@ namespace XIMALAYA.PCDesktop.Tools
                 {
                     SystemCommands.RestoreWindow(parentWindow);
                 }
+            });
+            //添加到跳转列表命令
+            this.AddToJumpListCommand = new DelegateCommand<JumpListEventArgs>((e) =>
+            {
+                this.EventAggregator.GetEvent<JumplistEvent<JumpListEventArgs>>().Publish(e);
             });
         }
 

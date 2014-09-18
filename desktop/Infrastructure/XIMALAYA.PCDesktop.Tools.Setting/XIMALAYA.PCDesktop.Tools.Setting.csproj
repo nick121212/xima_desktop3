@@ -42,8 +42,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\Microsoft.Practices.Prism.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -71,6 +73,7 @@
     <Compile Include="AppearanceSetting.cs" />
     <Compile Include="BaseSetting.cs" />
     <Compile Include="HotKeySetting.cs" />
+    <Compile Include="JumpListSetting.cs" />
     <Compile Include="PlayerSetting.cs" />
     <Compile Include="XMSetting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

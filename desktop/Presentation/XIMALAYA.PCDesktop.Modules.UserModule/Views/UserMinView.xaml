@@ -9,23 +9,26 @@
 			 xmlns:tools="http://ximalaya.com/xaml/tools"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Margin="0 0 0 20">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="*"/>
-		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="Auto"/>
-			<ColumnDefinition Width="100"/>
-			<ColumnDefinition Width="*"/>
-		</Grid.ColumnDefinitions>
-		
-		<Grid.DataContext>
-			<Binding Path="UserData"/>
-		</Grid.DataContext>
+	<Border BorderThickness="0 0 0 3"
+			Margin="0 0 0 20"
+			BorderBrush="{DynamicResource BlackBrush}" >
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="100"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
 
-		<!--关闭按钮-->
-		<Button Grid.Column="0"
+			<Grid.DataContext>
+				<Binding Path="UserData"/>
+			</Grid.DataContext>
+
+			<!--关闭按钮-->
+			<Button Grid.Column="0"
 				Grid.Row="0"
 				Grid.RowSpan="2"
 				Margin="0 -5 0 0"
@@ -39,31 +42,31 @@
                 FontSize="16"
 				HorizontalAlignment="Right"
                 VerticalAlignment="Top">
-			<Rectangle Width="20"
+				<Rectangle Width="20"
                            Height="15"
                            Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type Controls:Flyout}}, Path=Foreground}">
-				<Rectangle.OpacityMask>
-					<VisualBrush Stretch="Fill">
-						<VisualBrush.Visual>
-							<Canvas Width="48"
+					<Rectangle.OpacityMask>
+						<VisualBrush Stretch="Fill">
+							<VisualBrush.Visual>
+								<Canvas Width="48"
                                         Height="48"
                                         Clip="F1 M 0,0L 48,0L 48,48L 0,48L 0,0"
                                         UseLayoutRounding="False">
-								<Path Width="25"
+									<Path Width="25"
                                           Height="18"
                                           Canvas.Left="12"
                                           Canvas.Top="15"
                                           Stretch="Fill"
                                           Fill="Black"
                                           Data="F1 M 12,22L 12,26L 28.25,26L 21,33L 27.5,33L 37,24L 27.5,15L 21,15L 28.25,22L 12,22 Z " />
-							</Canvas>
-						</VisualBrush.Visual>
-					</VisualBrush>
-				</Rectangle.OpacityMask>
-			</Rectangle>
-		</Button>
-		<!--用户头像-->
-		<MControls:MyImage Grid.Column="1"
+								</Canvas>
+							</VisualBrush.Visual>
+						</VisualBrush>
+					</Rectangle.OpacityMask>
+				</Rectangle>
+			</Button>
+			<!--用户头像-->
+			<MControls:MyImage Grid.Column="1"
 						   Grid.Row="0"
 						   Grid.RowSpan="2"
 						   VerticalAlignment="Center"
@@ -71,38 +74,39 @@
 						   Width="60" 
 						   Height="60" 
 						   Source="{Binding MobileSmallLogo}">
-			<MControls:MyImage.Clip>
-				<EllipseGeometry Center="30,30" RadiusX="30" RadiusY="30"/>
-			</MControls:MyImage.Clip>
-		</MControls:MyImage>
-		
-		<StackPanel Grid.Column="2"
+				<MControls:MyImage.Clip>
+					<EllipseGeometry Center="30,30" RadiusX="30" RadiusY="30"/>
+				</MControls:MyImage.Clip>
+			</MControls:MyImage>
+			<!--加V标识-->
+			<StackPanel Grid.Column="2"
 					Grid.Row="0"
 					Orientation="Horizontal">
-			<Label Content="{Binding NickName}"
+				<Label Content="{Binding NickName}"
 				   FontSize="16"/>
-			<MControls:MyToggleButton IsEnabled="False"
+				<MControls:MyToggleButton IsEnabled="False"
 									  IsChecked="{Binding IsVerified}"
 								      Foreground="{DynamicResource BlackBrush}"
 								      Background="{DynamicResource BlackBrush}"
 								      BorderBrush="{DynamicResource BlackBrush}">
-				<MControls:MyToggleButton.ContentChecked>
-					<Label Foreground="{DynamicResource BlackBrush}" FontSize="16" FontWeight="Bold" Content="V"/>
-				</MControls:MyToggleButton.ContentChecked>
-			</MControls:MyToggleButton>
-									  
-		</StackPanel>
-		<StackPanel Grid.Column="2"
+					<MControls:MyToggleButton.ContentChecked>
+						<Label Foreground="{DynamicResource BlackBrush}" FontSize="16" FontWeight="Bold" Content="V"/>
+					</MControls:MyToggleButton.ContentChecked>
+				</MControls:MyToggleButton>
+
+			</StackPanel>
+			<!--他人操作-->
+			<StackPanel Grid.Column="2"
 					Grid.Row="1"
 					Orientation="Horizontal">
-			<Label Content="主页"/>
-			<Label Content="声音"/>
-			<Label Content="专辑"/>
-			<Label Content="赞过的"/>
-			<Label Content="关注"/>
-			<Label Content="粉丝"/>
-			<Label Content="听过"/>
-		</StackPanel>
-
-	</Grid>
+				<Label Content="主页"/>
+				<Label Content="声音"/>
+				<Label Content="专辑"/>
+				<Label Content="赞过的"/>
+				<Label Content="关注"/>
+				<Label Content="粉丝"/>
+				<Label Content="听过"/>
+			</StackPanel>
+		</Grid>
+	</Border>
 </UserControl>

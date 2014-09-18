@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.IO;
+using System.IO.MemoryMappedFiles;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using System.Windows.Shell;
 using System.Windows.Threading;
 using Hardcodet.Wpf.TaskbarNotification;
 using Microsoft.Practices.Prism.Events;
@@ -16,7 +20,8 @@ using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.ViewModel;
 using XIMALAYA.PCDesktop.Common.Events;
 using XIMALAYA.PCDesktop.Tools;
-using XIMALAYA.PCDesktop.Tools.Player;
+using XIMALAYA.PCDesktop.Tools.MyType;
+using XIMALAYA.PCDesktop.Tools.Setting;
 using XIMALAYA.PCDesktop.Untils;
 
 namespace XIMALAYA.PCDesktop
@@ -48,6 +53,10 @@ namespace XIMALAYA.PCDesktop
         /// 定时器，用于清理内存
         /// </summary>
         private DispatcherTimer ClearMemeryTimer = new DispatcherTimer();
+        /// <summary>
+        /// 定时器，用于监测指令队列
+        /// </summary>
+        private DispatcherTimer CheckQueueTimer = new DispatcherTimer();
 
         #endregion
 
@@ -101,15 +110,6 @@ namespace XIMALAYA.PCDesktop
 
         #endregion
 
-        #region 命令
-
-        /// <summary>
-        /// 显示隐藏界面
-        /// </summary>
-        //public DelegateCommand ShowOrHideCommand { get; set; }
-
-        #endregion
-
         #region 构造
 
         /// <summary>
@@ -128,17 +128,7 @@ namespace XIMALAYA.PCDesktop
             this.ModuleCatalog = moduleCatalog;
             this.EventAggregator = eventAggregator;
             this.WindowTitle = @"喜马拉雅-听我想听";
-            //this.ShowOrHideCommand = new DelegateCommand(() =>
-            //{
-            //    if (Application.Current.MainWindow.Visibility == Visibility.Visible)
-            //    {
-            //        Application.Current.MainWindow.Visibility = Visibility.Hidden;
-            //    }
-            //    else
-            //    {
-            //        Application.Current.MainWindow.Visibility = Visibility.Visible;
-            //    }
-            //});
+
             //订阅加载模块事件
             if (this.EventAggregator != null)
             {
@@ -152,43 +142,96 @@ namespace XIMALAYA.PCDesktop
                 this.EventAggregator.GetEvent<ChangeCoverEvent>().Subscribe(cover =>
                 {
                     DownloadImage(cover);
-
-                    //Application.Current.Dispatcher.Invoke(() =>
-                    //{
-                    //    this.NotifyIcon.ShowCustomBalloon(new BalloonSongInfo(), PopupAnimation.Fade, 5000);
-                    //});
+                });
+                //添加到跳转列表
+                this.EventAggregator.GetEvent<JumplistEvent<JumpListEventArgs>>().Subscribe(e =>
+                {
+                    this.AddKeyToJumpList(e);
                 });
             }
             //注册程序错误事件
-            //AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler((sender, e) =>
-            //{
-            //    Debug.WriteLine("**********************************************************************");
-            //    Debug.WriteLine("喜马拉雅出现错误：" + DateTime.Now.ToShortDateString());
-            //    Debug.WriteLine("**********************************************************************");
+            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler((sender, e) =>
+            {
+                MessageBox.Show(e.ExceptionObject.ToString());
+                Debug.WriteLine("**********************************************************************");
+                Debug.WriteLine("喜马拉雅出现错误：" + DateTime.Now.ToShortDateString());
+                Debug.WriteLine("喜马拉雅出现错误：" + e.ExceptionObject.ToString());
+                Debug.WriteLine("喜马拉雅出现错误：" + e.IsTerminating.ToString());
+                Debug.WriteLine("**********************************************************************");
 
-            //    Process.GetCurrentProcess().Kill();
-            //});
+                //Process.GetCurrentProcess().Kill();
+            });
         }
 
         #endregion
 
         #region 方法
 
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        /// <param name="notifyIcon"></param>
+        /// <param name="mainWindow"></param>
         public void Init(TaskbarIcon notifyIcon, Window mainWindow)
         {
             this.NotifyIcon = notifyIcon;
             this.ClearMemeory();
+            this.CheckArgQueue();
         }
+        private void CheckArgQueue()
+        {
+            string arg;
+            JumplistEvent<string> jumpEvent = this.EventAggregator.GetEvent<JumplistEvent<string>>();
+
+            this.CheckQueueTimer.Interval = TimeSpan.FromMilliseconds(500);
+            this.CheckQueueTimer.Tick += new EventHandler((o, e) =>
+            {
+                arg = LoadKeyFromMappedFile();
+                ClearMappedFile();
+                jumpEvent.Publish(arg);
+            });
+
+            this.CheckQueueTimer.IsEnabled = true;
+        }
+        string LoadKeyFromMappedFile()
+        {
+            try
+            {
+                using (Stream stream = GlobalDataSingleton.Instance.MemoryMappedFile.CreateViewStream())
+                {
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    return formatter.Deserialize(stream).ToString();
+                }
+            }
+            catch
+            {
+                return string.Empty;
+            }
+        }
+        void ClearMappedFile()
+        {
+            try
+            {
+                using (Stream stream = GlobalDataSingleton.Instance.MemoryMappedFile.CreateViewStream())
+                {
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    formatter.Serialize(stream, 0);
+                }
+            }
+            catch { }
+        }
+        /// <summary>
+        /// 定时清除内存
+        /// </summary>
         private void ClearMemeory()
         {
             this.ClearMemeryTimer.Interval = TimeSpan.FromSeconds(50);
-            this.ClearMemeryTimer.Tick += new EventHandler((o, e1) =>
+            this.ClearMemeryTimer.Tick += new EventHandler((o, e) =>
             {
                 SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
             });
             this.ClearMemeryTimer.IsEnabled = true;
         }
-
         /// <summary>
         /// 下载图片
         /// </summary>
@@ -307,6 +350,42 @@ namespace XIMALAYA.PCDesktop
             }
             Debug.WriteLine(e.IsErrorHandled.ToString());
         }
+        /// <summary>
+        /// 添加到跳转列表
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="arguments"></param>
+        private void AddKeyToJumpList(JumpListEventArgs args)
+        {
+            JumpList jumpList = JumpList.GetJumpList(App.Current);
+
+            if (jumpList == null) jumpList = new JumpList();
+            //jumpList.ShowRecentCategory = false;
+            //jumpList.ShowFrequentCategory = true;
+            foreach (JumpTask jumpItem in jumpList.JumpItems)
+            {
+                if (jumpItem.Title == args.Title) return;
+            }
+            JumpTask jumpTask = new JumpTask();
+            jumpTask.Title = args.Title;
+            jumpTask.Description = jumpTask.Title;
+            jumpTask.Arguments = args.Arguments;
+            jumpTask.CustomCategory = args.Category;
+            jumpTask.WorkingDirectory = Directory.GetCurrentDirectory();
+            jumpTask.ApplicationPath = Assembly.GetExecutingAssembly().Location;
+            jumpList.JumpItems.Insert(0, jumpTask);
+            if (jumpList.JumpItems.Count > 20)
+            {
+                jumpList.JumpItems.RemoveAt(20);
+            }
+            //jumpList.JumpItems.RemoveRange(10, 10);
+            JumpList.AddToRecentCategory(jumpTask);
+
+            Application.Current.Dispatcher.Invoke(new Action(() =>
+            {
+                JumpList.SetJumpList(App.Current, jumpList);
+            }));
+        }
 
         #endregion
 
@@ -324,6 +403,7 @@ namespace XIMALAYA.PCDesktop
             this.EventAggregator = null;
             this.ClearMemeryTimer.IsEnabled = false;
             this.ClearMemeryTimer = null;
+            XMSetting.Instance.Dispose();
         }
 
         #endregion

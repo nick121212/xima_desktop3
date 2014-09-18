@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO.MemoryMappedFiles;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -11,7 +14,7 @@ using XIMALAYA.PCDesktop.Tools.Player;
 
 namespace XIMALAYA.PCDesktop.Tools
 {
-    public class GlobalData : NotificationObject
+    public class GlobalData : NotificationObject, IDisposable
     {
         #region 字段
 
@@ -26,6 +29,10 @@ namespace XIMALAYA.PCDesktop.Tools
 
         #region 属性
 
+        /// <summary>
+        /// 指令队列（用于win7中jumplist）
+        /// </summary>
+        public Queue<string> ArgumentList { get; set; }
         /// <summary>
         /// 全局播放
         /// </summary>
@@ -148,6 +155,12 @@ namespace XIMALAYA.PCDesktop.Tools
                 }
             }
         }
+        private Thread thread { get; set; }
+        /// <summary>
+        /// 内存映射文件的文件名
+        /// </summary>
+        public string MappingFileID { get; set; }
+        public MemoryMappedFile MemoryMappedFile { get; set; }
 
         #endregion
 
@@ -161,6 +174,21 @@ namespace XIMALAYA.PCDesktop.Tools
             };
             this.SoundCollection = new ListBox().Items;
             this.CurrentSoundCoverColor = Colors.Black;
+            this.ArgumentList = new Queue<string>();
+            this.MappingFileID = "{04EFCEB4-F10A-403D-9824-1E685C4B7962}";
+            this.MemoryMappedFile = MemoryMappedFile.CreateOrOpen(this.MappingFileID, 1024 * 1024, MemoryMappedFileAccess.ReadWrite);
+        }
+
+        #endregion
+
+        #region IDisposable 成员
+
+        public void Dispose()
+        {
+            this.SoundCollection.Clear();
+            this.SoundCollection = null;
+            this.ArgumentList.Clear();
+            this.ArgumentList = null;
         }
 
         #endregion

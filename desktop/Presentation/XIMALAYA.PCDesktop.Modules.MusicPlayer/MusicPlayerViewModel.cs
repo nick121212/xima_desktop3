@@ -45,9 +45,15 @@ namespace XIMALAYA.PCDesktop.Modules.MusicPlayer
             if (soundData == null) return;
             if (soundData.PlayUrl32 == null && soundData.PlayUrl64 == null) return;
 
-            this.EventAggregator.GetEvent<ChangeCoverEvent>().Publish(soundData.CoverLarge);
             GlobalDataSingleton.Instance.SoundData = soundData;
             GlobalDataSingleton.Instance.BassEngine.OpenUrlAsync(soundData.PlayUrl64 == null ? soundData.PlayUrl32 : soundData.PlayUrl64);
+            this.EventAggregator.GetEvent<ChangeCoverEvent>().Publish(soundData.CoverLarge);
+            CommandSingleton.Instance.AddToJumpListCommand.Execute(new JumpListEventArgs
+            {
+                Title = soundData.Title,
+                Arguments = "sound_" + soundData.TrackId,
+                Category = "最近听过的声音"
+            });
         }
         /// <summary>
         /// 当前声音播放完成

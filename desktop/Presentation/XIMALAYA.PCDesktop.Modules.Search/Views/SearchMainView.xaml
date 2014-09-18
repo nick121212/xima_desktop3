@@ -129,6 +129,7 @@
 					  Style="{DynamicResource CleanGroupBoxStyleKey}" 
 					  Header="专辑" 
 					  Padding="5" 
+					  BorderThickness="0"
 					  Controls:ControlsHelper.HeaderFontSize="30">
 				<ListBox ItemsSource="{Binding AlbumDatas}"
 						 ScrollViewer.HorizontalScrollBarVisibility="Hidden"
@@ -138,11 +139,13 @@
 					  Style="{DynamicResource CleanGroupBoxStyleKey}" 
 					  Header="用户" 
 					  Padding="5" 
+					  BorderThickness="0"
 					  Controls:ControlsHelper.HeaderFontSize="30">
 				<ListBox ItemsSource="{Binding UserDatas}"
 						 ItemContainerStyle="{DynamicResource NormalUserItemStyle}"/>
 			</GroupBox>
 			<GroupBox Grid.Column="2" 
+					  BorderThickness="0"
 					  Style="{DynamicResource CleanGroupBoxStyleKey}" 
 					  Header="声音" 
 					  Padding="5" 

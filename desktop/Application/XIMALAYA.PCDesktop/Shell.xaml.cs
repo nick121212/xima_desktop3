@@ -30,7 +30,7 @@ namespace XIMALAYA.PCDesktop
         /// viewmodel
         /// </summary>
         [Import]
-        public MainViewModel MainViewModel
+        public MainViewModel ViewModel
         {
             get { return this.DataContext as MainViewModel; }
             set { this.DataContext = value; }
@@ -68,7 +68,7 @@ namespace XIMALAYA.PCDesktop
             XMSetting set = XMSetting.Instance;
             RegionManager.SetRegionManager(this.settingFlyout, this.regionManager);
             //定时清理内存
-            this.MainViewModel.Init(NotifyIcon, this);
+            this.ViewModel.Init(NotifyIcon, this);
             this.StateChanged += Shell_StateChanged;
         }
 
@@ -79,12 +79,12 @@ namespace XIMALAYA.PCDesktop
 
         void Shell_Closed(object sender, EventArgs e)
         {
-            this.MainViewModel.Dispose();
+            this.ViewModel.Dispose();
         }
 
         async void Shell_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            e.Cancel = !this.MainViewModel.IsShutDown;
+            e.Cancel = !this.ViewModel.IsShutDown;
             var mySettings = new MetroDialogSettings()
             {
                 AffirmativeButtonText = "退出",
@@ -97,7 +97,7 @@ namespace XIMALAYA.PCDesktop
                 "确定要退出喜马拉雅?",
                 MessageDialogStyle.AffirmativeAndNegative, mySettings);
 
-            if (this.MainViewModel.IsShutDown = result == MessageDialogResult.Affirmative)
+            if (this.ViewModel.IsShutDown = result == MessageDialogResult.Affirmative)
             {
                 Application.Current.ShutdownMode = ShutdownMode.OnLastWindowClose;
                 Application.Current.Shutdown();

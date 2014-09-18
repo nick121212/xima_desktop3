@@ -28,14 +28,17 @@ namespace XIMALAYA.PCDesktop.Tools.Setting
 
         public HotKeySetting()
         {
-            this.Keys.Add(System.Windows.Input.Key.F5, HotKeysManager.CommandKeys.Play);
-            this.Keys.Add(System.Windows.Input.Key.Right, HotKeysManager.CommandKeys.Next);
-            this.Keys.Add(System.Windows.Input.Key.Left, HotKeysManager.CommandKeys.Prev);
-            this.Keys.Add(System.Windows.Input.Key.Up, HotKeysManager.CommandKeys.VolumeUp);
-            this.Keys.Add(System.Windows.Input.Key.Down, HotKeysManager.CommandKeys.VolumeDown);
-            this.Keys.Add(System.Windows.Input.Key.C, HotKeysManager.CommandKeys.Close);
-            this.Keys.Add(System.Windows.Input.Key.M, HotKeysManager.CommandKeys.Minisize);
-            this.Keys.Add(System.Windows.Input.Key.N, HotKeysManager.CommandKeys.Maxisize);
+            if (this.Keys.Count == 0)
+            {
+                this.Keys.Add(System.Windows.Input.Key.F5, HotKeysManager.CommandKeys.Play);
+                this.Keys.Add(System.Windows.Input.Key.Right, HotKeysManager.CommandKeys.Next);
+                this.Keys.Add(System.Windows.Input.Key.Left, HotKeysManager.CommandKeys.Prev);
+                this.Keys.Add(System.Windows.Input.Key.Up, HotKeysManager.CommandKeys.VolumeUp);
+                this.Keys.Add(System.Windows.Input.Key.Down, HotKeysManager.CommandKeys.VolumeDown);
+                this.Keys.Add(System.Windows.Input.Key.C, HotKeysManager.CommandKeys.Close);
+                this.Keys.Add(System.Windows.Input.Key.M, HotKeysManager.CommandKeys.Minisize);
+                this.Keys.Add(System.Windows.Input.Key.N, HotKeysManager.CommandKeys.Maxisize);
+            }
         }
         public override void Init()
         {

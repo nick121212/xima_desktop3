@@ -63,6 +63,20 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumModule
                 albumDetailView.ViewModel.DoInit(albumID, regionName, albumDetailView);
             }
         }
+        private void OnArgument(string argument)
+        {
+
+            string[] args = argument.Split('_');
+            long id = 0;
+
+            if (args.Length == 2)
+            {
+                if (args[0] == "album" && long.TryParse(args[1], out id))
+                {
+                    this.OnAlbumDetailEvent(id);
+                }
+            }
+        }
 
         #endregion
 
@@ -82,6 +96,8 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumModule
 
             //获取专辑详情数据
             this.EventAggregator.GetEvent<AlbumDetailEvent<long>>().Subscribe(OnAlbumDetailEvent);
+            //跳转指令
+            this.EventAggregator.GetEvent<JumplistEvent<string>>().Subscribe(OnArgument);
         }
 
         public override void Dispose()
@@ -89,6 +105,7 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumModule
             base.Dispose();
             this.EventAggregator.GetEvent<AlbumDetailEvent<long>>().Unsubscribe(OnAlbumDetailEvent);
             this.EventAggregator.GetEvent<AlbumListEvent<TagEventArgument>>().Unsubscribe(OnChangeTagEventArgument);
+            this.EventAggregator.GetEvent<JumplistEvent<string>>().Unsubscribe(OnArgument);
         }
 
         #endregion

@@ -90,6 +90,12 @@ namespace XIMALAYA.PCDesktop.Modules.SoundModule
                                 RegionName = this.RegionName,
                                 UID = this.SoundData.UID
                             });
+                            //CommandSingleton.Instance.AddToJumpListCommand.Execute(new JumpListEventArgs
+                            //{
+                            //    Title = this.SoundData.Title,
+                            //    Arguments = "sound_" + this.SoundData.TrackId,
+                            //    Category = "最近听过的声音"
+                            //});
                             if (GlobalDataSingleton.Instance.SoundData.TrackId != this.SoundData.TrackId)
                             {
                                 CommandSingleton.Instance.PlaySoundCommand.Execute(this.SoundData.TrackId);
