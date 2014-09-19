@@ -12,10 +12,5 @@ namespace XIMALAYA.PCDesktop.Modules.Settings.Views
         {
             InitializeComponent();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
     }
 }

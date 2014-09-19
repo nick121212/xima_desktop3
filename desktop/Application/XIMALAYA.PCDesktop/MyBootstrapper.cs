@@ -99,6 +99,7 @@ namespace XIMALAYA.PCDesktop
             base.AggregateCatalog.Catalogs.Add(new AssemblyCatalog("./XIMALAYA.PCDesktop.Tools.dll"));
             base.AggregateCatalog.Catalogs.Add(new AssemblyCatalog("./XIMALAYA.PCDesktop.Core.Data.dll"));
             base.AggregateCatalog.Catalogs.Add(new AssemblyCatalog("./XIMALAYA.PCDesktop.Core.Services.dll"));
+            base.AggregateCatalog.Catalogs.Add(new AssemblyCatalog("./XIMALAYA.PCDesktop.Tools.Setting.dll"));
             //base.AggregateCatalog.Catalogs.Add(new AssemblyCatalog("./XIMALAYA.PCDesktop.Core.ParamsModel.dll"));
 
             //this.Container.ComposeParts(this.AggregateCatalog.)

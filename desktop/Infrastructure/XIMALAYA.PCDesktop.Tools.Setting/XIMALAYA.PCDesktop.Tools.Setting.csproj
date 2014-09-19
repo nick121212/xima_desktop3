@@ -44,6 +44,7 @@
     </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -72,6 +73,7 @@
   <ItemGroup>
     <Compile Include="AppearanceSetting.cs" />
     <Compile Include="BaseSetting.cs" />
+    <Compile Include="CommonSetting.cs" />
     <Compile Include="HotKeySetting.cs" />
     <Compile Include="JumpListSetting.cs" />
     <Compile Include="PlayerSetting.cs" />

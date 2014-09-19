@@ -11,6 +11,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 using System.Windows.Shell;
 using System.Windows.Threading;
@@ -43,6 +44,21 @@ namespace XIMALAYA.PCDesktop
         /// <returns></returns>
         [DllImport("kernel32.dll")]
         public static extern bool SetProcessWorkingSetSize(IntPtr proc, int min, int max);
+        /// <summary>
+        /// 窗体在最前端
+        /// </summary>
+        /// <param name="hWnd"></param>
+        /// <param name="hWndInsertAfter"></param>
+        /// <param name="X"></param>
+        /// <param name="Y"></param>
+        /// <param name="cx"></param>
+        /// <param name="cy"></param>
+        /// <param name="uFlags"></param>
+        /// <returns></returns>
+        [DllImport("user32.dll")]
+        private static extern int SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, int uFlags);
+        static readonly IntPtr HWND_TOPMOST = new IntPtr(-1);
+        const int SWP_SHOWWINDOW = 0x0040;
 
         #endregion
 
@@ -177,6 +193,10 @@ namespace XIMALAYA.PCDesktop
             this.NotifyIcon = notifyIcon;
             this.ClearMemeory();
             this.CheckArgQueue();
+
+            IntPtr handle = new WindowInteropHelper(mainWindow).Handle;
+
+            SetWindowPos(handle, HWND_TOPMOST, (int)mainWindow.Left, (int)mainWindow.Top, (int)mainWindow.Width, (int)mainWindow.Height, SWP_SHOWWINDOW); 
         }
         private void CheckArgQueue()
         {

@@ -8,6 +8,7 @@ using DigitalIdeaSolutions.Collections.Generic;
 using Microsoft.Isam.Esent.Collections.Generic;
 using XIMALAYA.PCDesktop.Tools.HotKey;
 using XIMALAYA.PCDesktop.Tools.MyType;
+using XIMALAYA.PCDesktop.Untils;
 
 namespace XIMALAYA.PCDesktop.Tools.Setting
 {
@@ -42,10 +43,39 @@ namespace XIMALAYA.PCDesktop.Tools.Setting
         }
         public override void Init()
         {
+            Type type = typeof(HotKeySetting);
+
+            if (this.Dictionary.ContainsKey(type.Name))
+            {
+                try
+                {
+                    string val = this.Dictionary[type.Name];
+
+                    var HotKey = XmlUtil.Deserialize(type, val) as HotKeySetting;
+                    this.SetData(this, HotKey);
+                }
+                catch
+                {
+                    this.Dictionary.Remove(type.Name);
+                }
+            }
             foreach (var val in this.Keys)
             {
                 HotKeysManagerSingleton.Instance.AddKey(val.Key, val.Value);
             }
+        }
+
+        public override void Save()
+        {
+            Type type = typeof(HotKeySetting);
+
+            try
+            {
+                string val = XmlUtil.Serializer(type, this);
+
+                this.Dictionary[type.Name] = val;
+            }
+            catch { }
         }
     }
 }

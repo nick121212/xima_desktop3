@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO.MemoryMappedFiles;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Microsoft.Practices.Prism.ViewModel;
@@ -24,6 +20,9 @@ namespace XIMALAYA.PCDesktop.Tools
         private bool _IsWindowShow = true;
         private bool _IsSettingFlyoutShow = false;
         private bool _IsShowListView;
+        private bool _IsAutoStart;
+        private bool _IsActualExit;
+        private bool _IsExitConfirm;
 
         #endregion
 
@@ -160,8 +159,69 @@ namespace XIMALAYA.PCDesktop.Tools
         /// 内存映射文件的文件名
         /// </summary>
         public string MappingFileID { get; set; }
+        /// <summary>
+        /// 内存映射文件的文件
+        /// </summary>
         public MemoryMappedFile MemoryMappedFile { get; set; }
-
+        /// <summary>
+        /// 开机自动启动
+        /// </summary>
+        public bool IsAutoStart
+        {
+            get
+            {
+                return _IsAutoStart;
+            }
+            set
+            {
+                if (value != _IsAutoStart)
+                {
+                    _IsAutoStart = value;
+                    this.RaisePropertyChanged(() => this.IsAutoStart);
+                }
+            }
+        }
+        /// <summary>
+        /// 关闭是否最小化
+        /// </summary>
+        public bool IsActualExit
+        {
+            get
+            {
+                return _IsActualExit;
+            }
+            set
+            {
+                if (value != _IsActualExit)
+                {
+                    _IsActualExit = value;
+                    this.RaisePropertyChanged(() => this.IsActualExit);
+                }
+            }
+        }
+        /// <summary>
+        /// 退出时是否确认
+        /// </summary>
+        public bool IsExitConfirm
+        {
+            get
+            {
+                return _IsExitConfirm;
+            }
+            set
+            {
+                if (value != _IsExitConfirm)
+                {
+                    _IsExitConfirm = value;
+                    this.RaisePropertyChanged(() => this.IsExitConfirm);
+                }
+            }
+        }
+        /// <summary>
+        /// 是否执行退出命令
+        /// </summary>
+        public bool IsExit { get; set; }
+        
         #endregion
 
         #region 构造

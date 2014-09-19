@@ -7,6 +7,7 @@ using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Regions;
+using Microsoft.Practices.ServiceLocation;
 using XIMALAYA.PCDesktop.Tools;
 using XIMALAYA.PCDesktop.Tools.Setting;
 using XIMALAYA.PCDesktop.Untils;
@@ -21,6 +22,11 @@ namespace XIMALAYA.PCDesktop
     {
         #region 属性
 
+        /// <summary>
+        /// MEF服务
+        /// </summary>
+        [Import]
+        protected IServiceLocator Container { get; set; }
         /// <summary>
         /// 容器管理器
         /// </summary>
@@ -56,6 +62,7 @@ namespace XIMALAYA.PCDesktop
             InitializeComponent();
 
             this.Loaded += Shell_Loaded;
+            this.Closing += Shell_Closing;
             this.Closed += Shell_Closed;
         }
 
@@ -65,7 +72,7 @@ namespace XIMALAYA.PCDesktop
 
         void Shell_Loaded(object sender, RoutedEventArgs e)
         {
-            XMSetting set = XMSetting.Instance;
+            this.Container.GetInstance(typeof(XMSetting));
             RegionManager.SetRegionManager(this.settingFlyout, this.regionManager);
             //定时清理内存
             this.ViewModel.Init(NotifyIcon, this);
@@ -75,6 +82,15 @@ namespace XIMALAYA.PCDesktop
         void Shell_StateChanged(object sender, EventArgs e)
         {
             GlobalDataSingleton.Instance.IsWindowShow = this.WindowState != System.Windows.WindowState.Minimized;
+            if (GlobalDataSingleton.Instance.IsWindowShow)
+            {
+                this.Show();
+                this.Activate();
+            }
+            else
+            {
+                this.Hide();
+            }
         }
 
         void Shell_Closed(object sender, EventArgs e)
@@ -84,23 +100,35 @@ namespace XIMALAYA.PCDesktop
 
         async void Shell_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            e.Cancel = !this.ViewModel.IsShutDown;
-            var mySettings = new MetroDialogSettings()
+            if (!GlobalDataSingleton.Instance.IsActualExit && !GlobalDataSingleton.Instance.IsExit)
             {
-                AffirmativeButtonText = "退出",
-                NegativeButtonText = "取消",
-                AnimateShow = true,
-                AnimateHide = false
-            };
+                e.Cancel = true;
+                this.WindowState = System.Windows.WindowState.Minimized;
+                this.Hide();
+                return;
+            }
 
-            var result = await this.ShowMessageAsync("喜马拉雅?",
-                "确定要退出喜马拉雅?",
-                MessageDialogStyle.AffirmativeAndNegative, mySettings);
-
-            if (this.ViewModel.IsShutDown = result == MessageDialogResult.Affirmative)
+            if (GlobalDataSingleton.Instance.IsExitConfirm)
             {
-                Application.Current.ShutdownMode = ShutdownMode.OnLastWindowClose;
-                Application.Current.Shutdown();
+                e.Cancel = GlobalDataSingleton.Instance.IsExitConfirm;
+                var mySettings = new MetroDialogSettings()
+                {
+                    AffirmativeButtonText = "退出",
+                    NegativeButtonText = "取消",
+                    AnimateShow = true,
+                    AnimateHide = false
+                };
+
+                var result = await this.ShowMessageAsync("喜马拉雅?",
+                    "确定要退出喜马拉雅?",
+                    MessageDialogStyle.AffirmativeAndNegative, mySettings);
+
+                if (result == MessageDialogResult.Affirmative)
+                {
+                    Application.Current.ShutdownMode = ShutdownMode.OnLastWindowClose;
+                    Application.Current.Shutdown();
+                }
+                return;
             }
         }
 

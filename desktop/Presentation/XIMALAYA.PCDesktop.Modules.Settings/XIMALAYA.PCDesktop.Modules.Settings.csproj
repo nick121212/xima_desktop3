@@ -88,6 +88,9 @@
     <Compile Include="Views\AppearanceView.xaml.cs">
       <DependentUpon>AppearanceView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CommonView.xaml.cs">
+      <DependentUpon>CommonView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\HotKeyView.xaml.cs">
       <DependentUpon>HotKeyView.xaml</DependentUpon>
     </Compile>
@@ -97,6 +100,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\AppearanceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CommonView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

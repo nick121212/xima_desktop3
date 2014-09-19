@@ -10,7 +10,7 @@
 		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Styles/ListBoxItem.Common.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 
-	<!--标签下的专辑列表 start-->
+	<!--快捷键列表 start-->
 
 	<DataTemplate x:Key="HotKeysTemplate" DataType="{x:Type ListBoxItem}">
 		<MControls:HotKeyTextbox CommandKey="{Binding Value}" 
@@ -24,7 +24,26 @@
 	<Style x:Key="HotKeysStyle" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource ListItemBaseTemp}">
 		<Setter Property="ContentTemplate" Value="{StaticResource HotKeysTemplate}"/>
 	</Style>
-	
-	<!--默认专辑列表样式 end-->
+
+	<!--快捷键列表 end-->
+
+	<!--界面色值风格 start-->
+
+	<DataTemplate x:Key="UIStyleTemplate" DataType="{x:Type ListBoxItem}">
+		<Rectangle Width="100" 
+				   Height="100" 
+				   HorizontalAlignment="Center"
+				   VerticalAlignment="Center"
+                   Stroke="{Binding BorderColorBrush}" 
+                   Fill="{Binding ColorBrush}">
+		</Rectangle>
+	</DataTemplate>
+
+	<Style x:Key="UIStyle" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource ListItemBaseTemp}">
+		<Setter Property="ContentTemplate" Value="{StaticResource UIStyleTemplate}"/>
+		<Setter Property="Focusable" Value="True"/>
+	</Style>
+
+	<!--界面色值风格 end-->
 
 </ResourceDictionary>

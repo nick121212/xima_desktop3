@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,188 +16,37 @@ namespace XIMALAYA.PCDesktop.Tools.Setting
     /// <summary>
     /// 设置类
     /// </summary>
-    public class XMSetting : Singleton<XMSetting>, IDisposable
+    [Export, PartCreationPolicy(CreationPolicy.Shared)]
+    public class XMSetting1 : IDisposable
     {
         const string DataPath = "datas/settings";
-        private PersistentDictionary<string, string> Dictionary { get; set; }
-        /// <summary>
-        /// 播放器相关设置
-        /// </summary>
-        public PlayerSetting Player { get; private set; }
-        /// <summary>
-        /// 热键相关设置
-        /// </summary>
-        public HotKeySetting HotKey { get; private set; }
-        /// <summary>
-        /// 外观相关设置
-        /// </summary>
-        public AppearanceSetting Appearance { get; private set; }
-        /// <summary>
-        /// jumplist列表
-        /// </summary>
-        public JumpListSetting Jumplist { get; private set; }
+        [Export("Dictionary")]
+        public PersistentDictionary<string, string> Dictionary { get; set; }
+        [ImportMany]
+        public IEnumerable<BaseSetting> Settings { get; set; }
 
-        private XMSetting()
+        public XMSetting1()
         {
             this.Dictionary = new PersistentDictionary<string, string>(DataPath);
-
-            this.InitPlayerSetting();
-            this.InitHotKeySetting();
-            this.InitAppearanceSetting();
-            this.InitJumpListSetting();
         }
 
-        private void InitJumpListSetting()
+        public void Init()
         {
-            Type type = typeof(JumpListSetting);
-
-            if (this.Dictionary.ContainsKey(type.Name))
+            if (this.Settings != null)
             {
-                try
+                foreach (var setting in this.Settings)
                 {
-                    string val = this.Dictionary[type.Name];
-
-                    this.Jumplist = XmlUtil.Deserialize(type, val) as JumpListSetting;
-                }
-                catch
-                {
-                    this.Dictionary.Remove(type.Name);
+                    setting.Init();
                 }
             }
-            if (this.Jumplist == null)
-            {
-                this.Jumplist = new JumpListSetting();
-            }
-            this.Jumplist.Init();
         }
-        private void InitHotKeySetting()
-        {
-            Type type = typeof(HotKeySetting);
 
-            if (this.Dictionary.ContainsKey(type.Name))
-            {
-                try
-                {
-                    string val = this.Dictionary[type.Name];
-
-                    this.HotKey = XmlUtil.Deserialize(type, val) as HotKeySetting;
-                }
-                catch
-                {
-                    this.Dictionary.Remove(type.Name);
-                }
-            }
-
-            if (this.HotKey == null)
-            {
-                this.HotKey = new HotKeySetting();
-            }
-            this.HotKey.Init();
-        }
-        private void InitAppearanceSetting()
-        {
-            Type type = typeof(AppearanceSetting);
-
-            if (this.Dictionary.ContainsKey(type.Name))
-            {
-                try
-                {
-                    string val = this.Dictionary[type.Name];
-
-                    this.Appearance = XmlUtil.Deserialize(type, val) as AppearanceSetting;
-                }
-                catch
-                {
-                    this.Dictionary.Remove(type.Name);
-                }
-            }
-
-            if (this.Appearance == null)
-            {
-                this.Appearance = new AppearanceSetting();
-            }
-            this.Appearance.Init();
-        }
-        private void InitPlayerSetting()
-        {
-            Type type = typeof(PlayerSetting);
-
-            if (this.Dictionary.ContainsKey(type.Name))
-            {
-                try
-                {
-                    string val = this.Dictionary[type.Name];
-
-                    this.Player = XmlUtil.Deserialize(type, val) as PlayerSetting;
-                }
-                catch
-                {
-                    this.Dictionary.Remove(type.Name);
-                }
-            }
-
-            if (this.Player == null)
-            {
-                this.Player = new PlayerSetting();
-            }
-            this.Player.Init();
-        }
-        private void SavePlayerSetting()
-        {
-            Type type = typeof(PlayerSetting);
-
-            try
-            {
-                string val = XmlUtil.Serializer(type, this.Player);
-
-                this.Dictionary[type.Name] = val;
-            }
-            catch { }
-
-        }
-        private void SaveAppearanceSetting()
-        {
-            Type type = typeof(AppearanceSetting);
-
-            try
-            {
-                string val = XmlUtil.Serializer(type, this.Appearance);
-
-                this.Dictionary[type.Name] = val;
-            }
-            catch { }
-        }
-        private void SaveHotKeySetting()
-        {
-            Type type = typeof(HotKeySetting);
-
-            try
-            {
-                string val = XmlUtil.Serializer(type, this.HotKey);
-
-                this.Dictionary[type.Name] = val;
-            }
-            catch { }
-        }
-        private void SaveJumpListSetting()
-        {
-            Type type = typeof(JumpListSetting);
-
-            try
-            {
-                this.Jumplist.JumpItemList = this.Jumplist.Jumplist.JumpItems;
-                string val = XmlUtil.Serializer(type, this.Jumplist);
-
-                this.Dictionary[type.Name] = val;
-            }
-            catch { }
-        }
         public void Save()
         {
-            this.SaveHotKeySetting();
-            this.SaveAppearanceSetting();
-            this.SavePlayerSetting();
-            this.SaveJumpListSetting();
+            foreach (var setting in this.Settings)
+            {
+                setting.Save();
+            }
         }
 
         #region IDisposable 成员
@@ -204,12 +54,30 @@ namespace XIMALAYA.PCDesktop.Tools.Setting
         public void Dispose()
         {
             this.Save();
+            this.Dictionary.Dispose();
             this.Dictionary = null;
-            this.Player = null;
-            this.HotKey = null;
-            this.Appearance = null;
         }
 
         #endregion
+    }
+
+    [Export]
+    public sealed class XMSetting
+    {
+        private static XMSetting1 _instance;
+
+        public static XMSetting1 Instance
+        {
+            get
+            {
+                return _instance;
+            }
+        }
+        [ImportingConstructor]
+        private XMSetting(XMSetting1 instance)
+        {
+            _instance = instance;
+            _instance.Init();
+        }
     }
 }

@@ -49,6 +49,7 @@
 										  Height="40"
 										  BorderType="None"
 										  IsThreeState="True"
+										  IsSingle="True"
 										  Command="{Binding BassEngine.PlayCommand,Source={x:Static tools:GlobalDataSingleton.Instance}}"
 										  CommandParameter="{Binding Source={RelativeSource Self},Path=IsChecked}"
 										  Foreground="{DynamicResource GrayBrush6}"

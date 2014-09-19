@@ -16,6 +16,9 @@
 		</Grid.RowDefinitions>
 		<Controls:MetroAnimatedSingleRowTabControl TabStripPlacement="Top"
 												   Width="{Binding ActualWidth ,RelativeSource={RelativeSource AncestorType=Controls:MetroWindow}}">
+			<TabItem Header="常规设置">
+				<local:CommonView DataContext="{Binding}"/>
+			</TabItem>
 			<TabItem Header="外观设置">
 				<local:AppearanceView DataContext="{Binding}"/>
 			</TabItem>

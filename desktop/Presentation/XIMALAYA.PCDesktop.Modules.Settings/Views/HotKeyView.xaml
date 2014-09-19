@@ -4,11 +4,11 @@
 			 xmlns:MControls="http://ximalaya.com/xaml/controls"
 			 xmlns:tools="http://ximalaya.com/xaml/tools">
 	
-	<!--<UserControl.Resources>
+	<UserControl.Resources>
 		<ResourceDictionary Source="pack://application:,,,/XIMALAYA.PCDesktop.Controls;component/Themes/Generic.xaml" />
-	</UserControl.Resources>-->
+	</UserControl.Resources>
 	
-	<StackPanel>
+	<StackPanel HorizontalAlignment="Left">
 		<!--快捷键列表-->
 		<ListBox x:Name="list"
 				 Background="Transparent"

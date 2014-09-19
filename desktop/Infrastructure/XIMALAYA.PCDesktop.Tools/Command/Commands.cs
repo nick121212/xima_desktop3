@@ -324,7 +324,13 @@ namespace XIMALAYA.PCDesktop.Tools
                 var parentWindow = Application.Current.MainWindow;
                 if (parentWindow == null)
                     return;
-
+                GlobalDataSingleton.Instance.IsExit = true;
+                parentWindow.Show();
+                parentWindow.Activate();
+                if (parentWindow.WindowState == WindowState.Minimized)
+                {
+                    parentWindow.WindowState = WindowState.Normal;
+                }
                 parentWindow.Close();
             });
             //最小化命令
@@ -339,9 +345,12 @@ namespace XIMALAYA.PCDesktop.Tools
                     if (parentWindow.WindowState == WindowState.Normal)
                     {
                         parentWindow.WindowState = WindowState.Minimized;
+                        parentWindow.Hide();
                     }
                     else
                     {
+                        parentWindow.Show();
+                        parentWindow.Activate();
                         parentWindow.WindowState = WindowState.Normal;
                     }
                 }));
@@ -355,10 +364,13 @@ namespace XIMALAYA.PCDesktop.Tools
 
                 if (parentWindow.WindowState == WindowState.Normal)
                 {
+                    parentWindow.Show();
+                    parentWindow.Activate();
                     SystemCommands.MaximizeWindow(parentWindow);
                 }
                 else
                 {
+                    parentWindow.Show();
                     SystemCommands.RestoreWindow(parentWindow);
                 }
             });
