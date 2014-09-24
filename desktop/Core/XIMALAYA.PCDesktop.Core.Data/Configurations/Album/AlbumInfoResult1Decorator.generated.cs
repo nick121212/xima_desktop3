@@ -44,7 +44,7 @@ namespace XIMALAYA.PCDesktop.Core.Data
                                     .Field<System.Int32>(field => field.Ret, type => type.To("ret"))
                     .Field<System.String>(field => field.Message, type => type.To("msg"))
                     .Field<System.Int32>(field => field.MaxPageId, type => type.To("maxPageId"))
-                    .Field<System.Int32>(field => field.Count, type => type.To("count"))
+                    .Field<System.Int32>(field => field.TotalCount, type => type.To("totalCount"))
                     .Field<XIMALAYA.PCDesktop.Core.Models.Album.AlbumData[]>(field => field.List, type => type.To("list"))
             );
             this.doAddOtherConfig();

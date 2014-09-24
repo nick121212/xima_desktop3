@@ -14,6 +14,4 @@ namespace XIMALAYA.PCDesktop.Common.Events
     }
 
     public class UserEvent<T> : CompositePresentationEvent<T> { }
-    public class UserMinEvent : UserEvent<UserEventArgument> { }
-
 }

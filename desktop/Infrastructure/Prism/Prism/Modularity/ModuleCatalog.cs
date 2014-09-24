@@ -478,7 +478,6 @@ namespace Microsoft.Practices.Prism.Modularity
         {
             SolveDependencies(this.Modules);
         }
-
         /// <summary>
         /// Ensures that there are no dependencies between modules on different groups.
         /// </summary>

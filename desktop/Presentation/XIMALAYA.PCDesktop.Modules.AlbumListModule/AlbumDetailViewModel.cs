@@ -109,7 +109,7 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumModule
                     if (albumInfo.Ret == 0)
                     {
                         this.AlbumData = albumInfo.Album;
-                        this.EventAggregator.GetEvent<UserMinEvent>().Publish(new UserEventArgument
+                        this.EventAggregator.GetEvent<UserEvent<UserEventArgument>>().Publish(new UserEventArgument
                         {
                             RegionName = this.RegionName,
                             UID = this.AlbumData.Uid

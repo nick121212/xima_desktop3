@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\build\</OutputPath>
+    <OutputPath>..\..\build\modules\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -24,7 +24,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\release\modules\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -32,21 +32,27 @@
   <ItemGroup>
     <Reference Include="MahApps.Metro">
       <HintPath>..\..\build\MahApps.Metro.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="MahApps.Metro.Resources">
       <HintPath>..\..\build\MahApps.Metro.Resources.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.Practices.Prism">
       <HintPath>..\..\build\Microsoft.Practices.Prism.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.Practices.Prism.Interactivity">
       <HintPath>..\..\build\Microsoft.Practices.Prism.Interactivity.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.Practices.Prism.MefExtensions">
       <HintPath>..\..\build\Microsoft.Practices.Prism.MefExtensions.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\..\build\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -58,6 +64,7 @@
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\System.Windows.Interactivity.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -69,43 +76,60 @@
     <Reference Include="XIMALAYA.PCDesktop.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\XIMALAYA.PCDesktop.Common.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="XIMALAYA.PCDesktop.Controls">
       <HintPath>..\..\build\XIMALAYA.PCDesktop.Controls.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="XIMALAYA.PCDesktop.Core.Data">
       <HintPath>..\..\build\XIMALAYA.PCDesktop.Core.Data.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="XIMALAYA.PCDesktop.Core.Models">
       <HintPath>..\..\build\XIMALAYA.PCDesktop.Core.Models.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="XIMALAYA.PCDesktop.Core.ParamsModel">
       <HintPath>..\..\build\XIMALAYA.PCDesktop.Core.ParamsModel.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="XIMALAYA.PCDesktop.Core.Services">
       <HintPath>..\..\build\XIMALAYA.PCDesktop.Core.Services.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="XIMALAYA.PCDesktop.Tools">
       <HintPath>..\..\build\XIMALAYA.PCDesktop.Tools.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="XIMALAYA.PCDesktop.Tools.Player">
       <HintPath>..\..\build\XIMALAYA.PCDesktop.Tools.Player.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="XIMALAYA.PCDesktop.Untils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\XIMALAYA.PCDesktop.Untils.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UserViewModel.cs" />
     <Compile Include="UserModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserViewModel.cs" />
+    <Compile Include="UserMinViewModel.cs" />
     <Compile Include="Views\UserMinView.xaml.cs">
       <DependentUpon>UserMinView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserView.xaml.cs">
+      <DependentUpon>UserView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\UserMinView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

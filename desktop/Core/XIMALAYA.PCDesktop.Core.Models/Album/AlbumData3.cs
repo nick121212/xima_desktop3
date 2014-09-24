@@ -14,10 +14,11 @@ namespace XIMALAYA.PCDesktop.Core.Models.Album
         public AlbumData3()
             : base()
         {
-            this.doAddMap(() => this.AlbumCoverUrl140, "coverLarge");
+            //this.doAddMap(() => this.AlbumCoverUrl140, "coverLarge");
             this.doAddMap(() => this.AlbumCoverUrl290, "coverWebLarge");
             this.doAddMap(() => this.AlbumCoverUrl640, "coverOrigin");
             this.doAddMap(() => this.AlbumCoverUrl86, "coverSmall");
+            this.doAddMap(() => this.CoverPath, "coverLarge");
             this.doAddMap(() => this.AlbumID, "albumId");
             this.doAddMap(() => this.AvatarPath, "avatarPath");
             this.doAddMap(() => this.CategoryID, "categoryId");

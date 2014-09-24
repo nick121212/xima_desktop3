@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Package
+  xmlns="http://schemas.microsoft.com/developer/2004/01/bootstrapper"
+  Name="DisplayName"
+  Culture="Culture"
+>
+<Strings>
+      <String Name="DisplayName">Ximalaya Certificate Insteraller</String>
+ </Strings>
+</Package>

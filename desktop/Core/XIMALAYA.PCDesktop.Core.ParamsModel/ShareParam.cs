@@ -23,6 +23,11 @@ namespace XIMALAYA.PCDesktop.Core.ParamsModel
         [DataMember(Name = "albumId", IsRequired = false)]
         public long AlbumId { get; set; }
         /// <summary>
+        /// uid
+        /// </summary>
+        [DataMember(Name = "shareUid", IsRequired = false)]
+        public long ShareUid { get; set; }
+        /// <summary>
         /// 分享到的平台
         /// </summary>
         [DataMember(Name = "tpName", IsRequired = true)]

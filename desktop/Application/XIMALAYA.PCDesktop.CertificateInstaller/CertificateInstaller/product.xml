@@ -1,0 +1,24 @@
+﻿Product.xml 
+
+Code highlighting produced by Actipro CodeHighlighter (freeware)http://www.CodeHighlighter.com/--><?xml version="1.0" encoding="utf-8" ?>
+<Product
+  xmlns="http://schemas.microsoft.com/developer/2004/01/bootstrapper"
+  ProductCode="CertificateInsteraller"
+>
+    <PackageFiles CopyAllPackageFiles="true">
+        <PackageFile Name="CertificateInstaller.exe" />
+    </PackageFiles>
+
+    <Commands Reboot="Immediate">
+        <Command PackageFile="CertificateInstaller.exe"
+                 Arguments= 'http://XXX/xxx.cer' 
+                 EstimatedInstallSeconds="30" >
+            <ExitCodes>
+                <ExitCode Value="0" Result="Success"/>
+                <ExitCode Value="1641" Result="SuccessReboot"/>
+                <ExitCode Value="3010" Result="SuccessReboot"/>
+                <DefaultExitCode Result="Fail" FormatMessageFromSystem="true" String="GeneralFailure" />
+            </ExitCodes>
+        </Command>
+    </Commands>
+</Product>

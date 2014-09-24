@@ -89,7 +89,7 @@ namespace XIMALAYA.PCDesktop
             }
             else
             {
-                this.Hide();
+                //this.Hide();
             }
         }
 
@@ -105,6 +105,7 @@ namespace XIMALAYA.PCDesktop
                 e.Cancel = true;
                 this.WindowState = System.Windows.WindowState.Minimized;
                 this.Hide();
+                this.NotifyIcon.ShowBalloonTip(this.ViewModel.WindowTitle, "程序在后台已运行！", Hardcodet.Wpf.TaskbarNotification.BalloonIcon.Info);
                 return;
             }
 

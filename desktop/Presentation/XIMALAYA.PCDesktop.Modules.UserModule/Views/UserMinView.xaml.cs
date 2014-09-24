@@ -20,10 +20,10 @@ namespace XIMALAYA.PCDesktop.Modules.UserModule.Views
             this.ViewModel = null;
         }
         [Import]
-        public UserViewModel ViewModel {
+        public UserMinViewModel ViewModel {
             get
             {
-                return this.DataContext as UserViewModel;
+                return this.DataContext as UserMinViewModel;
             }
             set
             {

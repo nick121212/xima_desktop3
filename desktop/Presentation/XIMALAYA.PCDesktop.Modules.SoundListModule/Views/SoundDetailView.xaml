@@ -117,7 +117,7 @@
 				<!--分享-->
 				<Label Margin="5 0"
 				       Height="30"
-				       Width="200"
+				       Width="220"
 					   HorizontalAlignment="Left"
 					   Grid.Row="4"
 					   Template="{StaticResource ShareBtns}">

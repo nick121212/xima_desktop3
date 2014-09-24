@@ -80,10 +80,10 @@
 			</MControls:MyImage>
 			<!--加V标识-->
 			<StackPanel Grid.Column="2"
-					Grid.Row="0"
-					Orientation="Horizontal">
+						Grid.Row="0"
+						Orientation="Horizontal">
 				<Label Content="{Binding NickName}"
-				   FontSize="16"/>
+					   FontSize="16"/>
 				<MControls:MyToggleButton IsEnabled="False"
 									  IsChecked="{Binding IsVerified}"
 								      Foreground="{DynamicResource BlackBrush}"
@@ -95,18 +95,30 @@
 				</MControls:MyToggleButton>
 
 			</StackPanel>
-			<!--他人操作-->
-			<StackPanel Grid.Column="2"
-					Grid.Row="1"
-					Orientation="Horizontal">
-				<Label Content="主页"/>
+			<!--分享-->
+			<Label Grid.Column="2"
+				   Grid.Row="1"
+				   Margin="5 0"
+				   Height="30"
+				   Width="220"
+				   HorizontalAlignment="Left"
+				   Template="{StaticResource ShareUserBtns}">
+				<!--<Label.DataContext>
+					<Binding Path="UserData"/>
+				</Label.DataContext>-->
+			</Label>
+			<!--<Label Grid.Column="2"
+				   Grid.Row="1">
+				
+				--><!--<Label Content="{Binding a}" />-->
+				<!--<Label Content="主页"/>
 				<Label Content="声音"/>
 				<Label Content="专辑"/>
 				<Label Content="赞过的"/>
 				<Label Content="关注"/>
 				<Label Content="粉丝"/>
-				<Label Content="听过"/>
-			</StackPanel>
+				<Label Content="听过"/>--><!--
+			</Label>-->
 		</Grid>
 	</Border>
 </UserControl>

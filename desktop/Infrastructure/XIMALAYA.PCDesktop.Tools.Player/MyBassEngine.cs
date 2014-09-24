@@ -646,10 +646,12 @@ namespace XIMALAYA.PCDesktop.Tools.Player
 
             //判断当前系统是32位系统还是64位系统，并加载对应版本的bass.dll
             string targetPath;
+            string workDirectory = Directory.GetCurrentDirectory();
+
             if (Un4seen.Bass.Utils.Is64Bit)
-                targetPath = Path.Combine(Path.GetDirectoryName(typeof(BassEngine).Assembly.GetModules()[0].FullyQualifiedName), "x64");
+                targetPath = Path.Combine(workDirectory, "x64");
             else
-                targetPath = Path.Combine(Path.GetDirectoryName(typeof(BassEngine).Assembly.GetModules()[0].FullyQualifiedName), "x86");
+                targetPath = Path.Combine(workDirectory, "x86");
 
             // now load all libs manually
             Un4seen.Bass.Bass.LoadMe(targetPath);

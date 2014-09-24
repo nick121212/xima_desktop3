@@ -78,6 +78,11 @@ namespace XIMALAYA.PCDesktop.Untils
         public const string ShareAlbumInfo = WebPath + "/mobile/album/share/content";
 
         /// <summary>
+        /// 单个用户分享界面内容
+        /// </summary>
+        public const string ShareUserInfo = WebPath + "/mobile/user/share/content";
+
+        /// <summary>
         /// 单个用户的详细信息
         /// </summary>
         public const string UserDetailInfo = WebPath + "/mobile/others/homePage";
@@ -86,5 +91,10 @@ namespace XIMALAYA.PCDesktop.Untils
         /// 喜欢声音的用户列表
         /// </summary>
         public const string LikedSoundUsers = WebPath + "/mobile/track/lovers";
+
+        /// <summary>
+        /// 他人专辑列表
+        /// </summary>
+        public const string UserAlbums = WebPath + "/mobile/others/album";
     }
 }

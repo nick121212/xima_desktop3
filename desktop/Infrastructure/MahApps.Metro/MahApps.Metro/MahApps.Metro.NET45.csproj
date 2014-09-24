@@ -49,12 +49,12 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\NET45\</OutputPath>
+    <OutputPath>..\..\..\release\</OutputPath>
     <IntermediateOutputPath>obj\NET45\Release\</IntermediateOutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\NET45\MahApps.Metro.XML</DocumentationFile>
+    <DocumentationFile>..\..\..\release\MahApps.Metro.XML</DocumentationFile>
     <NoWarn>1572,1573,1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition="'$(StrongName)'=='True'">

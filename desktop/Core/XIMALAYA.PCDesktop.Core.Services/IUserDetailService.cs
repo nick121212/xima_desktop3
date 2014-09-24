@@ -12,5 +12,9 @@ namespace XIMALAYA.PCDesktop.Core.Services
         /// 获取数据接口
         /// </summary>
         void GetData<T>(Action<object> act,T param);
+        /// <summary>
+        /// 获取他人专辑数据接口
+        /// </summary>
+        void GetAlbumsData<T>(Action<object> act, T param);
     }
 }

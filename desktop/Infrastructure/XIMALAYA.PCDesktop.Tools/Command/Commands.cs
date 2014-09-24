@@ -53,6 +53,10 @@ namespace XIMALAYA.PCDesktop.Tools
         /// </summary>
         public DelegateCommand<long?> AlbumDetailCommand { get; set; }
         /// <summary>
+        /// 用户详情页命令
+        /// </summary>
+        public DelegateCommand<long?> UserDetailCommand { get; set; }
+        /// <summary>
         /// 上一首命令
         /// </summary>
         public DelegateCommand PrevCommand { get; set; }
@@ -244,6 +248,13 @@ namespace XIMALAYA.PCDesktop.Tools
                     this.EventAggregator.GetEvent<SoundDetailEvent<long>>().Publish((long)trackId);
                 }
             });
+            this.UserDetailCommand = new DelegateCommand<long?>(userId =>
+            {
+                if (userId.HasValue)
+                {
+                    this.EventAggregator.GetEvent<UserEvent<long>>().Publish((long)userId);
+                }
+            });
             //内容切换的命令，现在有搜索和发现切换
             this.ShowContentCommand = new DelegateCommand<string>(s =>
             {
@@ -284,6 +295,9 @@ namespace XIMALAYA.PCDesktop.Tools
                             break;
                         case ShareType.Album:
                             this.GetShareAlbumLink((Sites)arr[0], (long)arr[2]);
+                            break;
+                        case ShareType.User:
+                            this.GetShareUserLink((Sites)arr[0], (long)arr[2]);
                             break;
                     }
                 }
@@ -345,7 +359,7 @@ namespace XIMALAYA.PCDesktop.Tools
                     if (parentWindow.WindowState == WindowState.Normal)
                     {
                         parentWindow.WindowState = WindowState.Minimized;
-                        parentWindow.Hide();
+                        //parentWindow.Hide();
                     }
                     else
                     {
@@ -385,6 +399,30 @@ namespace XIMALAYA.PCDesktop.Tools
 
         #region 方法
 
+        /// <summary>
+        /// 分享用户
+        /// </summary>
+        /// <param name="Site"></param>
+        /// <param name="uid"></param>
+        private void GetShareUserLink(Sites Site, long uid)
+        {
+            if (this.ShareService == null) return;
+            if (uid <= 0) return;
+
+            this.ShareService.GetData(res =>
+            {
+                var result = res as ShareResult;
+
+                if (result.Ret == 0)
+                {
+                    this.DoShare(Site, result.PicUrl, result.Content, result.Url);
+                }
+            }, new ShareParam
+            {
+                ShareUid = uid,
+                tpName = "qq"
+            }, TagType.user);
+        }
         /// <summary>
         /// 分享专辑
         /// </summary>

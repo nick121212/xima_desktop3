@@ -21,6 +21,8 @@
 					             Background="Transparent"
 								 GroupName="SearchAlbum"
 					             BorderThickness="0 0 0 1"
+								 Command="{Binding UserDetailCommand,Source={x:Static tools:CommandSingleton.Instance}}"
+								 CommandParameter="{Binding Uid}"
 								 CheckedBorderThickness="0 0 0 1"
 								 IsChecked="False"
 								 SuperScriptSize="0"

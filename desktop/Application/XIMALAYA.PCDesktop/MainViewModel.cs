@@ -14,6 +14,7 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 using System.Windows.Shell;
+using System.Deployment.Application;
 using System.Windows.Threading;
 using Hardcodet.Wpf.TaskbarNotification;
 using Microsoft.Practices.Prism.Events;
@@ -145,6 +146,15 @@ namespace XIMALAYA.PCDesktop
             this.EventAggregator = eventAggregator;
             this.WindowTitle = @"喜马拉雅-听我想听";
 
+            try
+            {
+                this.WindowTitle += ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
+            }
+            catch
+            {
+
+            }
+
             //订阅加载模块事件
             if (this.EventAggregator != null)
             {
@@ -157,7 +167,7 @@ namespace XIMALAYA.PCDesktop
                 //注册更换cover图事件
                 this.EventAggregator.GetEvent<ChangeCoverEvent>().Subscribe(cover =>
                 {
-                    DownloadImage(cover);
+                    //DownloadImage(cover);
                 });
                 //添加到跳转列表
                 this.EventAggregator.GetEvent<JumplistEvent<JumpListEventArgs>>().Subscribe(e =>
@@ -193,10 +203,6 @@ namespace XIMALAYA.PCDesktop
             this.NotifyIcon = notifyIcon;
             this.ClearMemeory();
             this.CheckArgQueue();
-
-            IntPtr handle = new WindowInteropHelper(mainWindow).Handle;
-
-            SetWindowPos(handle, HWND_TOPMOST, (int)mainWindow.Left, (int)mainWindow.Top, (int)mainWindow.Width, (int)mainWindow.Height, SWP_SHOWWINDOW); 
         }
         private void CheckArgQueue()
         {

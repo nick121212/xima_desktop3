@@ -15,11 +15,12 @@
                       Title="{Binding WindowTitle}" 
 					  ShowTitleBar="True"
                       MinHeight="850"
+					  Topmost="False"
                       MinWidth="1150"
                       Width="1150"
                       Height="850"
-					  Icon="ICO/icon_16.ico"
-                      WindowStartupLocation="CenterScreen">
+                      WindowStartupLocation="CenterScreen" 
+					  Icon="ico/icon_16.ico">
 	<Window.Resources>
 		<Style x:Key="CleanWindowStyle" TargetType="Controls:MetroWindow" BasedOn="{StaticResource CleanWindowStyleKey}" />
 		<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>

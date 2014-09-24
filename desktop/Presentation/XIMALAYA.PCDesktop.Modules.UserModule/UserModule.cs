@@ -19,10 +19,33 @@ namespace XIMALAYA.PCDesktop.Modules.UserModule
         /// </summary>
         public override void Initialize()
         {
-            //this.AddMinUserViewToRegion();
-            this.EventAggregator.GetEvent<UserMinEvent>().Subscribe(AddMinUserViewToRegion);
+            this.EventAggregator.GetEvent<UserEvent<UserEventArgument>>().Subscribe(AddMinUserViewToRegion);
+            this.EventAggregator.GetEvent<UserEvent<long>>().Subscribe(AddUserViewToRegion);
         }
+        /// <summary>
+        /// 普通用户视图
+        /// </summary>
+        /// <param name="obj"></param>
+        private void AddUserViewToRegion(long uid)
+        {
+            var view = this.Container.GetInstance<UserView>();
+            string regionName = this.ContainerView.GetFlyout(string.Empty);
 
+            if (view != null)
+            {
+                if (this.RegionManager.Regions.ContainsRegionWithName(regionName))
+                {
+                    var region = this.RegionManager.Regions[regionName];
+
+                    view.ViewModel.Initialize(uid);
+                    region.Add(view);
+                }
+            }
+        }
+        /// <summary>
+        /// 小用户视图
+        /// </summary>
+        /// <param name="e"></param>
         private void AddMinUserViewToRegion(UserEventArgument e)
         {
             if (this.RegionManager.Regions.ContainsRegionWithName(e.RegionName))
@@ -34,14 +57,13 @@ namespace XIMALAYA.PCDesktop.Modules.UserModule
                 region.Add(view);
             }
         }
-
         /// <summary>
         /// 销毁
         /// </summary>
         public override void Dispose()
         {
             base.Dispose();
-            this.EventAggregator.GetEvent<UserMinEvent>().Unsubscribe(AddMinUserViewToRegion);
+            this.EventAggregator.GetEvent<UserEvent<UserEventArgument>>().Unsubscribe(AddMinUserViewToRegion);
         }
     }
 }

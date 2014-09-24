@@ -42,10 +42,10 @@ namespace XIMALAYA.PCDesktop.Core.Data
             base.doAddConfig();
             this.Config.MapType<AlbumData>(map => map
                                     .Field<System.Int64>(field => field.AlbumID, type => type.To("albumId"))
-                    .Field<System.String>(field => field.AlbumCoverUrl140, type => type.To("coverLarge"))
                     .Field<System.String>(field => field.AlbumCoverUrl290, type => type.To("coverWebLarge"))
                     .Field<System.String>(field => field.AlbumCoverUrl640, type => type.To("coverOrigin"))
                     .Field<System.String>(field => field.AlbumCoverUrl86, type => type.To("coverSmall"))
+                    .Field<System.String>(field => field.CoverPath, type => type.To("coverLarge"))
                     .Field<System.String>(field => field.AvatarPath, type => type.To("avatarPath"))
                     .Field<System.Int64>(field => field.CategoryID, type => type.To("categoryId"))
                     .Field<System.Int64>(field => field.CreateDate, type => type.To("createdAt"))

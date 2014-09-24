@@ -1,5 +1,11 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel.Composition;
+using System.Windows;
+using System.Windows.Threading;
 using XIMALAYA.PCDesktop.Common;
+using XIMALAYA.PCDesktop.Common.Events;
+using XIMALAYA.PCDesktop.Core.Models.Album;
 using XIMALAYA.PCDesktop.Core.Models.User;
 using XIMALAYA.PCDesktop.Core.ParamsModel;
 using XIMALAYA.PCDesktop.Core.Services;
@@ -12,37 +18,16 @@ namespace XIMALAYA.PCDesktop.Modules.UserModule
     [Export, PartCreationPolicy(CreationPolicy.NonShared)]
     public class UserViewModel : BaseViewModel
     {
-        #region 字段
-
-        private UserData _UserData;
-
-        #endregion
-
         #region 属性
 
         /// <summary>
-        /// uid
+        /// 他人的专辑列表
         /// </summary>
-        private long UID { get; set; }
+        public ObservableCollection<AlbumData> Albums { get; set; }
         /// <summary>
-        /// 用户详情
+        /// 参数
         /// </summary>
-        public UserData UserData
-        {
-            get
-            {
-                return _UserData;
-            }
-            set
-            {
-                if (value != _UserData)
-                {
-                    _UserData = value;
-                    this.RaisePropertyChanged(() => this.UserData);
-                }
-            }
-        }
-        
+        private UserDetailParam Params { get; set; }
         /// <summary>
         /// 用户详情服务
         /// </summary>
@@ -55,24 +40,59 @@ namespace XIMALAYA.PCDesktop.Modules.UserModule
 
         protected override void GetData(bool isClear)
         {
-            if (this.UserDetailService == null) return;
-            this.UserDetailService.GetData(res =>
+            if (this.UserDetailService == null)
             {
-                var result = res as UserData;
+                throw new NullReferenceException();
+            }
 
-                this.UserData = result;
-                //base.GetData(isClear);
-
-            }, new UserDetailParam
+            this.Params.Page = this.CurrentPage;
+            base.GetData(isClear);
+            this.UserDetailService.GetAlbumsData(result =>
             {
-                ToUID = this.UID
-            });
+                AlbumInfoResult1 albumInfo = result as AlbumInfoResult1;
+
+                Application.Current.Dispatcher.InvokeAsync(new Action(() =>
+                {
+                    this.IsWaiting = false;
+                    if (isClear)
+                    {
+                        this.Albums.Clear();
+                    }
+                    if (albumInfo.Ret == 0)
+                    {
+                        this.EventAggregator.GetEvent<UserEvent<UserEventArgument>>().Publish(new UserEventArgument
+                        {
+                            RegionName = this.RegionName,
+                            UID = this.Params.ToUID
+                        });
+                        //CommandSingleton.Instance.AddToJumpListCommand.Execute(new JumpListEventArgs
+                        //{
+                        //    Title = this.AlbumData.Title,
+                        //    Arguments = "album_" + this.AlbumData.AlbumID,
+                        //    Category = "最近浏览过的用户"
+                        //});
+                        this.Total = albumInfo.TotalCount;
+                        foreach (AlbumData album in albumInfo.List)
+                        {
+                            this.Albums.Add(album);
+                        }
+                    }
+
+                }), DispatcherPriority.Background);
+            }, this.Params);
         }
 
         public void Initialize(long uid)
         {
-            this.UID = uid;
-            this.GetData(true);
+            this.Albums = new ObservableCollection<AlbumData>();
+            this.Params = new UserDetailParam
+            {
+                ToUID = uid,
+                Page=1,
+                PerPage = 20
+            };
+            this.PageSize = (int)this.Params.PerPage;
+            this.CurrentPage = 1;
         }
 
         #endregion

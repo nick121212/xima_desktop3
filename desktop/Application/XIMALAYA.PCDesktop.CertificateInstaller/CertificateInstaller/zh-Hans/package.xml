@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/developer/2004/01/bootstrapper" Name="DisplayName" Culture="Culture" LicenseAgreement="eula.txt">
+
+    <PackageFiles>
+        <PackageFile Name="eula.txt"/>
+    </PackageFiles>
+
+    <!-- Defines a localizable string table for error messages-->
+    <Strings>
+        <String Name="DisplayName">Windows Installer 4.5</String>
+        <String Name="Culture">zh-CHS</String>
+        <String Name="AdminRequired">安装 Windows Installer 4.5 必须要有管理员权限。请与管理员联系。</String>
+        <String Name="InvalidPlatform">安装 Windows Installer 4.5 需要 Windows XP Service Pack 2 或更高版本。请与应用程序供应商联系。</String>
+        <String Name="GeneralFailure">尝试安装 Windows Installer 4.5 时失败。</String>
+    </Strings>
+
+</Package>

@@ -93,7 +93,6 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumModule
             }
             //标签点击事件，获取专辑数据
             this.EventAggregator.GetEvent<AlbumListEvent<TagEventArgument>>().Subscribe(OnChangeTagEventArgument);
-
             //获取专辑详情数据
             this.EventAggregator.GetEvent<AlbumDetailEvent<long>>().Subscribe(OnAlbumDetailEvent);
             //跳转指令

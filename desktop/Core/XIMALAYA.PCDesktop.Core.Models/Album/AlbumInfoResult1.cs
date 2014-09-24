@@ -18,7 +18,7 @@ namespace XIMALAYA.PCDesktop.Core.Models.Album
         /// 总数
         /// count
         /// </summary>
-        public int Count { get; set; }
+        public int TotalCount { get; set; }
         /// <summary>
         /// 专辑数据
         /// list
@@ -29,7 +29,8 @@ namespace XIMALAYA.PCDesktop.Core.Models.Album
             : base()
         {
             this.doAddMap(() => this.MaxPageId, "maxPageId");
-            this.doAddMap(() => this.Count, "count");
+            this.doAddMap(() => this.TotalCount, "count");
+            this.doAddMap(() => this.TotalCount, "totalCount");
             this.doAddMap(() => this.List, "list");
         }
 

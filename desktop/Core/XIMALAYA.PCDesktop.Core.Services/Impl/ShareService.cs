@@ -33,15 +33,18 @@ namespace XIMALAYA.PCDesktop.Core.Services
             this.Act = act;
             this.Decoder = Json.DecoderFor<ShareResult>(config => config.DeriveFrom(result.Config));
 
-            if (tagType == TagType.sound)
+            switch (tagType)
             {
-                this.Responsitory.Fetch(WellKnownUrl.ShareSoundInfo, param.ToString(), base.GetDataCallBack);
+                case TagType.sound:
+                    this.Responsitory.Fetch(WellKnownUrl.ShareSoundInfo, param.ToString(), base.GetDataCallBack);
+                    break;
+                case TagType.album:
+                    this.Responsitory.Fetch(WellKnownUrl.ShareAlbumInfo, param.ToString(), base.GetDataCallBack);
+                    break;
+                case TagType.user:
+                    this.Responsitory.Fetch(WellKnownUrl.ShareUserInfo, param.ToString(), base.GetDataCallBack);
+                    break;
             }
-            else
-            {
-                this.Responsitory.Fetch(WellKnownUrl.ShareAlbumInfo, param.ToString(), base.GetDataCallBack);
-            }
-
         }
     }
 }
