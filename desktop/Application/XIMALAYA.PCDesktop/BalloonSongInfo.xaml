@@ -5,12 +5,8 @@
 			 xmlns:tb="http://www.hardcodet.net/taskbar"
 			 xmlns:MControls="http://ximalaya.com/xaml/controls"
 			 MaxWidth="300"
-			 x:Name="userControl"
+			 Background="{DynamicResource WhiteBrush}"
 			 TextOptions.TextFormattingMode="Display">
-
-	<UserControl.Background>
-		<SolidColorBrush Color="{Binding CurrentSoundCoverColor,Source={x:Static tools:GlobalDataSingleton.Instance}}" Opacity="0.8"/>
-	</UserControl.Background>
 
 	<UserControl.Resources>
 		<!--<Storyboard x:Key="ShowCoverSmooth">

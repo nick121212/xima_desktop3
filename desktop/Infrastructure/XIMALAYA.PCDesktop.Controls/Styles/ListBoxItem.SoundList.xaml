@@ -26,28 +26,25 @@
 								  BorderThickness="1"
 								  IsThreeState="True"
 								  Command="{Binding PlaySound1Command,Source={x:Static tools:CommandSingleton.Instance}}" 
-								  CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
-								  Foreground="{DynamicResource WhiteBrush}"
-								  Background="{DynamicResource BlackBrush}"
-								  BorderBrush="{DynamicResource BlackBrush}">
+								  CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}}">
 			<MControls:MyToggleButton.Content>
 				<Path Data="{Binding [play], Source={x:Static MControls:PathData.Instance}}" 
 					  Style="{DynamicResource PathStyle}"
 					  Width="10"
 					  Height="10"
 					  Margin="3 0 0 0"
-					  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" />
+					  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" />
 			</MControls:MyToggleButton.Content>
 			<MControls:MyToggleButton.ContentChecked>
 				<Path Data="{Binding [pause], Source={x:Static MControls:PathData.Instance}}"
 					  Style="{DynamicResource PathStyle}"
 					  Width="10"
 					  Height="10"
-					  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" />
+					  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" />
 			</MControls:MyToggleButton.ContentChecked>
 			<MControls:MyToggleButton.ContentThreeState>
 				<Controls:ProgressRing IsActive="True"
-									   Foreground="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
+									   Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
 									   Width="20"
 									   Height="20"/>
 			</MControls:MyToggleButton.ContentThreeState>
@@ -75,28 +72,25 @@
 								  BorderThickness="1"
 								  IsThreeState="True"
 								  Command="{Binding PlaySoundCommand,Source={x:Static tools:CommandSingleton.Instance}}"
-								  CommandParameter="{Binding TrackId}"
-								  Foreground="{DynamicResource WhiteBrush}"
-								  Background="{DynamicResource BlackBrush}"
-								  BorderBrush="{DynamicResource BlackBrush}">
+								  CommandParameter="{Binding TrackId}">
 			<MControls:MyToggleButton.Content>
 				<Path Data="{Binding [play], Source={x:Static MControls:PathData.Instance}}" 
 					  Style="{DynamicResource PathStyle}"
 					  Width="10"
 					  Height="10"
 					  Margin="3 0 0 0"
-					  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" />
+					  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" />
 			</MControls:MyToggleButton.Content>
 			<MControls:MyToggleButton.ContentChecked>
 				<Path Data="{Binding [pause], Source={x:Static MControls:PathData.Instance}}"
 					  Style="{DynamicResource PathStyle}"
 					  Width="10"
 					  Height="10"
-					  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" />
+					  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" />
 			</MControls:MyToggleButton.ContentChecked>
 			<MControls:MyToggleButton.ContentThreeState>
 				<Controls:ProgressRing IsActive="True"
-									   Foreground="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
+									   Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
 									   Width="20"
 									   Height="20"/>
 			</MControls:MyToggleButton.ContentThreeState>

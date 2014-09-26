@@ -9,7 +9,9 @@
              xmlns:tools="http://ximalaya.com/xaml/tools">
 	
 	<UserControl.Resources>
-		<Style x:Key="NavPathStyle" BasedOn="{StaticResource PathStyle}" TargetType="Path">
+		<Style x:Key="NavPathStyle" 
+			   TargetType="Path"
+			   BasedOn="{StaticResource PathStyle}">
 			<Setter Property="Width" Value="40"/>
 			<Setter Property="Height" Value="40"/>
 		</Style>
@@ -24,18 +26,17 @@
 								  Margin="0 5"
 								  BorderType="None"
 								  IsSingle="True"
+								  Foreground="{DynamicResource BlackBrush}"
 								  Command="{Binding ShowContentCommand,Source={x:Static tools:CommandSingleton.Instance}}"
-								  CommandParameter="{x:Static untils:WellKnownModuleNames.SearchModule}"
-								  Foreground="{DynamicResource GrayBrush6}"
-								  Background="{DynamicResource BlackBrush}">
+								  CommandParameter="{x:Static untils:WellKnownModuleNames.SearchModule}">
 			<MControls:MyToggleButton.Content>
 				<StackPanel>
 					<Path Data="{Binding [search], Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{DynamicResource NavPathStyle}"
 						  HorizontalAlignment="Center"
-						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
+						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
 					</Path>
-					<Label Foreground="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
+					<Label Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
 						   HorizontalAlignment="Center" 
 						   FontSize="16"
 						   FontWeight="Bold"
@@ -50,18 +51,17 @@
 								  BorderThickness="0"
 								  BorderType="None"
 								  IsSingle="True"
+								  Foreground="{DynamicResource BlackBrush}"
 								  Command="{Binding ShowContentCommand,Source={x:Static tools:CommandSingleton.Instance}}"
-								  CommandParameter="{x:Static untils:WellKnownModuleNames.DiscoverModule}"
-								  Foreground="{DynamicResource GrayBrush6}"
-								  Background="{DynamicResource BlackBrush}">
+								  CommandParameter="{x:Static untils:WellKnownModuleNames.DiscoverModule}">
 			<MControls:MyToggleButton.Content>
 				<StackPanel>
 					<Path Data="{Binding [discover], Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{DynamicResource NavPathStyle}"
 						  HorizontalAlignment="Center"
-						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
+						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
 					</Path>
-					<Label Foreground="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
+					<Label Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
 						   HorizontalAlignment="Center" 
 						   FontSize="16"
 						   FontWeight="Bold"
@@ -76,17 +76,16 @@
 								  BorderThickness="0"
 								  BorderType="None"
 								  IsBackground="Hidden"
-								  IsChecked="{Binding IsSettingFlyoutShow,Source={x:Static tools:GlobalDataSingleton.Instance}}"
-								  Foreground="{DynamicResource GrayBrush6}"
-								  Background="{DynamicResource BlackBrush}">
+								  Foreground="{DynamicResource BlackBrush}"
+								  IsChecked="{Binding IsSettingFlyoutShow,Source={x:Static tools:GlobalDataSingleton.Instance}}">
 			<MControls:MyToggleButton.Content>
 				<StackPanel>
 					<Path Data="{Binding [setting], Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{DynamicResource NavPathStyle}"
 						  HorizontalAlignment="Center"
-						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
+						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
 					</Path>
-					<Label Foreground="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
+					<Label Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
 						   HorizontalAlignment="Center" 
 						   FontSize="16"
 						   FontWeight="Bold"
@@ -98,9 +97,9 @@
 					<Path Data="{Binding [setting], Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{DynamicResource NavPathStyle}"
 						  HorizontalAlignment="Center"
-						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
+						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
 					</Path>
-					<Label Foreground="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
+					<Label Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
 						   HorizontalAlignment="Center" 
 						   FontSize="16"
 						   FontWeight="Bold"
@@ -116,18 +115,17 @@
 								  BorderType="None"
 								  IsBackground="Hidden"
 								  IsSingle="True"
+								  Foreground="{DynamicResource BlackBrush}"
 								  Command="{Binding RedirectCommand,Source={x:Static tools:CommandSingleton.Instance}}"
-								  CommandParameter="http://www.ximalaya.com/download?tag=thirdpartfx"
-								  Foreground="{DynamicResource GrayBrush6}"
-								  Background="{DynamicResource BlackBrush}">
+								  CommandParameter="http://www.ximalaya.com/download?tag=thirdpartfx">
 			<MControls:MyToggleButton.Content>
 				<StackPanel>
 					<Path Data="{Binding [download], Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{DynamicResource NavPathStyle}"
 						  HorizontalAlignment="Center"
-						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
+						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
 					</Path>
-					<Label Foreground="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
+					<Label Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
 						   HorizontalAlignment="Center" 
 						   FontSize="16"
 						   FontWeight="Bold"
@@ -141,17 +139,16 @@
 								  Margin="0 5"
 								  BorderThickness="0"
 								  BorderType="None"
-								  IsBackground="Hidden"
-								  Foreground="{DynamicResource GrayBrush6}"
-								  Background="{DynamicResource BlackBrush}">
+								  Foreground="{DynamicResource BlackBrush}"
+								  IsBackground="Hidden">
 			<MControls:MyToggleButton.Content>
 				<StackPanel>
 					<Path Data="{Binding [aboutme], Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{DynamicResource NavPathStyle}"
 						  HorizontalAlignment="Center"
-						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
+						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
 					</Path>
-					<Label Foreground="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
+					<Label Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
 						   HorizontalAlignment="Center" 
 						   FontSize="16"
 						   FontWeight="Bold"
@@ -163,9 +160,9 @@
 					<Path Data="{Binding [aboutme], Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{DynamicResource NavPathStyle}"
 						  HorizontalAlignment="Center"
-						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
+						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
 					</Path>
-					<Label Foreground="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
+					<Label Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
 						   HorizontalAlignment="Center" 
 						   FontSize="16"
 						   FontWeight="Bold"

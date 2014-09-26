@@ -158,7 +158,7 @@ namespace XIMALAYA.PCDesktop.Tools
                     {
                         this.PlaySoundCommand.Execute(((SoundData)GlobalDataSingleton.Instance.SoundCollection.CurrentItem).TrackId);
                     }
-                    else if (GlobalDataSingleton.Instance.SoundCollection.IsCurrentAfterLast)
+                    else if (GlobalDataSingleton.Instance.SoundCollection.IsCurrentBeforeFirst)
                     {
                         GlobalDataSingleton.Instance.SoundCollection.MoveCurrentToLast();
                         this.PlaySoundCommand.Execute(((SoundData)GlobalDataSingleton.Instance.SoundCollection.CurrentItem).TrackId);
@@ -166,8 +166,12 @@ namespace XIMALAYA.PCDesktop.Tools
                 }), null);
             }, () =>
             {
-                if (GlobalDataSingleton.Instance.SoundCollection == null) return false;
-
+                if (GlobalDataSingleton.Instance.SoundCollection == null || GlobalDataSingleton.Instance.PlayMode == true || GlobalDataSingleton.Instance.SoundCollection.Count <= 1) return false;
+                //列表循环
+                if (GlobalDataSingleton.Instance.PlayMode == null)
+                {
+                    return true;
+                }
                 return GlobalDataSingleton.Instance.SoundCollection.CurrentPosition > 0;
             });
             //下一首命令
@@ -180,7 +184,7 @@ namespace XIMALAYA.PCDesktop.Tools
                     {
                         this.PlaySoundCommand.Execute(((SoundData)GlobalDataSingleton.Instance.SoundCollection.CurrentItem).TrackId);
                     }
-                    else if (GlobalDataSingleton.Instance.SoundCollection.IsCurrentBeforeFirst)
+                    else if (GlobalDataSingleton.Instance.SoundCollection.IsCurrentAfterLast)
                     {
                         GlobalDataSingleton.Instance.SoundCollection.MoveCurrentToFirst();
                         this.PlaySoundCommand.Execute(((SoundData)GlobalDataSingleton.Instance.SoundCollection.CurrentItem).TrackId);
@@ -188,8 +192,12 @@ namespace XIMALAYA.PCDesktop.Tools
                 }), null);
             }, () =>
             {
-                if (GlobalDataSingleton.Instance.SoundCollection == null) return false;
-
+                if (GlobalDataSingleton.Instance.SoundCollection == null || GlobalDataSingleton.Instance.SoundCollection.CurrentPosition == -1 || GlobalDataSingleton.Instance.PlayMode == true || GlobalDataSingleton.Instance.SoundCollection.Count <= 1) return false;
+                //列表循环
+                if (GlobalDataSingleton.Instance.PlayMode == null)
+                {
+                    return true;
+                }
                 return GlobalDataSingleton.Instance.SoundCollection.CurrentPosition < GlobalDataSingleton.Instance.SoundCollection.Count - 1;
             });
             //播放声音，无列表

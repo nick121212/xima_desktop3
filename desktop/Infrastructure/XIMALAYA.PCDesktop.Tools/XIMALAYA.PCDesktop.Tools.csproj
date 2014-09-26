@@ -112,6 +112,7 @@
     <Compile Include="Behaviors\AutoPopulateExportedViewsBehavior.cs" />
     <Compile Include="Converter\BigNumberToSmallConverter.cs" />
     <Compile Include="Converter\KeysToStringConverter.cs" />
+    <Compile Include="Converter\PercentConverter.cs" />
     <Compile Include="Converter\MutiParamConverter.cs" />
     <Compile Include="GlobalData.cs" />
     <Compile Include="MyType\SerializableDictionary.cs" />

@@ -361,7 +361,7 @@ namespace XIMALAYA.PCDesktop.Tools.Player
                 }
             }
         }
-        
+
 
         #endregion
 

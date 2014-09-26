@@ -81,8 +81,7 @@
 									      IsEnabled="False"
 								          Foreground="White"
 									      HorizontalContentAlignment="Left"
-									      HorizontalAlignment="Left"
-								          Background="{DynamicResource BlackBrush}">
+									      HorizontalAlignment="Left">
 						<MControls:MyToggleButton.Content>
 							<Grid>
 								<Path Data="{Binding [play], Source={x:Static MControls:PathData.Instance}}" 
@@ -90,11 +89,11 @@
 									  HorizontalAlignment="Left"
 									  Width="10"
 									  Height="10"
-									  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
+									  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
 								</Path>
 								<Label Margin="10 0 0 0" 
 									   HorizontalAlignment="Left" 
-									   Foreground="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" 
+									   Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" 
 									   ContentStringFormat="{}{0}次播放"
 									   Content="{Binding SoundData.PlayCount}"/>
 							</Grid>

@@ -23,6 +23,7 @@ namespace XIMALAYA.PCDesktop.Tools
         private bool _IsAutoStart;
         private bool _IsActualExit;
         private bool _IsExitConfirm;
+        private bool? _PlayMode;
 
         #endregion
 
@@ -221,6 +222,36 @@ namespace XIMALAYA.PCDesktop.Tools
         /// 是否执行退出命令
         /// </summary>
         public bool IsExit { get; set; }
+        /// <summary>
+        /// 系统的标题
+        /// </summary>
+        public string SystemTitle
+        {
+            get
+            {
+                return "喜马拉雅-听上瘾！听过瘾！";
+            }
+        }
+        /// <summary>
+        /// 播放模式
+        /// </summary>
+        public bool? PlayMode
+        {
+            get
+            {
+                return _PlayMode;
+            }
+            set
+            {
+                if (value != _PlayMode)
+                {
+                    _PlayMode = value;
+                    this.RaisePropertyChanged(() => this.PlayMode);
+                    CommandSingleton.Instance.NextCommand.RaiseCanExecuteChanged();
+                    CommandSingleton.Instance.PrevCommand.RaiseCanExecuteChanged();
+                }
+            }
+        }
         
         #endregion
 
@@ -230,7 +261,7 @@ namespace XIMALAYA.PCDesktop.Tools
         {
             this.SoundData = new SoundData
             {
-                Title = "喜马拉雅，听我想听"
+                Title = this.SystemTitle
             };
             this.SoundCollection = new ListBox().Items;
             this.CurrentSoundCoverColor = Colors.Black;

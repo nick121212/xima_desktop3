@@ -40,8 +40,8 @@ namespace XIMALAYA.PCDesktop.Controls
         {
             QuinticEase SineEase = new QuinticEase { EasingMode = EasingMode.EaseIn };
             ThicknessAnimationUsingKeyFrames keyFrames = new ThicknessAnimationUsingKeyFrames();
-            EasingThicknessKeyFrame keyFrame = new EasingThicknessKeyFrame(new Thickness(left, this.Margin.Top, this.Margin.Right, this.Margin.Bottom), KeyTime.FromTimeSpan(TimeSpan.FromSeconds(3)), SineEase);
-            EasingThicknessKeyFrame keyFrame1 = new EasingThicknessKeyFrame(new Thickness(0, this.Margin.Top, this.Margin.Right, this.Margin.Bottom), KeyTime.FromTimeSpan(TimeSpan.FromSeconds(6)), SineEase);
+            EasingThicknessKeyFrame keyFrame = new EasingThicknessKeyFrame(new Thickness(left, this.Margin.Top, this.Margin.Right, this.Margin.Bottom), KeyTime.FromTimeSpan(TimeSpan.FromSeconds(5)), SineEase);
+            EasingThicknessKeyFrame keyFrame1 = new EasingThicknessKeyFrame(new Thickness(0, this.Margin.Top, this.Margin.Right, this.Margin.Bottom), KeyTime.FromTimeSpan(TimeSpan.FromSeconds(10)), SineEase);
 
             this.Margin = new Thickness(0,this.Margin.Top,this.Margin.Right,this.Margin.Bottom);
             keyFrames.RepeatBehavior = RepeatBehavior.Forever;

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Deployment.Application;
 using System.Diagnostics;
 using System.IO;
-using System.IO.MemoryMappedFiles;
 using System.Linq;
 using System.Net;
 using System.Reflection;
@@ -11,10 +11,8 @@ using System.Runtime.InteropServices;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 using System.Windows.Shell;
-using System.Deployment.Application;
 using System.Windows.Threading;
 using Hardcodet.Wpf.TaskbarNotification;
 using Microsoft.Practices.Prism.Events;
@@ -22,7 +20,6 @@ using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.ViewModel;
 using XIMALAYA.PCDesktop.Common.Events;
 using XIMALAYA.PCDesktop.Tools;
-using XIMALAYA.PCDesktop.Tools.MyType;
 using XIMALAYA.PCDesktop.Tools.Setting;
 using XIMALAYA.PCDesktop.Untils;
 
@@ -144,11 +141,11 @@ namespace XIMALAYA.PCDesktop
             this.ModuleManager = moduleManager;
             this.ModuleCatalog = moduleCatalog;
             this.EventAggregator = eventAggregator;
-            this.WindowTitle = @"喜马拉雅-听我想听";
+            this.WindowTitle = GlobalDataSingleton.Instance.SystemTitle;
 
             try
             {
-                this.WindowTitle += ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
+                this.WindowTitle += "-" + ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
             }
             catch
             {

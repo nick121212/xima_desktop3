@@ -606,30 +606,21 @@
 						<Label Width="0" Opacity="0"  x:Name="Shares" Template="{StaticResource ShareBtns}"/>
 						<!--分享按钮-->
 						<local:MyToggleButton Grid.Column="1"
-											  Width="20" 
-											  Height="20"
+											  Width="30" 
+											  Height="30"
 											  IsSingle="True"
 											  BorderType="Ellipse"
-											  IsBackground="Visible"
-											  Foreground="{DynamicResource WhiteBrush}"
-											  BackgroundChecked="{DynamicResource GrayBrush10}"
-											  Background="{DynamicResource BlackBrush}"
-											  BorderBrush="{DynamicResource BlackBrush}"
-											  BorderThickness="1">
+											  IsBackground="Visible">
 							<local:MyToggleButton.ContentChecked>
 								<Path Data="{Binding [share], Source={x:Static local:PathData.Instance}}" 
 									  Style="{StaticResource PathStyle}"
-									  Width="10"
-									  Height="10"
-									  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type local:MyToggleButton}}}" >
+									  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type local:MyToggleButton}}}" >
 								</Path>
 							</local:MyToggleButton.ContentChecked>
 							<local:MyToggleButton.Content>
 								<Path Data="{Binding [share], Source={x:Static local:PathData.Instance}}" 
 									  Style="{StaticResource PathStyle}"
-									  Width="10"
-									  Height="10"
-									  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type local:MyToggleButton}}}" >
+									  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type local:MyToggleButton}}}" >
 								</Path>
 							</local:MyToggleButton.Content>
 						</local:MyToggleButton>

@@ -15,11 +15,12 @@
 			<BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
 			<converter:ToTransparentColorConverter x:Key="ToTransparentColorConverter"/>
 			<converter:MutiBoolConverter x:Key="MutiBoolConverter" />
+			<converter:PercentConverter x:Key="PercentConverter" />
 
 			<Storyboard x:Key="OnVolumeControlMouseEnter">
 				<DoubleAnimation Duration="0:0:0.2" 
 								 Storyboard.TargetName="BdVolumeControl"
-								 Storyboard.TargetProperty="(FrameworkElement.Width)" To="94">
+								 Storyboard.TargetProperty="(FrameworkElement.Width)" To="104">
 					<DoubleAnimation.EasingFunction>
 						<CircleEase/>
 					</DoubleAnimation.EasingFunction>
@@ -28,7 +29,7 @@
 			<Storyboard x:Key="OnVolumeControlMouseLeave">
 				<DoubleAnimation Duration="0:0:0.1" 
 								 Storyboard.TargetName="BdVolumeControl"
-								 Storyboard.TargetProperty="(FrameworkElement.Width)" To="20">
+								 Storyboard.TargetProperty="(FrameworkElement.Width)" To="30">
 					<DoubleAnimation.EasingFunction>
 						<CircleEase/>
 					</DoubleAnimation.EasingFunction>
@@ -112,31 +113,30 @@
 				</MControls:SharePanel.DataContext>
 			</MControls:SharePanel>
 			<!--音量控制-->
-			<StackPanel Width="20" x:Name="BdVolumeControl" 
+			<StackPanel x:Name="BdVolumeControl" 
+						Width="30" 
 						Background="Transparent" 
 						Orientation="Horizontal">
 				<!--静音-->
-				<MControls:MyToggleButton Width="20" 
-										  Height="20"
+				<MControls:MyToggleButton Width="30" 
+										  Height="30"
 										  IsChecked="{Binding BassEngine.IsMuted,Mode=TwoWay,Source={x:Static tools:GlobalDataSingleton.Instance}}"
-										  BorderType="Ellipse"
-										  Foreground="{DynamicResource WhiteBrush}"
-										  Background="{DynamicResource BlackBrush}"
-										  BorderBrush="{DynamicResource BlackBrush}"
-										  BorderThickness="1">
+										  BorderType="Ellipse">
 					<MControls:MyToggleButton.Content>
-						<Path Data="{Binding [volume], Source={x:Static MControls:PathData.Instance}}" 
-						  Style="{StaticResource PathStyle}"
-						  Width="10" Height="10"
-						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-						</Path>
+						<Label Background="Transparent" ToolTip="静音">
+							<Path Data="{Binding [volume], Source={x:Static MControls:PathData.Instance}}" 
+								  Style="{StaticResource PathStyle}"
+								  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
+							</Path>
+						</Label>
 					</MControls:MyToggleButton.Content>
 					<MControls:MyToggleButton.ContentChecked>
-						<Path Data="{Binding [muted], Source={x:Static MControls:PathData.Instance}}"
-						  Style="{StaticResource PathStyle}"
-						  Width="10" Height="10"
-						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-						</Path>
+						<Label Background="Transparent" ToolTip="恢复">
+							<Path Data="{Binding [muted], Source={x:Static MControls:PathData.Instance}}" 
+								  Style="{StaticResource PathStyle}"
+								  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
+							</Path>
+						</Label>
 					</MControls:MyToggleButton.ContentChecked>
 				</MControls:MyToggleButton>
 				<!--音量条-->
@@ -148,66 +148,29 @@
 						Minimum="0"
 						LargeChange="0.2"
 						SmallChange="0.1"
+						ToolTip="{Binding Value,RelativeSource={RelativeSource Self},Converter={StaticResource PercentConverter}}"
 						BorderBrush="{DynamicResource GrayBrush8}"
 						Foreground="{DynamicResource BlackBrush}"
 						Value="{Binding BassEngine.Volume,Source={x:Static tools:GlobalDataSingleton.Instance}}"
 						Style="{DynamicResource FlatSlider}" />
 			</StackPanel>
-			<!--播放模式-->
-			<MControls:MyToggleButton Width="20" 
-								      Height="20"
-								      BorderType="Ellipse"
-									  IsThreeState="True"
-									  Visibility="Collapsed"
-								      Foreground="{DynamicResource WhiteBrush}"
-								      Background="{DynamicResource BlackBrush}"
-								      BorderBrush="{DynamicResource BlackBrush}"
-								      BorderThickness="1">
-				<MControls:MyToggleButton.Content>
-					<Path Data="{Binding [play_mode_1], Source={x:Static MControls:PathData.Instance}}" 
-						  Style="{StaticResource PathStyle}"
-						  Width="10"
-						  Height="10"
-						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-					</Path>
-				</MControls:MyToggleButton.Content>
-				<MControls:MyToggleButton.ContentChecked>
-					<Path Data="{Binding [play_mode_2], Source={x:Static MControls:PathData.Instance}}"
-						  Style="{StaticResource PathStyle}"
-						  Width="10"
-						  Height="10"
-						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-					</Path>
-				</MControls:MyToggleButton.ContentChecked>
-				<MControls:MyToggleButton.ContentThreeState>
-					<Path Data="{Binding [play_mode_3], Source={x:Static MControls:PathData.Instance}}"
-						  Style="{StaticResource PathStyle}"
-						  Width="10"
-						  Height="10"
-						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-					</Path>
-				</MControls:MyToggleButton.ContentThreeState>
-			</MControls:MyToggleButton>
 			<!--上一首-->
 			<MControls:MyToggleButton Width="30" 
 								      Height="30"
 									  Margin="5"
 								      BorderType="Ellipse"
-									  Command="{Binding PrevCommand,Source={x:Static tools:CommandSingleton.Instance}}"
-								      Foreground="{DynamicResource WhiteBrush}"
-									  Background="{DynamicResource BlackBrush}"
-								      BorderBrush="{DynamicResource BlackBrush}"
-								      BorderThickness="1">
+									  ToolTip="上一首"
+									  Command="{Binding PrevCommand,Source={x:Static tools:CommandSingleton.Instance}}">
 				<MControls:MyToggleButton.Content>
 					<Path Data="{Binding [prev], Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{StaticResource PathStyle}"
-						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
+						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
 					</Path>
 				</MControls:MyToggleButton.Content>
 				<MControls:MyToggleButton.ContentChecked>
 					<Path Data="{Binding [prev], Source={x:Static MControls:PathData.Instance}}"
 						  Style="{StaticResource PathStyle}"
-						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
+						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
 					</Path>
 				</MControls:MyToggleButton.ContentChecked>
 			</MControls:MyToggleButton>
@@ -216,12 +179,9 @@
 								      Height="40"
 								      BorderType="Ellipse"
 									  IsThreeState="True"
+									  ToolTipService.IsEnabled="False"
                                       Command="{Binding BassEngine.PlayCommand,Source={x:Static tools:GlobalDataSingleton.Instance}}"
-                                      CommandParameter="{Binding Source={RelativeSource Self},Path=IsChecked}"
-								      Foreground="{DynamicResource WhiteBrush}"
-								      Background="{DynamicResource BlackBrush}"
-								      BorderBrush="{DynamicResource BlackBrush}"
-								      BorderThickness="1">
+                                      CommandParameter="{Binding Source={RelativeSource Self},Path=IsChecked}">
 				<MControls:MyToggleButton.IsChecked>
 					<MultiBinding Converter="{StaticResource MutiBoolConverter}" 
 								  ConverterParameter="1" 
@@ -233,23 +193,27 @@
 					</MultiBinding>
 				</MControls:MyToggleButton.IsChecked>
 				<MControls:MyToggleButton.Content>
-					<Path Data="{Binding [play], Source={x:Static MControls:PathData.Instance}}" 
-						  Style="{StaticResource PathStyle}"
-						  Margin="5 0 0 0"
-						  Width="20" Height="20"
-						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-					</Path>
+					<Label Background="Transparent" ToolTip="播放">
+						<Path Data="{Binding [play], Source={x:Static MControls:PathData.Instance}}" 
+						      Style="{StaticResource PathStyle}"
+						      Margin="5 0 0 0"
+						      Width="20" Height="20"
+						      Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
+						</Path>
+					</Label>
 				</MControls:MyToggleButton.Content>
 				<MControls:MyToggleButton.ContentChecked>
-					<Path Data="{Binding [pause], Source={x:Static MControls:PathData.Instance}}"
-						  Style="{StaticResource PathStyle}"
-						  Width="15" Height="20"
-						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-					</Path>
+					<Label Background="Transparent" ToolTip="暂停">
+						<Path Data="{Binding [pause], Source={x:Static MControls:PathData.Instance}}"
+							  Style="{StaticResource PathStyle}"
+							  Width="15" Height="20"
+							  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
+						</Path>
+					</Label>
 				</MControls:MyToggleButton.ContentChecked>
 				<MControls:MyToggleButton.ContentThreeState>
 					<Controls:ProgressRing IsActive="True"
-										   Foreground="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
+										   Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
 										   Width="30"
 										   Height="30"/>
 				</MControls:MyToggleButton.ContentThreeState>
@@ -259,23 +223,52 @@
 								      Height="30"
 									  Margin="5"
 								      BorderType="Ellipse"
-									  Command="{Binding NextCommand,Source={x:Static tools:CommandSingleton.Instance}}"
-								      Foreground="{DynamicResource WhiteBrush}"
-								      Background="{DynamicResource BlackBrush}"
-								      BorderBrush="{DynamicResource BlackBrush}"
-								      BorderThickness="1">
+									  ToolTip="下一首"
+									  Command="{Binding NextCommand,Source={x:Static tools:CommandSingleton.Instance}}">
 				<MControls:MyToggleButton.Content>
 					<Path Data="{Binding [next], Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{StaticResource PathStyle}"
-						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
+						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
 					</Path>
 				</MControls:MyToggleButton.Content>
 				<MControls:MyToggleButton.ContentChecked>
 					<Path Data="{Binding [next], Source={x:Static MControls:PathData.Instance}}"
 						  Style="{StaticResource PathStyle}"
-						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
+						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
 					</Path>
 				</MControls:MyToggleButton.ContentChecked>
+			</MControls:MyToggleButton>
+			<!--播放模式-->
+			<MControls:MyToggleButton Width="30" 
+								      Height="30"
+								      BorderType="Ellipse"
+									  IsThreeState="True"
+									  Margin="5 0"
+									  IsChecked="{Binding PlayMode,Source={x:Static tools:GlobalDataSingleton.Instance}}">
+				<MControls:MyToggleButton.Content>
+					<Label Background="Transparent" ToolTip="顺序播放">
+						<Path Data="{Binding [play_mode_1], Source={x:Static MControls:PathData.Instance}}"
+							  Style="{StaticResource PathStyle}"
+							  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
+						</Path>
+					</Label>
+				</MControls:MyToggleButton.Content>
+				<MControls:MyToggleButton.ContentChecked>
+					<Label Background="Transparent" ToolTip="单曲循环">
+						<Path Data="{Binding [play_mode_2], Source={x:Static MControls:PathData.Instance}}"
+							  Style="{StaticResource PathStyle}"
+							  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
+						</Path>
+					</Label>
+				</MControls:MyToggleButton.ContentChecked>
+				<MControls:MyToggleButton.ContentThreeState>
+					<Label Background="Transparent" ToolTip="列表循环">
+						<Path Data="{Binding [play_mode_3], Source={x:Static MControls:PathData.Instance}}"
+						  Style="{StaticResource PathStyle}"
+						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
+						</Path>
+					</Label>
+				</MControls:MyToggleButton.ContentThreeState>
 			</MControls:MyToggleButton>
 			<!--当前播放列表-->
 			<MControls:MyToggleButton x:Name="btnShowList"
@@ -285,21 +278,18 @@
 									  IsThreeState="True"
 								      BorderType="Ellipse"
 									  IsBackground="Visible"
-									  IsChecked="{Binding IsShowListView,Source={x:Static tools:GlobalDataSingleton.Instance}}"
-								      Foreground="{DynamicResource WhiteBrush}"
-								      Background="{DynamicResource BlackBrush}"
-								      BorderBrush="{DynamicResource BlackBrush}"
-								      BorderThickness="1">
+									  ToolTip="播放列表"
+									  IsChecked="{Binding IsShowListView,Source={x:Static tools:GlobalDataSingleton.Instance}}">
 				<MControls:MyToggleButton.Content>
 					<Path Data="{Binding [list_view], Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{StaticResource PathStyle}"
-						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
+						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
 					</Path>
 				</MControls:MyToggleButton.Content>
 				<MControls:MyToggleButton.ContentChecked>
 					<Path Data="{Binding [list_view], Source={x:Static MControls:PathData.Instance}}"
 						  Style="{StaticResource PathStyle}"
-						  Fill="{Binding ForegroundChecked,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
+						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
 					</Path>
 				</MControls:MyToggleButton.ContentChecked>
 				<MControls:MyToggleButton.ContentThreeState>
@@ -321,18 +311,9 @@
 			<TextBlock TextWrapping="Wrap"
 					   Margin="0 0 100 0"
 					   FontSize="14"
+					   ToolTip="{Binding Text,RelativeSource={RelativeSource Self}}"
 					   Text="{Binding SoundData.Title,Source={x:Static tools:GlobalDataSingleton.Instance}}" 
 					   VerticalAlignment="Center"/>
-			<!--<StackPanel Orientation="Horizontal"
-						HorizontalAlignment="Right" 
-						VerticalAlignment="Center">
-				<TextBlock HorizontalAlignment="Right" 
-						   VerticalAlignment="Center"
-						   Text="{Binding TotalTimeSpan,ElementName=metroSlider,Converter={StaticResource TimeSpanConverter}}"/>
-				<TextBlock HorizontalAlignment="Right" 
-						   VerticalAlignment="Center"
-						   Text="{Binding Duration,ElementName=metroSlider,Converter={StaticResource TimeSpanConverter},StringFormat='{} / {0}'}"/>
-			</StackPanel>-->
 		</Grid>
 		<!--进度条-->
 		<Grid Grid.ColumnSpan="4" 
@@ -349,9 +330,9 @@
 					   VerticalAlignment="Center"
 					   Text="{Binding TotalTimeSpan,ElementName=metroSlider,Converter={StaticResource TimeSpanConverter}}"/>
 			<MControls:MetroSlider Grid.Column="1"
-								   x:Name="metroSlider"
                                    Minimum="0"
 								   Height="10"
+								   Name="metroSlider"
                                    Maximum="{Binding RelativeSource={RelativeSource Self},Path=Duration}"
                                    ThumbBackground="{DynamicResource WhiteColorBrush}"
                                    ThumbForeground="{DynamicResource AccentColorBrush}"

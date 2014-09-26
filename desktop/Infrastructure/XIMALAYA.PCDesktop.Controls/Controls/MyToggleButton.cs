@@ -230,21 +230,21 @@ namespace XIMALAYA.PCDesktop.Controls
             this.Border = GetTemplateChild("PART_Border") as Border;
             this.Rectangle = GetTemplateChild("PART_Fill") as Rectangle;
             this.ScaleTransform = GetTemplateChild("Part_Scale") as ScaleTransform;
-            this.ColorAnimation = GetTemplateChild("Part_ColorAnimation") as ColorAnimation;
-            this.ColorCheckedAnimation = GetTemplateChild("Part_ColorCheckAnimation") as ColorAnimation;
 
-            if (this.ForegroundChecked == null || this.ForegroundChecked.GetType() != typeof(SolidColorBrush) || ((SolidColorBrush)this.ForegroundChecked).Color == null)
-            {
-                return;
-            }
-            if (this.ColorAnimation != null)
-            {
-                this.ColorAnimation.To = ((SolidColorBrush)this.ForegroundChecked).Color;
-            }
-            if (this.ColorCheckedAnimation != null)
-            {
-                this.ColorCheckedAnimation.To = ((SolidColorBrush)this.ForegroundChecked).Color;
-            }
+            //this.ColorAnimation = GetTemplateChild("Part_ColorAnimation") as ColorAnimation;
+            //this.ColorCheckedAnimation = GetTemplateChild("Part_ColorCheckAnimation") as ColorAnimation;
+            //if (this.ForegroundChecked == null || this.ForegroundChecked.GetType() != typeof(SolidColorBrush) || ((SolidColorBrush)this.ForegroundChecked).Color == null)
+            //{
+            //    return;
+            //}
+            //if (this.ColorAnimation != null)
+            //{
+            //    this.ColorAnimation.To = ((SolidColorBrush)this.ForegroundChecked).Color;
+            //}
+            //if (this.ColorCheckedAnimation != null)
+            //{
+            //    this.ColorCheckedAnimation.To = ((SolidColorBrush)this.ForegroundChecked).Color;
+            //}
         }
     }
 }

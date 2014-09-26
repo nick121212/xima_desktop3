@@ -14,6 +14,7 @@
 		<!--设置色调，黑色和白色-->
 		<ComboBox Grid.Column="1" 
                   DisplayMemberPath="Name"
+				  Visibility="Collapsed"
                   ItemsSource="{Binding Source={x:Static tools:ThemeInfoManagerSingleton.Instance},Path=AppThemes}"  
                   SelectedItem="{Binding SelectedTheme, Mode=TwoWay}" 
                   VerticalAlignment="Center" Margin="0,16,0,4" />

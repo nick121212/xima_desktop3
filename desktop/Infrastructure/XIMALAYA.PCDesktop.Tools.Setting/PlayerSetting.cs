@@ -39,6 +39,20 @@ namespace XIMALAYA.PCDesktop.Tools.Setting
                 PlayerSingleton.Instance.IsMuted = value;
             }
         }
+        /// <summary>
+        /// 播放模式
+        /// </summary>
+        public bool? PlayMode
+        {
+            get
+            {
+                return GlobalDataSingleton.Instance.PlayMode;
+            }
+            set
+            {
+                GlobalDataSingleton.Instance.PlayMode = value;
+            }
+        }
 
         public PlayerSetting()
         {
