@@ -51,7 +51,7 @@
 											 Storyboard.TargetProperty="Opacity" To="0"/>
 							<DoubleAnimation Duration="0"
 											 Storyboard.TargetName="PART_BackGround"
-											 Storyboard.TargetProperty="Opacity" To="0"/>
+											 Storyboard.TargetProperty="Opacity" To="1"/>
 
 							<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" 
 														   Storyboard.TargetName="contentCheckedPresenter"
@@ -238,7 +238,7 @@
 				   Padding="{TemplateBinding Padding}"
 				   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-				   Foreground="{TemplateBinding ForegroundChecked}">
+				   Foreground="{TemplateBinding Foreground}">
 				<ContentPresenter Content="{TemplateBinding Content}"
                                   ContentTemplate="{TemplateBinding ContentTemplate}"
                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -251,7 +251,7 @@
 				   Padding="{TemplateBinding Padding}"
 				   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-				   Foreground="{TemplateBinding ForegroundChecked}">
+				   Foreground="{TemplateBinding Foreground}">
 				<ContentPresenter Content="{TemplateBinding ContentChecked}"
                                   ContentTemplate="{TemplateBinding ContentTemplate}"
                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -265,7 +265,7 @@
 				   Padding="{TemplateBinding Padding}"
 				   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-				   Foreground="{TemplateBinding ForegroundChecked}">
+				   Foreground="{TemplateBinding Foreground}">
 				<ContentPresenter Content="{TemplateBinding ContentThreeState}"
                                   ContentTemplate="{TemplateBinding ContentTemplate}"
                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -292,7 +292,7 @@
 					<Condition Binding="{Binding IsChecked,RelativeSource={RelativeSource Self}}" Value="True"/>
 					<Condition Binding="{Binding IsBackground,RelativeSource={RelativeSource Self}}" Value="Visible"/>
 				</MultiDataTrigger.Conditions>
-				<Setter Property="ForegroundChecked" Value="{Binding Foreground,RelativeSource={RelativeSource Self}}"/>
+				<Setter Property="Foreground" Value="{Binding BackgroundChecked,RelativeSource={RelativeSource Self}}"/>
 			</MultiDataTrigger>
 		</Style.Triggers>
 	</Style>
@@ -530,7 +530,7 @@
 				   Padding="{TemplateBinding Padding}"
 				   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-				   Foreground="{TemplateBinding ForegroundChecked}">
+				   Foreground="{TemplateBinding Foreground}">
 				<ContentPresenter Content="{TemplateBinding Content}"
                                   ContentTemplate="{TemplateBinding ContentTemplate}"
                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -543,7 +543,7 @@
 				   Padding="{TemplateBinding Padding}"
 				   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-				   Foreground="{TemplateBinding ForegroundChecked}">
+				   Foreground="{TemplateBinding Foreground}">
 				<ContentPresenter Content="{TemplateBinding ContentChecked}"
                                   ContentTemplate="{TemplateBinding ContentTemplate}"
                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -557,7 +557,7 @@
 				   Padding="{TemplateBinding Padding}"
 				   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-				   Foreground="{TemplateBinding ForegroundChecked}">
+				   Foreground="{TemplateBinding Foreground}">
 				<ContentPresenter Content="{TemplateBinding ContentThreeState}"
                                   ContentTemplate="{TemplateBinding ContentTemplate}"
                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -569,23 +569,23 @@
 	<Style x:Key="MyToggleButtonStyle1" TargetType="local:MyToggleButton">
 		<Setter Property="Template" Value="{StaticResource MyToggleButtonTemplate1}"/>
 		<Setter Property="BorderThickness" Value="1"/>
-		<Setter Property="BackgroundChecked" Value="{DynamicResource WhiteBrush}"/>
+		<Setter Property="BackgroundChecked" Value="{DynamicResource BlackBrush}"/>
 		<Setter Property="Background" Value="{DynamicResource BlackBrush}"/>
 		<Setter Property="BorderBrush" Value="{DynamicResource BlackBrush}"/>
 		<Setter Property="IsBackground" Value="Visible"/>
 		<Style.Triggers>
 			<Trigger Property="IsMouseOver" Value="True">
-				<Setter Property="ForegroundChecked" Value="{Binding Foreground,RelativeSource={RelativeSource Self}}"/>
+				<Setter Property="Foreground" Value="{Binding BackgroundChecked,RelativeSource={RelativeSource Self}}"/>
 			</Trigger>
 			<Trigger Property="IsMouseOver" Value="False">
-				<Setter Property="ForegroundChecked" Value="{Binding Background,RelativeSource={RelativeSource Self}}"/>
+				<Setter Property="Foreground" Value="{Binding Background,RelativeSource={RelativeSource Self}}"/>
 			</Trigger>
 			<MultiDataTrigger>
 				<MultiDataTrigger.Conditions>
 					<Condition Binding="{Binding IsChecked,RelativeSource={RelativeSource Self}}" Value="True"/>
 					<Condition Binding="{Binding IsBackground,RelativeSource={RelativeSource Self}}" Value="Visible"/>
 				</MultiDataTrigger.Conditions>
-				<Setter Property="ForegroundChecked" Value="{Binding Foreground,RelativeSource={RelativeSource Self}}"/>
+				<Setter Property="Foreground" Value="{Binding BackgroundChecked,RelativeSource={RelativeSource Self}}"/>
 			</MultiDataTrigger>
 		</Style.Triggers>
 	</Style>

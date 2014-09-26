@@ -5,6 +5,7 @@
              xmlns:MControls="http://ximalaya.com/xaml/controls"
 			 xmlns:tools="http://ximalaya.com/xaml/tools"
 			 xmlns:converter="http://ximalaya.com/xaml/tools/converter"
+			 Opacity="0.9"
 			 Background="{DynamicResource WhiteBrush}">
 
 	<UserControl.Resources>
@@ -27,6 +28,7 @@
 										  Margin="5"
 										  ToolTip="上一首"
 										  BorderType="None"
+										  Style="{StaticResource MyToggleButtonStyle1}"
 										  Command="{Binding PrevCommand,Source={x:Static tools:CommandSingleton.Instance}}">
 					<MControls:MyToggleButton.Content>
 						<Path Data="{Binding [prev], Source={x:Static MControls:PathData.Instance}}" 
@@ -47,6 +49,7 @@
 										  BorderType="None"
 										  IsThreeState="True"
 										  IsSingle="True"
+										  Style="{StaticResource MyToggleButtonStyle1}"
 										  Command="{Binding BassEngine.PlayCommand,Source={x:Static tools:GlobalDataSingleton.Instance}}"
 										  CommandParameter="{Binding Source={RelativeSource Self},Path=IsChecked}">
 					<MControls:MyToggleButton.IsChecked>
@@ -91,6 +94,7 @@
 										  Margin="5"
 										  ToolTip="下一首"
 										  BorderType="None"
+										  Style="{StaticResource MyToggleButtonStyle1}"
 										  Command="{Binding NextCommand,Source={x:Static tools:CommandSingleton.Instance}}">
 					<MControls:MyToggleButton.Content>
 						<Path Data="{Binding [next], Source={x:Static MControls:PathData.Instance}}" 
@@ -137,8 +141,9 @@
 				<!--静音-->
 				<MControls:MyToggleButton Width="30" 
 										  Height="30"
-										  IsChecked="{Binding BassEngine.IsMuted,Mode=TwoWay,Source={x:Static tools:GlobalDataSingleton.Instance}}"
-										  BorderType="None">
+										  BorderType="None"
+										  Style="{StaticResource MyToggleButtonStyle1}"
+										  IsChecked="{Binding BassEngine.IsMuted,Mode=TwoWay,Source={x:Static tools:GlobalDataSingleton.Instance}}">
 					<MControls:MyToggleButton.Content>
 						<Label Background="Transparent" ToolTip="静音">
 							<Path Data="{Binding [volume], Source={x:Static MControls:PathData.Instance}}" 

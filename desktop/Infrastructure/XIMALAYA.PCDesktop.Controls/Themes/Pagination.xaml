@@ -32,17 +32,15 @@
 		</Border>
 	</ControlTemplate>
 
-	<Style TargetType="local:MyToggleButton" x:Key="PaginationButtonStyle" BasedOn="{StaticResource {x:Type local:MyToggleButton}}">
+	<Style TargetType="local:MyToggleButton" 
+		   x:Key="PaginationButtonStyle" 
+		   BasedOn="{StaticResource {x:Type local:MyToggleButton}}">
 		<Setter Property="Margin" Value="5"/>
 		<Setter Property="Padding" Value="5 0"/>
 		<Setter Property="FontWeight" Value="Bold"/>
 		<Setter Property="MinWidth" Value="25"/>
 		<Setter Property="MinHeight" Value="25"/>
 		<Setter Property="BorderType" Value="Rectangle"/>
-		<Setter Property="Foreground" Value="{DynamicResource WhiteBrush}"/>
-		<Setter Property="Background" Value="{DynamicResource BlackBrush}"/>
-		<Setter Property="BorderBrush" Value="{DynamicResource BlackBrush}"/>
-		<!--<Setter Property="ContentChecked" Value="{StaticResource PginationButtonCheckedLabelStyle}"/>-->
 	</Style>
 	<Style TargetType="local:Pagination">
 		<Setter Property="Margin" Value="5"/>
