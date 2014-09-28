@@ -17,6 +17,7 @@ using XIMALAYA.PCDesktop.Tools.Player;
 using XIMALAYA.PCDesktop.Tools.Untils;
 using XIMALAYA.PCDesktop.Untils;
 using XIMALAYA.PCDesktop.Cache;
+using System.Collections;
 
 namespace XIMALAYA.PCDesktop.Tools
 {
@@ -123,24 +124,38 @@ namespace XIMALAYA.PCDesktop.Tools
             this.PlaySound1Command = new DelegateCommand<Control>(con =>
             {
                 var soundData = con.DataContext as SoundData;
+                SoundData soundCol = null;
 
                 if (soundData == null) return;
-                GlobalDataSingleton.Instance.SoundCollection.Clear();
-                if (con.GetType() == typeof(ListBoxItem))
+                
+                for (int i = 0; i < GlobalDataSingleton.Instance.SoundCollection.Count; i++)
                 {
-                    var listBox = VisualTreeHelperExtensions.FindAncestor<ListBox>(con);
-                    var sounds = new SoundData[listBox.Items.Count];
-
-                    listBox.Items.CopyTo(sounds, 0);
-                    sounds.ToList().ForEach(sound => GlobalDataSingleton.Instance.SoundCollection.Add(sound));
+                    soundCol = GlobalDataSingleton.Instance.SoundCollection[i] as SoundData;
+                    if (soundCol.TrackId == soundData.TrackId)
+                    {
+                        break;
+                    }
+                    soundCol = null;
                 }
-                else
+                if (soundCol == null)
                 {
-                    var dataGrid = VisualTreeHelperExtensions.FindAncestor<DataGrid>(con);
-                    var sounds = new SoundData[dataGrid.Items.Count];
+                    GlobalDataSingleton.Instance.SoundCollection.Clear();
+                    if (con.GetType() == typeof(ListBoxItem))
+                    {
+                        var listBox = VisualTreeHelperExtensions.FindAncestor<ListBox>(con);
+                        var sounds = new SoundData[listBox.Items.Count];
 
-                    dataGrid.Items.CopyTo(sounds, 0);
-                    sounds.ToList().ForEach(sound => GlobalDataSingleton.Instance.SoundCollection.Add(sound));
+                        listBox.Items.CopyTo(sounds, 0);
+                        sounds.ToList().ForEach(sound => GlobalDataSingleton.Instance.SoundCollection.Add(sound));
+                    }
+                    else
+                    {
+                        var dataGrid = VisualTreeHelperExtensions.FindAncestor<DataGrid>(con);
+                        var sounds = new SoundData[dataGrid.Items.Count];
+
+                        dataGrid.Items.CopyTo(sounds, 0);
+                        sounds.ToList().ForEach(sound => GlobalDataSingleton.Instance.SoundCollection.Add(sound));
+                    }
                 }
 
                 if (GlobalDataSingleton.Instance.SoundCollection.MoveCurrentTo(soundData))
@@ -206,10 +221,21 @@ namespace XIMALAYA.PCDesktop.Tools
                 if (trackID == null || !trackID.HasValue) return;
 
                 SoundData soundData = SoundCache.Instance[(long)trackID];
+                SoundData soundCol = null;
 
                 if (soundData != null)
                 {
-                    if (!GlobalDataSingleton.Instance.SoundCollection.Contains(soundData))
+                    for (int i = 0; i < GlobalDataSingleton.Instance.SoundCollection.Count; i++)
+                    {
+                        soundCol = GlobalDataSingleton.Instance.SoundCollection[i] as SoundData;
+                        if (soundCol.TrackId == soundData.TrackId)
+                        {
+                            break;
+                        }
+                        soundCol = null;
+                    }
+
+                    if (soundCol == null)
                     {
                         GlobalDataSingleton.Instance.SoundCollection.Clear();
                         GlobalDataSingleton.Instance.SoundCollection.Add(soundData);

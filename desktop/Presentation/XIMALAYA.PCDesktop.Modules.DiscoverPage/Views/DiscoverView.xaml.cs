@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.Composition;
 using System.Windows;
 
-namespace XIMALAYA.PCDesktop.Modules.DiscoverPage.Views
+namespace XIMALAYA.PCDesktop.Modules.DiscoverModule.Views
 {
     /// <summary>
     /// DiscoverView.xaml 的交互逻辑

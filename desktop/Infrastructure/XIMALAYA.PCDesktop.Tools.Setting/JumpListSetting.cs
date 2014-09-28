@@ -18,6 +18,8 @@ namespace XIMALAYA.PCDesktop.Tools.Setting
         public JumpListSetting()
         {
             this.JumpItemList = new List<JumpItem>();
+
+            
         }
 
         public override void Init()
@@ -39,7 +41,6 @@ namespace XIMALAYA.PCDesktop.Tools.Setting
                     this.Dictionary.Remove(type.Name);
                 }
             }
-
             this.Jumplist = JumpList.GetJumpList(Application.Current);
 
             if (this.Jumplist == null) this.Jumplist = new JumpList();
@@ -47,7 +48,7 @@ namespace XIMALAYA.PCDesktop.Tools.Setting
             this.Jumplist.ShowFrequentCategory = false;
             this.Jumplist.ShowRecentCategory = false;
             this.Jumplist.JumpItems.Clear();
-            this.Jumplist.JumpItems.AddRange(JumpItemList);
+            this.Jumplist.JumpItems.AddRange(this.JumpItemList);
 
             JumpList.SetJumpList(Application.Current, this.Jumplist);
         }
@@ -59,7 +60,7 @@ namespace XIMALAYA.PCDesktop.Tools.Setting
             try
             {
                 this.JumpItemList = this.Jumplist.JumpItems;
-                string val = XmlUtil.Serializer(type, this.Jumplist);
+                string val = XmlUtil.Serializer(type, this);
 
                 this.Dictionary[type.Name] = val;
             }

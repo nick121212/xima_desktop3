@@ -27,7 +27,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XIMALAYA.PCDesktop.Tools.Pl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XIMALAYA.PCDesktop.Common", "Presentation\XIMALAYA.PCDesktop.Events\XIMALAYA.PCDesktop.Common.csproj", "{D36CA7A5-CED6-482D-A440-2E9F8F4D495E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XIMALAYA.PCDesktop.Modules.DiscoverPage", "Presentation\XIMALAYA.PCDesktop.Modules.DiscoverPage\XIMALAYA.PCDesktop.Modules.DiscoverPage.csproj", "{B59B5BFB-242B-4AB0-9E15-C8ABDCCBF6E0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XIMALAYA.PCDesktop.Modules.DiscoverModule", "Presentation\XIMALAYA.PCDesktop.Modules.DiscoverPage\XIMALAYA.PCDesktop.Modules.DiscoverModule.csproj", "{B59B5BFB-242B-4AB0-9E15-C8ABDCCBF6E0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FluetJson-Net", "FluetJson-Net", "{55B3718D-1DE9-42D5-B690-25EFE541CCAD}"
 EndProject
@@ -99,6 +99,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shell", "Infrastructure\WindowsAPICodePack\Shell\Shell.csproj", "{AA0C00CB-8699-4F37-BFAE-40CA87ACC06D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XIMALAYA.PCDesktop.Untils", "Infrastructure\XIMALAYA.PCDesktop.Untils\XIMALAYA.PCDesktop.Untils.csproj", "{CCBF29F7-73E2-48B8-9EAC-E72526F53600}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XIMALAYA.PCDesktop.Modules.AboutModule", "Presentation\XIMALAYA.PCDesktop.Modules.AboutModule\XIMALAYA.PCDesktop.Modules.AboutModule.csproj", "{A3E45293-9C96-4A79-995C-44F805DF879A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -506,6 +508,18 @@ Global
 		{CCBF29F7-73E2-48B8-9EAC-E72526F53600}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CCBF29F7-73E2-48B8-9EAC-E72526F53600}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
 		{CCBF29F7-73E2-48B8-9EAC-E72526F53600}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{A3E45293-9C96-4A79-995C-44F805DF879A}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{A3E45293-9C96-4A79-995C-44F805DF879A}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{A3E45293-9C96-4A79-995C-44F805DF879A}.CodeAnalysisDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3E45293-9C96-4A79-995C-44F805DF879A}.CodeAnalysisDebug|Any CPU.Build.0 = Debug|Any CPU
+		{A3E45293-9C96-4A79-995C-44F805DF879A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3E45293-9C96-4A79-995C-44F805DF879A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3E45293-9C96-4A79-995C-44F805DF879A}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3E45293-9C96-4A79-995C-44F805DF879A}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{A3E45293-9C96-4A79-995C-44F805DF879A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3E45293-9C96-4A79-995C-44F805DF879A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3E45293-9C96-4A79-995C-44F805DF879A}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{A3E45293-9C96-4A79-995C-44F805DF879A}.SingleImage|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -552,5 +566,6 @@ Global
 		{2E1FB0DF-F9BB-4909-9F32-2D9D022A8E57} = {BB0B123D-C17B-4627-851C-7D801ACCF8CF}
 		{AA0C00CB-8699-4F37-BFAE-40CA87ACC06D} = {BB0B123D-C17B-4627-851C-7D801ACCF8CF}
 		{CCBF29F7-73E2-48B8-9EAC-E72526F53600} = {3C6A2C1F-FF7A-4F1A-9E7C-5458C27A37AD}
+		{A3E45293-9C96-4A79-995C-44F805DF879A} = {6DE0B7E0-6E4D-49D3-B923-0B0BC143AC18}
 	EndGlobalSection
 EndGlobal

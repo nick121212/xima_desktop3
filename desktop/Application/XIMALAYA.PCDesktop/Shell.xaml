@@ -15,7 +15,6 @@
                       Title="{Binding WindowTitle}" 
 					  ShowTitleBar="True"
                       MinHeight="850"
-					  Topmost="False"
                       MinWidth="1150"
                       Width="1150"
                       Height="850"

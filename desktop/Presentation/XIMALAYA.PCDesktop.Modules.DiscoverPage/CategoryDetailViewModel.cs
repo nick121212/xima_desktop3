@@ -12,9 +12,9 @@ using XIMALAYA.PCDesktop.Core.Models.Category;
 using XIMALAYA.PCDesktop.Core.Models.Tags;
 using XIMALAYA.PCDesktop.Core.ParamsModel;
 using XIMALAYA.PCDesktop.Core.Services;
-using XIMALAYA.PCDesktop.Modules.DiscoverPage.Views;
+using XIMALAYA.PCDesktop.Modules.DiscoverModule.Views;
 
-namespace XIMALAYA.PCDesktop.Modules.DiscoverPage
+namespace XIMALAYA.PCDesktop.Modules.DiscoverModule
 {
     /// <summary>
     /// 分类详情页面

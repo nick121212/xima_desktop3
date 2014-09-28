@@ -7,8 +7,8 @@
     <ProjectGuid>{B59B5BFB-242B-4AB0-9E15-C8ABDCCBF6E0}</ProjectGuid>
     <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>XIMALAYA.PCDesktop.Modules.DiscoverPage</RootNamespace>
-    <AssemblyName>XIMALAYA.PCDesktop.Modules.DiscoverPage</AssemblyName>
+    <RootNamespace>XIMALAYA.PCDesktop.Modules.DiscoverModule</RootNamespace>
+    <AssemblyName>XIMALAYA.PCDesktop.Modules.DiscoverModule</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

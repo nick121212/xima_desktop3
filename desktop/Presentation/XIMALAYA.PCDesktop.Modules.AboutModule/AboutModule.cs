@@ -1,28 +1,23 @@
 ﻿using Microsoft.Practices.Prism.MefExtensions.Modularity;
 using XIMALAYA.PCDesktop.Common;
 using XIMALAYA.PCDesktop.Common.Events;
-using XIMALAYA.PCDesktop.Modules.DiscoverModule.Views;
-using XIMALAYA.PCDesktop.Tools;
+using XIMALAYA.PCDesktop.Modules.AboutModule.Views;
 using XIMALAYA.PCDesktop.Untils;
 
-namespace XIMALAYA.PCDesktop.Modules.DiscoverModule
+namespace XIMALAYA.PCDesktop.Modules.AboutModule
 {
-    [ModuleExport(WellKnownModuleNames.DiscoverModule, typeof(DiscoverModule))]
-    public class DiscoverModule : BaseModule
+    [ModuleExport(WellKnownModuleNames.AboutModule, typeof(AboutModule))]
+    public class AboutModule : BaseModule
     {
         public override void Initialize()
         {
-            var detailModel = this.Container.GetInstance<CategoryDetailViewModel>();
-
-            detailModel.Initialize();
             this.EventAggregator.GetEvent<ContentChangeEvent>().Subscribe(s =>
             {
-                if (s == WellKnownModuleNames.DiscoverModule)
+                if (s == WellKnownModuleNames.AboutModule)
                 {
                     this.LoadModule();
                 }
             });
-            this.LoadModule();
         }
         /// <summary>
         /// 加载模块
@@ -31,7 +26,7 @@ namespace XIMALAYA.PCDesktop.Modules.DiscoverModule
         {
             if (this.RegionManager.Regions.ContainsRegionWithName(WellKnownRegionNames.DiscoverModuleRegion))
             {
-                var view = this.Container.GetInstance<DiscoverView>();
+                var view = this.Container.GetInstance<AboutView>();
                 var region = this.RegionManager.Regions[WellKnownRegionNames.DiscoverModuleRegion];
 
                 if (!region.ActiveViews.Contains(view))
@@ -40,7 +35,7 @@ namespace XIMALAYA.PCDesktop.Modules.DiscoverModule
                     {
                         region.Remove(activeView);
                     }
-                    view.ViewModel.Initialize();
+                    
                     region.Add(view);
                 }
             }

@@ -107,7 +107,7 @@
 		<!--控制按钮-->
 		<StackPanel Grid.Column="3" Grid.Row="1" Orientation="Horizontal">
 			<!--分享条-->
-			<MControls:SharePanel Margin="5 0">
+			<MControls:SharePanel Margin="2 0">
 				<MControls:SharePanel.DataContext>
 					<Binding Path="SoundData" Source="{x:Static tools:GlobalDataSingleton.Instance}"/>
 				</MControls:SharePanel.DataContext>
@@ -115,6 +115,7 @@
 			<!--音量控制-->
 			<StackPanel x:Name="BdVolumeControl" 
 						Width="30" 
+						Margin="2 0"
 						Background="Transparent" 
 						Orientation="Horizontal">
 				<!--静音-->
@@ -157,7 +158,7 @@
 			<!--上一首-->
 			<MControls:MyToggleButton Width="30" 
 								      Height="30"
-									  Margin="5"
+									  Margin="2 0"
 								      BorderType="Ellipse"
 									  ToolTip="上一首"
 									  Command="{Binding PrevCommand,Source={x:Static tools:CommandSingleton.Instance}}">
@@ -179,7 +180,7 @@
 								      Height="40"
 								      BorderType="Ellipse"
 									  IsThreeState="True"
-									  ToolTipService.IsEnabled="False"
+									  Margin="2 0"
                                       Command="{Binding BassEngine.PlayCommand,Source={x:Static tools:GlobalDataSingleton.Instance}}"
                                       CommandParameter="{Binding Source={RelativeSource Self},Path=IsChecked}">
 				<MControls:MyToggleButton.IsChecked>
@@ -221,7 +222,7 @@
 			<!--下一首-->
 			<MControls:MyToggleButton Width="30" 
 								      Height="30"
-									  Margin="5"
+									  Margin="2 0"
 								      BorderType="Ellipse"
 									  ToolTip="下一首"
 									  Command="{Binding NextCommand,Source={x:Static tools:CommandSingleton.Instance}}">
@@ -243,7 +244,7 @@
 								      Height="30"
 								      BorderType="Ellipse"
 									  IsThreeState="True"
-									  Margin="5 0"
+									  Margin="2 0"
 									  IsChecked="{Binding PlayMode,Source={x:Static tools:GlobalDataSingleton.Instance}}">
 				<MControls:MyToggleButton.Content>
 					<Label Background="Transparent" ToolTip="顺序播放">
@@ -274,7 +275,7 @@
 			<MControls:MyToggleButton x:Name="btnShowList"
 									  Width="30" 
 								      Height="30"
-									  Margin="2"
+									  Margin="2 0"
 									  IsThreeState="True"
 								      BorderType="Ellipse"
 									  IsBackground="Visible"

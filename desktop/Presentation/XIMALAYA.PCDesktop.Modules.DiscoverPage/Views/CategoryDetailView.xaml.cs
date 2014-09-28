@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace XIMALAYA.PCDesktop.Modules.DiscoverPage.Views
+namespace XIMALAYA.PCDesktop.Modules.DiscoverModule.Views
 {
     /// <summary>
     /// CategoryDetailView.xaml 的交互逻辑

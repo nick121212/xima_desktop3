@@ -143,15 +143,6 @@ namespace XIMALAYA.PCDesktop
             this.EventAggregator = eventAggregator;
             this.WindowTitle = GlobalDataSingleton.Instance.SystemTitle;
 
-            try
-            {
-                this.WindowTitle += "-" + ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
-            }
-            catch
-            {
-
-            }
-
             //订阅加载模块事件
             if (this.EventAggregator != null)
             {

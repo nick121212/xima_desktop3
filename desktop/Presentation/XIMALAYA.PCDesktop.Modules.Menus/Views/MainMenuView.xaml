@@ -20,12 +20,12 @@
 	<StackPanel Orientation="Vertical" 
 				Margin="0 10 0 0"
 				FocusManager.IsFocusScope="True">
+		<!--搜索-->
 		<MControls:MyToggleButton Width="100" 
 								  Height="90" 
 								  Padding="0 5 0 0"
 								  Margin="0 5"
 								  BorderType="None"
-								  IsSingle="True"
 								  Foreground="{DynamicResource BlackBrush}"
 								  Command="{Binding ShowContentCommand,Source={x:Static tools:CommandSingleton.Instance}}"
 								  CommandParameter="{x:Static untils:WellKnownModuleNames.SearchModule}">
@@ -43,14 +43,28 @@
 						   Content="搜索"/>
 				</StackPanel>
 			</MControls:MyToggleButton.Content>
+			<MControls:MyToggleButton.ContentChecked>
+				<StackPanel>
+					<Path Data="{Binding [search], Source={x:Static MControls:PathData.Instance}}" 
+						  Style="{DynamicResource NavPathStyle}"
+						  HorizontalAlignment="Center"
+						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
+					</Path>
+					<Label Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
+						   HorizontalAlignment="Center" 
+						   FontSize="16"
+						   FontWeight="Bold"
+						   Content="搜索"/>
+				</StackPanel>
+			</MControls:MyToggleButton.ContentChecked>
 		</MControls:MyToggleButton>
+		<!--发现-->
 		<MControls:MyToggleButton Width="100" 
 								  Height="90" 
 								  Padding="0 5 0 0"
 								  Margin="0 5"
 								  BorderThickness="0"
 								  BorderType="None"
-								  IsSingle="True"
 								  Foreground="{DynamicResource BlackBrush}"
 								  Command="{Binding ShowContentCommand,Source={x:Static tools:CommandSingleton.Instance}}"
 								  CommandParameter="{x:Static untils:WellKnownModuleNames.DiscoverModule}">
@@ -68,7 +82,22 @@
 						   Content="发现"/>
 				</StackPanel>
 			</MControls:MyToggleButton.Content>
+			<MControls:MyToggleButton.ContentChecked>
+				<StackPanel>
+					<Path Data="{Binding [discover], Source={x:Static MControls:PathData.Instance}}" 
+						  Style="{DynamicResource NavPathStyle}"
+						  HorizontalAlignment="Center"
+						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
+					</Path>
+					<Label Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
+						   HorizontalAlignment="Center" 
+						   FontSize="16"
+						   FontWeight="Bold"
+						   Content="发现"/>
+				</StackPanel>
+			</MControls:MyToggleButton.ContentChecked>
 		</MControls:MyToggleButton>
+		<!--设置-->
 		<MControls:MyToggleButton Width="100" 
 								  Height="90" 
 								  Padding="0 5 0 0"
@@ -107,6 +136,7 @@
 				</StackPanel>
 			</MControls:MyToggleButton.ContentChecked>
 		</MControls:MyToggleButton>
+		<!--下载-->
 		<MControls:MyToggleButton Width="100" 
 								  Height="90" 
 								  Padding="0 5 0 0"
@@ -132,15 +162,32 @@
 						   Content="下载"/>
 				</StackPanel>
 			</MControls:MyToggleButton.Content>
+			<MControls:MyToggleButton.ContentChecked>
+				<StackPanel>
+					<Path Data="{Binding [download], Source={x:Static MControls:PathData.Instance}}" 
+						  Style="{DynamicResource NavPathStyle}"
+						  HorizontalAlignment="Center"
+						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
+					</Path>
+					<Label Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
+						   HorizontalAlignment="Center" 
+						   FontSize="16"
+						   FontWeight="Bold"
+						   Content="下载"/>
+				</StackPanel>
+			</MControls:MyToggleButton.ContentChecked>
 		</MControls:MyToggleButton>
+		<!--关于-->
 		<MControls:MyToggleButton Width="100" 
 								  Height="90" 
 								  Padding="0 5 0 0"
 								  Margin="0 5"
 								  BorderThickness="0"
 								  BorderType="None"
+								  IsBackground="Hidden"
 								  Foreground="{DynamicResource BlackBrush}"
-								  IsBackground="Hidden">
+								  Command="{Binding ShowContentCommand,Source={x:Static tools:CommandSingleton.Instance}}"
+								  CommandParameter="{x:Static untils:WellKnownModuleNames.AboutModule}">
 			<MControls:MyToggleButton.Content>
 				<StackPanel>
 					<Path Data="{Binding [aboutme], Source={x:Static MControls:PathData.Instance}}" 

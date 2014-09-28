@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Deployment.Application;
 using System.IO.MemoryMappedFiles;
 using System.Threading;
 using System.Windows.Controls;
@@ -252,7 +253,19 @@ namespace XIMALAYA.PCDesktop.Tools
                 }
             }
         }
-        
+
+        public string Version
+        {
+            get
+            {
+                if (ApplicationDeployment.IsNetworkDeployed)
+                {
+                    return ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
+                }
+                return string.Empty + "1.0.0.1";
+            }
+        }
+
         #endregion
 
         #region 构造

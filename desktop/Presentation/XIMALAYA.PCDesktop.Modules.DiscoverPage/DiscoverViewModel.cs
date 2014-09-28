@@ -15,7 +15,7 @@ using XIMALAYA.PCDesktop.Core.Models.Subject;
 using XIMALAYA.PCDesktop.Core.ParamsModel;
 using XIMALAYA.PCDesktop.Core.Services;
 
-namespace XIMALAYA.PCDesktop.Modules.DiscoverPage
+namespace XIMALAYA.PCDesktop.Modules.DiscoverModule
 {
     [Export]
     public sealed class DiscoverViewModel : BaseViewModel
