@@ -42,19 +42,18 @@
     <DefineConstants>TRACE;DEBUG;NET4_5</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>
-    </DocumentationFile>
+    <DocumentationFile>..\..\..\build\MahApps.Metro.XML</DocumentationFile>
     <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\..\release\</OutputPath>
+    <OutputPath>bin\Release\NET45\</OutputPath>
     <IntermediateOutputPath>obj\NET45\Release\</IntermediateOutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\..\release\MahApps.Metro.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\NET45\MahApps.Metro.XML</DocumentationFile>
     <NoWarn>1572,1573,1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition="'$(StrongName)'=='True'">
@@ -90,6 +89,7 @@
     <Compile Include="Controls\ClosingWindowEventHandlerArgs.cs" />
     <Compile Include="Controls\ComboBoxHelper.cs" />
     <Compile Include="Controls\ControlsHelper.cs" />
+    <Compile Include="Controls\CustomValidationPopup.cs" />
     <Compile Include="Controls\DataGridNumericUpDownColumn.cs" />
     <Compile Include="Controls\Dialogs\BaseMetroDialog.cs" />
     <Compile Include="Controls\Dialogs\DialogManager.cs" />
@@ -367,6 +367,11 @@
       <DependentUpon>Controls.xaml</DependentUpon>
     </Page>
     <Page Include="Styles\Controls.ProgressBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <DependentUpon>Controls.xaml</DependentUpon>
+    </Page>
+    <Page Include="Styles\Controls.StatusBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <DependentUpon>Controls.xaml</DependentUpon>
