@@ -61,24 +61,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAlbumService.cs" />
+    <Compile Include="Impl\AlbumService.cs" />
     <Compile Include="Impl\ShareService.cs" />
-    <Compile Include="Impl\UserDetailService.cs" />
+    <Compile Include="Impl\UserService.cs" />
     <Compile Include="IShareService.cs" />
-    <Compile Include="Impl\SoundDetailService.cs" />
-    <Compile Include="IUserDetailService.cs" />
-    <Compile Include="ISoundDetailService.cs" />
-    <Compile Include="ICategoryTagAlbumsService.cs" />
-    <Compile Include="ICategoryTagService.cs" />
-    <Compile Include="Impl\FocusImageService.cs" />
-    <Compile Include="Impl\CategoryTagAlbumsService.cs" />
-    <Compile Include="Impl\CategoryTagService.cs" />
-    <Compile Include="Impl\AlbumDetailService.cs" />
-    <Compile Include="Impl\SuperExploreIndexService.cs" />
+    <Compile Include="Impl\SoundService.cs" />
+    <Compile Include="IUserService.cs" />
+    <Compile Include="ISoundService.cs" />
+    <Compile Include="Impl\ExploreService.cs" />
     <Compile Include="Impl\SearchService.cs" />
-    <Compile Include="IAlbumDetailService.cs" />
-    <Compile Include="IFocusImageService.cs" />
     <Compile Include="ISearchService.cs" />
-    <Compile Include="ISuperExploreIndexService.cs" />
+    <Compile Include="IExploreService.cs" />
     <Compile Include="Impl\ServiceBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

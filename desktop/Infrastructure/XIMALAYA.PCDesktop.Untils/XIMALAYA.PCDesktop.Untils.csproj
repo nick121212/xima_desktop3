@@ -53,7 +53,6 @@
     <Compile Include="AeroHelper.cs" />
     <Compile Include="ColorUntil.cs" />
     <Compile Include="HttpWebRequestOpt.cs" />
-    <Compile Include="IFlyoutFactory.cs" />
     <Compile Include="MD5Until.cs" />
     <Compile Include="OSInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -70,6 +69,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="SingletonBase.cs" />
+    <Compile Include="Functions.cs" />
     <Compile Include="WellKnownModuleNames.cs" />
     <Compile Include="WellKnownRegionNames.cs" />
     <Compile Include="WellKnownUrl.cs" />

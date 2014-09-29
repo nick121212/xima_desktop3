@@ -163,6 +163,10 @@ namespace XIMALAYA.PCDesktop
                     this.AddKeyToJumpList(e);
                 });
             }
+            App.Current.Exit += (o, e) =>
+            {
+                this.Dispose();
+            };
             //注册程序错误事件
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler((sender, e) =>
             {

@@ -168,7 +168,24 @@
 		</Controls:WindowCommands>
 	</Controls:MetroWindow.RightWindowCommands>-->
 	<!--内容框架-->
-	<DockPanel>
+
+	<Grid ClipToBounds="False">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="80"/>
+		</Grid.RowDefinitions>
+
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+
+		<!--播放器-->
+		<Canvas Grid.Row="1"
+				Grid.Column="0"
+				Grid.ColumnSpan="2">
+			<ContentControl Canvas.Bottom="0" cal:RegionManager.RegionName="{x:Static untils:WellKnownRegionNames.MusicPlayerModuleRegion}"/>
+		</Canvas>
 		<!--托盘提示-->
 		<tb:TaskbarIcon x:Name="NotifyIcon"
 						IconSource="/ICO/icon_16.ico"
@@ -178,9 +195,6 @@
 			<tb:TaskbarIcon.TrayToolTip>
 				<local:BalloonSongInfo />
 			</tb:TaskbarIcon.TrayToolTip>
-			<!--<tb:TaskbarIcon.TrayPopup>
-				<local:PopupControlPanel/>
-			</tb:TaskbarIcon.TrayPopup>-->
 			<tb:TaskbarIcon.ContextMenu>
 				<ContextMenu>
 					<ContextMenu.Template>
@@ -191,12 +205,19 @@
 				</ContextMenu>
 			</tb:TaskbarIcon.ContextMenu>
 		</tb:TaskbarIcon>
-		<!--播放器-->
-		<Grid DockPanel.Dock="Bottom" MaxHeight="70" ClipToBounds="False">
-			<ContentControl cal:RegionManager.RegionName="{x:Static untils:WellKnownRegionNames.MusicPlayerModuleRegion}"/>
-		</Grid>
+		<!--内容-->
+		<ContentControl Grid.Column="1" 
+						Grid.Row="0"
+						cal:RegionManager.RegionName="{x:Static untils:WellKnownRegionNames.DiscoverModuleRegion}" />
+		<!--弹出层内容-->
+		<Controls:FlyoutsControl Grid.Column="1" 
+								 Grid.Row="0"
+								 Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Grid}, Path=ActualHeight}" 
+								 x:Name="ContainerGrid"/>
 		<!--菜单-->
-		<Border x:Name="LeftContainer" 
+		<Border Grid.Row="0"
+				Grid.Column="0"
+				x:Name="LeftContainer" 
 				DockPanel.Dock="Left" 
 				Width="100"
 				BorderBrush="{DynamicResource AccentColorBrush}"
@@ -205,14 +226,8 @@
 							Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Border}, Path=ActualHeight}" 
 							cal:RegionManager.RegionName="{x:Static untils:WellKnownRegionNames.MenusRegion}"/>
 		</Border>
-		<!--内容-->
-		<Grid x:Name="ContentContainer">
-			<ContentControl cal:RegionManager.RegionName="{x:Static untils:WellKnownRegionNames.DiscoverModuleRegion}" />
-			<Controls:FlyoutsControl Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Grid}, Path=ActualWidth}" 
-									 Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Grid}, Path=ActualHeight}" 
-									 x:Name="ContainerGrid"/>
-		</Grid>
-	</DockPanel>
+
+	</Grid>
 
 </Controls:MetroWindow>
 

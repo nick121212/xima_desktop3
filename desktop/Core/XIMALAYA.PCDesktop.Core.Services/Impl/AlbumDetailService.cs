@@ -17,11 +17,6 @@ namespace XIMALAYA.PCDesktop.Core.Services
         /// <summary>
         /// 
         /// </summary>
-        [Import]
-        protected IAlbumInfoResultResponsitory Responsitory { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
         public void GetData<T>(Action<object> act,T param)
         {
             Result<AlbumInfoResult> result = new Result<AlbumInfoResult>();

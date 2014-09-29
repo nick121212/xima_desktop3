@@ -41,17 +41,17 @@
         config.Output.Encoding = Encoding.UTF8;
         config.RenderToFile(Path.Combine(path, config.FileName));
 
-        IRespositoriesTemplate config1= new IRespositoriesTemplate(model);
-        RespositoriesTemplate config2= new RespositoriesTemplate(model);
-
-        path = model.UseModuleDir 
-            ? string.Format(@"{0}\Respositories\{1}", projectPath, model.ModuleName)
-            : string.Format(@"{0}\Respositories", projectPath);
-        config1.Output.Encoding = Encoding.UTF8;
-        config1.RenderToFile(Path.Combine(path, config1.FileName));
-
-        config2.Output.Encoding = Encoding.UTF8;
-        config2.RenderToFile(Path.Combine(path, config2.FileName));
+        //IRespositoriesTemplate config1= new IRespositoriesTemplate(model);
+        //RespositoriesTemplate config2= new RespositoriesTemplate(model);
+//
+        //path = model.UseModuleDir 
+            //? string.Format(@"{0}\Respositories\{1}", projectPath, model.ModuleName)
+            //: string.Format(@"{0}\Respositories", projectPath);
+        //config1.Output.Encoding = Encoding.UTF8;
+        //config1.RenderToFile(Path.Combine(path, config1.FileName));
+//
+        //config2.Output.Encoding = Encoding.UTF8;
+        //config2.RenderToFile(Path.Combine(path, config2.FileName));
     }
 
     baseType = typeof(BaseData);

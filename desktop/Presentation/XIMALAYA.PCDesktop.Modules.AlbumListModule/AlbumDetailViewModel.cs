@@ -36,7 +36,7 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumModule
         /// 专辑详情服务
         /// </summary>
         [Import]
-        private IAlbumDetailService AlbumDetailService { get; set; }
+        private IAlbumService AlbumDetailService { get; set; }
         /// <summary>
         /// 专辑数据
         /// </summary>
@@ -95,7 +95,7 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumModule
 
             this.Params.Page = this.CurrentPage;
             base.GetData(isClear);
-            this.AlbumDetailService.GetData(result =>
+            this.AlbumDetailService.GetDetailData(result =>
             {
                 AlbumInfoResult albumInfo = result as AlbumInfoResult;
 

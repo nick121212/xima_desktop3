@@ -21,6 +21,28 @@ namespace XIMALAYA.PCDesktop.Modules.UserModule
         {
             this.EventAggregator.GetEvent<UserEvent<UserEventArgument>>().Subscribe(AddMinUserViewToRegion);
             this.EventAggregator.GetEvent<UserEvent<long>>().Subscribe(AddUserViewToRegion);
+            this.EventAggregator.GetEvent<UserEvent<int>>().Subscribe(AddMutiUserViewToRegion);
+        }
+
+        /// <summary>
+        /// 多用户视图
+        /// </summary>
+        /// <param name="id"></param>
+        private void AddMutiUserViewToRegion(int id)
+        {
+            var view = this.Container.GetInstance<MutiUserView>();
+            string regionName = this.ContainerView.GetFlyout(" ", null, null, view.ViewModel, () => view.ViewModel.Title);
+
+            if (view != null)
+            {
+                if (this.RegionManager.Regions.ContainsRegionWithName(regionName))
+                {
+                    var region = this.RegionManager.Regions[regionName];
+
+                    view.ViewModel.Initialize(id);
+                    region.Add(view);
+                }
+            }
         }
         /// <summary>
         /// 普通用户视图
@@ -64,6 +86,8 @@ namespace XIMALAYA.PCDesktop.Modules.UserModule
         {
             base.Dispose();
             this.EventAggregator.GetEvent<UserEvent<UserEventArgument>>().Unsubscribe(AddMinUserViewToRegion);
+            this.EventAggregator.GetEvent<UserEvent<long>>().Unsubscribe(AddUserViewToRegion);
+            this.EventAggregator.GetEvent<UserEvent<int>>().Unsubscribe(AddMutiUserViewToRegion);
         }
     }
 }

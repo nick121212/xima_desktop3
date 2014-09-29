@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Deployment.Application;
+using System.IO;
 using System.IO.MemoryMappedFiles;
+using System.Reflection;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Microsoft.Practices.Prism.ViewModel;
 using XIMALAYA.PCDesktop.Core.Models.Sound;
 using XIMALAYA.PCDesktop.Tools.Player;
+using XIMALAYA.PCDesktop.Untils;
 
 namespace XIMALAYA.PCDesktop.Tools
 {
@@ -166,6 +169,10 @@ namespace XIMALAYA.PCDesktop.Tools
         /// </summary>
         public MemoryMappedFile MemoryMappedFile { get; set; }
         /// <summary>
+        /// 启动路径
+        /// </summary>
+        public string ExeFileLocation { get; set; }
+        /// <summary>
         /// 开机自动启动
         /// </summary>
         public bool IsAutoStart
@@ -179,6 +186,7 @@ namespace XIMALAYA.PCDesktop.Tools
                 if (value != _IsAutoStart)
                 {
                     _IsAutoStart = value;
+                    //Functions.SetAutoRun(this.ExeFileLocation, _IsAutoStart);
                     this.RaisePropertyChanged(() => this.IsAutoStart);
                 }
             }

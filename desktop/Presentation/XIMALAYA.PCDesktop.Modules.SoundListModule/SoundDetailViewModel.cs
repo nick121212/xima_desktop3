@@ -51,7 +51,12 @@ namespace XIMALAYA.PCDesktop.Modules.SoundModule
         /// 声音详情页接口
         /// </summary>
         [Import]
-        private ISoundDetailService SoundDetailService { get; set; }
+        private ISoundService SoundService { get; set; }
+        /// <summary>
+        /// 用户服务接口
+        /// </summary>
+        [Import]
+        private IUserService UserService { get; set; }
         /// <summary>
         /// 喜欢改声音的用户列表
         /// </summary>
@@ -71,11 +76,11 @@ namespace XIMALAYA.PCDesktop.Modules.SoundModule
         /// <param name="isClear"></param>
         protected override void GetData(bool isClear)
         {
-            if (this.SoundDetailService == null) return;
+            if (this.SoundService == null) return;
 
             if (this.SoundData == null)
             {
-                this.SoundDetailService.GetData(res =>
+                this.SoundService.GetDetailData(res =>
                 {
                     var result = res as SoundData;
                     Application.Current.Dispatcher.InvokeAsync(new Action(() =>
@@ -110,7 +115,7 @@ namespace XIMALAYA.PCDesktop.Modules.SoundModule
             base.GetData(isClear);
             this.Param.Page = this.CurrentPage;
             this.Param.PerPage = this.PageSize;
-            this.SoundDetailService.GetLikedUsers(res =>
+            this.UserService.GetSoundLikedUsers(res =>
             {
                 var result = res as LikedSoundUserResult;
                 Application.Current.Dispatcher.InvokeAsync(new Action(() =>

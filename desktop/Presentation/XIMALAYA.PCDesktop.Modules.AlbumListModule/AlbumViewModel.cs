@@ -40,7 +40,7 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumModule
         /// 标签下的专辑服务
         /// </summary>
         [Import]
-        private ICategoryTagAlbumsService CategoryTagAlbumsService { get; set; }
+        private IAlbumService AlbumService { get; set; }
         /// <summary>
         /// 当前参数
         /// </summary>
@@ -152,11 +152,11 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumModule
         /// <param name="isClear"></param>
         protected override void GetData(bool isClear)
         {
-            if (this.CategoryTagAlbumsService != null)
+            if (this.AlbumService != null)
             {
                 this.Params.Page = this.CurrentPage;
                 base.GetData(isClear);
-                this.CategoryTagAlbumsService.GetData(result =>
+                this.AlbumService.GetTagAlbums(result =>
                 {
                     TagAlbumsResult tagAlbumsResult = result as TagAlbumsResult;
                     Application.Current.Dispatcher.InvokeAsync(new Action(() =>

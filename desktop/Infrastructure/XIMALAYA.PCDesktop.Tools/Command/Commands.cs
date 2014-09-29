@@ -110,6 +110,10 @@ namespace XIMALAYA.PCDesktop.Tools
         /// </summary>
         public DelegateCommand<JumpListEventArgs> AddToJumpListCommand { get; set; }
 
+        public DelegateCommand<int?> MutiUserCommand { get; set; }
+        public DelegateCommand<int?> MutiAlbumCommand { get; set; }
+        public DelegateCommand<int?> MutiSoundCommand { get; set; }
+
         #endregion
 
         #region 构造
@@ -127,7 +131,7 @@ namespace XIMALAYA.PCDesktop.Tools
                 SoundData soundCol = null;
 
                 if (soundData == null) return;
-                
+
                 for (int i = 0; i < GlobalDataSingleton.Instance.SoundCollection.Count; i++)
                 {
                     soundCol = GlobalDataSingleton.Instance.SoundCollection[i] as SoundData;
@@ -282,6 +286,7 @@ namespace XIMALAYA.PCDesktop.Tools
                     this.EventAggregator.GetEvent<SoundDetailEvent<long>>().Publish((long)trackId);
                 }
             });
+            //用户详情页
             this.UserDetailCommand = new DelegateCommand<long?>(userId =>
             {
                 if (userId.HasValue)
@@ -294,7 +299,7 @@ namespace XIMALAYA.PCDesktop.Tools
             {
                 this.EventAggregator.GetEvent<ContentChangeEvent>().Publish(s);
             });
-
+            //直接跳转浏览器
             this.RedirectCommand = new DelegateCommand<string>(s =>
             {
                 try
@@ -426,6 +431,21 @@ namespace XIMALAYA.PCDesktop.Tools
             this.AddToJumpListCommand = new DelegateCommand<JumpListEventArgs>((e) =>
             {
                 this.EventAggregator.GetEvent<JumplistEvent<JumpListEventArgs>>().Publish(e);
+            });
+            this.MutiUserCommand = new DelegateCommand<int?>((id) =>
+            {
+                if (id.HasValue)
+                {
+                    this.EventAggregator.GetEvent<UserEvent<int>>().Publish((int)id);
+                }
+            });
+            this.MutiAlbumCommand = new DelegateCommand<int?>((id) =>
+            {
+                MessageBox.Show(id.ToString());
+            });
+            this.MutiSoundCommand = new DelegateCommand<int?>((id) =>
+            {
+                MessageBox.Show(id.ToString());
             });
         }
 

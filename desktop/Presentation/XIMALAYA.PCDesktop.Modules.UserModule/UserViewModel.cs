@@ -29,10 +29,10 @@ namespace XIMALAYA.PCDesktop.Modules.UserModule
         /// </summary>
         private UserDetailParam Params { get; set; }
         /// <summary>
-        /// 用户详情服务
+        /// 专辑服务
         /// </summary>
         [Import]
-        private IUserDetailService UserDetailService { get; set; }
+        private IAlbumService AlbumService { get; set; }
 
         #endregion
 
@@ -40,14 +40,14 @@ namespace XIMALAYA.PCDesktop.Modules.UserModule
 
         protected override void GetData(bool isClear)
         {
-            if (this.UserDetailService == null)
+            if (this.AlbumService == null)
             {
                 throw new NullReferenceException();
             }
 
             this.Params.Page = this.CurrentPage;
             base.GetData(isClear);
-            this.UserDetailService.GetAlbumsData(result =>
+            this.AlbumService.GetUserAlbums(result =>
             {
                 AlbumInfoResult1 albumInfo = result as AlbumInfoResult1;
 

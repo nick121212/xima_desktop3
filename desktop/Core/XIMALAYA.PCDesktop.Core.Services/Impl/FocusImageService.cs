@@ -18,11 +18,6 @@ namespace XIMALAYA.PCDesktop.Core.Services
         /// <summary>
         /// 
         /// </summary>
-        [Import]
-        protected IFocusImageResultResponsitory Responsitory { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
         public void GetData<T>(Action<object> act,T param)
         {
             Result<FocusImageResult> result = new Result<FocusImageResult>();

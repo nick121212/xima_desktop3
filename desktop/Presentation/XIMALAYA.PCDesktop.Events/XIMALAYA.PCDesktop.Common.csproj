@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Events\AlbumListEvent.cs" />
+    <Compile Include="IFlyoutFactory.cs" />
     <Compile Include="Modules\BaseModule.cs" />
     <Compile Include="Modules\BaseViewModel.cs" />
     <Compile Include="Events\ChangeCoverEvent.cs" />

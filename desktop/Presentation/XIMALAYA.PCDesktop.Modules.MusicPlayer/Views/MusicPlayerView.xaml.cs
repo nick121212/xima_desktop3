@@ -19,14 +19,6 @@ namespace XIMALAYA.PCDesktop.Modules.MusicPlayer.Views
         void MusicPlayerView_Loaded(object sender, RoutedEventArgs e)
         {
             this.SpectrumAnalyzer.RegisterSoundPlayer(GlobalDataSingleton.Instance.BassEngine);
-
-            //if (!TaskbarManager.Instance.TabbedThumbnail.IsThumbnailPreviewAdded(coverPath))
-            //{
-            //    Vector peekOffect = Utilities.GetOffset(Application.Current.MainWindow, coverPath);
-            //    TabbedThumbnail newPreview = new TabbedThumbnail(Application.Current.MainWindow, coverPath, peekOffect);
-            //    TaskbarManager.Instance.TabbedThumbnail.AddThumbnailPreview(newPreview);
-            //    TaskbarManager.Instance.TabbedThumbnail.SetActiveTab(newPreview);
-            //}
         }
 
         [Import]

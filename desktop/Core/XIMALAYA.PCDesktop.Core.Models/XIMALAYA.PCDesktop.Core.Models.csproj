@@ -58,6 +58,9 @@
     <Compile Include="BaseResult.cs" />
     <Compile Include="Discover\SuperExploreIndexResult.cs" />
     <Compile Include="FocusImage\FocusImageData.cs" />
+    <Compile Include="MutiData\MutiAlbumResult.cs" />
+    <Compile Include="MutiData\MutiSoundResult.cs" />
+    <Compile Include="MutiData\MutiUserResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FocusImage\FocusImageResult.cs" />
     <Compile Include="Search\SearchAlbumResult.cs" />
@@ -79,8 +82,8 @@
     <Compile Include="Tags\TagAlbumsResult.cs" />
     <Compile Include="Tags\TagSoundListResult.cs" />
     <Compile Include="User\LikedSoundUserResult.cs" />
+    <Compile Include="User\UserData5.cs" />
     <Compile Include="User\UserData4.cs" />
-    <Compile Include="User\UserResult.cs" />
     <Compile Include="User\UserData3.cs" />
     <Compile Include="User\UserData2.cs" />
     <Compile Include="User\UserData1.cs" />

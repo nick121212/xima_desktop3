@@ -47,7 +47,7 @@ namespace XIMALAYA.PCDesktop.Modules.UserModule
         /// 用户详情服务
         /// </summary>
         [Import]
-        private IUserDetailService UserDetailService { get; set; }
+        private IUserService UserService { get; set; }
 
         #endregion
 
@@ -55,8 +55,8 @@ namespace XIMALAYA.PCDesktop.Modules.UserModule
 
         protected override void GetData(bool isClear)
         {
-            if (this.UserDetailService == null) return;
-            this.UserDetailService.GetData(res =>
+            if (this.UserService == null) return;
+            this.UserService.GetDetailData(res =>
             {
                 var result = res as UserData;
 

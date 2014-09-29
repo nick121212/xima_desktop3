@@ -1,7 +1,9 @@
 ﻿using System;
+using System.ComponentModel.Composition;
 using System.IO;
 using System.Net;
 using FluentJson;
+using XIMALAYA.PCDesktop.Core.Data;
 
 namespace XIMALAYA.PCDesktop.Core.Services
 {
@@ -10,6 +12,13 @@ namespace XIMALAYA.PCDesktop.Core.Services
     /// </summary>
     public class ServiceBase<T> : IDisposable
     {
+        #region 属性
+
+        /// <summary>
+        /// 调用http请求类
+        /// </summary>
+        [Import]
+        protected IRepository Responsitory { get; set; }
         /// <summary>
         /// json格式转换类
         /// </summary>
@@ -18,23 +27,22 @@ namespace XIMALAYA.PCDesktop.Core.Services
         /// 数据返回后的回调
         /// </summary>
         protected Action<object> Act { get; set; }
+
+        #endregion
+
+        #region 方法
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="result"></param>
-        protected void GetDataCallBack(IAsyncResult result)
+        protected string GetDataCallBack(IAsyncResult result)
         {
             HttpWebRequest request = result.AsyncState as HttpWebRequest;
             HttpWebResponse response = request.EndGetResponse(result) as HttpWebResponse;
             Stream responseStream = response.GetResponseStream();
             StreamReader reader = new StreamReader(responseStream);
             string responseString = reader.ReadToEnd();
-            object fr = this.Decoder.Decode(responseString);
-
-            if (this.Act != null)
-            {
-                this.Act.BeginInvoke(fr, null, null);
-            }
 
             response.Dispose();
             responseStream.Dispose();
@@ -44,7 +52,21 @@ namespace XIMALAYA.PCDesktop.Core.Services
             response = null;
             responseStream = null;
             reader = null;
+
+            return responseString;
         }
+
+        protected void GetDecodeData<T1>(string responseString, JsonDecoder<T1> decoder, Action<object> act)
+        {
+            object fr = decoder.Decode(responseString);
+
+            if (act != null)
+            {
+                act.BeginInvoke((T1)fr, null, null);
+            }
+        }
+
+        #endregion
 
         #region IDisposable 成员
 

@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="XIMALAYA.PCDesktop.Modules.UserModule.Views.MutiUserView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+			 xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:MControls="http://ximalaya.com/xaml/controls"
+             xmlns:converter="http://ximalaya.com/xaml/tools/converter"
+			 xmlns:tools="http://ximalaya.com/xaml/tools">
+	<Grid Margin="10 0 10 80">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+		<Controls:MetroProgressBar Grid.Row="0" 
+								   Background="Transparent"
+								   Foreground="{DynamicResource BlackBrush}"
+								   Margin="0 0 0 2" 
+								   IsIndeterminate="{Binding IsWaiting}" />
+		<!--专辑数据-->
+		<ListBox Grid.Row="1" 
+				 ItemsSource="{Binding Users}"
+				 Background="Transparent"
+				 ItemContainerStyle="{DynamicResource NormalUserItemStyle}">
+			<ListBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<VirtualizingStackPanel></VirtualizingStackPanel>
+				</ItemsPanelTemplate>
+			</ListBox.ItemsPanel>
+		</ListBox>
+		<!--分页控件-->
+		<MControls:Pagination Grid.Row="2"
+							  PageSize="{Binding PageSize}"
+							  HorizontalAlignment="Center"
+							  Margin="3"
+							  IsEnabled="{Binding IsEnable}"
+							  CurrentPage="{Binding CurrentPage,Mode=TwoWay}"
+							  Total="{Binding Total}"/>
+	</Grid>
+</UserControl>

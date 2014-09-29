@@ -45,6 +45,7 @@ namespace XIMALAYA.PCDesktop
             FileInfo file = new FileInfo(Assembly.GetExecutingAssembly().Location);
 
             System.Environment.CurrentDirectory = file.DirectoryName;
+            GlobalDataSingleton.Instance.ExeFileLocation = file.FullName;
             mutex = new Mutex(true, "{ximalaya-thirdpart}", out createdNew);
 
             if (e.Args != null && e.Args.Length > 0)

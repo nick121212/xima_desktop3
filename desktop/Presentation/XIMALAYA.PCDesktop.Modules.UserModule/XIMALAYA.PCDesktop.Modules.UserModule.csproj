@@ -113,10 +113,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MutiUserViewModel.cs" />
     <Compile Include="UserViewModel.cs" />
     <Compile Include="UserModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserMinViewModel.cs" />
+    <Compile Include="Views\MutiUserView.xaml.cs">
+      <DependentUpon>MutiUserView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserMinView.xaml.cs">
       <DependentUpon>UserMinView.xaml</DependentUpon>
     </Compile>
@@ -125,6 +129,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\MutiUserView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserMinView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

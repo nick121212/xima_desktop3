@@ -64,9 +64,9 @@
 				</StackPanel>
 				<!--标签-->
 				<ListBox Grid.Row="2"
-					 ItemsSource="{Binding SoundData.TagList}"
-					 Background="Transparent"
-					 ItemContainerStyle="{StaticResource NormalTagStyle}">
+						 ItemsSource="{Binding SoundData.TagList}"
+						 Background="Transparent"
+						 ItemContainerStyle="{StaticResource NormalTagStyle}">
 					<ListBox.ItemsPanel>
 						<ItemsPanelTemplate>
 							<StackPanel Orientation="Horizontal"></StackPanel>

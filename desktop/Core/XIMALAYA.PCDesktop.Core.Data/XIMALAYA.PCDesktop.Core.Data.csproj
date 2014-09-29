@@ -67,6 +67,9 @@
     <Compile Include="Configurations\Discover\SuperExploreIndexResultDecorator.generated.cs" />
     <Compile Include="Configurations\FocusImage\FocusImageDataDecorator.generated.cs" />
     <Compile Include="Configurations\FocusImage\FocusImageResultDecorator.generated.cs" />
+    <Compile Include="Configurations\MutiData\MutiAlbumResultDecorator.generated.cs" />
+    <Compile Include="Configurations\MutiData\MutiSoundResultDecorator.generated.cs" />
+    <Compile Include="Configurations\MutiData\MutiUserResultDecorator.generated.cs" />
     <Compile Include="Configurations\Search\SearchAlbumResultDecorator.generated.cs" />
     <Compile Include="Configurations\Search\SearchResultDecorator.generated.cs" />
     <Compile Include="Configurations\Search\SearchSoundResultDecorator.generated.cs" />
@@ -92,48 +95,16 @@
     <Compile Include="Configurations\User\UserData2Decorator.generated.cs" />
     <Compile Include="Configurations\User\UserData3Decorator.generated.cs" />
     <Compile Include="Configurations\User\UserData4Decorator.generated.cs" />
+    <Compile Include="Configurations\User\UserData5Decorator.generated.cs" />
     <Compile Include="Configurations\User\UserDataDecorator.generated.cs" />
-    <Compile Include="Configurations\User\UserResultDecorator.generated.cs" />
     <Compile Include="Decorator\ResultBase.cs" />
     <Compile Include="IRepository.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RepositoryBase.cs">
+    <Compile Include="HttpRepository.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Respositories\Album\AlbumInfoResult1Respositories.generated.cs" />
-    <Compile Include="Respositories\Album\AlbumInfoResultRespositories.generated.cs" />
-    <Compile Include="Respositories\Album\IAlbumInfoResult1Respositories.generated.cs" />
-    <Compile Include="Respositories\Album\IAlbumInfoResultRespositories.generated.cs" />
-    <Compile Include="Respositories\Category\CategoryResultRespositories.generated.cs" />
-    <Compile Include="Respositories\Category\ICategoryResultRespositories.generated.cs" />
-    <Compile Include="Respositories\Discover\ISuperExploreIndexResultRespositories.generated.cs" />
-    <Compile Include="Respositories\Discover\SuperExploreIndexResultRespositories.generated.cs" />
-    <Compile Include="Respositories\FocusImage\FocusImageResultRespositories.generated.cs" />
-    <Compile Include="Respositories\FocusImage\IFocusImageResultRespositories.generated.cs" />
-    <Compile Include="Respositories\Search\ISearchAlbumResultRespositories.generated.cs" />
-    <Compile Include="Respositories\Search\ISearchResultRespositories.generated.cs" />
-    <Compile Include="Respositories\Search\ISearchSoundResultRespositories.generated.cs" />
-    <Compile Include="Respositories\Search\ISearchUserResultRespositories.generated.cs" />
-    <Compile Include="Respositories\Search\SearchAlbumResultRespositories.generated.cs" />
-    <Compile Include="Respositories\Search\SearchResultRespositories.generated.cs" />
-    <Compile Include="Respositories\Search\SearchSoundResultRespositories.generated.cs" />
-    <Compile Include="Respositories\Search\SearchUserResultRespositories.generated.cs" />
-    <Compile Include="Respositories\share\IShareResultRespositories.generated.cs" />
-    <Compile Include="Respositories\share\ShareResultRespositories.generated.cs" />
-    <Compile Include="Respositories\Sound\ISoundsResultRespositories.generated.cs" />
-    <Compile Include="Respositories\Sound\SoundsResultRespositories.generated.cs" />
-    <Compile Include="Respositories\Tags\CategoryTagResultRespositories.generated.cs" />
-    <Compile Include="Respositories\Tags\ICategoryTagResultRespositories.generated.cs" />
-    <Compile Include="Respositories\Tags\ITagAlbumsResultRespositories.generated.cs" />
-    <Compile Include="Respositories\Tags\ITagSoundListResultRespositories.generated.cs" />
-    <Compile Include="Respositories\Tags\TagAlbumsResultRespositories.generated.cs" />
-    <Compile Include="Respositories\Tags\TagSoundListResultRespositories.generated.cs" />
-    <Compile Include="Respositories\User\ILikedSoundUserResultRespositories.generated.cs" />
-    <Compile Include="Respositories\User\IUserResultRespositories.generated.cs" />
-    <Compile Include="Respositories\User\LikedSoundUserResultRespositories.generated.cs" />
-    <Compile Include="Respositories\User\UserResultRespositories.generated.cs" />
     <Compile Include="T4\CoreData.cs">
       <DependentUpon>CoreData.tt</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -157,6 +128,9 @@
 ..\Configurations\Discover\SuperExploreIndexResultDecorator.generated.cs
 ..\Configurations\FocusImage\FocusImageDataDecorator.generated.cs
 ..\Configurations\FocusImage\FocusImageResultDecorator.generated.cs
+..\Configurations\MutiData\MutiAlbumResultDecorator.generated.cs
+..\Configurations\MutiData\MutiSoundResultDecorator.generated.cs
+..\Configurations\MutiData\MutiUserResultDecorator.generated.cs
 ..\Configurations\Search\SearchAlbumResultDecorator.generated.cs
 ..\Configurations\Search\SearchResultDecorator.generated.cs
 ..\Configurations\Search\SearchSoundResultDecorator.generated.cs
@@ -180,40 +154,8 @@
 ..\Configurations\User\UserData2Decorator.generated.cs
 ..\Configurations\User\UserData3Decorator.generated.cs
 ..\Configurations\User\UserData4Decorator.generated.cs
+..\Configurations\User\UserData5Decorator.generated.cs
 ..\Configurations\User\UserDataDecorator.generated.cs
-..\Configurations\User\UserResultDecorator.generated.cs
-..\Respositories\Album\AlbumInfoResult1Respositories.generated.cs
-..\Respositories\Album\AlbumInfoResultRespositories.generated.cs
-..\Respositories\Album\IAlbumInfoResult1Respositories.generated.cs
-..\Respositories\Album\IAlbumInfoResultRespositories.generated.cs
-..\Respositories\Category\CategoryResultRespositories.generated.cs
-..\Respositories\Category\ICategoryResultRespositories.generated.cs
-..\Respositories\Discover\ISuperExploreIndexResultRespositories.generated.cs
-..\Respositories\Discover\SuperExploreIndexResultRespositories.generated.cs
-..\Respositories\FocusImage\FocusImageResultRespositories.generated.cs
-..\Respositories\FocusImage\IFocusImageResultRespositories.generated.cs
-..\Respositories\Search\ISearchAlbumResultRespositories.generated.cs
-..\Respositories\Search\ISearchResultRespositories.generated.cs
-..\Respositories\Search\ISearchSoundResultRespositories.generated.cs
-..\Respositories\Search\ISearchUserResultRespositories.generated.cs
-..\Respositories\Search\SearchAlbumResultRespositories.generated.cs
-..\Respositories\Search\SearchResultRespositories.generated.cs
-..\Respositories\Search\SearchSoundResultRespositories.generated.cs
-..\Respositories\Search\SearchUserResultRespositories.generated.cs
-..\Respositories\Share\IShareResultRespositories.generated.cs
-..\Respositories\Share\ShareResultRespositories.generated.cs
-..\Respositories\Sound\ISoundsResultRespositories.generated.cs
-..\Respositories\Sound\SoundsResultRespositories.generated.cs
-..\Respositories\Tags\CategoryTagResultRespositories.generated.cs
-..\Respositories\Tags\ICategoryTagResultRespositories.generated.cs
-..\Respositories\Tags\ITagAlbumsResultRespositories.generated.cs
-..\Respositories\Tags\ITagSoundListResultRespositories.generated.cs
-..\Respositories\Tags\TagAlbumsResultRespositories.generated.cs
-..\Respositories\Tags\TagSoundListResultRespositories.generated.cs
-..\Respositories\User\ILikedSoundUserResultRespositories.generated.cs
-..\Respositories\User\IUserResultRespositories.generated.cs
-..\Respositories\User\LikedSoundUserResultRespositories.generated.cs
-..\Respositories\User\UserResultRespositories.generated.cs
 .\CoreData.cs
 </LastOutputs>
     </None>

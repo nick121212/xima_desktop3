@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.Composition;
+using System.Linq.Expressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -8,6 +9,7 @@ using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.ServiceLocation;
+using XIMALAYA.PCDesktop.Common;
 using XIMALAYA.PCDesktop.Tools;
 using XIMALAYA.PCDesktop.Tools.Setting;
 using XIMALAYA.PCDesktop.Untils;
@@ -63,7 +65,6 @@ namespace XIMALAYA.PCDesktop
 
             this.Loaded += Shell_Loaded;
             this.Closing += Shell_Closing;
-            this.Closed += Shell_Closed;
         }
 
         #endregion
@@ -91,11 +92,6 @@ namespace XIMALAYA.PCDesktop
             {
                 //this.Hide();
             }
-        }
-
-        void Shell_Closed(object sender, EventArgs e)
-        {
-            this.ViewModel.Dispose();
         }
 
         async void Shell_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -151,8 +147,6 @@ namespace XIMALAYA.PCDesktop
         private string SetFlyout(string header)
         {
             string regionName = string.Format("ViewRegionName_{0}", ++this.Count);
-            Binding binding = null;
-            RelativeSource rs;
 
             this.CurrentFlyout = new Flyout();
             this.CurrentFlyout.IsOpen = false;
@@ -176,11 +170,8 @@ namespace XIMALAYA.PCDesktop
                 });
             }
 
-            rs = new RelativeSource(RelativeSourceMode.FindAncestor);
-            rs.AncestorType = typeof(Grid);
-            binding = new Binding("ActualWidth");
-            binding.RelativeSource = rs;
-            this.CurrentFlyout.SetBinding(Flyout.WidthProperty, binding);
+            this.CurrentFlyout.SetBinding(Flyout.WidthProperty, new Binding { Path = new PropertyPath("ActualWidth"), ElementName = this.ContainerGrid.Name });
+            this.CurrentFlyout.SetBinding(Flyout.HeightProperty, new Binding { Path = new PropertyPath("ActualHeight"), ElementName = this.ContainerGrid.Name });
             RegionManager.SetRegionManager(this.CurrentFlyout, this.regionManager);
             RegionManager.SetRegionName(this.CurrentFlyout, regionName);
             this.ContainerGrid.Items.Add(this.CurrentFlyout);
@@ -259,6 +250,37 @@ namespace XIMALAYA.PCDesktop
             this.CurrentFlyout.IsModal = isModal;
             this.CurrentFlyout.Position = Position.Right;
             this.CurrentFlyout.IsOpen = true;
+
+            return regionName;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="header"></param>
+        /// <param name="Width"></param>
+        /// <param name="Height"></param>
+        /// <param name="isModal"></param>
+        /// <returns></returns>
+        public string GetFlyout(string header, double? Width, double? Height, BaseViewModel veiwModel, Expression<Func<string>> propertyExpression)
+        {
+            string regionName = this.SetFlyout(header);
+            Binding binding = null;
+            var body = propertyExpression.Body as MemberExpression;
+
+            if (Width.HasValue)
+            {
+                this.CurrentFlyout.Width = (double)Width;
+            }
+            if (Height.HasValue)
+            {
+                this.CurrentFlyout.Height = (double)Height;
+            }
+
+            this.CurrentFlyout.Position = Position.Right;
+            this.CurrentFlyout.IsOpen = true;
+            binding = new Binding(body.Member.Name);
+            binding.Source = veiwModel;
+            this.CurrentFlyout.SetBinding(Flyout.HeaderProperty, binding);
 
             return regionName;
         }

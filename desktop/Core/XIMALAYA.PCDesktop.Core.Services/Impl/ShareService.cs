@@ -19,15 +19,10 @@ namespace XIMALAYA.PCDesktop.Core.Services
         /// <summary>
         /// 
         /// </summary>
-        [Import]
-        protected IShareResultResponsitory Responsitory { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
         public void GetData<T>(Action<object> act, T param, TagType tagType)
         {
             Result<ShareResult> result = new Result<ShareResult>();
-
+            string url = string.Empty;
             new ShareResultDecorator<ShareResult>(result);
 
             this.Act = act;
@@ -36,15 +31,35 @@ namespace XIMALAYA.PCDesktop.Core.Services
             switch (tagType)
             {
                 case TagType.sound:
-                    this.Responsitory.Fetch(WellKnownUrl.ShareSoundInfo, param.ToString(), base.GetDataCallBack);
+                    url = WellKnownUrl.ShareSoundInfo;
+                    //this.Responsitory.Fetch(WellKnownUrl.ShareSoundInfo, param.ToString(), base.GetDataCallBack);
                     break;
                 case TagType.album:
-                    this.Responsitory.Fetch(WellKnownUrl.ShareAlbumInfo, param.ToString(), base.GetDataCallBack);
+                    url = WellKnownUrl.ShareAlbumInfo;
+                    //this.Responsitory.Fetch(WellKnownUrl.ShareAlbumInfo, param.ToString(), base.GetDataCallBack);
                     break;
                 case TagType.user:
-                    this.Responsitory.Fetch(WellKnownUrl.ShareUserInfo, param.ToString(), base.GetDataCallBack);
+                    url = WellKnownUrl.ShareUserInfo;
+                    //this.Responsitory.Fetch(WellKnownUrl.ShareUserInfo, param.ToString(), base.GetDataCallBack);
                     break;
             }
+
+            try
+            {
+                this.Responsitory.Fetch(url, param.ToString(), asyncResult =>
+                {
+                    this.GetDecodeData<ShareResult>(this.GetDataCallBack(asyncResult), this.Decoder, this.Act);
+                });
+            }
+            catch (Exception ex)
+            {
+                this.Act.BeginInvoke(new ShareResult
+                {
+                    Ret = 0,
+                    Message = ex.Message
+                }, null, null);
+            }
+
         }
     }
 }

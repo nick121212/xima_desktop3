@@ -49,7 +49,7 @@ namespace XIMALAYA.PCDesktop.Modules.DiscoverModule
         /// 分类服务
         /// </summary>
         [Import]
-        public ICategoryTagService CategoryTagService { get; set; }
+        public IExploreService ExploreService { get; set; }
         /// <summary>
         /// 当前分类
         /// </summary>
@@ -105,10 +105,10 @@ namespace XIMALAYA.PCDesktop.Modules.DiscoverModule
                 this.RegionManager.AddToRegion(regionName, this.CategoryDetailView);
             }
 
-            if (this.CategoryTagService != null)
+            if (this.ExploreService != null)
             {
                 this.IsWaiting = true;
-                this.CategoryTagService.GetData(result =>
+                this.ExploreService.GetTagsData(result =>
                 {
                     Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                     {

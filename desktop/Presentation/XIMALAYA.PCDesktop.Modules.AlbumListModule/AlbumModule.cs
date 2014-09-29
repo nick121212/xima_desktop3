@@ -18,16 +18,6 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumModule
     [ModuleExport(WellKnownModuleNames.AlbumListModule, typeof(AlbumModule), InitializationMode = InitializationMode.WhenAvailable)]
     public class AlbumModule : BaseModule
     {
-        #region properties
-
-        /// <summary>
-        /// 标签下的声音服务
-        /// </summary>
-        [Import]
-        private ICategoryTagAlbumsService CategoryTagAlbumsService { get; set; }
-
-        #endregion
-
         #region actions
 
         private void OnChangeTagEventArgument(TagEventArgument e)

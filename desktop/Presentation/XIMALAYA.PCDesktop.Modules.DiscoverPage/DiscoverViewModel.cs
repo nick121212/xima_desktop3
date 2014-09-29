@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
+using System.Threading;
 using System.Windows;
+using System.Windows.Threading;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Practices.Prism.Commands;
@@ -29,15 +31,10 @@ namespace XIMALAYA.PCDesktop.Modules.DiscoverModule
         #region 属性
 
         /// <summary>
-        /// 焦点图服务
-        /// </summary>
-        [Import]
-        private IFocusImageService FocusImageService { get; set; }
-        /// <summary>
         /// 发现也整合接口，没用
         /// </summary>
         [Import]
-        private ISuperExploreIndexService SuperExploreIndex { get; set; }
+        private IExploreService SuperExploreIndex { get; set; }
         /// <summary>
         /// 今日焦点的title
         /// </summary>
@@ -103,9 +100,10 @@ namespace XIMALAYA.PCDesktop.Modules.DiscoverModule
             var superData = result as SuperExploreIndexResult;
 
             if (superData == null) throw new ArgumentNullException();
-            if (superData.Ret == 0)
+
+            Application.Current.Dispatcher.InvokeAsync(() =>
             {
-                Application.Current.Dispatcher.InvokeAsync(() =>
+                if (superData.Ret == 0)
                 {
                     int index = 0;
                     this.FocusImageList.Clear();
@@ -119,12 +117,12 @@ namespace XIMALAYA.PCDesktop.Modules.DiscoverModule
                     {
                         DiscoverViewModel.CategoryList.Add(category);
                     }
-                }, System.Windows.Threading.DispatcherPriority.Background);
-            }
-            else
-            {
-                DialogManager.ShowMessageAsync(Application.Current.MainWindow as MetroWindow, "喜马拉雅", superData.Message);
-            }
+                }
+                else
+                {
+                    DialogManager.ShowMessageAsync(Application.Current.MainWindow as MetroWindow, "喜马拉雅", superData.Message);
+                }
+            });
         }
         public void Initialize()
         {

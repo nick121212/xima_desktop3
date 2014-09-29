@@ -96,5 +96,10 @@ namespace XIMALAYA.PCDesktop.Untils
         /// 他人专辑列表
         /// </summary>
         public const string UserAlbums = WebPath + "/mobile/others/album";
+
+        /// <summary>
+        /// 多用户，多专辑，多声音
+        /// </summary>
+        public const string MutiData = WebPath + "/m/focus_list";
     }
 }

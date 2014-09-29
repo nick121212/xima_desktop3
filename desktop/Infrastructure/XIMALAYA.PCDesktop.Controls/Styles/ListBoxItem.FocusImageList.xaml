@@ -37,24 +37,56 @@
 			<Controls:Tile.Resources>
 				<Style TargetType="Controls:Tile" BasedOn="{StaticResource {x:Type Controls:Tile}}">
 					<Style.Triggers>
+						<!--单个用户-->
+						<DataTrigger Binding="{Binding Type}" Value="1">
+							<Setter Property="ButtonBase.Command" 
+									Value="{Binding UserDetailCommand,Source={x:Static tools:CommandSingleton.Instance}}"/>
+							<Setter Property="ButtonBase.CommandParameter"
+									Value="{Binding Uid}"/>
+						</DataTrigger>
+						<!--单个专辑-->
 						<DataTrigger Binding="{Binding Type}" Value="2">
 							<Setter Property="ButtonBase.Command" 
 									Value="{Binding AlbumDetailCommand,Source={x:Static tools:CommandSingleton.Instance}}"/>
 							<Setter Property="ButtonBase.CommandParameter"
 									Value="{Binding AlbumID}"/>
 						</DataTrigger>
+						<!--单个声音-->
 						<DataTrigger Binding="{Binding Type}" Value="3">
 							<Setter Property="ButtonBase.Command" 
 									Value="{Binding ShowSoundDetailCommand,Source={x:Static tools:CommandSingleton.Instance}}"/>
 							<Setter Property="ButtonBase.CommandParameter"
 									Value="{Binding TrackId}"/>
 						</DataTrigger>
+						<!--链接-->
 						<DataTrigger Binding="{Binding Type}" Value="4">
 							<Setter Property="ButtonBase.Command" 
 									Value="{Binding RedirectCommand,Source={x:Static tools:CommandSingleton.Instance}}"/>
 							<Setter Property="ButtonBase.CommandParameter"
 									Value="{Binding Url}"/>
 						</DataTrigger>
+						<!--多个用户-->
+						<DataTrigger Binding="{Binding Type}" Value="5">
+							<Setter Property="ButtonBase.Command" 
+									Value="{Binding MutiUserCommand,Source={x:Static tools:CommandSingleton.Instance}}"/>
+							<Setter Property="ButtonBase.CommandParameter"
+									Value="{Binding ID}"/>
+						</DataTrigger>
+						<!--多个专辑-->
+						<DataTrigger Binding="{Binding Type}" Value="6">
+							<Setter Property="ButtonBase.Command" 
+									Value="{Binding MutiAlbumCommand,Source={x:Static tools:CommandSingleton.Instance}}"/>
+							<Setter Property="ButtonBase.CommandParameter"
+									Value="{Binding ID}"/>
+						</DataTrigger>
+						<!--多个声音-->
+						<DataTrigger Binding="{Binding Type}" Value="7">
+							<Setter Property="ButtonBase.Command" 
+									Value="{Binding MutiSoundCommand,Source={x:Static tools:CommandSingleton.Instance}}"/>
+							<Setter Property="ButtonBase.CommandParameter"
+									Value="{Binding ID}"/>
+						</DataTrigger>
+						<!--活动-->
 						<DataTrigger Binding="{Binding Type}" Value="8">
 							<Setter Property="ButtonBase.Command" 
 									Value="{Binding RedirectCommand,Source={x:Static tools:CommandSingleton.Instance}}"/>
