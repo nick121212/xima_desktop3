@@ -172,7 +172,7 @@
 	<Grid ClipToBounds="False">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*"/>
-			<RowDefinition Height="80"/>
+			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 
 		<Grid.ColumnDefinitions>
@@ -212,7 +212,6 @@
 		<!--弹出层内容-->
 		<Controls:FlyoutsControl Grid.Column="1" 
 								 Grid.Row="0"
-								 Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Grid}, Path=ActualHeight}" 
 								 x:Name="ContainerGrid"/>
 		<!--菜单-->
 		<Border Grid.Row="0"

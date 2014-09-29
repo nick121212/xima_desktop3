@@ -171,7 +171,7 @@ namespace XIMALAYA.PCDesktop
             }
 
             this.CurrentFlyout.SetBinding(Flyout.WidthProperty, new Binding { Path = new PropertyPath("ActualWidth"), ElementName = this.ContainerGrid.Name });
-            this.CurrentFlyout.SetBinding(Flyout.HeightProperty, new Binding { Path = new PropertyPath("ActualHeight"), ElementName = this.ContainerGrid.Name });
+            //this.CurrentFlyout.SetBinding(Flyout.HeightProperty, new Binding { Path = new PropertyPath("ActualHeight"), ElementName = this.ContainerGrid.Name });
             RegionManager.SetRegionManager(this.CurrentFlyout, this.regionManager);
             RegionManager.SetRegionName(this.CurrentFlyout, regionName);
             this.ContainerGrid.Items.Add(this.CurrentFlyout);

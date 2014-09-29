@@ -6,7 +6,7 @@
              xmlns:MControls="http://ximalaya.com/xaml/controls"
              xmlns:converter="http://ximalaya.com/xaml/tools/converter"
 			 xmlns:tools="http://ximalaya.com/xaml/tools">
-	<Grid Margin="10 0 10 80">
+	<Grid Margin="10 0">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="*"/>
