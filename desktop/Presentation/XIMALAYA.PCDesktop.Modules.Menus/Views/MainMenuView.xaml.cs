@@ -21,5 +21,10 @@ namespace XIMALAYA.PCDesktop.Modules.Menus.Views
             get { return this.DataContext as MainMenuViewModel; }
             set { this.DataContext = value; }
         }
+
+        private void MyRadioButton_Checked(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
     }
 }

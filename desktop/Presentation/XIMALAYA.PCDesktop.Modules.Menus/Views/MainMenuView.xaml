@@ -1,8 +1,6 @@
 ﻿<UserControl x:Class="XIMALAYA.PCDesktop.Modules.Menus.Views.MainMenuView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:MControls="http://ximalaya.com/xaml/controls" 
 			 xmlns:untils="http://ximalaya.com/xaml/untils"
 			 xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
@@ -18,204 +16,151 @@
 	</UserControl.Resources>
 	
 	<StackPanel Orientation="Vertical" 
-				Margin="0 10 0 0"
-				FocusManager.IsFocusScope="True">
+				Margin="0 10 10 0">
 		<!--搜索-->
-		<MControls:MyToggleButton Width="100" 
-								  Height="90" 
-								  Padding="0 5 0 0"
-								  Margin="0 5"
-								  BorderType="None"
-								  Foreground="{DynamicResource BlackBrush}"
-								  Command="{Binding ShowContentCommand,Source={x:Static tools:CommandSingleton.Instance}}"
-								  CommandParameter="{x:Static untils:WellKnownModuleNames.SearchModule}">
-			<MControls:MyToggleButton.Content>
+		<MControls:MyRadioButton Background="Transparent"
+                                 Width="100" 
+								 Height="90" 
+                                 IconMargin="6"
+                                 GroupName="menusGroup"
+								 Foreground="{DynamicResource BlackBrush}"
+                                 Style="{StaticResource MetroMyRadioButton}"
+                                 BorderBrush="{DynamicResource BlackBrush}"
+								 BorderThickness="0"
+								 SuperScriptSize="20"
+								 CheckedBorderThickness="0"
+                                 Command="{Binding ShowContentCommand,Source={x:Static tools:CommandSingleton.Instance}}"
+								 CommandParameter="{x:Static untils:WellKnownModuleNames.SearchModule}">
+			<MControls:MyRadioButton.Content>
 				<StackPanel>
 					<Path Data="{Binding [search], Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{DynamicResource NavPathStyle}"
 						  HorizontalAlignment="Center"
-						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
+						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyRadioButton}}}" >
 					</Path>
-					<Label Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
+					<Label Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyRadioButton}}}"
 						   HorizontalAlignment="Center" 
 						   FontSize="16"
 						   FontWeight="Bold"
 						   Content="搜索"/>
 				</StackPanel>
-			</MControls:MyToggleButton.Content>
-			<MControls:MyToggleButton.ContentChecked>
-				<StackPanel>
-					<Path Data="{Binding [search], Source={x:Static MControls:PathData.Instance}}" 
-						  Style="{DynamicResource NavPathStyle}"
-						  HorizontalAlignment="Center"
-						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-					</Path>
-					<Label Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
-						   HorizontalAlignment="Center" 
-						   FontSize="16"
-						   FontWeight="Bold"
-						   Content="搜索"/>
-				</StackPanel>
-			</MControls:MyToggleButton.ContentChecked>
-		</MControls:MyToggleButton>
+			</MControls:MyRadioButton.Content>
+		</MControls:MyRadioButton>
 		<!--发现-->
-		<MControls:MyToggleButton Width="100" 
-								  Height="90" 
-								  Padding="0 5 0 0"
-								  Margin="0 5"
-								  BorderThickness="0"
-								  BorderType="None"
-								  Foreground="{DynamicResource BlackBrush}"
-								  Command="{Binding ShowContentCommand,Source={x:Static tools:CommandSingleton.Instance}}"
-								  CommandParameter="{x:Static untils:WellKnownModuleNames.DiscoverModule}">
-			<MControls:MyToggleButton.Content>
+		<MControls:MyRadioButton Background="Transparent"
+                                 Width="100" 
+								 Height="90" 
+                                 IconMargin="6"
+                                 GroupName="menusGroup"
+								 IsChecked="True"
+								 Foreground="{DynamicResource BlackBrush}"
+                                 Style="{StaticResource MetroMyRadioButton}"
+                                 BorderBrush="{DynamicResource BlackBrush}"
+								 BorderThickness="0"
+								 SuperScriptSize="20"
+								 CheckedBorderThickness="0"
+                                 Command="{Binding ShowContentCommand,Source={x:Static tools:CommandSingleton.Instance}}"
+								 CommandParameter="{x:Static untils:WellKnownModuleNames.DiscoverModule}">
+			<MControls:MyRadioButton.Content>
 				<StackPanel>
 					<Path Data="{Binding [discover], Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{DynamicResource NavPathStyle}"
 						  HorizontalAlignment="Center"
-						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
+						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyRadioButton}}}" >
 					</Path>
-					<Label Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
+					<Label Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyRadioButton}}}"
 						   HorizontalAlignment="Center" 
 						   FontSize="16"
 						   FontWeight="Bold"
 						   Content="发现"/>
 				</StackPanel>
-			</MControls:MyToggleButton.Content>
-			<MControls:MyToggleButton.ContentChecked>
-				<StackPanel>
-					<Path Data="{Binding [discover], Source={x:Static MControls:PathData.Instance}}" 
-						  Style="{DynamicResource NavPathStyle}"
-						  HorizontalAlignment="Center"
-						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-					</Path>
-					<Label Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
-						   HorizontalAlignment="Center" 
-						   FontSize="16"
-						   FontWeight="Bold"
-						   Content="发现"/>
-				</StackPanel>
-			</MControls:MyToggleButton.ContentChecked>
-		</MControls:MyToggleButton>
-		<!--设置-->
-		<MControls:MyToggleButton Width="100" 
-								  Height="90" 
-								  Padding="0 5 0 0"
-								  Margin="0 5"
-								  BorderThickness="0"
-								  BorderType="None"
-								  IsBackground="Hidden"
-								  Foreground="{DynamicResource BlackBrush}"
-								  IsChecked="{Binding IsSettingFlyoutShow,Source={x:Static tools:GlobalDataSingleton.Instance}}">
-			<MControls:MyToggleButton.Content>
-				<StackPanel>
-					<Path Data="{Binding [setting], Source={x:Static MControls:PathData.Instance}}" 
-						  Style="{DynamicResource NavPathStyle}"
-						  HorizontalAlignment="Center"
-						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-					</Path>
-					<Label Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
-						   HorizontalAlignment="Center" 
-						   FontSize="16"
-						   FontWeight="Bold"
-						   Content="设置"/>
-				</StackPanel>
-			</MControls:MyToggleButton.Content>
-			<MControls:MyToggleButton.ContentChecked>
-				<StackPanel>
-					<Path Data="{Binding [setting], Source={x:Static MControls:PathData.Instance}}" 
-						  Style="{DynamicResource NavPathStyle}"
-						  HorizontalAlignment="Center"
-						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-					</Path>
-					<Label Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
-						   HorizontalAlignment="Center" 
-						   FontSize="16"
-						   FontWeight="Bold"
-						   Content="设置"/>
-				</StackPanel>
-			</MControls:MyToggleButton.ContentChecked>
-		</MControls:MyToggleButton>
-		<!--下载-->
-		<MControls:MyToggleButton Width="100" 
-								  Height="90" 
-								  Padding="0 5 0 0"
-								  Margin="0 5"
-								  BorderThickness="0"
-								  BorderType="None"
-								  IsBackground="Hidden"
-								  IsSingle="True"
-								  Foreground="{DynamicResource BlackBrush}"
-								  Command="{Binding RedirectCommand,Source={x:Static tools:CommandSingleton.Instance}}"
-								  CommandParameter="http://www.ximalaya.com/download?tag=thirdpartfx">
-			<MControls:MyToggleButton.Content>
-				<StackPanel>
-					<Path Data="{Binding [download], Source={x:Static MControls:PathData.Instance}}" 
-						  Style="{DynamicResource NavPathStyle}"
-						  HorizontalAlignment="Center"
-						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-					</Path>
-					<Label Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
-						   HorizontalAlignment="Center" 
-						   FontSize="16"
-						   FontWeight="Bold"
-						   Content="下载"/>
-				</StackPanel>
-			</MControls:MyToggleButton.Content>
-			<MControls:MyToggleButton.ContentChecked>
-				<StackPanel>
-					<Path Data="{Binding [download], Source={x:Static MControls:PathData.Instance}}" 
-						  Style="{DynamicResource NavPathStyle}"
-						  HorizontalAlignment="Center"
-						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
-					</Path>
-					<Label Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
-						   HorizontalAlignment="Center" 
-						   FontSize="16"
-						   FontWeight="Bold"
-						   Content="下载"/>
-				</StackPanel>
-			</MControls:MyToggleButton.ContentChecked>
-		</MControls:MyToggleButton>
+			</MControls:MyRadioButton.Content>
+		</MControls:MyRadioButton>
 		<!--关于-->
-		<MControls:MyToggleButton Width="100" 
-								  Height="90" 
-								  Padding="0 5 0 0"
-								  Margin="0 5"
-								  BorderThickness="0"
-								  BorderType="None"
-								  IsBackground="Hidden"
-								  Foreground="{DynamicResource BlackBrush}"
-								  Command="{Binding ShowContentCommand,Source={x:Static tools:CommandSingleton.Instance}}"
-								  CommandParameter="{x:Static untils:WellKnownModuleNames.AboutModule}">
-			<MControls:MyToggleButton.Content>
+		<MControls:MyRadioButton Background="Transparent"
+                                 Width="100" 
+								 Height="90" 
+                                 IconMargin="6"
+                                 GroupName="menusGroup"
+								 Foreground="{DynamicResource BlackBrush}"
+                                 Style="{StaticResource MetroMyRadioButton}"
+                                 BorderBrush="{DynamicResource BlackBrush}"
+								 BorderThickness="0"
+								 SuperScriptSize="20"
+								 CheckedBorderThickness="0"
+                                 Command="{Binding ShowContentCommand,Source={x:Static tools:CommandSingleton.Instance}}"
+								 CommandParameter="{x:Static untils:WellKnownModuleNames.AboutModule}">
+			<MControls:MyRadioButton.Content>
 				<StackPanel>
 					<Path Data="{Binding [aboutme], Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{DynamicResource NavPathStyle}"
 						  HorizontalAlignment="Center"
-						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
+						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyRadioButton}}}" >
 					</Path>
-					<Label Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
+					<Label Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyRadioButton}}}"
 						   HorizontalAlignment="Center" 
 						   FontSize="16"
 						   FontWeight="Bold"
 						   Content="关于"/>
 				</StackPanel>
-			</MControls:MyToggleButton.Content>
-			<MControls:MyToggleButton.ContentChecked>
+			</MControls:MyRadioButton.Content>
+		</MControls:MyRadioButton>
+		<!--设置-->
+		<MControls:MyRadioButton Background="Transparent"
+                                 Width="100" 
+								 Height="90" 
+                                 IconMargin="6"
+                                 GroupName="menusGroup"
+								 Foreground="{DynamicResource BlackBrush}"
+                                 Style="{StaticResource MetroMyRadioButton}"
+                                 BorderBrush="{DynamicResource BlackBrush}"
+								 BorderThickness="0"
+								 SuperScriptSize="20"
+								 CheckedBorderThickness="0"
+                                 Command="{Binding ShowContentCommand,Source={x:Static tools:CommandSingleton.Instance}}"
+								 CommandParameter="{x:Static untils:WellKnownModuleNames.SettingsModule}">
+			<MControls:MyRadioButton.Content>
 				<StackPanel>
-					<Path Data="{Binding [aboutme], Source={x:Static MControls:PathData.Instance}}" 
+					<Path Data="{Binding [setting], Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{DynamicResource NavPathStyle}"
 						  HorizontalAlignment="Center"
-						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}" >
+						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyRadioButton}}}" >
 					</Path>
-					<Label Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyToggleButton}}}"
+					<Label Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyRadioButton}}}"
 						   HorizontalAlignment="Center" 
 						   FontSize="16"
 						   FontWeight="Bold"
-						   Content="关于"/>
+						   Content="设置"/>
 				</StackPanel>
-			</MControls:MyToggleButton.ContentChecked>
-		</MControls:MyToggleButton>
+			</MControls:MyRadioButton.Content>
+		</MControls:MyRadioButton>
+		<!--下载-->
+		<MControls:MyRadioButton Background="Transparent"
+                                 Width="100" 
+								 Height="90" 
+                                 IconMargin="6"
+								 Foreground="{DynamicResource BlackBrush}"
+                                 Style="{StaticResource MetroMyRadioButton}"
+                                 BorderBrush="{DynamicResource BlackBrush}"
+								 BorderThickness="0"
+								 SuperScriptSize="0"
+								 CheckedBorderThickness="0"
+                                 Command="{Binding RedirectCommand,Source={x:Static tools:CommandSingleton.Instance}}"
+								 CommandParameter="http://www.ximalaya.com/download?tag=thirdpartfx">
+			<MControls:MyRadioButton.Content>
+				<StackPanel>
+					<Path Data="{Binding [download], Source={x:Static MControls:PathData.Instance}}" 
+						  Style="{DynamicResource NavPathStyle}"
+						  HorizontalAlignment="Center"
+						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyRadioButton}}}" >
+					</Path>
+					<Label Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyRadioButton}}}"
+						   HorizontalAlignment="Center" 
+						   FontSize="16"
+						   FontWeight="Bold"
+						   Content="下载"/>
+				</StackPanel>
+			</MControls:MyRadioButton.Content>
+		</MControls:MyRadioButton>
 	</StackPanel>
 </UserControl>

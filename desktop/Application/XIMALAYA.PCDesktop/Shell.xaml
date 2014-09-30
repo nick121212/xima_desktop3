@@ -180,12 +180,17 @@
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 
+		<Controls:TransitioningContentControl Grid.Row="1"
+											  Grid.Column="0"
+											  Grid.ColumnSpan="2"
+											  cal:RegionManager.RegionName="{x:Static untils:WellKnownRegionNames.MusicPlayerModuleRegion}"
+                                              Transition="LeftReplace" />
 		<!--播放器-->
-		<Canvas Grid.Row="1"
+		<!--<Canvas Grid.Row="1"
 				Grid.Column="0"
 				Grid.ColumnSpan="2">
 			<ContentControl Canvas.Bottom="0" cal:RegionManager.RegionName="{x:Static untils:WellKnownRegionNames.MusicPlayerModuleRegion}"/>
-		</Canvas>
+		</Canvas>-->
 		<!--托盘提示-->
 		<tb:TaskbarIcon x:Name="NotifyIcon"
 						IconSource="/ICO/icon_16.ico"
@@ -206,9 +211,10 @@
 			</tb:TaskbarIcon.ContextMenu>
 		</tb:TaskbarIcon>
 		<!--内容-->
-		<ContentControl Grid.Column="1" 
-						Grid.Row="0"
-						cal:RegionManager.RegionName="{x:Static untils:WellKnownRegionNames.DiscoverModuleRegion}" />
+		<Controls:TransitioningContentControl Grid.Column="1" 
+											  Grid.Row="0"
+											  Transition="LeftReplace"
+											  cal:RegionManager.RegionName="{x:Static untils:WellKnownRegionNames.DiscoverModuleRegion}" />
 		<!--弹出层内容-->
 		<Controls:FlyoutsControl Grid.Column="1" 
 								 Grid.Row="0"
