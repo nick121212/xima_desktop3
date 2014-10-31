@@ -16,6 +16,7 @@
 			<converter:ToTransparentColorConverter x:Key="ToTransparentColorConverter"/>
 			<converter:MutiBoolConverter x:Key="MutiBoolConverter" />
 			<converter:PercentConverter x:Key="PercentConverter" />
+			<converter:ActualSizeFixedConverter x:Key="ActualSizeFixedConverter"/>
 
 			<Storyboard x:Key="OnVolumeControlMouseEnter">
 				<DoubleAnimation Duration="0:0:0.2" 
@@ -38,7 +39,6 @@
 
 		</ResourceDictionary>
 	</UserControl.Resources>
-
 	<UserControl.Triggers>
 		<EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="BdVolumeControl">
 			<BeginStoryboard x:Name="OnVolumeControlMouseEnter_BeginStoryboard" Storyboard="{StaticResource OnVolumeControlMouseEnter}"/>
@@ -47,10 +47,9 @@
 			<BeginStoryboard x:Name="OnVolumeControlMouseLeave_BeginStoryboard" Storyboard="{StaticResource OnVolumeControlMouseLeave}"/>
 		</EventTrigger>
 	</UserControl.Triggers>
-
-	
-	<Grid ClipToBounds="False"
-		  Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Canvas}}">
+	<Grid ClipToBounds="True"
+		  VerticalAlignment="Bottom"
+		  Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Grid},Converter={StaticResource ActualSizeFixedConverter},ConverterParameter='-,5'}">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="40"/>

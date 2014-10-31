@@ -42,7 +42,7 @@
     <DefineConstants>TRACE;DEBUG;NET4_5</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\..\build\MahApps.Metro.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\NET45\MahApps.Metro.XML</DocumentationFile>
     <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -50,7 +50,7 @@
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\NET45\</OutputPath>
     <IntermediateOutputPath>obj\NET45\Release\</IntermediateOutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;NET4_5</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\NET45\MahApps.Metro.XML</DocumentationFile>
@@ -110,6 +110,7 @@
     <Compile Include="Controls\GlowWindow.xaml.cs">
       <DependentUpon>GlowWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\GroupBoxHelper.cs" />
     <Compile Include="Controls\MetroAnimatedSingleRowTabControl.cs" />
     <Compile Include="Controls\MetroAnimatedTabControl.cs" />
     <Compile Include="Controls\MetroNavigationWindow.cs" />
@@ -120,13 +121,17 @@
     <Compile Include="Controls\NumericUpDown.cs" />
     <Compile Include="Controls\NumericUpDownChangedRoutedEventArgs.cs" />
     <Compile Include="Controls\NumericUpDownChangedRoutedEventHandler.cs" />
+    <Compile Include="Controls\PasswordBoxHelper.cs" />
     <Compile Include="Controls\Pivot.cs" />
     <Compile Include="Controls\PivotItem.cs" />
     <Compile Include="Controls\Position.cs" />
     <Compile Include="Controls\RangeParameterChangedEventArgs.cs" />
     <Compile Include="Controls\SafeRaise.cs" />
+    <Compile Include="Controls\ScrollBarHelper.cs" />
     <Compile Include="Controls\ScrollViewerOffsetMediator.cs" />
     <Compile Include="Controls\SplitButton.cs" />
+    <Compile Include="Controls\TabControlHelper.cs" />
+    <Compile Include="Controls\ToggleButtonHelper.cs" />
     <Compile Include="Controls\WindowButtonCommands.cs" />
     <Compile Include="Controls\WindowCommandsOverlayBehavior.cs" />
     <Compile Include="Converters\BackgroundToForegroundConverter.cs" />
@@ -174,6 +179,7 @@
     <Compile Include="Native\ABEdge.cs" />
     <Compile Include="Native\ABMsg.cs" />
     <Compile Include="Native\APPBARDATA.cs" />
+    <Compile Include="Native\SafeLibraryHandle.cs" />
     <Compile Include="Native\WINDOWPLACEMENT.cs" />
     <Compile Include="Controls\WindowSettings.cs" />
     <Compile Include="Native\Constants.cs" />
@@ -414,6 +420,10 @@
     <Page Include="Styles\FlatSlider.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Shared.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\Sizes.xaml">
       <SubType>Designer</SubType>

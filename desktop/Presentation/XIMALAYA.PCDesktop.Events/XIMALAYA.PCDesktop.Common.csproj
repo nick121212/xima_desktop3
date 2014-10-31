@@ -38,6 +38,10 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MahApps.Metro, Version=0.14.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\MahApps.Metro.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.Prism, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\Microsoft.Practices.Prism.dll</HintPath>

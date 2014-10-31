@@ -2,7 +2,6 @@
 using System.ComponentModel.Composition;
 using System.Linq.Expressions;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
@@ -11,6 +10,7 @@ using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.ServiceLocation;
 using XIMALAYA.PCDesktop.Common;
 using XIMALAYA.PCDesktop.Tools;
+using XIMALAYA.PCDesktop.Tools.Converter;
 using XIMALAYA.PCDesktop.Tools.Setting;
 using XIMALAYA.PCDesktop.Untils;
 
@@ -51,6 +51,10 @@ namespace XIMALAYA.PCDesktop
         /// 当前的flyout
         /// </summary>
         private Flyout CurrentFlyout { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        private FlyoutsControl ContainerGrid { get; set; }
 
         #endregion
 
@@ -74,6 +78,7 @@ namespace XIMALAYA.PCDesktop
         void Shell_Loaded(object sender, RoutedEventArgs e)
         {
             this.Container.GetInstance(typeof(XMSetting));
+            this.ContainerGrid = this.Flyouts;
             RegionManager.SetRegionManager(this.settingFlyout, this.regionManager);
             //定时清理内存
             this.ViewModel.Init(NotifyIcon, this);
@@ -101,7 +106,11 @@ namespace XIMALAYA.PCDesktop
                 e.Cancel = true;
                 this.WindowState = System.Windows.WindowState.Minimized;
                 this.Hide();
-                this.NotifyIcon.ShowBalloonTip(this.ViewModel.WindowTitle, "程序在后台已运行！", Hardcodet.Wpf.TaskbarNotification.BalloonIcon.Info);
+                if (!GlobalDataSingleton.Instance.IsTrip)
+                {
+                    GlobalDataSingleton.Instance.IsTrip = true;
+                    this.NotifyIcon.ShowBalloonTip(this.ViewModel.WindowTitle, "程序在后台已运行！", Hardcodet.Wpf.TaskbarNotification.BalloonIcon.Info);
+                }
                 return;
             }
 
@@ -120,6 +129,7 @@ namespace XIMALAYA.PCDesktop
                     "确定要退出喜马拉雅?",
                     MessageDialogStyle.AffirmativeAndNegative, mySettings);
 
+                GlobalDataSingleton.Instance.IsExit = false;
                 if (result == MessageDialogResult.Affirmative)
                 {
                     Application.Current.ShutdownMode = ShutdownMode.OnLastWindowClose;
@@ -152,6 +162,7 @@ namespace XIMALAYA.PCDesktop
             this.CurrentFlyout.IsOpen = false;
             this.CurrentFlyout.AnimateOnPositionChange = true;
             this.CurrentFlyout.Theme = FlyoutTheme.Adapt;
+            this.CurrentFlyout.VerticalAlignment = System.Windows.VerticalAlignment.Top;
             if (header != string.Empty)
             {
                 this.CurrentFlyout.Header = header;
@@ -170,15 +181,15 @@ namespace XIMALAYA.PCDesktop
                 });
             }
 
-            this.CurrentFlyout.SetBinding(Flyout.WidthProperty, new Binding { Path = new PropertyPath("ActualWidth"), ElementName = this.ContainerGrid.Name });
-            //this.CurrentFlyout.SetBinding(Flyout.HeightProperty, new Binding { Path = new PropertyPath("ActualHeight"), ElementName = this.ContainerGrid.Name });
+            this.CurrentFlyout.SetBinding(Flyout.WidthProperty, new Binding { Path = new PropertyPath("ActualWidth"), ElementName = this.Name });
+            this.CurrentFlyout.SetBinding(Flyout.HeightProperty, new Binding { Path = new PropertyPath("ActualHeight"), ElementName = this.Name, Converter = new ActualSizeFixedConverter(), ConverterParameter = "-,70" });
             RegionManager.SetRegionManager(this.CurrentFlyout, this.regionManager);
             RegionManager.SetRegionName(this.CurrentFlyout, regionName);
             this.ContainerGrid.Items.Add(this.CurrentFlyout);
             this.CurrentFlyout.ApplyTemplate();
             this.CurrentFlyout.IsVisibleChanged += CurrentFlyout_IsVisibleChanged;
             this.CurrentFlyout.Position = Position.Right;
-
+            
             return regionName;
         }
 
@@ -186,6 +197,7 @@ namespace XIMALAYA.PCDesktop
         {
             Flyout flyout = sender as Flyout;
 
+            this.CurrentFlyout.VerticalAlignment = System.Windows.VerticalAlignment.Top;
             if (flyout.Visibility == System.Windows.Visibility.Hidden)
             {
                 string regionName = string.Empty;

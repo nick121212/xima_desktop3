@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using MahApps.Metro.Controls;
 using XIMALAYA.PCDesktop.Common;
 
 namespace XIMALAYA.PCDesktop.Untils
@@ -13,6 +14,8 @@ namespace XIMALAYA.PCDesktop.Untils
     /// </summary>
     public interface IFlyoutFactory
     {
+        //FlyoutsControl ContainerGrid { get; set; }
+
         /// <summary>
         /// 新建面板
         /// </summary>

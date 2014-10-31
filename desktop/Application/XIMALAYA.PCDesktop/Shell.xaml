@@ -18,6 +18,7 @@
                       MinWidth="1150"
                       Width="1150"
                       Height="850"
+					  x:Name="MainWindow"
 					  EnableDWMDropShadow="False"
                       WindowTransitionsEnabled="False"
                       WindowStartupLocation="CenterScreen" 
@@ -172,7 +173,7 @@
 	<Grid ClipToBounds="False">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*"/>
-			<RowDefinition Height="60"/>
+			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 
 		<Grid.ColumnDefinitions>
@@ -180,11 +181,20 @@
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 
-		<Controls:TransitioningContentControl Grid.Row="1"
+
+		<StatusBar Grid.Row="1"
+				   Grid.Column="0"
+				   Height="70"
+				   Grid.ColumnSpan="2">
+			<Controls:TransitioningContentControl cal:RegionManager.RegionName="{x:Static untils:WellKnownRegionNames.MusicPlayerModuleRegion}"
+												  Transition="LeftReplace" />
+		</StatusBar>
+
+		<!--<Controls:TransitioningContentControl Grid.Row="1"
 											  Grid.Column="0"
 											  Grid.ColumnSpan="2"
 											  cal:RegionManager.RegionName="{x:Static untils:WellKnownRegionNames.MusicPlayerModuleRegion}"
-                                              Transition="LeftReplace" />
+                                              Transition="LeftReplace" />-->
 		<!--播放器-->
 		<!--<Canvas Grid.Row="1"
 				Grid.Column="0"
@@ -216,9 +226,9 @@
 											  Transition="LeftReplace"
 											  cal:RegionManager.RegionName="{x:Static untils:WellKnownRegionNames.DiscoverModuleRegion}" />
 		<!--弹出层内容-->
-		<Controls:FlyoutsControl Grid.Column="1" 
+		<!--<Controls:FlyoutsControl Grid.Column="1" 
 								 Grid.Row="0"
-								 x:Name="ContainerGrid"/>
+								 x:Name="ContainerGrid"/>-->
 		<!--菜单-->
 		<Border Grid.Row="0"
 				Grid.Column="0"

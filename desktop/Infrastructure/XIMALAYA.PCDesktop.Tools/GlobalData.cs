@@ -261,7 +261,9 @@ namespace XIMALAYA.PCDesktop.Tools
                 }
             }
         }
-
+        /// <summary>
+        /// 当前版本
+        /// </summary>
         public string Version
         {
             get
@@ -273,6 +275,10 @@ namespace XIMALAYA.PCDesktop.Tools
                 return string.Empty + "1.0.0.1";
             }
         }
+        /// <summary>
+        /// 是否已经提示过托盘
+        /// </summary>
+        public bool IsTrip { get; set; }
 
         #endregion
 
@@ -295,6 +301,9 @@ namespace XIMALAYA.PCDesktop.Tools
 
         #region IDisposable 成员
 
+        /// <summary>
+        /// 销毁
+        /// </summary>
         public void Dispose()
         {
             this.SoundCollection.Clear();

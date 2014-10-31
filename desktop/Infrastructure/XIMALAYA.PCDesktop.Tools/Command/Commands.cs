@@ -383,6 +383,7 @@ namespace XIMALAYA.PCDesktop.Tools
                 if (parentWindow.WindowState == WindowState.Minimized)
                 {
                     parentWindow.WindowState = WindowState.Normal;
+                    parentWindow.Activate();
                 }
                 parentWindow.Close();
             });

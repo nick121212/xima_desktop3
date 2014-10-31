@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:MControls="http://ximalaya.com/xaml/controls"
              xmlns:cal="http://www.codeplex.com/prism"
              xmlns:local="clr-namespace:XIMALAYA.PCDesktop.Modules.DiscoverModule"
-             xmlns:tools="clr-namespace:XIMALAYA.PCDesktop.Tools;assembly=XIMALAYA.PCDesktop.Tools"
+			 xmlns:tools="http://ximalaya.com/xaml/tools"
              HorizontalAlignment="Center">
 
 	<Grid Margin="0 5" HorizontalAlignment="Center">
@@ -15,6 +15,7 @@
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
+
 		<!--焦点图-->
 		<GroupBox Header=" "
                       Style="{StaticResource MyMetroGroupBox}"
@@ -63,6 +64,4 @@
 			</ListBox>
 		</GroupBox>
 	</Grid>
-
-
 </UserControl>

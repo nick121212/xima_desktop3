@@ -62,13 +62,16 @@ namespace XIMALAYA.PCDesktop.Modules.MusicPlayer
         /// <param name="e"></param>
         void BassEngine_PlayOverEvent(object sender, EventArgs e)
         {
-            if (GlobalDataSingleton.Instance.PlayMode == true)
+            if (GlobalDataSingleton.Instance.PlayMode == true)//单曲循环
             {
                 CommandSingleton.Instance.PlaySoundCommand.Execute(GlobalDataSingleton.Instance.SoundData.TrackId);
             }
             else
             {
-                CommandSingleton.Instance.NextCommand.Execute();
+                if (CommandSingleton.Instance.NextCommand.CanExecute())
+                {
+                    CommandSingleton.Instance.NextCommand.Execute();
+                }
             }
         }
 
