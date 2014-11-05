@@ -59,6 +59,7 @@
     <Compile Include="Configurations\Album\AlbumData2Decorator.generated.cs" />
     <Compile Include="Configurations\Album\AlbumData3Decorator.generated.cs" />
     <Compile Include="Configurations\Album\AlbumData4Decorator.generated.cs" />
+    <Compile Include="Configurations\Album\AlbumData5Decorator.generated.cs" />
     <Compile Include="Configurations\Album\AlbumDataDecorator.generated.cs" />
     <Compile Include="Configurations\Album\AlbumInfoResult1Decorator.generated.cs" />
     <Compile Include="Configurations\Album\AlbumInfoResultDecorator.generated.cs" />
@@ -81,6 +82,8 @@
     <Compile Include="Configurations\Sound\SoundData4Decorator.cs" />
     <Compile Include="Configurations\Sound\SoundData4Decorator.generated.cs" />
     <Compile Include="Configurations\Sound\SoundData5Decorator.generated.cs" />
+    <Compile Include="Configurations\Sound\SoundData6Decorator.cs" />
+    <Compile Include="Configurations\Sound\SoundData6Decorator.generated.cs" />
     <Compile Include="Configurations\Sound\SoundDataDecorator.generated.cs" />
     <Compile Include="Configurations\Sound\SoundDetailResultDecorator.generated.cs" />
     <Compile Include="Configurations\Sound\SoundsResultDecorator.generated.cs" />
@@ -120,6 +123,7 @@
 ..\Configurations\Album\AlbumData2Decorator.generated.cs
 ..\Configurations\Album\AlbumData3Decorator.generated.cs
 ..\Configurations\Album\AlbumData4Decorator.generated.cs
+..\Configurations\Album\AlbumData5Decorator.generated.cs
 ..\Configurations\Album\AlbumDataDecorator.generated.cs
 ..\Configurations\Album\AlbumInfoResult1Decorator.generated.cs
 ..\Configurations\Album\AlbumInfoResultDecorator.generated.cs
@@ -141,6 +145,7 @@
 ..\Configurations\Sound\SoundData3Decorator.generated.cs
 ..\Configurations\Sound\SoundData4Decorator.generated.cs
 ..\Configurations\Sound\SoundData5Decorator.generated.cs
+..\Configurations\Sound\SoundData6Decorator.generated.cs
 ..\Configurations\Sound\SoundDataDecorator.generated.cs
 ..\Configurations\Sound\SoundDetailResultDecorator.generated.cs
 ..\Configurations\Sound\SoundsResultDecorator.generated.cs

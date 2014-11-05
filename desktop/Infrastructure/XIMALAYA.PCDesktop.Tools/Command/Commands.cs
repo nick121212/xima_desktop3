@@ -443,10 +443,17 @@ namespace XIMALAYA.PCDesktop.Tools
             this.MutiAlbumCommand = new DelegateCommand<int?>((id) =>
             {
                 MessageBox.Show(id.ToString());
+                if (id.HasValue)
+                {
+                    this.EventAggregator.GetEvent<AlbumDetailEvent<int>>().Publish((int)id);
+                }
             });
             this.MutiSoundCommand = new DelegateCommand<int?>((id) =>
             {
-                MessageBox.Show(id.ToString());
+                if (id.HasValue)
+                {
+                    this.EventAggregator.GetEvent<SoundDetailEvent<int>>().Publish((int)id);
+                }
             });
         }
 

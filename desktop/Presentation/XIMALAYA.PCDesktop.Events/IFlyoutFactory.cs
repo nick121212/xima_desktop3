@@ -49,7 +49,6 @@ namespace XIMALAYA.PCDesktop.Untils
         /// <param name="titlePath"></param>
         /// <returns></returns>
         string GetFlyout(string header, double? Width, double? Height, BaseViewModel veiwModel, Expression<Func<string>> propertyExpression);
-
         /// <summary>
         /// 显示面板
         /// </summary>

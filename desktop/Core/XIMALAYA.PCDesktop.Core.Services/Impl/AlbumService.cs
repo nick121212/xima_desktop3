@@ -8,6 +8,7 @@ using FluentJson;
 using XIMALAYA.PCDesktop.Core.Data;
 using XIMALAYA.PCDesktop.Core.Data.Decorator;
 using XIMALAYA.PCDesktop.Core.Models.Album;
+using XIMALAYA.PCDesktop.Core.Models.MutiData;
 using XIMALAYA.PCDesktop.Core.Models.Tags;
 using XIMALAYA.PCDesktop.Untils;
 
@@ -24,11 +25,11 @@ namespace XIMALAYA.PCDesktop.Core.Services.Impl
         /// <summary>
         /// json格式转换类
         /// </summary>
-        protected JsonDecoder<TagAlbumsResult> TagAlbumsResultDecoder { get; set; }
+        private JsonDecoder<TagAlbumsResult> TagAlbumsResultDecoder { get; set; }
         /// <summary>
         /// 标签下的专辑
         /// </summary>
-        protected Action<object> TagAlbumsResultAct { get; set; }
+        private Action<object> TagAlbumsResultAct { get; set; }
         /// <summary>
         /// 他人的专辑decoder
         /// </summary>
@@ -36,7 +37,15 @@ namespace XIMALAYA.PCDesktop.Core.Services.Impl
         /// <summary>
         /// 他人的专辑回调
         /// </summary>
-        protected Action<object> AlbumInfoResult1Act { get; set; }
+        private Action<object> AlbumInfoResult1Act { get; set; }
+        /// <summary>
+        /// 多专辑decoder
+        /// </summary>
+        private JsonDecoder<MutiAlbumResult> MutiAlbumDecoder { get; set; }
+        /// <summary>
+        /// 多专辑回调
+        /// </summary>
+        private Action<object> MutiAlbumAct { get; set; }
 
         #endregion
 
@@ -75,7 +84,6 @@ namespace XIMALAYA.PCDesktop.Core.Services.Impl
                 }, null, null);
             }
         }
-
         /// <summary>
         /// 标签下的专辑
         /// </summary>
@@ -140,6 +148,37 @@ namespace XIMALAYA.PCDesktop.Core.Services.Impl
                 }, null, null);
             }
             //this.Responsitory.Fetch(WellKnownUrl.UserAlbums, param.ToString(), this.GetAlbumsDataCallBack);
+        }
+        /// <summary>
+        /// 多专辑
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="act"></param>
+        /// <param name="param"></param>
+        public void GetMutiAlbums<T>(Action<object> act, T param)
+        {
+            Result<MutiAlbumResult> result = new Result<MutiAlbumResult>();
+
+            new MutiAlbumResultDecorator<MutiAlbumResult>(result);
+            new AlbumData5Decorator<MutiAlbumResult>(result);
+
+            this.MutiAlbumAct = act;
+            this.MutiAlbumDecoder = Json.DecoderFor<MutiAlbumResult>(config => config.DeriveFrom(result.Config));
+            try
+            {
+                this.Responsitory.Fetch(WellKnownUrl.MutiData, param.ToString(), asyncResult =>
+                {
+                    this.GetDecodeData<MutiAlbumResult>(this.GetDataCallBack(asyncResult), this.MutiAlbumDecoder, this.MutiAlbumAct);
+                });
+            }
+            catch (Exception ex)
+            {
+                this.Act.BeginInvoke(new MutiUserResult
+                {
+                    Ret = 500,
+                    Message = ex.Message
+                }, null, null);
+            }
         }
 
         #endregion

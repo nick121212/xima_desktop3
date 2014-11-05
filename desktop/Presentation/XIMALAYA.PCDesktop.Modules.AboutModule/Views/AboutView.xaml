@@ -13,21 +13,17 @@
 		<!--标题-->
 		<Label Grid.Row="0" 
 			   HorizontalAlignment="Center"
-			   Content="喜马拉雅"
+			   Content="{Binding SystemTitle, Source={x:Static tools:GlobalDataSingleton.Instance}}"
 			   FontSize="20"/>
-		<!--副标题-->
-		<Label Grid.Row="1" 
-			   HorizontalAlignment="Center"
-			   ContentStringFormat="第三方客户端 V{0} Copyright © 2014-2024 Bakuru"
-			   Content="{Binding Version,Source={x:Static tools:GlobalDataSingleton.Instance}}"
-			   FontSize="14"/>
+		<!--内容-->
 		<StackPanel Grid.Row="2">
 			
 		</StackPanel>
 		<!--版权-->
 		<Label Grid.Row="3" 
 			   HorizontalAlignment="Center"
-			   Content="Copyright © 2014-2024 Bakuru"
+			   ContentStringFormat="第三方客户端 V{0} Copyright © 2014-2024 Bakuru"
+			   Content="{Binding Version,Source={x:Static tools:GlobalDataSingleton.Instance}}"
 			   FontSize="14"/>
 		
 	</Grid>

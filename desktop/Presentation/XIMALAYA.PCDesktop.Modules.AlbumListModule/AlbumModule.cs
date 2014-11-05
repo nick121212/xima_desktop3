@@ -87,6 +87,32 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumModule
             this.EventAggregator.GetEvent<AlbumDetailEvent<long>>().Subscribe(OnAlbumDetailEvent);
             //跳转指令
             this.EventAggregator.GetEvent<JumplistEvent<string>>().Subscribe(OnArgument);
+            //多专辑
+            this.EventAggregator.GetEvent<AlbumDetailEvent<int>>().Subscribe(AddMutiAlbumViewToRegion);
+
+
+            this.EventAggregator.GetEvent<AlbumDetailEvent<int>>().Publish((int)911);
+        }
+
+        /// <summary>
+        /// 多用户视图
+        /// </summary>
+        /// <param name="id"></param>
+        private void AddMutiAlbumViewToRegion(int id)
+        {
+            var view = this.Container.GetInstance<MutiAlbumView>();
+            string regionName = this.ContainerView.GetFlyout(" ", null, null, view.ViewModel, () => view.ViewModel.Title);
+
+            if (view != null)
+            {
+                if (this.RegionManager.Regions.ContainsRegionWithName(regionName))
+                {
+                    var region = this.RegionManager.Regions[regionName];
+
+                    view.ViewModel.Initialize(id);
+                    region.Add(view);
+                }
+            }
         }
 
         public override void Dispose()
@@ -95,6 +121,7 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumModule
             this.EventAggregator.GetEvent<AlbumDetailEvent<long>>().Unsubscribe(OnAlbumDetailEvent);
             this.EventAggregator.GetEvent<AlbumListEvent<TagEventArgument>>().Unsubscribe(OnChangeTagEventArgument);
             this.EventAggregator.GetEvent<JumplistEvent<string>>().Unsubscribe(OnArgument);
+            this.EventAggregator.GetEvent<AlbumDetailEvent<int>>().Unsubscribe(AddMutiAlbumViewToRegion);
         }
 
         #endregion

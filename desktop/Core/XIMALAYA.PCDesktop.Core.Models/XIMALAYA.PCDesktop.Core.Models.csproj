@@ -43,6 +43,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Album\AlbumData5.cs" />
     <Compile Include="Album\AlbumData4.cs" />
     <Compile Include="Album\AlbumData3.cs" />
     <Compile Include="Album\AlbumData2.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Sound\SoundData2.cs" />
     <Compile Include="Sound\SoundData4.cs" />
     <Compile Include="Sound\SoundData3.cs" />
+    <Compile Include="Sound\SoundData6.cs" />
     <Compile Include="Sound\SoundData5.cs" />
     <Compile Include="Sound\SoundDetailResult.cs" />
     <Compile Include="Sound\SoundsResult.cs" />

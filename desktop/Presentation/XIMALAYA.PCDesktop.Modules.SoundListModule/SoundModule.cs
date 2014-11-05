@@ -57,14 +57,35 @@ namespace XIMALAYA.PCDesktop.Modules.SoundModule
             //标签点击事件，获取专辑详情数据
             this.EventAggregator.GetEvent<SoundDetailEvent<long>>().Subscribe(OnSoundDetailEvent);
             this.EventAggregator.GetEvent<JumplistEvent<string>>().Subscribe(OnArgument);
+            this.EventAggregator.GetEvent<SoundDetailEvent<int>>().Subscribe(AddMutiSoundViewToRegion);
             //this.EventAggregator.GetEvent<SoundDetailEvent<long>>().Publish(352374);
         }
+        /// <summary>
+        /// 多声音视图
+        /// </summary>
+        /// <param name="id"></param>
+        private void AddMutiSoundViewToRegion(int id)
+        {
+            var view = this.Container.GetInstance<MutiSoundView>();
+            string regionName = this.ContainerView.GetFlyout(" ", null, null, view.ViewModel, () => view.ViewModel.Title);
 
+            if (view != null)
+            {
+                if (this.RegionManager.Regions.ContainsRegionWithName(regionName))
+                {
+                    var region = this.RegionManager.Regions[regionName];
+
+                    view.ViewModel.Initialize(id);
+                    region.Add(view);
+                }
+            }
+        }
         public override void Dispose()
         {
             base.Dispose();
             this.EventAggregator.GetEvent<SoundDetailEvent<long>>().Unsubscribe(OnSoundDetailEvent);
             this.EventAggregator.GetEvent<JumplistEvent<string>>().Unsubscribe(OnArgument);
+            this.EventAggregator.GetEvent<SoundDetailEvent<int>>().Unsubscribe(AddMutiSoundViewToRegion);
         }
 
         #endregion

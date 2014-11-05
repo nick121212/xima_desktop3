@@ -136,14 +136,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MutiSoundViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SoundDetailViewModel.cs" />
     <Compile Include="SoundModule.cs" />
+    <Compile Include="Views\MutiSoundView.xaml.cs">
+      <DependentUpon>MutiSoundView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SoundDetailView.xaml.cs">
       <DependentUpon>SoundDetailView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\MutiSoundView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SoundDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

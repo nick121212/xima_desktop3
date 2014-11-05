@@ -182,19 +182,19 @@
 		</Grid.ColumnDefinitions>
 
 
-		<StatusBar Grid.Row="1"
+		<!--<StatusBar Grid.Row="1"
 				   Grid.Column="0"
 				   Height="70"
 				   Grid.ColumnSpan="2">
 			<Controls:TransitioningContentControl cal:RegionManager.RegionName="{x:Static untils:WellKnownRegionNames.MusicPlayerModuleRegion}"
 												  Transition="LeftReplace" />
-		</StatusBar>
+		</StatusBar>-->
 
-		<!--<Controls:TransitioningContentControl Grid.Row="1"
+		<Controls:TransitioningContentControl Grid.Row="1"
 											  Grid.Column="0"
 											  Grid.ColumnSpan="2"
 											  cal:RegionManager.RegionName="{x:Static untils:WellKnownRegionNames.MusicPlayerModuleRegion}"
-                                              Transition="LeftReplace" />-->
+                                              Transition="LeftReplace" />
 		<!--播放器-->
 		<!--<Canvas Grid.Row="1"
 				Grid.Column="0"

@@ -5,6 +5,7 @@ using System.Net;
 using FluentJson;
 using XIMALAYA.PCDesktop.Core.Data;
 using XIMALAYA.PCDesktop.Core.Data.Decorator;
+using XIMALAYA.PCDesktop.Core.Models.MutiData;
 using XIMALAYA.PCDesktop.Core.Models.Sound;
 using XIMALAYA.PCDesktop.Core.Models.User;
 using XIMALAYA.PCDesktop.Tools;
@@ -18,6 +19,14 @@ namespace XIMALAYA.PCDesktop.Core.Services
     [Export(typeof(ISoundService))]
     class SoundService : ServiceBase<SoundData>, ISoundService
     {
+        #region 属性
+
+        private Action<object> MutiSoundResultAct { get; set; }
+
+        private JsonDecoder<MutiSoundResult> MutiSoundResultDecoder { get; set; }
+
+        #endregion
+
         #region ISoundDetailService 成员
 
         /// <summary>
@@ -46,10 +55,41 @@ namespace XIMALAYA.PCDesktop.Core.Services
             {
                 this.Act.BeginInvoke(new SoundData
                 {
-                    
+
                 }, null, null);
             }
             //this.Responsitory.Fetch(WellKnownUrl.SoundInfoNew, param.ToString(), base.GetDataCallBack);
+        }
+        /// <summary>
+        /// 多声音数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="act"></param>
+        /// <param name="param"></param>
+        public void GetMutiSounds<T>(Action<object> act, T param)
+        {
+            Result<MutiSoundResult> result = new Result<MutiSoundResult>();
+
+            new MutiSoundResultDecorator<MutiSoundResult>(result);
+            new SoundData6Decorator<MutiSoundResult>(result);
+
+            this.MutiSoundResultAct = act;
+            this.MutiSoundResultDecoder = Json.DecoderFor<MutiSoundResult>(config => config.DeriveFrom(result.Config));
+            try
+            {
+                this.Responsitory.Fetch(WellKnownUrl.MutiData, param.ToString(), asyncResult =>
+                {
+                    this.GetDecodeData<MutiSoundResult>(this.GetDataCallBack(asyncResult), this.MutiSoundResultDecoder, this.MutiSoundResultAct);
+                });
+            }
+            catch (Exception ex)
+            {
+                this.Act.BeginInvoke(new MutiUserResult
+                {
+                    Ret = 500,
+                    Message = ex.Message
+                }, null, null);
+            }
         }
 
         #endregion

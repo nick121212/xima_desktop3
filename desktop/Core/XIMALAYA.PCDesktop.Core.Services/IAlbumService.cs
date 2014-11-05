@@ -24,5 +24,12 @@ namespace XIMALAYA.PCDesktop.Core.Services
         /// <param name="act"></param>
         /// <param name="param"></param>
         void GetUserAlbums<T>(Action<object> act,T param);
+        /// <summary>
+        /// 获取多专辑列表
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="act"></param>
+        /// <param name="param"></param>
+        void GetMutiAlbums<T>(Action<object> act, T param);
     }
 }

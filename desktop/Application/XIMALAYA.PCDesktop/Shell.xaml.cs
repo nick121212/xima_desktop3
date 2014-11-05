@@ -55,6 +55,10 @@ namespace XIMALAYA.PCDesktop
         /// 
         /// </summary>
         private FlyoutsControl ContainerGrid { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        private string CurrentRegionName { get; set; }
 
         #endregion
 
@@ -83,6 +87,7 @@ namespace XIMALAYA.PCDesktop
             //定时清理内存
             this.ViewModel.Init(NotifyIcon, this);
             this.StateChanged += Shell_StateChanged;
+            this.SetFlyout(string.Empty);
         }
 
         void Shell_StateChanged(object sender, EventArgs e)
@@ -153,16 +158,12 @@ namespace XIMALAYA.PCDesktop
                 this.CurrentFlyout.IsOpen = true;
             }
         }
-
-        private string SetFlyout(string header)
+        /// <summary>
+        /// 设置标题
+        /// </summary>
+        /// <param name="header"></param>
+        private void SetHeader(string header)
         {
-            string regionName = string.Format("ViewRegionName_{0}", ++this.Count);
-
-            this.CurrentFlyout = new Flyout();
-            this.CurrentFlyout.IsOpen = false;
-            this.CurrentFlyout.AnimateOnPositionChange = true;
-            this.CurrentFlyout.Theme = FlyoutTheme.Adapt;
-            this.CurrentFlyout.VerticalAlignment = System.Windows.VerticalAlignment.Top;
             if (header != string.Empty)
             {
                 this.CurrentFlyout.Header = header;
@@ -180,24 +181,42 @@ namespace XIMALAYA.PCDesktop
                     }
                 });
             }
+        }
+        /// <summary>
+        /// 获取flyout
+        /// </summary>
+        /// <param name="header"></param>
+        /// <returns></returns>
+        private string SetFlyout(string header)
+        {
+            this.CurrentRegionName = string.Format("ViewRegionName_{0}", ++this.Count);
+
+            this.CurrentFlyout = new Flyout();
+            this.CurrentFlyout.IsOpen = false;
+            this.CurrentFlyout.AnimateOnPositionChange = true;
+            this.CurrentFlyout.Theme = FlyoutTheme.Adapt;
+            this.CurrentFlyout.VerticalAlignment = System.Windows.VerticalAlignment.Top;
 
             this.CurrentFlyout.SetBinding(Flyout.WidthProperty, new Binding { Path = new PropertyPath("ActualWidth"), ElementName = this.Name });
             this.CurrentFlyout.SetBinding(Flyout.HeightProperty, new Binding { Path = new PropertyPath("ActualHeight"), ElementName = this.Name, Converter = new ActualSizeFixedConverter(), ConverterParameter = "-,70" });
             RegionManager.SetRegionManager(this.CurrentFlyout, this.regionManager);
-            RegionManager.SetRegionName(this.CurrentFlyout, regionName);
+            RegionManager.SetRegionName(this.CurrentFlyout, this.CurrentRegionName);
             this.ContainerGrid.Items.Add(this.CurrentFlyout);
             this.CurrentFlyout.ApplyTemplate();
             this.CurrentFlyout.IsVisibleChanged += CurrentFlyout_IsVisibleChanged;
             this.CurrentFlyout.Position = Position.Right;
-            
-            return regionName;
-        }
 
+            return this.CurrentRegionName;
+        }
+        /// <summary>
+        /// flyout显示事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void CurrentFlyout_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             Flyout flyout = sender as Flyout;
 
-            this.CurrentFlyout.VerticalAlignment = System.Windows.VerticalAlignment.Top;
             if (flyout.Visibility == System.Windows.Visibility.Hidden)
             {
                 string regionName = string.Empty;
@@ -212,7 +231,6 @@ namespace XIMALAYA.PCDesktop
                 GC.Collect();
             }
         }
-
         /// <summary>
         /// 新建层
         /// </summary>
@@ -220,10 +238,13 @@ namespace XIMALAYA.PCDesktop
         /// <returns></returns>
         public string GetFlyout(string header)
         {
-            string regionName = this.GetFlyout(header, null, null);
+            string regionName = this.CurrentRegionName;
 
+            this.SetHeader(header);
             this.CurrentFlyout.Position = Position.Right;
             this.CurrentFlyout.IsOpen = true;
+
+            this.SetFlyout(string.Empty);
 
             return regionName;
         }
@@ -248,7 +269,7 @@ namespace XIMALAYA.PCDesktop
         /// <returns></returns>
         public string GetFlyout(string header, double? Width, double? Height, bool isModal = false)
         {
-            string regionName = this.SetFlyout(header);
+            string regionName = this.CurrentRegionName;
 
             if (Width.HasValue)
             {
@@ -258,10 +279,12 @@ namespace XIMALAYA.PCDesktop
             {
                 this.CurrentFlyout.Height = (double)Height;
             }
-
+            this.SetHeader(header);
             this.CurrentFlyout.IsModal = isModal;
             this.CurrentFlyout.Position = Position.Right;
             this.CurrentFlyout.IsOpen = true;
+
+            this.SetFlyout(header);
 
             return regionName;
         }
@@ -275,7 +298,7 @@ namespace XIMALAYA.PCDesktop
         /// <returns></returns>
         public string GetFlyout(string header, double? Width, double? Height, BaseViewModel veiwModel, Expression<Func<string>> propertyExpression)
         {
-            string regionName = this.SetFlyout(header);
+            string regionName = this.CurrentRegionName; 
             Binding binding = null;
             var body = propertyExpression.Body as MemberExpression;
 
@@ -293,6 +316,8 @@ namespace XIMALAYA.PCDesktop
             binding = new Binding(body.Member.Name);
             binding.Source = veiwModel;
             this.CurrentFlyout.SetBinding(Flyout.HeaderProperty, binding);
+
+            this.SetFlyout(header);
 
             return regionName;
         }
