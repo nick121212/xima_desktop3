@@ -6,6 +6,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <DataTemplate x:Key="HeaderTemplate"
@@ -18,6 +19,7 @@
                     Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Controls:Flyout}}, Path=CloseCommand, Mode=OneWay}"
                     DockPanel.Dock="Left"
                     Style="{DynamicResource MetroCircleButtonStyle}"
+                    Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:Flyout}}, Path=CloseButtonVisibility}"
                     Height="40"
                     Width="40"
                     FontFamily="Segoe UI Symbol"
@@ -55,7 +57,8 @@
             </Button>
             <TextBlock Text="{Binding}"
                        x:Name="PART_BackButton"
-                       FontSize="20"
+                       Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:Flyout}}, Path=TitleVisibility}"
+                       FontSize="{StaticResource FlyoutHeaderFontSize}"
                        Margin="15,0,0,0"
                        VerticalAlignment="Center" />
         </DockPanel>

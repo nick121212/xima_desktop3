@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
 
 namespace MahApps.Metro.Controls.Dialogs
@@ -14,30 +10,11 @@ namespace MahApps.Metro.Controls.Dialogs
     /// The base class for dialogs.
     ///
     /// You probably don't want to use this class, if you want to add arbitrary content to your dialog, 
-    /// use the <see cref="SimpleDialog"/> class.
+    /// use the <see cref="CustomDialog"/> class.
     /// </summary>
-    [System.Windows.Markup.ContentProperty("DialogBody")]
-    public abstract class BaseMetroDialog : Control
+    public abstract class BaseMetroDialog : ContentControl
     {
-        private const string PART_DialogBody_ContentPresenter = "PART_DialogBody_ContentPresenter";
-        protected ContentPresenter DialogBody_ContentPresenter = null;
-
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title", typeof(string), typeof(BaseMetroDialog), new PropertyMetadata(default(string)));
-        public static readonly DependencyProperty DialogBodyProperty = DependencyProperty.Register("DialogBody", typeof(object), typeof(BaseMetroDialog), new PropertyMetadata(null, (o, e) =>
-        {
-            var dialog = o as BaseMetroDialog;
-            if (dialog != null)
-            {
-                if (e.OldValue != null)
-                {
-                    dialog.RemoveLogicalChild(e.OldValue);
-                }
-                if (e.NewValue != null)
-                {
-                    dialog.AddLogicalChild(e.NewValue);
-                }
-            }
-        }));
         public static readonly DependencyProperty DialogTopProperty = DependencyProperty.Register("DialogTop", typeof(object), typeof(BaseMetroDialog), new PropertyMetadata(null));
         public static readonly DependencyProperty DialogBottomProperty = DependencyProperty.Register("DialogBottom", typeof(object), typeof(BaseMetroDialog), new PropertyMetadata(null));
 
@@ -50,15 +27,6 @@ namespace MahApps.Metro.Controls.Dialogs
         {
             get { return (string)GetValue(TitleProperty); }
             set { SetValue(TitleProperty, value); }
-        }
-
-        /// <summary>
-        /// Gets/sets arbitrary content in the "message" area in the dialog. 
-        /// </summary>
-        public object DialogBody
-        {
-            get { return GetValue(DialogBodyProperty); }
-            set { SetValue(DialogBodyProperty, value); }
         }
 
         /// <summary>
@@ -87,17 +55,11 @@ namespace MahApps.Metro.Controls.Dialogs
             DefaultStyleKeyProperty.OverrideMetadata(typeof(BaseMetroDialog), new FrameworkPropertyMetadata(typeof(BaseMetroDialog)));
         }
 
-        public override void OnApplyTemplate()
-        {
-            DialogBody_ContentPresenter = GetTemplateChild(PART_DialogBody_ContentPresenter) as ContentPresenter;
-
-            base.OnApplyTemplate();
-        }
-
         /// <summary>
         /// Initializes a new MahApps.Metro.Controls.BaseMetroDialog.
         /// </summary>
         /// <param name="owningWindow">The window that is the parent of the dialog.</param>
+        /// <param name="settings">The settings for the message dialog.</param>
         protected BaseMetroDialog(MetroWindow owningWindow, MetroDialogSettings settings)
         {
             DialogSettings = settings ?? owningWindow.MetroDialogOptions;
@@ -125,7 +87,7 @@ namespace MahApps.Metro.Controls.Dialogs
 
             HandleTheme();
 
-            this.Resources.MergedDictionaries.Add(new System.Windows.ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Themes/Dialogs/BaseMetroDialog.xaml") });
+            this.Resources.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Themes/Dialogs/BaseMetroDialog.xaml") });
 
         }
 
@@ -174,12 +136,12 @@ namespace MahApps.Metro.Controls.Dialogs
             TaskCompletionSource<object> tcs = new TaskCompletionSource<object>();
 
             RoutedEventHandler handler = null;
-            handler = new RoutedEventHandler((sender, args) =>
-                {
-                    this.Loaded -= handler;
+            handler = (sender, args) =>
+            {
+                this.Loaded -= handler;
 
-                    tcs.TrySetResult(null);
-                });
+                tcs.TrySetResult(null);
+            };
 
             this.Loaded += handler;
 
@@ -200,17 +162,15 @@ namespace MahApps.Metro.Controls.Dialogs
                     //This is from a user-created MetroWindow
                     return DialogManager.HideMetroDialogAsync(OwningWindow, this);
                 }
-                else
+
+                //This is from a MetroWindow created by the external dialog APIs.
+                return _WaitForCloseAsync().ContinueWith(x =>
                 {
-                    //This is from a MetroWindow created by the external dialog APIs.
-                    return _WaitForCloseAsync().ContinueWith(x =>
-                        {
-                            ParentDialogWindow.Dispatcher.Invoke(new Action(() =>
-                            {
-                                ParentDialogWindow.Close();
-                            }));
-                        });
-                }
+                    ParentDialogWindow.Dispatcher.Invoke(new Action(() =>
+                    {
+                        ParentDialogWindow.Close();
+                    }));
+                });
             }
             return Task.Factory.StartNew(() => { });
         }
@@ -252,12 +212,12 @@ namespace MahApps.Metro.Controls.Dialogs
                     throw new InvalidOperationException("Unable to find the dialog closing storyboard. Did you forget to add BaseMetroDialog.xaml to your merged dictionaries?");
 
                 EventHandler handler = null;
-                handler = new EventHandler((sender, args) =>
+                handler = (sender, args) =>
                 {
                     closingStoryboard.Completed -= handler;
 
                     tcs.TrySetResult(null);
-                });
+                };
 
                 closingStoryboard = closingStoryboard.Clone();
 

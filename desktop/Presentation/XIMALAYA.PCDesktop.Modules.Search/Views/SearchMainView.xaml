@@ -23,14 +23,14 @@
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 		<!--搜索框-->
+		<!--Controls:TextboxHelper.FocusBorderBrush="{DynamicResource BlackBrush}"
+					 Controls:TextboxHelper.MouseOverBorderBrush="{DynamicResource BlackBrush}"-->
 		<Canvas Height="60" Grid.Row="0" Panel.ZIndex="10">
 			<TextBox Margin="10"
 					 Height="40"
 					 x:Name="searchBox"
 					 Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Canvas}, Path=ActualWidth,Converter={StaticResource ActualSizeFixedConverter},ConverterParameter='-,20'}"
 					 Text="{Binding ConditionString,UpdateSourceTrigger=PropertyChanged}"
-					 Controls:TextboxHelper.FocusBorderBrush="{DynamicResource BlackBrush}"
-					 Controls:TextboxHelper.MouseOverBorderBrush="{DynamicResource BlackBrush}"
 					 Controls:TextboxHelper.IsWaitingForData="{Binding IsWaiting}"
 					 Controls:TextboxHelper.Watermark="搜索条件"
 					 BorderBrush="{DynamicResource BlackBrush}"
