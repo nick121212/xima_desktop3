@@ -198,7 +198,7 @@ namespace XIMALAYA.PCDesktop
             this.CurrentFlyout.VerticalAlignment = System.Windows.VerticalAlignment.Top;
 
             this.CurrentFlyout.SetBinding(Flyout.WidthProperty, new Binding { Path = new PropertyPath("ActualWidth"), ElementName = this.Name });
-            this.CurrentFlyout.SetBinding(Flyout.HeightProperty, new Binding { Path = new PropertyPath("ActualHeight"), ElementName = this.Name, Converter = new ActualSizeFixedConverter(), ConverterParameter = "-,70" });
+            this.CurrentFlyout.SetBinding(Flyout.HeightProperty, new Binding { Path = new PropertyPath("ActualHeight"), ElementName = this.Name, Converter = new ActualSizeFixedConverter(), ConverterParameter = "-,60" });
             RegionManager.SetRegionManager(this.CurrentFlyout, this.regionManager);
             RegionManager.SetRegionName(this.CurrentFlyout, this.CurrentRegionName);
             this.ContainerGrid.Items.Add(this.CurrentFlyout);

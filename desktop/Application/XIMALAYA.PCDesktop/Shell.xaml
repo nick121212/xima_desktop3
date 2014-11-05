@@ -114,7 +114,6 @@
 			</StackPanel>
 		</DataTemplate>
 	</Controls:MetroWindow.IconTemplate>
-
 	<!--窗体级FLYOUT-->
 	<Controls:MetroWindow.Flyouts>
 		<Controls:FlyoutsControl>
@@ -140,36 +139,16 @@
 					<ListBox.ItemsPanel>
 						<ItemsPanelTemplate>
 							<MControls:TilePanel TileHeight="50" 
-                                              TileWidth="280" 
-                                              TileMargin="0 2"
-                                              TileCount="1"/>
+												 TileWidth="280" 
+												 TileMargin="0 2"
+												 TileCount="1"/>
 						</ItemsPanelTemplate>
 					</ListBox.ItemsPanel>
 				</ListBox>
 			</Controls:Flyout>
 		</Controls:FlyoutsControl>
 	</Controls:MetroWindow.Flyouts>
-	<!--右侧按钮-->
-	<!--<Controls:MetroWindow.RightWindowCommands>
-		<Controls:WindowCommands>
-			<ToggleButton ToolTip="设置" 
-						  IsChecked="{Binding IsSettingFlyoutShow,Source={x:Static tools:FlyoutVisible.Instance}}">
-				<Path Data="{Binding [setting], Source={x:Static MControls:PathData.Instance}}" 
-                      Stretch="Uniform" Fill="{DynamicResource BlackColorBrush}" Width="16" Height="16" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
-					<Path.RenderTransform>
-						<TransformGroup>
-							<TransformGroup.Children>
-								<RotateTransform Angle="0" />
-								<ScaleTransform ScaleX="1" ScaleY="1" />
-							</TransformGroup.Children>
-						</TransformGroup>
-					</Path.RenderTransform>
-				</Path>
-			</ToggleButton>
-		</Controls:WindowCommands>
-	</Controls:MetroWindow.RightWindowCommands>-->
 	<!--内容框架-->
-
 	<Grid ClipToBounds="False">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*"/>
@@ -189,18 +168,13 @@
 			<Controls:TransitioningContentControl cal:RegionManager.RegionName="{x:Static untils:WellKnownRegionNames.MusicPlayerModuleRegion}"
 												  Transition="LeftReplace" />
 		</StatusBar>-->
-
+		<!--播放器-->
 		<Controls:TransitioningContentControl Grid.Row="1"
 											  Grid.Column="0"
 											  Grid.ColumnSpan="2"
 											  cal:RegionManager.RegionName="{x:Static untils:WellKnownRegionNames.MusicPlayerModuleRegion}"
                                               Transition="LeftReplace" />
-		<!--播放器-->
-		<!--<Canvas Grid.Row="1"
-				Grid.Column="0"
-				Grid.ColumnSpan="2">
-			<ContentControl Canvas.Bottom="0" cal:RegionManager.RegionName="{x:Static untils:WellKnownRegionNames.MusicPlayerModuleRegion}"/>
-		</Canvas>-->
+		
 		<!--托盘提示-->
 		<tb:TaskbarIcon x:Name="NotifyIcon"
 						IconSource="/ICO/icon_16.ico"
@@ -225,10 +199,6 @@
 											  Grid.Row="0"
 											  Transition="LeftReplace"
 											  cal:RegionManager.RegionName="{x:Static untils:WellKnownRegionNames.DiscoverModuleRegion}" />
-		<!--弹出层内容-->
-		<!--<Controls:FlyoutsControl Grid.Column="1" 
-								 Grid.Row="0"
-								 x:Name="ContainerGrid"/>-->
 		<!--菜单-->
 		<Border Grid.Row="0"
 				Grid.Column="0"
