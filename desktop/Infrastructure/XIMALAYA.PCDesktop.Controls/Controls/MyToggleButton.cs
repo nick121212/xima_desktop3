@@ -186,7 +186,10 @@ namespace XIMALAYA.PCDesktop.Controls
             switch (myToggleButton.BorderType)
             {
                 case BorderType.None:
-                    myToggleButton.IsShowBorder = false;
+                    myToggleButton.IsShowBorder = true;
+                    myToggleButton.BorderThickness = new Thickness();
+                    myToggleButton.CornerRadius = new CornerRadius();
+                    myToggleButton.RadiusSize = 0;
                     break;
                 case BorderType.Ellipse:
                     myToggleButton.IsShowBorder = true;

@@ -90,7 +90,6 @@
     <Compile Include="Controls\VirtualizingTilePanel.cs" />
     <Compile Include="PathData.cs" />
     <Compile Include="Controls\MetroSlider.cs" />
-    <Compile Include="Controls\PathButton.cs" />
     <Compile Include="Controls\TilePanel.cs" />
     <Compile Include="Controls\VirtualizingWrapPanel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -105,8 +104,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\GifAnimation.cs" />
-    <Compile Include="Controls\GifImage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Styles\Checkbox.xaml">

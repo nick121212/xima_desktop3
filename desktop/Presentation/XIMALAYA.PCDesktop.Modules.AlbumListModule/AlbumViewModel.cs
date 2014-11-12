@@ -201,5 +201,19 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumModule
         }
 
         #endregion
+
+        #region IDisposed接口
+
+        /// <summary>
+        /// 销毁
+        /// </summary>
+        public override void Dispose()
+        {
+            base.Dispose();
+            this.Albums.Clear();
+            //this.Albums = null;
+        }
+
+        #endregion
     }
 }

@@ -458,7 +458,7 @@
                         </VisualStateManager.VisualStateGroups>
                         <Border x:Name="Background"
                                 BorderBrush="{DynamicResource BlackBrush}"
-                                BorderThickness="2"
+                                BorderThickness="{TemplateBinding BorderThickness}"
                                 Background="{TemplateBinding Background}" />
                         <Rectangle x:Name="DisabledVisualElement"
                                    Fill="{DynamicResource ControlsDisabledBrush}"

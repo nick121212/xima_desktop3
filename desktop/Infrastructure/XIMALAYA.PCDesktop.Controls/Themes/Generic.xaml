@@ -35,5 +35,15 @@
 
 
 	</ResourceDictionary.MergedDictionaries>
+
+	<!--登录样式 start-->
+	
+	<!-- 登录图标背景色 -->
+	<SolidColorBrush Color="#2c2f34" x:Key="LoginPathBrush" />
+	<!-- 登录文本框背景色 -->
+	<SolidColorBrush Color="#545B63" x:Key="LoginTextboxBrush" />
+
+	<!--登录样式 end-->
+
 </ResourceDictionary>
 

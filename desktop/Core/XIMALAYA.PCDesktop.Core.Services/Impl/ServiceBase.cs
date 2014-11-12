@@ -62,8 +62,12 @@ namespace XIMALAYA.PCDesktop.Core.Services
 
             if (act != null)
             {
-                act.BeginInvoke((T1)fr, null, null);
+                IAsyncResult result = act.BeginInvoke((T1)fr, null, null);
+                act.EndInvoke(result);
             }
+
+            act = null;
+            decoder = null;
         }
 
         #endregion
@@ -75,10 +79,10 @@ namespace XIMALAYA.PCDesktop.Core.Services
         /// </summary>
         public void Dispose()
         {
-            this.Act.EndInvoke(null);
-            this.Decoder = null;
-            this.Act = null;
-            GC.Collect(0, GCCollectionMode.Forced);
+            //this.Act.EndInvoke(null);
+            //this.Decoder = null;
+            //this.Act = null;
+            GC.Collect();
         }
 
         #endregion

@@ -133,7 +133,7 @@ namespace XIMALAYA.PCDesktop.Tools.HotKey
                                 msg = errorCode.ToString();
                                 break;
                         }
-                        DialogManager.ShowMessageAsync(Application.Current.MainWindow as MetroWindow, "喜马拉雅", msg);
+                        //DialogManager.ShowMessageAsync(Application.Current.MainWindow as MetroWindow, "喜马拉雅", msg);
                         return false;
                     }
                 }

@@ -93,13 +93,13 @@ namespace XIMALAYA.PCDesktop
             //this.AggregateCatalog.Catalogs.Add(new DirectoryCatalog(Directory.GetCurrentDirectory()));
             //this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(Bootstrapper).Assembly));
             base.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly()));
-            //this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(AutoPopulateExportedViewsBehavior).Assembly));
-
-            //this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog("./Microsoft.Practices.Prism.MefExtensions.dll"));
             base.AggregateCatalog.Catalogs.Add(new AssemblyCatalog("./XIMALAYA.PCDesktop.Tools.dll"));
             base.AggregateCatalog.Catalogs.Add(new AssemblyCatalog("./XIMALAYA.PCDesktop.Core.Data.dll"));
             base.AggregateCatalog.Catalogs.Add(new AssemblyCatalog("./XIMALAYA.PCDesktop.Core.Services.dll"));
             base.AggregateCatalog.Catalogs.Add(new AssemblyCatalog("./XIMALAYA.PCDesktop.Tools.Setting.dll"));
+
+            //base.AggregateCatalog.Catalogs.Add(new AssemblyCatalog("./cwber.dll"));
+
             //base.AggregateCatalog.Catalogs.Add(new AssemblyCatalog("./XIMALAYA.PCDesktop.Core.ParamsModel.dll"));
 
             //this.Container.ComposeParts(this.AggregateCatalog.)

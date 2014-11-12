@@ -89,9 +89,7 @@ namespace XIMALAYA.PCDesktop.Modules.AlbumModule
             this.EventAggregator.GetEvent<JumplistEvent<string>>().Subscribe(OnArgument);
             //多专辑
             this.EventAggregator.GetEvent<AlbumDetailEvent<int>>().Subscribe(AddMutiAlbumViewToRegion);
-
-
-            this.EventAggregator.GetEvent<AlbumDetailEvent<int>>().Publish((int)911);
+            //this.EventAggregator.GetEvent<AlbumDetailEvent<int>>().Publish((int)911);
         }
 
         /// <summary>

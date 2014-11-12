@@ -60,5 +60,10 @@ namespace XIMALAYA.PCDesktop.Untils
         /// 关于
         /// </summary>
         public const string AboutModule = "AboutModule";
+
+        /// <summary>
+        /// 登录模块
+        /// </summary>
+        public const string PassportModule = "PassportModule";
     }
 }

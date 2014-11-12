@@ -101,5 +101,10 @@ namespace XIMALAYA.PCDesktop.Untils
         /// 多用户，多专辑，多声音
         /// </summary>
         public const string MutiData = WebPath + "/m/focus_list";
+
+        /// <summary>
+        /// 第三方登录接口地址
+        /// </summary>
+        public const string ThirdLoginPath = WebPath + "/passport/auth/{0}/authorize?responseJson=true";
     }
 }

@@ -22,7 +22,7 @@ namespace XIMALAYA.PCDesktop.Modules.DiscoverModule
                     this.LoadModule();
                 }
             });
-            this.LoadModule();
+            //this.LoadModule();
         }
         /// <summary>
         /// 加载模块

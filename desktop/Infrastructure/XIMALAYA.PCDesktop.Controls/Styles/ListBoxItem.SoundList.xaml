@@ -194,10 +194,10 @@
 								    CheckedBorderThickness="1"
 								    SuperScriptSize="35"
                                     BorderThickness="1">
-			<MControls:MyCheckboxButton.SuperScriptContent>
+			<!--<MControls:MyCheckboxButton.SuperScriptContent>
 				<MControls:GifImage Source="pack://application:,,,/XIMALAYA.PCDesktop.Tools;component/Resources/Images/playing.gif" 
 									Stretch="Uniform"/>
-			</MControls:MyCheckboxButton.SuperScriptContent>
+			</MControls:MyCheckboxButton.SuperScriptContent>-->
 			<MControls:MyCheckboxButton.IsChecked>
 				<MultiBinding Converter="{StaticResource MutiBoolConverter}"  ConverterParameter="0" Mode="OneWay">
 					<MultiBinding.Bindings>
