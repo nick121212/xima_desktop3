@@ -1,4 +1,6 @@
-﻿using Microsoft.Practices.Prism.MefExtensions.Modularity;
+﻿using System;
+using System.Windows.Controls;
+using Microsoft.Practices.Prism.MefExtensions.Modularity;
 using XIMALAYA.PCDesktop.Common;
 using XIMALAYA.PCDesktop.Common.Events;
 using XIMALAYA.PCDesktop.Modules.Passport.Views;
@@ -10,7 +12,7 @@ namespace XIMALAYA.PCDesktop.Modules.Passport
     /// 登录模块
     /// </summary>
     [ModuleExport(WellKnownModuleNames.PassportModule, typeof(PassportModule))]
-    public class PassportModule : BaseModule
+    class PassportModule : BaseModule
     {
         /// <summary>
         /// 初始化
@@ -24,9 +26,10 @@ namespace XIMALAYA.PCDesktop.Modules.Passport
                     this.LoadModule();
                 }
             });
-
+           
             this.LoadModule();
         }
+
         /// <summary>
         /// 加载搜索模块
         /// </summary>
@@ -34,16 +37,17 @@ namespace XIMALAYA.PCDesktop.Modules.Passport
         {
             if (this.RegionManager.Regions.ContainsRegionWithName(WellKnownRegionNames.DiscoverModuleRegion))
             {
-                var viewModel = this.Container.GetInstance<LoginView>();
+                var view = this.Container.GetInstance<LoginView>();
                 var region = this.RegionManager.Regions[WellKnownRegionNames.DiscoverModuleRegion];
 
-                if (!region.ActiveViews.Contains(viewModel))
+                if (!region.ActiveViews.Contains(view))
                 {
                     foreach (object activeView in region.ActiveViews)
                     {
                         region.Remove(activeView);
                     }
-                    region.Add(viewModel);
+                    view.ViewModel.DoInit();
+                    region.Add(view);
                 }
             }
         }

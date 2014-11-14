@@ -45,5 +45,10 @@ namespace XIMALAYA.PCDesktop.Untils
         /// The region of module UserMinViewRegion.
         /// </summary>
         public const string UserMinViewRegion = "UserMinViewRegion";
+
+        /// <summary>
+        /// The region of module LoginChildViewRegion.
+        /// </summary>
+        public const string LoginChildViewRegion = "LoginChildViewRegion";
     }
 }

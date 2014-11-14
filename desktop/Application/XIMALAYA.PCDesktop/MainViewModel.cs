@@ -170,7 +170,7 @@ namespace XIMALAYA.PCDesktop
             //注册程序错误事件
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler((sender, e) =>
             {
-                MessageBox.Show(e.ExceptionObject.ToString());
+                //MessageBox.Show(e.ExceptionObject.ToString());
                 Debug.WriteLine("**********************************************************************");
                 Debug.WriteLine("喜马拉雅出现错误：" + DateTime.Now.ToShortDateString());
                 Debug.WriteLine("喜马拉雅出现错误：" + e.ExceptionObject.ToString());

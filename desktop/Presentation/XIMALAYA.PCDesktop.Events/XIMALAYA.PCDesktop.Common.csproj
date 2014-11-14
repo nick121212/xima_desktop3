@@ -73,6 +73,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Events\PassportEvent.cs" />
     <Compile Include="Events\AlbumListEvent.cs" />
     <Compile Include="IFlyoutFactory.cs" />
     <Compile Include="Modules\BaseModule.cs" />

@@ -6,100 +6,108 @@
 			 xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:MControls="http://ximalaya.com/xaml/controls"
              xmlns:converter="http://ximalaya.com/xaml/tools/converter"
-			 xmlns:webkit="clr-namespace:Sashulin;assembly=cwber"
-			 xmlns:tools="http://ximalaya.com/xaml/tools"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-
+			 xmlns:webkit="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+			 xmlns:tools="http://ximalaya.com/xaml/tools">
 	<UserControl.Resources>
 		<converter:ActualSizeFixedConverter x:Key="ActualSizeFixedConverter" />
+		<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
 	</UserControl.Resources>
 
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="*" />
-		</Grid.RowDefinitions>
-
-		<Grid Grid.Row="0" Margin="20 30">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="*" />
-			</Grid.ColumnDefinitions>
-			<Button Grid.Column="0"
-					Style="{StaticResource ShareMyToggleButton}"
-					Width="100"
-					Height="100"
-					Command="{Binding ThirdPartLoginCommand}"
-					CommandParameter="1"
-					ToolTip="新浪">
-				<Button.Content>
-					<Viewbox>
-						<Canvas Width="256" Height="256" Clip="F1 M 0,0L 256,0L 256,256L 0,256L 0,0" Background="Transparent">
-							<Path Data="{Binding [share_sing_1], Source={x:Static MControls:PathData.Instance}}" 
+	<Controls:FlipView x:Name="flipView" 
+					   SelectedIndex="{Binding CurrentPageIndex}"
+					   Orientation="Vertical" 
+					   UpTransition="Up"
+					   DownTransition="Down"
+					   IsBannerEnabled="False"
+					   BorderThickness="0">
+		<Controls:FlipViewItem>
+			<Grid Margin="0 20">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
+				<Grid Grid.Row="0" 
+					  Margin="20 30">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+					<Button Grid.Column="0"
+							Style="{StaticResource ShareMyToggleButton}"
+							Width="100"
+							Height="100"
+							Command="{Binding ThirdPartLoginCommand}"
+							CommandParameter="1"
+							ToolTip="新浪">
+						<Button.Content>
+							<Viewbox>
+								<Canvas Width="256" Height="256" Clip="F1 M 0,0L 256,0L 256,256L 0,256L 0,0" Background="Transparent">
+									<Path Data="{Binding [share_sing_1], Source={x:Static MControls:PathData.Instance}}" 
 									  Width="209.463" Height="167.047" Canvas.Left="8.00002" Canvas.Top="58.16"
 									  Style="{StaticResource PathStyle}"
 									  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType=Button}}" />
-							<Path Data="{Binding [share_sing_2], Source={x:Static MControls:PathData.Instance}}" 
+									<Path Data="{Binding [share_sing_2], Source={x:Static MControls:PathData.Instance}}" 
 									  Width="84.1582" Height="89.533" Canvas.Left="163.94" Canvas.Top="30.7096"
 									  Style="{StaticResource PathStyle}"
 									  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType=Button}}" />
-							<Path Data="{Binding [share_sing_3], Source={x:Static MControls:PathData.Instance}}" 
+									<Path Data="{Binding [share_sing_3], Source={x:Static MControls:PathData.Instance}}" 
 									  Width="43.6995" Height="45.9727" Canvas.Left="171.777" Canvas.Top="63.3363"
 									  Style="{StaticResource PathStyle}"
 									  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType=Button}}" />
-							<Path Data="{Binding [share_sing_4], Source={x:Static MControls:PathData.Instance}}" 
+									<Path Data="{Binding [share_sing_4], Source={x:Static MControls:PathData.Instance}}" 
 									  Width="76.1243" Height="66.4617" Canvas.Left="61.0397" Canvas.Top="135.257"
 									  Style="{StaticResource PathStyle}"
 									  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType=Button}}" />
-						</Canvas>
-					</Viewbox>
-				</Button.Content>
-			</Button>
-			<Button Grid.Column="1"
-					Style="{StaticResource ShareMyToggleButton}"
-					Width="100"
-					Height="100"
-					Command="{Binding ThirdPartLoginCommand}"
-					CommandParameter="3"
-					ToolTip="人人">
-				<Button.Content>
-					<Viewbox>
-						<Canvas Width="256" Height="200" Clip="F1 M 0,0L 256,0L 256,256L 0,256L 0,0" Background="Transparent">
-							<Path Data="{Binding [share_renren], Source={x:Static MControls:PathData.Instance}}" 
+								</Canvas>
+							</Viewbox>
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="1"
+							Style="{StaticResource ShareMyToggleButton}"
+							Width="100"
+							Height="100"
+							Command="{Binding ThirdPartLoginCommand}"
+							CommandParameter="3"
+							ToolTip="人人">
+						<Button.Content>
+							<Viewbox>
+								<Canvas Width="256" Height="200" Clip="F1 M 0,0L 256,0L 256,256L 0,256L 0,0" Background="Transparent">
+									<Path Data="{Binding [share_renren], Source={x:Static MControls:PathData.Instance}}" 
 								  Style="{StaticResource PathStyle}"
 								  Width="256" Height="200"
 								  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType=Button}}" />
-						</Canvas>
-					</Viewbox>
-				</Button.Content>
-			</Button>
-			<Button Grid.Column="2"
-					Style="{StaticResource ShareMyToggleButton}"
-					Width="100"
-					Height="100"
-					Command="{Binding ThirdPartLoginCommand}"
-					CommandParameter="2"
-					ToolTip="腾讯">
-				<Button.Content>
-					<Viewbox>
-						<Canvas Width="256" Height="200" Clip="F1 M 0,0L 256,0L 256,256L 0,256L 0,0" Background="Transparent">
-							<Path Data="{Binding [share_qq], Source={x:Static MControls:PathData.Instance}}" 
+								</Canvas>
+							</Viewbox>
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="2"
+							Style="{StaticResource ShareMyToggleButton}"
+							Width="100"
+							Height="100"
+							Command="{Binding ThirdPartLoginCommand}"
+							CommandParameter="2"
+							ToolTip="腾讯">
+						<Button.Content>
+							<Viewbox>
+								<Canvas Width="256" Height="200" Clip="F1 M 0,0L 256,0L 256,256L 0,256L 0,0" Background="Transparent">
+									<Path Data="{Binding [share_qq], Source={x:Static MControls:PathData.Instance}}" 
 								  Style="{StaticResource PathStyle}"
 								  Width="256" Height="200"
 								  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType=Button}}" />
-						</Canvas>
-					</Viewbox>
-				</Button.Content>
-			</Button>
-		</Grid>
-		<StackPanel Grid.Row="1" Margin="20 10"  Orientation="Horizontal" >
-			<MControls:MyToggleButton Width="40" 
+								</Canvas>
+							</Viewbox>
+						</Button.Content>
+					</Button>
+				</Grid>
+				<StackPanel Grid.Row="1" 
+							Margin="20 10"  
+							Orientation="Horizontal">
+					<MControls:MyToggleButton Width="40" 
 								      Height="40"
 									  Background="{DynamicResource LoginPathBrush}"
 									  IsBackground="Visible"
@@ -107,16 +115,16 @@
 									  BorderThickness="0"
 									  IsEnabled="True"
 								      BorderType="None">
-				<MControls:MyToggleButton.ContentChecked>
-					<Label Padding="0">
-						<Path Data="{Binding [login_user], Source={x:Static MControls:PathData.Instance}}" 
+						<MControls:MyToggleButton.ContentChecked>
+							<Label Padding="0">
+								<Path Data="{Binding [login_user], Source={x:Static MControls:PathData.Instance}}" 
 						      Style="{StaticResource PathStyle}"
 						      Fill="{DynamicResource BlackBrush}" >
-						</Path>
-					</Label>
-				</MControls:MyToggleButton.ContentChecked>
-			</MControls:MyToggleButton>
-			<TextBox BorderThickness="0" 
+								</Path>
+							</Label>
+						</MControls:MyToggleButton.ContentChecked>
+					</MControls:MyToggleButton>
+					<TextBox BorderThickness="0" 
 					 Height="40"
 					 Width="{Binding ActualWidth,RelativeSource={RelativeSource AncestorType=Grid},Converter={StaticResource ActualSizeFixedConverter},ConverterParameter='-,70'}"
 					 Background="{DynamicResource LoginTextboxBrush}" 
@@ -124,9 +132,11 @@
 					 Controls:TextboxHelper.Watermark="username"
                      Controls:TextboxHelper.UseFloatingWatermark="False"
                      Controls:TextboxHelper.IsWaitingForData="False"/>
-		</StackPanel>
-		<StackPanel Grid.Row="2" Margin="20 10" Orientation="Horizontal" >
-			<MControls:MyToggleButton Width="40" 
+				</StackPanel>
+				<StackPanel Grid.Row="2" 
+							Margin="20 10" 
+							Orientation="Horizontal" >
+					<MControls:MyToggleButton Width="40" 
 								      Height="40"
 									  Background="{DynamicResource LoginPathBrush}"
 									  IsBackground="Visible"
@@ -134,16 +144,16 @@
 									  BorderThickness="0"
 									  IsEnabled="False"
 								      BorderType="None">
-				<MControls:MyToggleButton.ContentChecked>
-					<Label Padding="0">
-						<Path Data="{Binding [login_lock], Source={x:Static MControls:PathData.Instance}}" 
+						<MControls:MyToggleButton.ContentChecked>
+							<Label Padding="0">
+								<Path Data="{Binding [login_lock], Source={x:Static MControls:PathData.Instance}}" 
 						      Style="{StaticResource PathStyle}"
 						      Fill="{DynamicResource BlackBrush}" >
-						</Path>
-					</Label>
-				</MControls:MyToggleButton.ContentChecked>
-			</MControls:MyToggleButton>
-			<TextBox BorderThickness="0" 
+								</Path>
+							</Label>
+						</MControls:MyToggleButton.ContentChecked>
+					</MControls:MyToggleButton>
+					<TextBox BorderThickness="0" 
 					 Width="{Binding ActualWidth,RelativeSource={RelativeSource AncestorType=Grid},Converter={StaticResource ActualSizeFixedConverter},ConverterParameter='-,70'}"
 					 Height="40"
 					 Background="{DynamicResource LoginTextboxBrush}" 
@@ -151,54 +161,50 @@
 					 Controls:TextboxHelper.Watermark="password"
                      Controls:TextboxHelper.UseFloatingWatermark="False"
                      Controls:TextboxHelper.IsWaitingForData="False"/>
-		</StackPanel>
-		<Button Grid.Row="3"
-				Margin="20 20 20 0"
-				Height="40"
-				Foreground="{DynamicResource BlackBrush}"
-				Background="{DynamicResource AccentColorBrush}"
-                Content="SIGN IN" />
-		<StackPanel Grid.Row="4" Margin="20 0" Orientation="Horizontal" >
-			<MControls:MyToggleButton Background="{DynamicResource LoginPathBrush}"
+				</StackPanel>
+				<Button Grid.Row="3"
+						Margin="20 20 20 0"
+						Height="40"
+						Foreground="{DynamicResource BlackBrush}"
+						Background="{DynamicResource AccentColorBrush}"
+						Content="SIGN IN" />
+				<StackPanel Grid.Row="4" 
+							Margin="20 0" 
+							Orientation="Horizontal">
+					<MControls:MyToggleButton Background="{DynamicResource LoginPathBrush}"
 									  IsBackground="Visible"
 									  BorderThickness="0"
 									  IsEnabled="False"
 								      BorderType="None">
-				<MControls:MyToggleButton.Content>
-					<StackPanel Orientation="Horizontal">
-						<Label Content="Not a member？" />
-						<Label Foreground="{DynamicResource BlackBrush}" Content="Sign up now" />
-						<Label Padding="0 9">
-							<Path Data="{Binding [arrow], Source={x:Static MControls:PathData.Instance}}" 
+						<MControls:MyToggleButton.Content>
+							<StackPanel Orientation="Horizontal">
+								<Label Content="Not a member？" />
+								<Label Foreground="{DynamicResource BlackBrush}" Content="Sign up now" />
+								<Label Padding="0 9">
+									<Path Data="{Binding [arrow], Source={x:Static MControls:PathData.Instance}}" 
 								  Height="10"
 								  Width="15"
 								  Style="{StaticResource PathStyle}"
 								  Fill="{DynamicResource BlackBrush}" >
-							</Path>
-						</Label>
-					</StackPanel>
-				</MControls:MyToggleButton.Content>
-			</MControls:MyToggleButton>
+									</Path>
+								</Label>
+							</StackPanel>
+						</MControls:MyToggleButton.Content>
+					</MControls:MyToggleButton>
 
-		</StackPanel>
-
-		<Controls:FlyoutsControl Grid.RowSpan="6"
-								 Height="{Binding ActualHeight,RelativeSource={RelativeSource AncestorType=Grid}}">
-			
-			<Controls:Flyout Position="Right"  
-                             Theme="Adapt"
-							 Width="{Binding ActualWidth,RelativeSource={RelativeSource AncestorType=Grid}}"
-							 Height="{Binding ActualHeight,RelativeSource={RelativeSource AncestorType=Grid}}"
-							 Header="第三方登录"
-							 IsOpen="{Binding IsThirdPartShow}"
-                             AnimateOnPositionChange="False">
-
-				<WindowsFormsHost Grid.Row="5" >
-					<webkit:ChromeWebBrowser x:Name="ChromeWebBrowser" Width="300" Height="500" Url="http://www.ximalaya.com/passport/auth/2/authorize?responseJson=true" />
-				</WindowsFormsHost>
-
-			</Controls:Flyout>
-		</Controls:FlyoutsControl>
-
-	</Grid>
+				</StackPanel>
+			</Grid>
+		</Controls:FlipViewItem>
+		<Controls:FlipViewItem>
+			<webkit:ChromiumWebBrowser x:Name="ChromeWebBrowser"
+									   Margin="0 30 0 0"
+									   Opacity="1"
+									   Background="White"
+									   Address="{Binding Address, Mode=TwoWay}"
+									   WebBrowser="{Binding WebBrowser, Mode=OneWayToSource}"/>
+		</Controls:FlipViewItem>
+	</Controls:FlipView>
+	
+	
+	
 </UserControl>
