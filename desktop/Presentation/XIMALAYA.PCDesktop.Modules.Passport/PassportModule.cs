@@ -46,7 +46,6 @@ namespace XIMALAYA.PCDesktop.Modules.Passport
                     {
                         region.Remove(activeView);
                     }
-                    view.ViewModel.DoInit();
                     region.Add(view);
                 }
             }

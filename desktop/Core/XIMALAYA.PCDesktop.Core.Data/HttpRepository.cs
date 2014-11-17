@@ -18,11 +18,11 @@ namespace XIMALAYA.PCDesktop.Core.Data
         {
             if (IsPost)
             {
-                HttpWebRequestOpt.Instance.SendDataByPostAsyn(url, datas, async);
+                HttpWebRequestSingleton.Instance.SendDataByPostAsyn(url, datas, async);
             }
             else
             {
-                HttpWebRequestOpt.Instance.SendDataByGETAsyn(url, datas, async);
+                HttpWebRequestSingleton.Instance.SendDataByGETAsyn(url, datas, async);
             }
         }
         /// <summary>
@@ -33,11 +33,11 @@ namespace XIMALAYA.PCDesktop.Core.Data
         {
             if (IsPost)
             {
-                HttpWebRequestOpt.Instance.SendDataByPostAsyn(url, datas, async);
+                HttpWebRequestSingleton.Instance.SendDataByPostAsyn(url, datas, async);
             }
             else
             {
-                HttpWebRequestOpt.Instance.SendDataByGETAsyn(url, datas, async);
+                HttpWebRequestSingleton.Instance.SendDataByGETAsyn(url, datas, async);
             }
         }
         /// <summary>
@@ -48,11 +48,11 @@ namespace XIMALAYA.PCDesktop.Core.Data
         {
             if (IsPost)
             {
-                HttpWebRequestOpt.Instance.SendDataByPostAsyn(url, datas, async);
+                HttpWebRequestSingleton.Instance.SendDataByPostAsyn(url, datas, async);
             }
             else
             {
-                HttpWebRequestOpt.Instance.SendDataByGETAsyn(url, datas, async);
+                HttpWebRequestSingleton.Instance.SendDataByGETAsyn(url, datas, async);
             }
         }
         /// <summary>
@@ -63,11 +63,11 @@ namespace XIMALAYA.PCDesktop.Core.Data
         {
             if (IsPost)
             {
-                HttpWebRequestOpt.Instance.SendDataByPostAsyn(url, datas, async);
+                HttpWebRequestSingleton.Instance.SendDataByPostAsyn(url, datas, async);
             }
             else
             {
-                HttpWebRequestOpt.Instance.SendDataByGETAsyn(url, datas, async);
+                HttpWebRequestSingleton.Instance.SendDataByGETAsyn(url, datas, async);
             }
         }
     }

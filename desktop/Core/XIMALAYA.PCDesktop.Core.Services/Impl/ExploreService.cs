@@ -17,14 +17,8 @@ namespace XIMALAYA.PCDesktop.Core.Services
     {
         #region 属性
 
-        /// <summary>
-        /// 标签下的专辑decoder
-        /// </summary>
-        protected JsonDecoder<CategoryTagResult> CategoryTagResultDecoder { get; set; }
-        /// <summary>
-        /// 标签下的专辑action
-        /// </summary>
-        protected Action<object> CategoryTagResultAct { get; set; }
+        private ServiceParams<CategoryTagResult> CategoryTagResult { get; set; }
+        private ServiceParams<SuperExploreIndexResult> SuperExploreIndexResult { get; set; }
 
         #endregion
 
@@ -56,19 +50,20 @@ namespace XIMALAYA.PCDesktop.Core.Services
             //new SubjectListResultDecorator<SuperExploreIndexResult>(result);
             //new SubjectDataDecorator<SuperExploreIndexResult>(result);
 
-            this.Act = act;
-            this.Decoder = Json.DecoderFor<SuperExploreIndexResult>(config => config.DeriveFrom(result.Config));
+            this.SuperExploreIndexResult = new ServiceParams<SuperExploreIndexResult>(Json.DecoderFor<SuperExploreIndexResult>(config => config.DeriveFrom(result.Config)), act);
+            //this.Act = act;
+            //this.Decoder = Json.DecoderFor<SuperExploreIndexResult>(config => config.DeriveFrom(result.Config));
 
             try
             {
                 this.Responsitory.Fetch(WellKnownUrl.SuperExploreIndex, param.ToString(), asyncResult =>
                 {
-                    this.GetDecodeData<SuperExploreIndexResult>(this.GetDataCallBack(asyncResult), this.Decoder, this.Act);
+                    this.GetDecodeData<SuperExploreIndexResult>(this.GetDataCallBack(asyncResult), this.SuperExploreIndexResult);
                 });
             }
             catch (Exception ex)
             {
-                this.Act.BeginInvoke(new SuperExploreIndexResult
+                this.SuperExploreIndexResult.Act.BeginInvoke(new SuperExploreIndexResult
                 {
                     Ret = 500,
                     Message = ex.Message
@@ -88,19 +83,20 @@ namespace XIMALAYA.PCDesktop.Core.Services
             new CategoryTagResultDecorator<CategoryTagResult>(result);
             new TagDataDecorator<CategoryTagResult>(result);
 
-            this.CategoryTagResultAct = act;
-            this.CategoryTagResultDecoder = Json.DecoderFor<CategoryTagResult>(config => config.DeriveFrom(result.Config));
+            this.CategoryTagResult = new ServiceParams<CategoryTagResult>(Json.DecoderFor<CategoryTagResult>(config => config.DeriveFrom(result.Config)), act);
+            //this.CategoryTagResultAct = act;
+            //this.CategoryTagResultDecoder = Json.DecoderFor<CategoryTagResult>(config => config.DeriveFrom(result.Config));
 
             try
             {
                 this.Responsitory.Fetch(WellKnownUrl.CategoryTags, param.ToString(), asyncResult =>
                 {
-                    this.GetDecodeData<CategoryTagResult>(this.GetDataCallBack(asyncResult), this.CategoryTagResultDecoder, this.CategoryTagResultAct);
+                    this.GetDecodeData<CategoryTagResult>(this.GetDataCallBack(asyncResult), this.CategoryTagResult);
                 });
             }
             catch (Exception ex)
             {
-                this.Act.BeginInvoke(new CategoryTagResult
+                this.CategoryTagResult.Act.BeginInvoke(new CategoryTagResult
                 {
                     Ret = 500,
                     Message = ex.Message

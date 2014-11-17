@@ -40,6 +40,12 @@ namespace XIMALAYA.PCDesktop.Core.ParamsModel
         public int? Uid { get; set; }
 
         /// <summary>
+        /// 登陆用户的token
+        /// </summary>
+        [DataMember(IsRequired = false, Name = "token", Order = 50)]
+        public string Token { get; set; }
+
+        /// <summary>
         /// 返回成字符
         /// </summary>
         /// <returns></returns>

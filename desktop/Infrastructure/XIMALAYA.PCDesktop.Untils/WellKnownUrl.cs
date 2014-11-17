@@ -47,15 +47,12 @@ namespace XIMALAYA.PCDesktop.Untils
 
         #endregion
 
+        #region 详情页
+
         /// <summary>
         /// 专辑详情页接口
         /// </summary>
         public const string AlbumInfo = WebPath + "/mobile/others/ca/album/track";
-        
-        /// <summary>
-        /// 搜索接口
-        /// </summary>
-        public const string SearchPath = WebPath + "/s/mobile/search";
 
         /// <summary>
         /// 声音详情页
@@ -66,6 +63,20 @@ namespace XIMALAYA.PCDesktop.Untils
         /// 声音详情页
         /// </summary>
         public const string SoundInfoNew = WebPath + "/mobile/track/detail";
+
+        /// <summary>
+        /// 单个用户的详细信息
+        /// </summary>
+        public const string UserDetailInfo = WebPath + "/mobile/others/homePage";
+
+        #endregion
+
+        #region 发现页接口
+
+        /// <summary>
+        /// 搜索接口
+        /// </summary>
+        public const string SearchPath = WebPath + "/s/mobile/search";
 
         /// <summary>
         /// 单个声音分享界面内容
@@ -81,12 +92,7 @@ namespace XIMALAYA.PCDesktop.Untils
         /// 单个用户分享界面内容
         /// </summary>
         public const string ShareUserInfo = WebPath + "/mobile/user/share/content";
-
-        /// <summary>
-        /// 单个用户的详细信息
-        /// </summary>
-        public const string UserDetailInfo = WebPath + "/mobile/others/homePage";
-
+        
         /// <summary>
         /// 喜欢声音的用户列表
         /// </summary>
@@ -102,9 +108,23 @@ namespace XIMALAYA.PCDesktop.Untils
         /// </summary>
         public const string MutiData = WebPath + "/m/focus_list";
 
+        #endregion
+
+        #region 登录相关
+
+        /// <summary>
+        /// 本站登录
+        /// </summary>
+        public const string LoginPath = WebPath + "/mobile/login";
         /// <summary>
         /// 第三方登录接口地址
         /// </summary>
         public const string ThirdLoginPath = WebPath + "/passport/auth/{0}/authorize?responseJson=true";
+        /// <summary>
+        /// 获取登录用户信息
+        /// </summary>
+        public const string LoginUserInfo = WebPath + "/mobile/user_info";
+
+        #endregion
     }
 }

@@ -33,6 +33,14 @@ namespace XIMALAYA.PCDesktop.Core.Models
         /// 
         /// </summary>
         public Dictionary<string, string> Maps { get; set; }
+        /// <summary>
+        /// 成功标志
+        /// </summary>
+        public int Ret { get; set; }
+        /// <summary>
+        /// 错误信息
+        /// </summary>
+        public string Message { get; set; }
 
         public Base()
         {

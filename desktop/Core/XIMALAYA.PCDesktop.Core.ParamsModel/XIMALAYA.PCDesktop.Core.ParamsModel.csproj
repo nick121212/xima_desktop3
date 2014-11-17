@@ -60,6 +60,7 @@
     <Compile Include="CategoryTagAlbumParam.cs" />
     <Compile Include="CategoryTagSoundParam.cs" />
     <Compile Include="EnumsConverter.cs" />
+    <Compile Include="LoginParam.cs" />
     <Compile Include="MutiDataParam.cs" />
     <Compile Include="SearchParam.cs" />
     <Compile Include="ShareParam.cs" />

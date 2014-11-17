@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.IO;
-using System.Net;
 using System.Web.Script.Serialization;
 using FluentJson;
 using XIMALAYA.PCDesktop.Core.Data;
 using XIMALAYA.PCDesktop.Core.Data.Decorator;
 using XIMALAYA.PCDesktop.Core.Models.Search;
-using XIMALAYA.PCDesktop.Tools;
 using XIMALAYA.PCDesktop.Untils;
 
 namespace XIMALAYA.PCDesktop.Core.Services
@@ -19,10 +16,16 @@ namespace XIMALAYA.PCDesktop.Core.Services
     [Export(typeof(ISearchService))]
     public class SearchService : ServiceBase<SearchResult>, ISearchService
     {
+        #region 属性
 
-        private JsonDecoder<SearchSoundResult> SearchSoundResultDecoder { get; set; }
-        private JsonDecoder<SearchAlbumResult> SearchAlbumResultDecoder { get; set; }
-        private JsonDecoder<SearchUserResult> SearchUserResultDecoder { get; set; }
+        private ServiceParams<SearchResult> SearchResult { get; set; }
+        private ServiceParams<SearchSoundResult> SearchSoundResult { get; set; }
+        private ServiceParams<SearchAlbumResult> SearchAlbumResult { get; set; }
+        private ServiceParams<SearchUserResult> SearchUserResult { get; set; }
+
+        #endregion
+
+        #region 方法
 
         /// <summary>
         /// 搜索所有数据
@@ -42,18 +45,19 @@ namespace XIMALAYA.PCDesktop.Core.Services
             new AlbumData4Decorator<SearchResult>(result);
             new UserData1Decorator<SearchResult>(result);
 
-            this.Act = act;
-            this.Decoder = Json.DecoderFor<SearchResult>(config => config.DeriveFrom(result.Config));
+            this.SearchResult = new ServiceParams<SearchResult>(Json.DecoderFor<SearchResult>(config => config.DeriveFrom(result.Config)), act);
+            //this.Act = act;
+            //this.Decoder = Json.DecoderFor<SearchResult>(config => config.DeriveFrom(result.Config));
             try
             {
                 this.Responsitory.Fetch(WellKnownUrl.SearchPath, param.ToString(), asyncResult =>
                 {
-                    this.GetDecodeData<SearchResult>(this.GetDataCallBack(asyncResult), this.Decoder, this.Act);
+                    this.GetDecodeData<SearchResult>(this.GetDataCallBack(asyncResult), this.SearchResult);
                 });
             }
             catch (Exception ex)
             {
-                this.Act.BeginInvoke(new SearchSoundResult
+                this.SearchResult.Act.BeginInvoke(new SearchSoundResult
                 {
                     Ret = 500,
                     Message = ex.Message
@@ -74,8 +78,9 @@ namespace XIMALAYA.PCDesktop.Core.Services
             new SearchSoundResultDecorator<SearchSoundResult>(result);
             new SoundData4Decorator<SearchSoundResult>(result);
 
-            this.Act = act;
-            this.SearchSoundResultDecoder = Json.DecoderFor<SearchSoundResult>(config => config.DeriveFrom(result.Config));
+            this.SearchSoundResult = new ServiceParams<SearchSoundResult>(Json.DecoderFor<SearchSoundResult>(config => config.DeriveFrom(result.Config)), act);
+            //this.Act = act;
+            //this.SearchSoundResultDecoder = Json.DecoderFor<SearchSoundResult>(config => config.DeriveFrom(result.Config));
             try
             {
                 this.Responsitory.Fetch(WellKnownUrl.SearchPath, param.ToString(), asyncResult =>
@@ -87,14 +92,14 @@ namespace XIMALAYA.PCDesktop.Core.Services
                     if (dic.ContainsKey("response"))
                     {
                         responseString = js.Serialize(dic["response"]);
-                        this.GetDecodeData<SearchSoundResult>(responseString, this.SearchSoundResultDecoder, this.Act);
+                        this.GetDecodeData<SearchSoundResult>(responseString, this.SearchSoundResult);
                     }
                     //this.GetDecodeData<SearchSoundResult>(this.GetDataCallBack1(asyncResult), this.SearchSoundResultDecoder, this.Act);
                 });
             }
             catch (Exception ex)
             {
-                this.Act.BeginInvoke(new SearchSoundResult
+                this.SearchSoundResult.Act.BeginInvoke(new SearchSoundResult
                 {
                     Ret = 500,
                     Message = ex.Message
@@ -115,8 +120,9 @@ namespace XIMALAYA.PCDesktop.Core.Services
             new SearchAlbumResultDecorator<SearchAlbumResult>(result);
             new AlbumData4Decorator<SearchAlbumResult>(result);
 
-            this.Act = act;
-            this.SearchAlbumResultDecoder = Json.DecoderFor<SearchAlbumResult>(config => config.DeriveFrom(result.Config));
+            this.SearchAlbumResult = new ServiceParams<SearchAlbumResult>(Json.DecoderFor<SearchAlbumResult>(config => config.DeriveFrom(result.Config)), act);
+            //this.Act = act;
+            //this.SearchAlbumResultDecoder = Json.DecoderFor<SearchAlbumResult>(config => config.DeriveFrom(result.Config));
             try
             {
                 this.Responsitory.Fetch(WellKnownUrl.SearchPath, param.ToString(), asyncResult =>
@@ -128,14 +134,14 @@ namespace XIMALAYA.PCDesktop.Core.Services
                     if (dic.ContainsKey("response"))
                     {
                         responseString = js.Serialize(dic["response"]);
-                        this.GetDecodeData<SearchAlbumResult>(responseString, this.SearchAlbumResultDecoder, this.Act);
+                        this.GetDecodeData<SearchAlbumResult>(responseString, this.SearchAlbumResult);
                     }
                     //this.GetDecodeData<SearchSoundResult>(this.GetDataCallBack1(asyncResult), this.SearchSoundResultDecoder, this.Act);
                 });
             }
             catch (Exception ex)
             {
-                this.Act.BeginInvoke(new SearchAlbumResult
+                this.SearchAlbumResult.Act.BeginInvoke(new SearchAlbumResult
                 {
                     Ret = 500,
                     Message = ex.Message
@@ -156,8 +162,9 @@ namespace XIMALAYA.PCDesktop.Core.Services
             new SearchUserResultDecorator<SearchUserResult>(result);
             new UserData1Decorator<SearchUserResult>(result);
 
-            this.Act = act;
-            this.SearchUserResultDecoder = Json.DecoderFor<SearchUserResult>(config => config.DeriveFrom(result.Config));
+            this.SearchUserResult = new ServiceParams<SearchUserResult>(Json.DecoderFor<SearchUserResult>(config => config.DeriveFrom(result.Config)), act);
+            //this.Act = act;
+            //this.SearchUserResultDecoder = Json.DecoderFor<SearchUserResult>(config => config.DeriveFrom(result.Config));
             try
             {
                 this.Responsitory.Fetch(WellKnownUrl.SearchPath, param.ToString(), asyncResult =>
@@ -169,14 +176,14 @@ namespace XIMALAYA.PCDesktop.Core.Services
                     if (dic.ContainsKey("response"))
                     {
                         responseString = js.Serialize(dic["response"]);
-                        this.GetDecodeData<SearchUserResult>(responseString, this.SearchUserResultDecoder, this.Act);
+                        this.GetDecodeData<SearchUserResult>(responseString, this.SearchUserResult);
                     }
                     //this.GetDecodeData<SearchSoundResult>(this.GetDataCallBack1(asyncResult), this.SearchSoundResultDecoder, this.Act);
                 });
             }
             catch (Exception ex)
             {
-                this.Act.BeginInvoke(new SearchUserResult
+                this.SearchUserResult.Act.BeginInvoke(new SearchUserResult
                 {
                     Ret = 500,
                     Message = ex.Message
@@ -184,5 +191,7 @@ namespace XIMALAYA.PCDesktop.Core.Services
             }
             //this.Responsitory.Fetch(WellKnownUrl.SearchPath, param.ToString(), UserDataCallBack);
         }
+
+        #endregion
     }
 }

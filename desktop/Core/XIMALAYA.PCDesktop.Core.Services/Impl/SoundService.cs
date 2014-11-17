@@ -1,14 +1,10 @@
 ﻿using System;
 using System.ComponentModel.Composition;
-using System.IO;
-using System.Net;
 using FluentJson;
 using XIMALAYA.PCDesktop.Core.Data;
 using XIMALAYA.PCDesktop.Core.Data.Decorator;
 using XIMALAYA.PCDesktop.Core.Models.MutiData;
 using XIMALAYA.PCDesktop.Core.Models.Sound;
-using XIMALAYA.PCDesktop.Core.Models.User;
-using XIMALAYA.PCDesktop.Tools;
 using XIMALAYA.PCDesktop.Untils;
 
 namespace XIMALAYA.PCDesktop.Core.Services
@@ -21,9 +17,8 @@ namespace XIMALAYA.PCDesktop.Core.Services
     {
         #region 属性
 
-        private Action<object> MutiSoundResultAct { get; set; }
-
-        private JsonDecoder<MutiSoundResult> MutiSoundResultDecoder { get; set; }
+        private ServiceParams<SoundData> SoundDataResult { get; set; }
+        private ServiceParams<MutiSoundResult> MutiSoundResult { get; set; }
 
         #endregion
 
@@ -42,20 +37,21 @@ namespace XIMALAYA.PCDesktop.Core.Services
             new SoundDetailResultDecorator<SoundData>(result);
             new UserData2Decorator<SoundData>(result);
 
-            this.Act = act;
-            this.Decoder = Json.DecoderFor<SoundData>(config => config.DeriveFrom(result.Config));
+            this.SoundDataResult = new ServiceParams<SoundData>(Json.DecoderFor<SoundData>(config => config.DeriveFrom(result.Config)),act);
+            //this.Act = act;
+            //this.Decoder = Json.DecoderFor<SoundData>(config => config.DeriveFrom(result.Config));
             try
             {
                 this.Responsitory.Fetch(WellKnownUrl.SoundInfoNew, param.ToString(), asyncResult =>
                 {
-                    this.GetDecodeData<SoundData>(this.GetDataCallBack(asyncResult), this.Decoder, this.Act);
+                    this.GetDecodeData<SoundData>(this.GetDataCallBack(asyncResult), this.SoundDataResult);
                 });
             }
             catch (Exception ex)
             {
-                this.Act.BeginInvoke(new SoundData
+                this.SoundDataResult.Act.BeginInvoke(new SoundData
                 {
-
+                    
                 }, null, null);
             }
             //this.Responsitory.Fetch(WellKnownUrl.SoundInfoNew, param.ToString(), base.GetDataCallBack);
@@ -73,18 +69,19 @@ namespace XIMALAYA.PCDesktop.Core.Services
             new MutiSoundResultDecorator<MutiSoundResult>(result);
             new SoundData6Decorator<MutiSoundResult>(result);
 
-            this.MutiSoundResultAct = act;
-            this.MutiSoundResultDecoder = Json.DecoderFor<MutiSoundResult>(config => config.DeriveFrom(result.Config));
+            this.MutiSoundResult = new ServiceParams<MutiSoundResult>(Json.DecoderFor<MutiSoundResult>(config => config.DeriveFrom(result.Config)),act);
+            //this.MutiSoundResultAct = act;
+            //this.MutiSoundResultDecoder = Json.DecoderFor<MutiSoundResult>(config => config.DeriveFrom(result.Config));
             try
             {
                 this.Responsitory.Fetch(WellKnownUrl.MutiData, param.ToString(), asyncResult =>
                 {
-                    this.GetDecodeData<MutiSoundResult>(this.GetDataCallBack(asyncResult), this.MutiSoundResultDecoder, this.MutiSoundResultAct);
+                    this.GetDecodeData<MutiSoundResult>(this.GetDataCallBack(asyncResult), this.MutiSoundResult);
                 });
             }
             catch (Exception ex)
             {
-                this.Act.BeginInvoke(new MutiUserResult
+                this.MutiSoundResult.Act.BeginInvoke(new MutiUserResult
                 {
                     Ret = 500,
                     Message = ex.Message

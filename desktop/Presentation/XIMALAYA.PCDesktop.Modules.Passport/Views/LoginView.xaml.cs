@@ -14,6 +14,12 @@ namespace XIMALAYA.PCDesktop.Modules.Passport.Views
         public LoginView()
         {
             InitializeComponent();
+            this.Loaded += LoginView_Loaded;
+        }
+
+        void LoginView_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            //this.ChromeWebBrowser.init
         }
         /// <summary>
         /// viewmodel

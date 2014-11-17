@@ -131,6 +131,34 @@ namespace XIMALAYA.PCDesktop.Core.Models.User
         /// 订阅专辑数量
         /// </summary>
         public long FavoriteAlbumCount { get; set; }
+        /// <summary>
+        /// 生日-天
+        /// </summary>
+        public int BirthDay { get; set; }
+        /// <summary>
+        /// 生日-月
+        /// </summary>
+        public int BirthMonth { get; set; }
+        /// <summary>
+        /// 生日-年
+        /// </summary>
+        public int BirthYear { get; set; }
+        /// <summary>
+        /// 城市
+        /// </summary>
+        public string City { get; set; }
+        /// <summary>
+        /// 国家
+        /// </summary>
+        public string Country { get; set; }
+        /// <summary>
+        /// 镇
+        /// </summary>
+        public string Province { get; set; }
+        /// <summary>
+        /// Email
+        /// </summary>
+        public string Email { get; set; }
 
         public bool IsMutualFollowed { get; set; }
 

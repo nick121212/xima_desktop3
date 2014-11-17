@@ -29,9 +29,13 @@ namespace XIMALAYA.PCDesktop.Tools
     /// <summary>
     /// 全局播放器
     /// </summary>
-    public class PlayerSingleton : Singleton<BassEngine> { }
+    public sealed class PlayerSingleton : Singleton<BassEngine> { }
     /// <summary>
     /// 全局数据
     /// </summary>
-    public class GlobalDataSingleton : Singleton<GlobalData> { }
+    public sealed class GlobalDataSingleton : Singleton<GlobalData> { }
+    /// <summary>
+    /// 
+    /// </summary>
+    public sealed class HttpWebRequestSingleton : Singleton<HttpWebRequestOpt> { }
 }

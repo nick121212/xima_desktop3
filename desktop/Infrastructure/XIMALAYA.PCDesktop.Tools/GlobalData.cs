@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Deployment.Application;
-using System.IO;
 using System.IO.MemoryMappedFiles;
-using System.Reflection;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Microsoft.Practices.Prism.ViewModel;
 using XIMALAYA.PCDesktop.Core.Models.Sound;
 using XIMALAYA.PCDesktop.Tools.Player;
-using XIMALAYA.PCDesktop.Untils;
 
 namespace XIMALAYA.PCDesktop.Tools
 {

@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Specialized;
-using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text;
-using XIMALAYA.PCDesktop.Untils;
 
-namespace XIMALAYA.PCDesktop.Tools
+namespace XIMALAYA.PCDesktop.Untils
 {
     /// <summary>
     /// 数据操作类
     /// </summary>
-    public class HttpWebRequestOpt : Singleton<HttpWebRequestOpt>
+    public class HttpWebRequestOpt
     {
         /// <summary>
         /// 
@@ -20,17 +18,32 @@ namespace XIMALAYA.PCDesktop.Tools
         /// <summary>
         /// cookie
         /// </summary>
-        public CookieContainer Cookies { get; set; }
+        private CookieContainer Cookies { get; set; }
 
         private HttpWebRequestOpt()
         {
             //FileVersionInfo myFileVersion = FileVersionInfo.GetVersionInfo(Path.Combine(Directory.GetCurrentDirectory(), "XIMALAYA.PCDesktop.exe"));
 
-            //this.Cookies = new CookieContainer();
+            this.Cookies = new CookieContainer();
             //this.UserAgent = string.Format("ting-ximalaya_v{0} name/ximalaya os/{1} osName/{2}", myFileVersion.FileVersion, OSInfo.Instance.OsInfo.VersionString, OSInfo.Instance.OsInfo.Platform.ToString());
             //this.Cookies.Add(new Cookie("4&_token", "935&d63fef280403904a8c0a5ee0dbe228f2d064", "/", ".ximalaya.com"));
         }
-
+        /// <summary>
+        /// 添加cookie
+        /// </summary>
+        /// <param name="cookie"></param>
+        public void SetCookies(Cookie cookie)
+        {
+            this.Cookies.Add(cookie);
+        }
+        /// <summary>
+        /// 添加cookie
+        /// </summary>
+        /// <param name="cookie"></param>
+        public void SetCookies(string key, string val)
+        {
+            this.Cookies.Add(new Cookie(key, val, "/", ".ximalaya.com"));
+        }
         /// <summary>
         /// 通过POST方式发送数据
         /// </summary>

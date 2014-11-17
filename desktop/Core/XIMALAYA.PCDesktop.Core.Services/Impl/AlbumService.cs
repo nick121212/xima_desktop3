@@ -22,30 +22,35 @@ namespace XIMALAYA.PCDesktop.Core.Services.Impl
     {
         #region 属性
 
-        /// <summary>
-        /// json格式转换类
-        /// </summary>
-        private JsonDecoder<TagAlbumsResult> TagAlbumsResultDecoder { get; set; }
-        /// <summary>
-        /// 标签下的专辑
-        /// </summary>
-        private Action<object> TagAlbumsResultAct { get; set; }
-        /// <summary>
-        /// 他人的专辑decoder
-        /// </summary>
-        private JsonDecoder<AlbumInfoResult1> AlbumInfoResult1Decoder { get; set; }
-        /// <summary>
-        /// 他人的专辑回调
-        /// </summary>
-        private Action<object> AlbumInfoResult1Act { get; set; }
-        /// <summary>
-        /// 多专辑decoder
-        /// </summary>
-        private JsonDecoder<MutiAlbumResult> MutiAlbumDecoder { get; set; }
-        /// <summary>
-        /// 多专辑回调
-        /// </summary>
-        private Action<object> MutiAlbumAct { get; set; }
+        private ServiceParams<TagAlbumsResult> TagAlbumsResult { get; set; }
+        private ServiceParams<AlbumInfoResult> AlbumInfoResult { get; set; }
+        private ServiceParams<AlbumInfoResult1> AlbumInfoResult1 { get; set; }
+        private ServiceParams<MutiAlbumResult> MutiAlbumResult { get; set; }
+
+        ///// <summary>
+        ///// json格式转换类
+        ///// </summary>
+        //private JsonDecoder<TagAlbumsResult> TagAlbumsResultDecoder { get; set; }
+        ///// <summary>
+        ///// 标签下的专辑
+        ///// </summary>
+        //private Action<object> TagAlbumsResultAct { get; set; }
+        ///// <summary>
+        ///// 他人的专辑decoder
+        ///// </summary>
+        //private JsonDecoder<AlbumInfoResult1> AlbumInfoResult1Decoder { get; set; }
+        ///// <summary>
+        ///// 他人的专辑回调
+        ///// </summary>
+        //private Action<object> AlbumInfoResult1Act { get; set; }
+        ///// <summary>
+        ///// 多专辑decoder
+        ///// </summary>
+        //private JsonDecoder<MutiAlbumResult> MutiAlbumDecoder { get; set; }
+        ///// <summary>
+        ///// 多专辑回调
+        ///// </summary>
+        //private Action<object> MutiAlbumAct { get; set; }
 
         #endregion
 
@@ -65,19 +70,21 @@ namespace XIMALAYA.PCDesktop.Core.Services.Impl
             new SoundsResultDecorator<AlbumInfoResult>(result);
             new AlbumData3Decorator<AlbumInfoResult>(result);
             new SoundData2Decorator<AlbumInfoResult>(result);
-            this.Act = act;
-            this.Decoder = Json.DecoderFor<AlbumInfoResult>(config => config.DeriveFrom(result.Config));
+
+            this.AlbumInfoResult = new ServiceParams<AlbumInfoResult>(Json.DecoderFor<AlbumInfoResult>(config => config.DeriveFrom(result.Config)), act);
+            //this.Act = act;
+            //this.Decoder = Json.DecoderFor<AlbumInfoResult>(config => config.DeriveFrom(result.Config));
 
             try
             {
                 this.Responsitory.Fetch(WellKnownUrl.AlbumInfo, param.ToString(), asyncResult =>
                 {
-                    this.GetDecodeData<AlbumInfoResult>(this.GetDataCallBack(asyncResult), this.Decoder, this.Act);
+                    this.GetDecodeData<AlbumInfoResult>(this.GetDataCallBack(asyncResult), this.AlbumInfoResult);
                 });
             }
             catch (Exception ex)
             {
-                this.Act.BeginInvoke(new AlbumInfoResult
+                this.AlbumInfoResult.Act.BeginInvoke(new AlbumInfoResult
                 {
                     Ret = 500,
                     Message = ex.Message
@@ -97,24 +104,24 @@ namespace XIMALAYA.PCDesktop.Core.Services.Impl
             new TagAlbumsResultDecorator<TagAlbumsResult>(result);
             new AlbumData1Decorator<TagAlbumsResult>(result);
 
-            this.TagAlbumsResultAct = act;
-            this.TagAlbumsResultDecoder = Json.DecoderFor<TagAlbumsResult>(config => config.DeriveFrom(result.Config));
+            this.TagAlbumsResult = new ServiceParams<TagAlbumsResult>(Json.DecoderFor<TagAlbumsResult>(config => config.DeriveFrom(result.Config)), act);
 
             try
             {
                 this.Responsitory.Fetch(WellKnownUrl.CategoryTagAlbums, param.ToString(), asyncResult =>
                 {
-                    this.GetDecodeData<TagAlbumsResult>(this.GetDataCallBack(asyncResult), this.TagAlbumsResultDecoder, this.TagAlbumsResultAct);
+                    this.GetDecodeData<TagAlbumsResult>(this.GetDataCallBack(asyncResult), this.TagAlbumsResult);
                 });
             }
             catch (Exception ex)
             {
-                this.Act.BeginInvoke(new TagAlbumsResult
+                this.TagAlbumsResult.Act.BeginInvoke(new TagAlbumsResult
                 {
                     Ret = 500,
                     Message = ex.Message
                 }, null, null);
             }
+            this.TagAlbumsResult.Dispose();
         }
         /// <summary>
         /// 获取他人的专辑列表
@@ -129,19 +136,21 @@ namespace XIMALAYA.PCDesktop.Core.Services.Impl
             new AlbumInfoResult1Decorator<AlbumInfoResult1>(result);
             new AlbumData3Decorator<AlbumInfoResult1>(result);
 
-            this.AlbumInfoResult1Act = act;
-            this.AlbumInfoResult1Decoder = Json.DecoderFor<AlbumInfoResult1>(config => config.DeriveFrom(result.Config));
+            this.AlbumInfoResult1 = new ServiceParams<AlbumInfoResult1>(Json.DecoderFor<AlbumInfoResult1>(config => config.DeriveFrom(result.Config)), act);
+
+            //this.AlbumInfoResult1Act = act;
+            //this.AlbumInfoResult1Decoder = Json.DecoderFor<AlbumInfoResult1>(config => config.DeriveFrom(result.Config));
 
             try
             {
                 this.Responsitory.Fetch(WellKnownUrl.UserAlbums, param.ToString(), asyncResult =>
                 {
-                    this.GetDecodeData<AlbumInfoResult1>(this.GetDataCallBack(asyncResult), this.AlbumInfoResult1Decoder, this.AlbumInfoResult1Act);
+                    this.GetDecodeData<AlbumInfoResult1>(this.GetDataCallBack(asyncResult), this.AlbumInfoResult1);
                 });
             }
             catch (Exception ex)
             {
-                this.Act.BeginInvoke(new AlbumInfoResult1
+                this.AlbumInfoResult1.Act.BeginInvoke(new AlbumInfoResult1
                 {
                     Ret = 500,
                     Message = ex.Message
@@ -162,18 +171,20 @@ namespace XIMALAYA.PCDesktop.Core.Services.Impl
             new MutiAlbumResultDecorator<MutiAlbumResult>(result);
             new AlbumData5Decorator<MutiAlbumResult>(result);
 
-            this.MutiAlbumAct = act;
-            this.MutiAlbumDecoder = Json.DecoderFor<MutiAlbumResult>(config => config.DeriveFrom(result.Config));
+            this.MutiAlbumResult = new ServiceParams<MutiAlbumResult>(Json.DecoderFor<MutiAlbumResult>(config => config.DeriveFrom(result.Config)), act);
+
+            //this.MutiAlbumAct = act;
+            //this.MutiAlbumDecoder = Json.DecoderFor<MutiAlbumResult>(config => config.DeriveFrom(result.Config));
             try
             {
                 this.Responsitory.Fetch(WellKnownUrl.MutiData, param.ToString(), asyncResult =>
                 {
-                    this.GetDecodeData<MutiAlbumResult>(this.GetDataCallBack(asyncResult), this.MutiAlbumDecoder, this.MutiAlbumAct);
+                    this.GetDecodeData<MutiAlbumResult>(this.GetDataCallBack(asyncResult), this.MutiAlbumResult);
                 });
             }
             catch (Exception ex)
             {
-                this.Act.BeginInvoke(new MutiUserResult
+                this.MutiAlbumResult.Act.BeginInvoke(new MutiAlbumResult
                 {
                     Ret = 500,
                     Message = ex.Message

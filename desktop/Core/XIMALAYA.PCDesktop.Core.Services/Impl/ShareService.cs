@@ -5,7 +5,6 @@ using XIMALAYA.PCDesktop.Core.Data;
 using XIMALAYA.PCDesktop.Core.Data.Decorator;
 using XIMALAYA.PCDesktop.Core.Models.Share;
 using XIMALAYA.PCDesktop.Core.ParamsModel;
-using XIMALAYA.PCDesktop.Tools;
 using XIMALAYA.PCDesktop.Untils;
 
 namespace XIMALAYA.PCDesktop.Core.Services
@@ -16,6 +15,10 @@ namespace XIMALAYA.PCDesktop.Core.Services
     [Export(typeof(IShareService))]
     public class ShareService : ServiceBase<ShareResult>, IShareService
     {
+
+        private ServiceParams<ShareResult> ShareResult { get; set; }
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -25,8 +28,9 @@ namespace XIMALAYA.PCDesktop.Core.Services
             string url = string.Empty;
             new ShareResultDecorator<ShareResult>(result);
 
-            this.Act = act;
-            this.Decoder = Json.DecoderFor<ShareResult>(config => config.DeriveFrom(result.Config));
+            this.ShareResult = new ServiceParams<ShareResult>(Json.DecoderFor<ShareResult>(config => config.DeriveFrom(result.Config)), act);
+            //this.Act = act;
+            //this.Decoder = Json.DecoderFor<ShareResult>(config => config.DeriveFrom(result.Config));
 
             switch (tagType)
             {
@@ -48,12 +52,12 @@ namespace XIMALAYA.PCDesktop.Core.Services
             {
                 this.Responsitory.Fetch(url, param.ToString(), asyncResult =>
                 {
-                    this.GetDecodeData<ShareResult>(this.GetDataCallBack(asyncResult), this.Decoder, this.Act);
+                    this.GetDecodeData<ShareResult>(this.GetDataCallBack(asyncResult), this.ShareResult);
                 });
             }
             catch (Exception ex)
             {
-                this.Act.BeginInvoke(new ShareResult
+                this.ShareResult.Act.BeginInvoke(new ShareResult
                 {
                     Ret = 0,
                     Message = ex.Message

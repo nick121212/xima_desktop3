@@ -1,9 +1,17 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.Web.Script.Serialization;
+using System.Windows;
+using System.Windows.Threading;
 using CefSharp.Wpf;
+using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Practices.Prism.Commands;
 using XIMALAYA.PCDesktop.Common;
-using XIMALAYA.PCDesktop.Common.Events;
-using XIMALAYA.PCDesktop.Modules.Passport.Views;
+using XIMALAYA.PCDesktop.Core.Models.User;
+using XIMALAYA.PCDesktop.Core.ParamsModel;
+using XIMALAYA.PCDesktop.Core.Services;
 using XIMALAYA.PCDesktop.Tools;
 using XIMALAYA.PCDesktop.Untils;
 
@@ -17,47 +25,29 @@ namespace XIMALAYA.PCDesktop.Modules.Passport
     {
         #region 字段
 
-        private bool _IsThirdPartShow;
         private IWpfWebBrowser _WebBrowser;
         private string _Address;
         private int _CurrentPageIndex;
+        private string _Account;
+        private string _Password;
 
         #endregion
 
-        #region 属性
+        #region 命令
 
         /// <summary>
         /// 第三方登录命令
         /// </summary>
         public DelegateCommand<string> ThirdPartLoginCommand { get; set; }
-        public DelegateCommand ShowNormalLogin { get; set; }
         /// <summary>
-        /// 第三方登录窗口
+        /// 登录命令
         /// </summary>
-        public bool IsThirdPartShow
-        {
-            get
-            {
-                return _IsThirdPartShow;
-            }
-            set
-            {
-                if (value != _IsThirdPartShow)
-                {
-                    _IsThirdPartShow = value;
-                    this.RaisePropertyChanged(() => this.IsThirdPartShow);
-                    this.RaisePropertyChanged(() => this.IsThirdPartShow1);
-                }
-            }
-        }
+        public DelegateCommand DoLoginCommand { get; set; }
 
-        public bool IsThirdPartShow1
-        {
-            get
-            {
-                return !this.IsThirdPartShow;
-            }
-        }
+        #endregion
+
+        #region 属性
+
         /// <summary>
         /// IWpfWebBrowser
         /// </summary>
@@ -73,6 +63,7 @@ namespace XIMALAYA.PCDesktop.Modules.Passport
                 {
                     _WebBrowser = value;
                     this.RaisePropertyChanged(() => this.WebBrowser);
+                    this.BindBrowserEvent();
                 }
             }
         }
@@ -95,7 +86,7 @@ namespace XIMALAYA.PCDesktop.Modules.Passport
             }
         }
         /// <summary>
-        /// 佔位服务
+        /// 当前选中的tab
         /// </summary>
         public int CurrentPageIndex
         {
@@ -112,6 +103,49 @@ namespace XIMALAYA.PCDesktop.Modules.Passport
                 }
             }
         }
+        /// <summary>
+        /// 账号名称
+        /// </summary>
+        public string Account
+        {
+            get
+            {
+                return _Account;
+            }
+            set
+            {
+                if (value != _Account)
+                {
+                    _Account = value;
+                    this.RaisePropertyChanged(() => this.Account);
+                    this.DoLoginCommand.RaiseCanExecuteChanged();
+                }
+            }
+        }
+        /// <summary>
+        /// 密码
+        /// </summary>
+        public string Password
+        {
+            get
+            {
+                return _Password;
+            }
+            set
+            {
+                if (value != _Password)
+                {
+                    _Password = value;
+                    this.RaisePropertyChanged(() => this.Password);
+                    this.DoLoginCommand.RaiseCanExecuteChanged();
+                }
+            }
+        }
+        /// <summary>
+        /// 用户服务
+        /// </summary>
+        [Import]
+        private IUserService UserService { get; set; }
 
         #endregion
 
@@ -123,23 +157,46 @@ namespace XIMALAYA.PCDesktop.Modules.Passport
         public LoginViewModel()
             : base()
         {
-            this.Address = "http://www.ximalaya.com";
-            //this.IsThirdPartShow = true;
-            this.ShowNormalLogin = new DelegateCommand(() =>
-            {
-                this.IsThirdPartShow = true;
-            });
             this.ThirdPartLoginCommand = new DelegateCommand<string>((type) =>
             {
                 if (!string.IsNullOrEmpty(type))
                 {
-                    string url = string.Format(WellKnownUrl.ThirdLoginPath, type.ToString());
-                    //this.IsThirdPartShow = false;
                     this.CurrentPageIndex = 1;
-
-                    this.Address = url;
+                    this.Address = string.Format(WellKnownUrl.ThirdLoginPath, type.ToString());
                 }
             });
+            this.DoLoginCommand = new DelegateCommand(() =>
+            {
+                this.IsWaiting = true;
+                this.UserService.DoLogin(obj =>
+                {
+                    Dictionary<string, object> dic = null;
+                    this.IsWaiting = false;
+                    Application.Current.Dispatcher.Invoke(new Action(delegate
+                    {
+                        dic = this.CheckData(obj.ToString());
+
+                        if (dic == null || !dic.ContainsKey("ret")) return;
+                        if (dic["ret"].ToString() != "0")
+                        {
+                            DialogManager.ShowMessageAsync(Application.Current.MainWindow as MetroWindow, "登录中...", dic["msg"].ToString());
+                        }
+                    }));
+                }, new LoginParam
+                {
+                    Account = this.Account,
+                    Password = this.Password,
+                    Remember = true,
+                    DeviceToken = "none"
+                });
+            }, () =>
+            {
+                return !string.IsNullOrWhiteSpace(this.Account) && !string.IsNullOrWhiteSpace(this.Password) && !this.IsWaiting;
+            });
+
+            this.Account = "tinytiny8@163.com";
+            this.Password = "111111";
+            this.Address = "empty.html";
         }
 
         #endregion
@@ -147,17 +204,104 @@ namespace XIMALAYA.PCDesktop.Modules.Passport
         #region 方法
 
         /// <summary>
-        /// 初始化
+        /// 绑定浏览器事件
         /// </summary>
-        public void DoInit()
+        private void BindBrowserEvent()
         {
-            //CSharpBrowserSettings settings = new CSharpBrowserSettings()
-            //{
-            //    CachePath = @"C:\temp\caches",
-            //    UserAgent = string.Format("ting-ximalaya_v{0} name/ximalaya os/{1} osName/{2}", GlobalDataSingleton.Instance.Version, OSInfo.Instance.OsInfo.VersionString, OSInfo.Instance.OsInfo.Platform.ToString()),
-            //};
+            if (this.WebBrowser != null)
+            {
+                this.WebBrowser.FrameLoadStart += WebBrowser_FrameLoadStart;
+                this.WebBrowser.FrameLoadEnd += WebBrowser_FrameLoadEnd;
+                //this.WebBrowser.IsBrowserInitialized();
+            }
+        }
 
-            //this.View.ChromeWebBrowser.Initialize(settings);
+        void WebBrowser_FrameLoadStart(object sender, CefSharp.FrameLoadStartEventArgs e)
+        {
+            Application.Current.Dispatcher.Invoke(new Action(delegate
+            {
+                this.IsWaiting = true;
+            }));
+        }
+        /// <summary>
+        /// 验证数据
+        /// </summary>
+        /// <param name="result"></param>
+        private Dictionary<string, object> CheckData(string result)
+        {
+            try
+            {
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                Dictionary<string, object> dic = js.Deserialize<Dictionary<string, object>>(result);
+
+                if (!dic.ContainsKey("ret")) return null;
+
+                switch (dic["ret"].ToString())
+                {
+                    case "0"://登录成功
+                        HttpWebRequestSingleton.Instance.SetCookies("1&_token", string.Format("{0}&{1}", dic["uid"].ToString(), dic["token"].ToString()));
+                        this.GetLoginInfo();
+                        this.CurrentPageIndex = 0;
+                        break;
+                    case "-1"://失败
+                        this.CurrentPageIndex = 0;
+                        break;
+                }
+
+                return dic;
+            }
+            catch
+            {
+
+            }
+
+            return null;
+        }
+        /// <summary>
+        /// 浏览器加载完毕后事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        async void WebBrowser_FrameLoadEnd(object sender, CefSharp.FrameLoadEndEventArgs e)
+        {
+            string result = await this.WebBrowser.GetTextAsync();
+
+            Application.Current.Dispatcher.Invoke(new Action(delegate
+            {
+                this.IsWaiting = false;
+                this.WebBrowser.Focus();
+                if (result.IndexOf('{') == 0)
+                {
+                    this.CheckData(result);
+                }
+            }));
+        }
+        /// <summary>
+        /// 获取登录用户信息
+        /// </summary>
+        private async void GetLoginInfo()
+        {
+            var controller = await DialogManager.ShowProgressAsync(Application.Current.MainWindow as MetroWindow, "登录中...", "获取登录用户信息");
+
+            this.UserService.GetLoginUserInfo(async result =>
+            {
+                UserData userInfo = result as UserData;
+
+                await controller.CloseAsync();
+
+                if (userInfo.Ret == 0)
+                {
+                    await Application.Current.Dispatcher.InvokeAsync(async () =>
+                    {
+                        await DialogManager.ShowMessageAsync(Application.Current.MainWindow as MetroWindow, "登录中...", "登录成功！");
+                    }, DispatcherPriority.Background);
+                }
+                else
+                {
+                    await DialogManager.ShowMessageAsync(Application.Current.MainWindow as MetroWindow, "登录中...", userInfo.Message);
+                }
+
+            }, new BaseParam());
         }
 
         #endregion

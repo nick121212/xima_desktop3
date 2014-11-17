@@ -13,14 +13,8 @@
 		<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
 	</UserControl.Resources>
 
-	<Controls:FlipView x:Name="flipView" 
-					   SelectedIndex="{Binding CurrentPageIndex}"
-					   Orientation="Vertical" 
-					   UpTransition="Up"
-					   DownTransition="Down"
-					   IsBannerEnabled="False"
-					   BorderThickness="0">
-		<Controls:FlipViewItem>
+	<TabControl SelectedIndex="{Binding CurrentPageIndex}" TabStripPlacement="Bottom">
+		<Controls:MetroTabItem Header="本站登录">
 			<Grid Margin="0 20">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto" />
@@ -125,13 +119,14 @@
 						</MControls:MyToggleButton.ContentChecked>
 					</MControls:MyToggleButton>
 					<TextBox BorderThickness="0" 
-					 Height="40"
-					 Width="{Binding ActualWidth,RelativeSource={RelativeSource AncestorType=Grid},Converter={StaticResource ActualSizeFixedConverter},ConverterParameter='-,70'}"
-					 Background="{DynamicResource LoginTextboxBrush}" 
-					 VerticalContentAlignment="Center"
-					 Controls:TextboxHelper.Watermark="username"
-                     Controls:TextboxHelper.UseFloatingWatermark="False"
-                     Controls:TextboxHelper.IsWaitingForData="False"/>
+							 Height="40"
+							 Width="{Binding ActualWidth,RelativeSource={RelativeSource AncestorType=Grid},Converter={StaticResource ActualSizeFixedConverter},ConverterParameter='-,70'}"
+							 Background="{DynamicResource LoginTextboxBrush}" 
+							 Text="{Binding Account}"
+							 VerticalContentAlignment="Center"
+							 Controls:TextboxHelper.Watermark="username"
+							 Controls:TextboxHelper.UseFloatingWatermark="False"
+							 Controls:TextboxHelper.IsWaitingForData="False"/>
 				</StackPanel>
 				<StackPanel Grid.Row="2" 
 							Margin="20 10" 
@@ -153,20 +148,23 @@
 							</Label>
 						</MControls:MyToggleButton.ContentChecked>
 					</MControls:MyToggleButton>
-					<TextBox BorderThickness="0" 
-					 Width="{Binding ActualWidth,RelativeSource={RelativeSource AncestorType=Grid},Converter={StaticResource ActualSizeFixedConverter},ConverterParameter='-,70'}"
-					 Height="40"
-					 Background="{DynamicResource LoginTextboxBrush}" 
-					 VerticalContentAlignment="Center"
-					 Controls:TextboxHelper.Watermark="password"
-                     Controls:TextboxHelper.UseFloatingWatermark="False"
-                     Controls:TextboxHelper.IsWaitingForData="False"/>
+					<PasswordBox BorderThickness="0" 
+								 Width="{Binding ActualWidth,RelativeSource={RelativeSource AncestorType=Grid},Converter={StaticResource ActualSizeFixedConverter},ConverterParameter='-,70'}"
+								 Height="40"
+								 Background="{DynamicResource LoginTextboxBrush}" 
+								 MControls:PasswordBoxHelper.Attach="True" 
+								 MControls:PasswordBoxHelper.Password="{Binding Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+								 VerticalContentAlignment="Center"
+								 Controls:TextboxHelper.Watermark="password"
+								 Controls:TextboxHelper.UseFloatingWatermark="False"
+								 Controls:TextboxHelper.IsWaitingForData="False"/>
 				</StackPanel>
 				<Button Grid.Row="3"
 						Margin="20 20 20 0"
 						Height="40"
 						Foreground="{DynamicResource BlackBrush}"
 						Background="{DynamicResource AccentColorBrush}"
+						Command="{Binding DoLoginCommand}"
 						Content="SIGN IN" />
 				<StackPanel Grid.Row="4" 
 							Margin="20 0" 
@@ -194,17 +192,102 @@
 
 				</StackPanel>
 			</Grid>
-		</Controls:FlipViewItem>
-		<Controls:FlipViewItem>
-			<webkit:ChromiumWebBrowser x:Name="ChromeWebBrowser"
-									   Margin="0 30 0 0"
-									   Opacity="1"
-									   Background="White"
-									   Address="{Binding Address, Mode=TwoWay}"
-									   WebBrowser="{Binding WebBrowser, Mode=OneWayToSource}"/>
-		</Controls:FlipViewItem>
-	</Controls:FlipView>
-	
-	
-	
+		</Controls:MetroTabItem>
+		<Controls:MetroTabItem Header="第三方登录">
+			<Grid Margin="0 20">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
+				<Grid Grid.Row="0" 
+					  Margin="20 30">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+					<Button Grid.Column="0"
+							Style="{StaticResource ShareMyToggleButton}"
+							Width="100"
+							Height="100"
+							Command="{Binding ThirdPartLoginCommand}"
+							CommandParameter="1"
+							ToolTip="新浪">
+						<Button.Content>
+							<Viewbox>
+								<Canvas Width="256" Height="256" Clip="F1 M 0,0L 256,0L 256,256L 0,256L 0,0" Background="Transparent">
+									<Path Data="{Binding [share_sing_1], Source={x:Static MControls:PathData.Instance}}" 
+									  Width="209.463" Height="167.047" Canvas.Left="8.00002" Canvas.Top="58.16"
+									  Style="{StaticResource PathStyle}"
+									  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType=Button}}" />
+									<Path Data="{Binding [share_sing_2], Source={x:Static MControls:PathData.Instance}}" 
+									  Width="84.1582" Height="89.533" Canvas.Left="163.94" Canvas.Top="30.7096"
+									  Style="{StaticResource PathStyle}"
+									  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType=Button}}" />
+									<Path Data="{Binding [share_sing_3], Source={x:Static MControls:PathData.Instance}}" 
+									  Width="43.6995" Height="45.9727" Canvas.Left="171.777" Canvas.Top="63.3363"
+									  Style="{StaticResource PathStyle}"
+									  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType=Button}}" />
+									<Path Data="{Binding [share_sing_4], Source={x:Static MControls:PathData.Instance}}" 
+									  Width="76.1243" Height="66.4617" Canvas.Left="61.0397" Canvas.Top="135.257"
+									  Style="{StaticResource PathStyle}"
+									  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType=Button}}" />
+								</Canvas>
+							</Viewbox>
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="1"
+							Style="{StaticResource ShareMyToggleButton}"
+							Width="100"
+							Height="100"
+							Command="{Binding ThirdPartLoginCommand}"
+							CommandParameter="3"
+							ToolTip="人人">
+						<Button.Content>
+							<Viewbox>
+								<Canvas Width="256" Height="200" Clip="F1 M 0,0L 256,0L 256,256L 0,256L 0,0" Background="Transparent">
+									<Path Data="{Binding [share_renren], Source={x:Static MControls:PathData.Instance}}" 
+								  Style="{StaticResource PathStyle}"
+								  Width="256" Height="200"
+								  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType=Button}}" />
+								</Canvas>
+							</Viewbox>
+						</Button.Content>
+					</Button>
+					<Button Grid.Column="2"
+							Style="{StaticResource ShareMyToggleButton}"
+							Width="100"
+							Height="100"
+							Command="{Binding ThirdPartLoginCommand}"
+							CommandParameter="2"
+							ToolTip="腾讯">
+						<Button.Content>
+							<Viewbox>
+								<Canvas Width="256" Height="200" Clip="F1 M 0,0L 256,0L 256,256L 0,256L 0,0" Background="Transparent">
+									<Path Data="{Binding [share_qq], Source={x:Static MControls:PathData.Instance}}" 
+								  Style="{StaticResource PathStyle}"
+								  Width="256" Height="200"
+								  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType=Button}}" />
+								</Canvas>
+							</Viewbox>
+						</Button.Content>
+					</Button>
+				</Grid>
+				<Controls:MetroProgressBar Grid.Row="1" 
+										   Background="Transparent"
+										   Foreground="{DynamicResource BlackBrush}"
+										   Margin="0 0 0 2" 
+										   IsIndeterminate="{Binding IsWaiting}" />
+				<webkit:ChromiumWebBrowser Grid.Row="2"
+										   x:Name="ChromeWebBrowser"
+										   Margin="0"
+										   Opacity="1"
+										   Background="White"
+										   Address="{Binding Address, Mode=TwoWay}"
+										   WebBrowser="{Binding WebBrowser, Mode=OneWayToSource}"/>
+			</Grid>
+		</Controls:MetroTabItem>
+	</TabControl>
+
 </UserControl>

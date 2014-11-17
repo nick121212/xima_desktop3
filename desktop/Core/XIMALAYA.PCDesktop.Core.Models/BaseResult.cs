@@ -16,10 +16,6 @@ namespace XIMALAYA.PCDesktop.Core.Models
         /// <summary>
         /// 成功标志
         /// </summary>
-        public int Ret { get; set; }
-        /// <summary>
-        /// 成功标志
-        /// </summary>
         public bool Res
         {
             get
@@ -32,10 +28,6 @@ namespace XIMALAYA.PCDesktop.Core.Models
                 this.Ret = value ? 0 : 1;
             }
         }
-        /// <summary>
-        /// 错误信息
-        /// </summary>
-        public string Message { get; set; }
 
         public BaseResult()
             : base()

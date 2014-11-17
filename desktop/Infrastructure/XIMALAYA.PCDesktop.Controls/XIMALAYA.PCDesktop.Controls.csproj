@@ -78,6 +78,7 @@
   <ItemGroup>
     <Compile Include="Controls\ArrowPopGrid.cs" />
     <Compile Include="Controls\AutoSizeRichTextBox.cs" />
+    <Compile Include="Controls\PasswordBoxHelper.cs" />
     <Compile Include="Controls\HotKeyTextbox.cs" />
     <Compile Include="Controls\ImageAttached.cs" />
     <Compile Include="Controls\Marquee.cs" />

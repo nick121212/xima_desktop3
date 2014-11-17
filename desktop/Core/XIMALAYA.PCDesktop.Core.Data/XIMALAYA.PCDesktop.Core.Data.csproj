@@ -49,6 +49,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\XIMALAYA.PCDesktop.Core.Models.dll</HintPath>
     </Reference>
+    <Reference Include="XIMALAYA.PCDesktop.Tools, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\XIMALAYA.PCDesktop.Tools.dll</HintPath>
+    </Reference>
     <Reference Include="XIMALAYA.PCDesktop.Untils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\XIMALAYA.PCDesktop.Untils.dll</HintPath>
@@ -99,6 +103,7 @@
     <Compile Include="Configurations\User\UserData3Decorator.generated.cs" />
     <Compile Include="Configurations\User\UserData4Decorator.generated.cs" />
     <Compile Include="Configurations\User\UserData5Decorator.generated.cs" />
+    <Compile Include="Configurations\User\UserData6Decorator.generated.cs" />
     <Compile Include="Configurations\User\UserDataDecorator.generated.cs" />
     <Compile Include="Decorator\ResultBase.cs" />
     <Compile Include="IRepository.cs">
@@ -160,6 +165,7 @@
 ..\Configurations\User\UserData3Decorator.generated.cs
 ..\Configurations\User\UserData4Decorator.generated.cs
 ..\Configurations\User\UserData5Decorator.generated.cs
+..\Configurations\User\UserData6Decorator.generated.cs
 ..\Configurations\User\UserDataDecorator.generated.cs
 .\CoreData.cs
 </LastOutputs>

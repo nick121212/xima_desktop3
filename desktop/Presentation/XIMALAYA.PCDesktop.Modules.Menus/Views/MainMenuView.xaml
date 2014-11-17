@@ -22,17 +22,19 @@
                                  Width="100" 
 								 Height="90" 
                                  IconMargin="6"
+								 Visibility="Collapsed"
+                                 GroupName="menusGroup"
 								 Foreground="{DynamicResource BlackBrush}"
                                  Style="{StaticResource MetroMyRadioButton}"
                                  BorderBrush="{DynamicResource BlackBrush}"
 								 BorderThickness="0"
-								 SuperScriptSize="0"
+								 SuperScriptSize="20"
 								 CheckedBorderThickness="0"
                                  Command="{Binding ShowContentCommand,Source={x:Static tools:CommandSingleton.Instance}}"
 								 CommandParameter="{x:Static untils:WellKnownModuleNames.PassportModule}">
 			<MControls:MyRadioButton.Content>
 				<StackPanel>
-					<Path Data="{Binding [download], Source={x:Static MControls:PathData.Instance}}" 
+					<Path Data="{Binding [login_user], Source={x:Static MControls:PathData.Instance}}" 
 						  Style="{DynamicResource NavPathStyle}"
 						  HorizontalAlignment="Center"
 						  Fill="{Binding Foreground,RelativeSource={RelativeSource AncestorType={x:Type MControls:MyRadioButton}}}" >

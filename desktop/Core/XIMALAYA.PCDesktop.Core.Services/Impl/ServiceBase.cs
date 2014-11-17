@@ -19,14 +19,15 @@ namespace XIMALAYA.PCDesktop.Core.Services
         /// </summary>
         [Import]
         protected IRepository Responsitory { get; set; }
-        /// <summary>
-        /// json格式转换类
-        /// </summary>
-        protected JsonDecoder<T> Decoder { get; set; }
-        /// <summary>
-        /// 数据返回后的回调
-        /// </summary>
-        protected Action<object> Act { get; set; }
+
+        ///// <summary>
+        ///// json格式转换类
+        ///// </summary>
+        //protected JsonDecoder<T> Decoder { get; set; }
+        ///// <summary>
+        ///// 数据返回后的回调
+        ///// </summary>
+        //protected Action<object> Act { get; set; }
 
         #endregion
 
@@ -56,18 +57,15 @@ namespace XIMALAYA.PCDesktop.Core.Services
             return responseString;
         }
 
-        protected void GetDecodeData<T1>(string responseString, JsonDecoder<T1> decoder, Action<object> act)
+        protected void GetDecodeData<T1>(string responseString, ServiceParams<T1> param)
         {
-            object fr = decoder.Decode(responseString);
+            object fr = param.Decoder.Decode(responseString);
 
-            if (act != null)
+            if (param.Act != null)
             {
-                IAsyncResult result = act.BeginInvoke((T1)fr, null, null);
-                act.EndInvoke(result);
+                IAsyncResult result = param.Act.BeginInvoke((T1)fr, null, null);
+                param.Act.EndInvoke(result);
             }
-
-            act = null;
-            decoder = null;
         }
 
         #endregion
@@ -86,5 +84,35 @@ namespace XIMALAYA.PCDesktop.Core.Services
         }
 
         #endregion
+    }
+
+    public class ServiceParams<T> : IDisposable
+    {
+        /// <summary>
+        /// json格式转换类
+        /// </summary>
+        public JsonDecoder<T> Decoder { get; set; }
+        /// <summary>
+        /// 数据返回后的回调
+        /// </summary>
+        public Action<object> Act { get; set; }
+        /// <summary>
+        /// 构造
+        /// </summary>
+        /// <param name="decoder"></param>
+        /// <param name="act"></param>
+        public ServiceParams(JsonDecoder<T> decoder, Action<object> act)
+        {
+            this.Decoder = decoder;
+            this.Act = act;
+        }
+        /// <summary>
+        /// 销毁
+        /// </summary>
+        public void Dispose()
+        {
+            this.Decoder = null;
+            this.Act = null;
+        }
     }
 }

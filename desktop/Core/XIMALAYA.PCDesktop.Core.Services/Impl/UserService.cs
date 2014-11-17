@@ -1,15 +1,10 @@
 ﻿using System;
 using System.ComponentModel.Composition;
-using System.IO;
-using System.Net;
 using FluentJson;
 using XIMALAYA.PCDesktop.Core.Data;
 using XIMALAYA.PCDesktop.Core.Data.Decorator;
-using XIMALAYA.PCDesktop.Core.Models.Album;
 using XIMALAYA.PCDesktop.Core.Models.MutiData;
-using XIMALAYA.PCDesktop.Core.Models.Sound;
 using XIMALAYA.PCDesktop.Core.Models.User;
-using XIMALAYA.PCDesktop.Tools;
 using XIMALAYA.PCDesktop.Untils;
 
 namespace XIMALAYA.PCDesktop.Core.Services
@@ -22,22 +17,10 @@ namespace XIMALAYA.PCDesktop.Core.Services
     {
         #region 属性
 
-        /// <summary>
-        /// 喜欢声音的用户decoder
-        /// </summary>
-        private JsonDecoder<LikedSoundUserResult> LikedSoundUserResultDecoder { get; set; }
-        /// <summary>
-        /// 喜欢声音的用户act
-        /// </summary>
-        private Action<object> LikedSoundUserResultAct { get; set; }
-        /// <summary>
-        /// 多用户decoder
-        /// </summary>
-        private JsonDecoder<MutiUserResult> MutiUserResultDecoder { get; set; }
-        /// <summary>
-        /// 多用户act
-        /// </summary>
-        private Action<object> MutiUserResultAct { get; set; }
+        private ServiceParams<UserData> UserDataResult { get; set; }
+        private ServiceParams<LikedSoundUserResult> LikedSoundUserResult { get; set; }
+        private ServiceParams<MutiUserResult> MutiUserResult { get; set; }
+        private ServiceParams<UserData> LoginUserDataResult { get; set; }
 
         #endregion
 
@@ -52,18 +35,19 @@ namespace XIMALAYA.PCDesktop.Core.Services
 
             new UserData3Decorator<UserData>(result);
 
-            this.Act = act;
-            this.Decoder = Json.DecoderFor<UserData>(config => config.DeriveFrom(result.Config));
+            this.UserDataResult = new ServiceParams<UserData>(Json.DecoderFor<UserData>(config => config.DeriveFrom(result.Config)), act);
+            //this.Act = act;
+            //this.Decoder = Json.DecoderFor<UserData>(config => config.DeriveFrom(result.Config));
             try
             {
                 this.Responsitory.Fetch(WellKnownUrl.UserDetailInfo, param.ToString(), asyncResult =>
                 {
-                    this.GetDecodeData<UserData>(this.GetDataCallBack(asyncResult), this.Decoder, this.Act);
+                    this.GetDecodeData<UserData>(this.GetDataCallBack(asyncResult), this.UserDataResult);
                 });
             }
             catch (Exception ex)
             {
-                this.Act.BeginInvoke(new UserData
+                this.UserDataResult.Act.BeginInvoke(new UserData
                 {
 
                 }, null, null);
@@ -81,18 +65,19 @@ namespace XIMALAYA.PCDesktop.Core.Services
             new LikedSoundUserResultDecorator<LikedSoundUserResult>(result);
             new UserData4Decorator<LikedSoundUserResult>(result);
 
-            this.LikedSoundUserResultAct = act;
-            this.LikedSoundUserResultDecoder = Json.DecoderFor<LikedSoundUserResult>(config => config.DeriveFrom(result.Config));
+            this.LikedSoundUserResult = new ServiceParams<LikedSoundUserResult>(Json.DecoderFor<LikedSoundUserResult>(config => config.DeriveFrom(result.Config)),act);
+            //this.LikedSoundUserResultAct = act;
+            //this.LikedSoundUserResultDecoder = Json.DecoderFor<LikedSoundUserResult>(config => config.DeriveFrom(result.Config));
             try
             {
                 this.Responsitory.Fetch(WellKnownUrl.LikedSoundUsers, param.ToString(), asyncResult =>
                 {
-                    this.GetDecodeData<LikedSoundUserResult>(this.GetDataCallBack(asyncResult), this.LikedSoundUserResultDecoder, this.LikedSoundUserResultAct);
+                    this.GetDecodeData<LikedSoundUserResult>(this.GetDataCallBack(asyncResult), this.LikedSoundUserResult);
                 });
             }
             catch (Exception ex)
             {
-                this.Act.BeginInvoke(new LikedSoundUserResult
+                this.LikedSoundUserResult.Act.BeginInvoke(new LikedSoundUserResult
                 {
                     Ret = 500,
                     Message = ex.Message
@@ -112,18 +97,74 @@ namespace XIMALAYA.PCDesktop.Core.Services
             new MutiUserResultDecorator<MutiUserResult>(result);
             new UserData5Decorator<MutiUserResult>(result);
 
-            this.MutiUserResultAct = act;
-            this.MutiUserResultDecoder = Json.DecoderFor<MutiUserResult>(config => config.DeriveFrom(result.Config));
+            this.MutiUserResult = new ServiceParams<MutiUserResult>(Json.DecoderFor<MutiUserResult>(config => config.DeriveFrom(result.Config)),act);
+            //this.MutiUserResultAct = act;
+            //this.MutiUserResultDecoder = Json.DecoderFor<MutiUserResult>(config => config.DeriveFrom(result.Config));
             try
             {
                 this.Responsitory.Fetch(WellKnownUrl.MutiData, param.ToString(), asyncResult =>
                 {
-                    this.GetDecodeData<MutiUserResult>(this.GetDataCallBack(asyncResult), this.MutiUserResultDecoder, this.MutiUserResultAct);
+                    this.GetDecodeData<MutiUserResult>(this.GetDataCallBack(asyncResult), this.MutiUserResult);
                 });
             }
             catch (Exception ex)
             {
-                this.Act.BeginInvoke(new MutiUserResult
+                this.MutiUserResult.Act.BeginInvoke(new MutiUserResult
+                {
+                    Ret = 500,
+                    Message = ex.Message
+                }, null, null);
+            }
+        }
+        /// <summary>
+        /// 获取登录用户的信息
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="act"></param>
+        /// <param name="param"></param>
+        public void GetLoginUserInfo<T>(Action<object> act, T param)
+        {
+            Result<UserData> result = new Result<UserData>();
+
+            new UserData6Decorator<UserData>(result);
+
+            this.LoginUserDataResult = new ServiceParams<UserData>(Json.DecoderFor<UserData>(config => config.DeriveFrom(result.Config)), act);
+            try
+            {
+                this.Responsitory.Fetch(WellKnownUrl.LoginUserInfo, param.ToString(), asyncResult =>
+                {
+                    this.GetDecodeData(this.GetDataCallBack(asyncResult), this.LoginUserDataResult);
+                });
+            }
+            catch (Exception ex)
+            {
+                this.LoginUserDataResult.Act.BeginInvoke(new UserData
+                {
+                    Ret = 500,
+                    Message = ex.Message
+                }, null, null);
+            }
+        }
+        /// <summary>
+        /// 本站登陆
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="act"></param>
+        /// <param name="param"></param>
+        public void DoLogin<T>(Action<object> act, T param)
+        {
+            try
+            {
+                this.Responsitory.Fetch(WellKnownUrl.LoginPath, param.ToString(), asyncResult =>
+                {
+                    string result = this.GetDataCallBack(asyncResult);
+
+                    act.BeginInvoke(result, null, null);
+                });
+            }
+            catch (Exception ex)
+            {
+                act.BeginInvoke(new UserData
                 {
                     Ret = 500,
                     Message = ex.Message

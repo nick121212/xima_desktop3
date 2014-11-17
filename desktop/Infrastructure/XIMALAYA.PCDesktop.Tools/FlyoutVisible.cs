@@ -9,7 +9,7 @@ namespace XIMALAYA.PCDesktop.Tools
     /// <summary>
     /// 全局flytou显示属性
     /// </summary>
-    public  class FlyoutVisibleBase : NotificationObject
+    public class FlyoutVisibleBase : NotificationObject
     {
         #region fields
 
