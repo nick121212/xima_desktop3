@@ -160,7 +160,7 @@ namespace XIMALAYA.PCDesktop.Core.Services
                     string result = this.GetDataCallBack(asyncResult);
 
                     act.BeginInvoke(result, null, null);
-                });
+                },true);
             }
             catch (Exception ex)
             {
