@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using System.Windows;
 using System.Windows.Threading;
@@ -287,6 +288,7 @@ namespace XIMALAYA.PCDesktop.Modules.Passport
             {
                 UserData userInfo = result as UserData;
 
+                await TaskEx.Delay(2000);
                 await controller.CloseAsync();
 
                 if (userInfo.Ret == 0)
