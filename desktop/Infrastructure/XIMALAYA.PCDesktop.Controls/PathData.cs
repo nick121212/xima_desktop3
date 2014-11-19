@@ -40,7 +40,10 @@ namespace XIMALAYA.PCDesktop.Controls
                 return Geometry.Parse(this[name]);
             }
         }
-       
-        private PathData() { }
+
+        private PathData()
+        {
+            
+        }
     }
 }
