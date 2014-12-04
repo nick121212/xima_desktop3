@@ -198,8 +198,8 @@ namespace XIMALAYA.PCDesktop
         }
         private void CheckArgQueue()
         {
-            string arg;
             JumplistEvent<string> jumpEvent = this.EventAggregator.GetEvent<JumplistEvent<string>>();
+            string arg;
 
             this.CheckQueueTimer.Interval = TimeSpan.FromMilliseconds(500);
             this.CheckQueueTimer.Tick += new EventHandler((o, e) =>

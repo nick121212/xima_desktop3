@@ -23,32 +23,11 @@ namespace XIMALAYA.PCDesktop.Modules.Passport
             {
                 if (s == WellKnownModuleNames.PassportModule)
                 {
-                    this.LoadModule();
+                    this.LoadModule(this.Container.GetInstance<LoginView>());
                 }
             });
-           
-            this.LoadModule();
-        }
 
-        /// <summary>
-        /// 加载搜索模块
-        /// </summary>
-        private void LoadModule()
-        {
-            if (this.RegionManager.Regions.ContainsRegionWithName(WellKnownRegionNames.DiscoverModuleRegion))
-            {
-                var view = this.Container.GetInstance<LoginView>();
-                var region = this.RegionManager.Regions[WellKnownRegionNames.DiscoverModuleRegion];
-
-                if (!region.ActiveViews.Contains(view))
-                {
-                    foreach (object activeView in region.ActiveViews)
-                    {
-                        region.Remove(activeView);
-                    }
-                    region.Add(view);
-                }
-            }
+            //this.LoadModule();
         }
     }
 }

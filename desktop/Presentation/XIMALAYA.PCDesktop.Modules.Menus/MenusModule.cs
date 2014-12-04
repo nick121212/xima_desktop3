@@ -1,5 +1,6 @@
 ﻿using Microsoft.Practices.Prism.MefExtensions.Modularity;
 using XIMALAYA.PCDesktop.Common;
+using XIMALAYA.PCDesktop.Common.Events;
 using XIMALAYA.PCDesktop.Modules.Menus.Views;
 using XIMALAYA.PCDesktop.Tools;
 using XIMALAYA.PCDesktop.Untils;
@@ -24,6 +25,7 @@ namespace XIMALAYA.PCDesktop.Modules.Menus
 
                 region.Add(view, WellKnownModuleNames.MenusModule);
             }
+            this.EventAggregator.GetEvent<ContentChangeEvent>().Publish(WellKnownModuleNames.DiscoverModule);
         }
     }
 }

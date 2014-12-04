@@ -25,6 +25,5 @@
 			   ContentStringFormat="第三方客户端 V{0} Copyright © 2014-2024 Bakuru"
 			   Content="{Binding Version,Source={x:Static tools:GlobalDataSingleton.Instance}}"
 			   FontSize="14"/>
-		
 	</Grid>
 </UserControl>

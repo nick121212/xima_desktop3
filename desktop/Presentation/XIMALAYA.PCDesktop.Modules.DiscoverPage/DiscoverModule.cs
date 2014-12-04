@@ -12,38 +12,43 @@ namespace XIMALAYA.PCDesktop.Modules.DiscoverModule
     {
         public override void Initialize()
         {
-            var detailModel = this.Container.GetInstance<CategoryDetailViewModel>();
+            CategoryDetailViewModel detailModel = this.Container.GetInstance<CategoryDetailViewModel>();
+
 
             detailModel.Initialize();
             this.EventAggregator.GetEvent<ContentChangeEvent>().Subscribe(s =>
             {
                 if (s == WellKnownModuleNames.DiscoverModule)
                 {
-                    this.LoadModule();
+                    DiscoverView view = this.Container.GetInstance<DiscoverView>();
+                    view.ViewModel.Initialize();
+                    this.LoadModule(view);
                 }
             });
-            //this.LoadModule();
+            //view = this.Container.GetInstance<DiscoverView>();
+            //view.ViewModel.Initialize();
+            //this.LoadModule(view);
         }
-        /// <summary>
-        /// 加载模块
-        /// </summary>
-        private void LoadModule()
-        {
-            if (this.RegionManager.Regions.ContainsRegionWithName(WellKnownRegionNames.DiscoverModuleRegion))
-            {
-                var view = this.Container.GetInstance<DiscoverView>();
-                var region = this.RegionManager.Regions[WellKnownRegionNames.DiscoverModuleRegion];
+        ///// <summary>
+        ///// 加载模块
+        ///// </summary>
+        //private void LoadModule()
+        //{
+        //    if (this.RegionManager.Regions.ContainsRegionWithName(WellKnownRegionNames.DiscoverModuleRegion))
+        //    {
+        //        var view = this.Container.GetInstance<DiscoverView>();
+        //        var region = this.RegionManager.Regions[WellKnownRegionNames.DiscoverModuleRegion];
 
-                if (!region.ActiveViews.Contains(view))
-                {
-                    foreach (object activeView in region.ActiveViews)
-                    {
-                        region.Remove(activeView);
-                    }
-                    view.ViewModel.Initialize();
-                    region.Add(view);
-                }
-            }
-        }
+        //        if (!region.ActiveViews.Contains(view))
+        //        {
+        //            foreach (object activeView in region.ActiveViews)
+        //            {
+        //                region.Remove(activeView);
+        //            }
+        //            view.ViewModel.Initialize();
+        //            region.Add(view);
+        //        }
+        //    }
+        //}
     }
 }

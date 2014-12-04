@@ -84,7 +84,7 @@ namespace XIMALAYA.PCDesktop
             this.Container.GetInstance(typeof(XMSetting));
             this.ContainerGrid = this.Flyouts;
             RegionManager.SetRegionManager(this.settingFlyout, this.regionManager);
-            //定时清理内存
+
             this.ViewModel.Init(NotifyIcon, this);
             this.StateChanged += Shell_StateChanged;
             this.SetFlyout(string.Empty);

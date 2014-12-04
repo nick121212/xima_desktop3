@@ -15,30 +15,9 @@ namespace XIMALAYA.PCDesktop.Modules.AboutModule
             {
                 if (s == WellKnownModuleNames.AboutModule)
                 {
-                    this.LoadModule();
+                    base.LoadModule(this.Container.GetInstance<AboutView>());
                 }
             });
-        }
-        /// <summary>
-        /// 加载模块
-        /// </summary>
-        private void LoadModule()
-        {
-            if (this.RegionManager.Regions.ContainsRegionWithName(WellKnownRegionNames.DiscoverModuleRegion))
-            {
-                var view = this.Container.GetInstance<AboutView>();
-                var region = this.RegionManager.Regions[WellKnownRegionNames.DiscoverModuleRegion];
-
-                if (!region.ActiveViews.Contains(view))
-                {
-                    foreach (object activeView in region.ActiveViews)
-                    {
-                        region.Remove(activeView);
-                    }
-                    
-                    region.Add(view);
-                }
-            }
         }
     }
 }

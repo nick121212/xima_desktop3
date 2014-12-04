@@ -17,40 +17,13 @@ namespace XIMALAYA.PCDesktop.Modules
         /// </summary>
         public override void Initialize()
         {
-            //if (this.RegionManager.Regions.ContainsRegionWithName(WellKnownRegionNames.SettingsModuleRegion))
-            //{
-            //    var view = this.Container.GetInstance<SettingsView>();
-            //    var region = this.RegionManager.Regions[WellKnownRegionNames.SettingsModuleRegion];
-
-            //    region.Add(view, WellKnownModuleNames.SettingsModule);
-            //}
             this.EventAggregator.GetEvent<ContentChangeEvent>().Subscribe(s =>
             {
                 if (s == WellKnownModuleNames.SettingsModule)
                 {
-                    this.LoadModule();
+                    this.LoadModule(this.Container.GetInstance<SettingsView>());
                 }
             });
-        }
-        /// <summary>
-        /// 加载模块
-        /// </summary>
-        private void LoadModule()
-        {
-            if (this.RegionManager.Regions.ContainsRegionWithName(WellKnownRegionNames.DiscoverModuleRegion))
-            {
-                var view = this.Container.GetInstance<SettingsView>();
-                var region = this.RegionManager.Regions[WellKnownRegionNames.DiscoverModuleRegion];
-
-                if (!region.ActiveViews.Contains(view))
-                {
-                    foreach (object activeView in region.ActiveViews)
-                    {
-                        region.Remove(activeView);
-                    }
-                    region.Add(view);
-                }
-            }
         }
     }
 }

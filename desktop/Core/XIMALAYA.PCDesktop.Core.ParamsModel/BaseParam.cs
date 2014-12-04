@@ -6,16 +6,13 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Practices.Prism.ViewModel;
-using Microsoft.Practices.ServiceLocation;
-
 
 namespace XIMALAYA.PCDesktop.Core.ParamsModel
 {
     /// <summary>
     /// 参数类基类
     /// </summary>
-    public class BaseParam : NotificationObject
+    public class BaseParam 
     {
         /// <summary>
         /// 分页的页码
