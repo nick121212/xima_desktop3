@@ -34,19 +34,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CefSharp">
-      <HintPath>..\..\build\webkit\CefSharp.dll</HintPath>
+      <HintPath>..\..\build\CefSharp.dll</HintPath>
     </Reference>
-    <Reference Include="CefSharp.BrowserSubprocess">
-      <HintPath>..\..\build\webkit\CefSharp.BrowserSubprocess.exe</HintPath>
+    <Reference Include="CefSharp.BrowserSubprocess.Core">
+      <HintPath>..\..\build\CefSharp.BrowserSubprocess.Core.dll</HintPath>
     </Reference>
     <Reference Include="CefSharp.Core">
-      <HintPath>..\..\build\webkit\CefSharp.Core.dll</HintPath>
+      <HintPath>..\..\build\CefSharp.Core.dll</HintPath>
     </Reference>
     <Reference Include="CefSharp.Example">
-      <HintPath>..\..\build\webkit\CefSharp.Example.dll</HintPath>
+      <HintPath>..\..\build\CefSharp.Example.dll</HintPath>
     </Reference>
     <Reference Include="CefSharp.Wpf">
-      <HintPath>..\..\build\webkit\CefSharp.Wpf.dll</HintPath>
+      <HintPath>..\..\build\CefSharp.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="FluentJson, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

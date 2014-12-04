@@ -27,6 +27,7 @@ namespace XIMALAYA.PCDesktop.Tools.MyType
         }
         
         #endregion
+
         #region IXmlSerializable Members
         public System.Xml.Schema.XmlSchema GetSchema()
         {

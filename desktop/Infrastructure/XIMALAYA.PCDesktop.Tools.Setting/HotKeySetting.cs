@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using DigitalIdeaSolutions.Collections.Generic;
 using Microsoft.Isam.Esent.Collections.Generic;
 using XIMALAYA.PCDesktop.Tools.HotKey;
 using XIMALAYA.PCDesktop.Tools.MyType;
