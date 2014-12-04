@@ -1,9 +1,13 @@
 ﻿using System;
 using System.ComponentModel.Composition;
-using XIMALAYA.PCDesktop.Tools;
+using XIMALAYA.PCDesktop.Untils;
 
 namespace XIMALAYA.PCDesktop.Core.Data
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    public sealed class HttpWebRequestSingleton : Singleton<HttpWebRequestOpt> { }
     /// <summary>
     /// 仓储类基类
     /// </summary>

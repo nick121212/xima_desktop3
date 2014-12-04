@@ -92,14 +92,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\XIMALAYA.PCDesktop.Core.Models.dll</HintPath>
     </Reference>
-    <Reference Include="XIMALAYA.PCDesktop.Core.ParamsModel, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\build\XIMALAYA.PCDesktop.Core.ParamsModel.dll</HintPath>
-    </Reference>
-    <Reference Include="XIMALAYA.PCDesktop.Core.Services, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\build\XIMALAYA.PCDesktop.Core.Services.dll</HintPath>
-    </Reference>
     <Reference Include="XIMALAYA.PCDesktop.Tools.Player, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\XIMALAYA.PCDesktop.Tools.Player.dll</HintPath>
@@ -118,7 +110,6 @@
     <Compile Include="Converter\MutiParamConverter.cs" />
     <Compile Include="GlobalData.cs" />
     <Compile Include="MyType\SerializableDictionary.cs" />
-    <Compile Include="Enum\Sites.cs" />
     <Compile Include="Command\Commands.cs" />
     <Compile Include="Converter\ActualSizeFixedConverter.cs" />
     <Compile Include="Converter\ToTransparentColorConverter.cs" />

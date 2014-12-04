@@ -4,90 +4,77 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D36CA7A5-CED6-482D-A440-2E9F8F4D495E}</ProjectGuid>
+    <ProjectGuid>{66EF7EB8-9F1B-4563-A37B-CCB5699B267F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>XIMALAYA.PCDesktop.Common</RootNamespace>
-    <AssemblyName>XIMALAYA.PCDesktop.Common</AssemblyName>
+    <RootNamespace>XIMALAYA.PCDesktop.Modules.Share</RootNamespace>
+    <AssemblyName>XIMALAYA.PCDesktop.Modules.Share</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\build\</OutputPath>
+    <OutputPath>..\..\build\modules\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\release\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
-  <PropertyGroup>
-    <SignAssembly>false</SignAssembly>
-  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MahApps.Metro, Version=0.14.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\build\MahApps.Metro.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Prism, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Microsoft.Practices.Prism">
       <HintPath>..\..\build\Microsoft.Practices.Prism.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.Prism.Interactivity, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Microsoft.Practices.Prism.Interactivity">
       <HintPath>..\..\build\Microsoft.Practices.Prism.Interactivity.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Microsoft.Practices.Prism.MefExtensions">
+      <HintPath>..\..\build\Microsoft.Practices.Prism.MefExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\..\build\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
-    <Reference Include="XIMALAYA.PCDesktop.Untils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="XIMALAYA.PCDesktop.Common">
+      <HintPath>..\..\build\XIMALAYA.PCDesktop.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="XIMALAYA.PCDesktop.Core.Models, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\XIMALAYA.PCDesktop.Core.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="XIMALAYA.PCDesktop.Core.ParamsModel, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\XIMALAYA.PCDesktop.Core.ParamsModel.dll</HintPath>
+    </Reference>
+    <Reference Include="XIMALAYA.PCDesktop.Core.Services, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\XIMALAYA.PCDesktop.Core.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="XIMALAYA.PCDesktop.Tools">
+      <HintPath>..\..\build\XIMALAYA.PCDesktop.Tools.dll</HintPath>
+    </Reference>
+    <Reference Include="XIMALAYA.PCDesktop.Untils">
       <HintPath>..\..\build\XIMALAYA.PCDesktop.Untils.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Events\ShareEvent.cs" />
-    <Compile Include="Events\PassportEvent.cs" />
-    <Compile Include="Events\AlbumListEvent.cs" />
-    <Compile Include="IFlyoutFactory.cs" />
-    <Compile Include="Modules\BaseModule.cs" />
-    <Compile Include="Modules\BaseViewModel.cs" />
-    <Compile Include="Events\ChangeCoverEvent.cs" />
-    <Compile Include="Events\ContentChangeEvent.cs" />
-    <Compile Include="Events\JumplistEvent.cs" />
-    <Compile Include="Events\SoundListEvent.cs" />
-    <Compile Include="Events\TagEvent.cs" />
-    <Compile Include="Events\ModulesManagerEvent.cs" />
-    <Compile Include="Events\PlayerEvent.cs" />
+    <Compile Include="ShareModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Events\UserEvent.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

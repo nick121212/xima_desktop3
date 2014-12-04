@@ -70,6 +70,7 @@
     </Compile>
     <Compile Include="SingletonBase.cs" />
     <Compile Include="Functions.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="WellKnownModuleNames.cs" />
     <Compile Include="WellKnownRegionNames.cs" />
     <Compile Include="WellKnownUrl.cs" />

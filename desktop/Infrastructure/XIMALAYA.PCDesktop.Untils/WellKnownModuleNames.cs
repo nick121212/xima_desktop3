@@ -70,5 +70,10 @@ namespace XIMALAYA.PCDesktop.Untils
         /// 登录模块
         /// </summary>
         public const string UploadModule = "UploadModule";
+
+        /// <summary>
+        /// 分享模块
+        /// </summary>
+        public const string ShareModule = "ShareModule";
     }
 }

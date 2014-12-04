@@ -10,6 +10,7 @@ using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Practices.Prism.Commands;
 using XIMALAYA.PCDesktop.Common;
+using XIMALAYA.PCDesktop.Core.Data;
 using XIMALAYA.PCDesktop.Core.Models.User;
 using XIMALAYA.PCDesktop.Core.ParamsModel;
 using XIMALAYA.PCDesktop.Core.Services;

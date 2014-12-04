@@ -34,8 +34,4 @@ namespace XIMALAYA.PCDesktop.Tools
     /// 全局数据
     /// </summary>
     public sealed class GlobalDataSingleton : Singleton<GlobalData> { }
-    /// <summary>
-    /// 
-    /// </summary>
-    public sealed class HttpWebRequestSingleton : Singleton<HttpWebRequestOpt> { }
 }

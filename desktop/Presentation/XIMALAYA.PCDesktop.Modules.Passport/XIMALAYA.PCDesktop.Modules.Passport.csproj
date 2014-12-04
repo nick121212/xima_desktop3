@@ -98,6 +98,10 @@
     <Reference Include="XIMALAYA.PCDesktop.Controls">
       <HintPath>..\..\build\XIMALAYA.PCDesktop.Controls.dll</HintPath>
     </Reference>
+    <Reference Include="XIMALAYA.PCDesktop.Core.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\XIMALAYA.PCDesktop.Core.Data.dll</HintPath>
+    </Reference>
     <Reference Include="XIMALAYA.PCDesktop.Core.Models, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\XIMALAYA.PCDesktop.Core.Models.dll</HintPath>

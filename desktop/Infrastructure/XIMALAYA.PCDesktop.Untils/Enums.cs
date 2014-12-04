@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XIMALAYA.PCDesktop.Tools
+namespace XIMALAYA.PCDesktop.Untils
 {
     /// <summary>
     /// 分享网站

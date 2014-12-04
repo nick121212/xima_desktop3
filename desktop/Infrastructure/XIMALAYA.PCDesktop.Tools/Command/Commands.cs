@@ -9,8 +9,6 @@ using Microsoft.Practices.Prism.ViewModel;
 using Microsoft.Practices.ServiceLocation;
 using XIMALAYA.PCDesktop.Core.Models.Share;
 using XIMALAYA.PCDesktop.Core.Models.Sound;
-using XIMALAYA.PCDesktop.Core.ParamsModel;
-using XIMALAYA.PCDesktop.Core.Services;
 using XIMALAYA.PCDesktop.Common.Events;
 using XIMALAYA.PCDesktop.Tools.Extension;
 using XIMALAYA.PCDesktop.Tools.Player;
@@ -32,10 +30,6 @@ namespace XIMALAYA.PCDesktop.Tools
         /// 事件管理器
         /// </summary>
         private IEventAggregator EventAggregator { get; set; }
-        /// <summary>
-        /// 分享服务
-        /// </summary>
-        private IShareService ShareService { get; set; }
 
         #endregion
 
@@ -121,8 +115,6 @@ namespace XIMALAYA.PCDesktop.Tools
         private CommandBaseSingleton()
         {
             this.EventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
-            this.ShareService = ServiceLocator.Current.GetInstance<IShareService>();
-
 
             //播放声音命令，获取列表
             this.PlaySound1Command = new DelegateCommand<Control>(con =>
@@ -327,18 +319,12 @@ namespace XIMALAYA.PCDesktop.Tools
                     if (arr[1].GetType() != typeof(ShareType)) return;
                     if (arr[2].GetType() != typeof(long)) return;
 
-                    switch ((ShareType)arr[1])
+                    this.EventAggregator.GetEvent<ShareEvent<ShareEventArgument>>().Publish(new ShareEventArgument
                     {
-                        case ShareType.Track:
-                            this.GetShareSoundLink((Sites)arr[0], (long)arr[2]);
-                            break;
-                        case ShareType.Album:
-                            this.GetShareAlbumLink((Sites)arr[0], (long)arr[2]);
-                            break;
-                        case ShareType.User:
-                            this.GetShareUserLink((Sites)arr[0], (long)arr[2]);
-                            break;
-                    }
+                        ID = (long)arr[2],
+                        Site = (Sites)arr[0],
+                        ShareType = (ShareType)arr[1]
+                    });
                 }
             });
             //提高音量命令
@@ -442,7 +428,6 @@ namespace XIMALAYA.PCDesktop.Tools
             });
             this.MutiAlbumCommand = new DelegateCommand<int?>((id) =>
             {
-                MessageBox.Show(id.ToString());
                 if (id.HasValue)
                 {
                     this.EventAggregator.GetEvent<AlbumDetailEvent<int>>().Publish((int)id);
@@ -455,156 +440,6 @@ namespace XIMALAYA.PCDesktop.Tools
                     this.EventAggregator.GetEvent<SoundDetailEvent<int>>().Publish((int)id);
                 }
             });
-        }
-
-        #endregion
-
-        #region 方法
-
-        /// <summary>
-        /// 分享用户
-        /// </summary>
-        /// <param name="Site"></param>
-        /// <param name="uid"></param>
-        private void GetShareUserLink(Sites Site, long uid)
-        {
-            if (this.ShareService == null) return;
-            if (uid <= 0) return;
-
-            this.ShareService.GetData(res =>
-            {
-                var result = res as ShareResult;
-
-                if (result.Ret == 0)
-                {
-                    this.DoShare(Site, result.PicUrl, result.Content, result.Url);
-                }
-            }, new ShareParam
-            {
-                ShareUid = uid,
-                tpName = "qq"
-            }, TagType.user);
-        }
-        /// <summary>
-        /// 分享专辑
-        /// </summary>
-        /// <param name="Site"></param>
-        /// <param name="AlbumID"></param>
-        private void GetShareAlbumLink(Sites Site, long AlbumID)
-        {
-            if (this.ShareService == null) return;
-            if (AlbumID <= 0) return;
-
-            this.ShareService.GetData(res =>
-            {
-                var result = res as ShareResult;
-
-                if (result.Ret == 0)
-                {
-                    this.DoShare(Site, result.PicUrl, result.Content, result.Url);
-                }
-            }, new ShareParam
-            {
-                AlbumId = AlbumID,
-                tpName = "qq"
-            }, TagType.album);
-
-        }
-        /// <summary>
-        /// 分享声音
-        /// </summary>
-        /// <param name="Site"></param>
-        /// <param name="SoundID"></param>
-        private void GetShareSoundLink(Sites Site, long SoundID)
-        {
-            if (this.ShareService == null) return;
-            if (SoundID <= 0) return;
-
-            this.ShareService.GetData(res =>
-            {
-                var result = res as ShareResult;
-
-                if (result.Ret == 0)
-                {
-                    this.DoShare(Site, result.PicUrl, result.Content, result.Url);
-                }
-            }, new ShareParam
-            {
-                TrackId = SoundID,
-                tpName = "qq"
-            }, TagType.sound);
-        }
-        /// <summary>
-        /// 跳转分享链接
-        /// </summary>
-        /// <param name="Site"></param>
-        /// <param name="PicUrl"></param>
-        /// <param name="Content"></param>
-        /// <param name="url"></param>
-        private void DoShare(Sites Site, string PicUrl, string Content, string url)
-        {
-            Parameters parameters = new Parameters(true);
-
-            switch (Site)
-            {
-                case Sites.Douban:
-                    parameters["name"] = Content;
-                    parameters["href"] = url;
-                    parameters["image"] = PicUrl;
-                    parameters["text"] = string.Empty;
-                    parameters["desc"] = string.Empty;
-                    parameters["apikey"] = "0c2e1df44f97c4eb248a59dceec74ec1";
-                    url = string.Format("http://shuo.douban.com/!service/share?{0}", parameters);
-                    break;
-                case Sites.Weibo:
-                    parameters["appkey"] = "1075899032";
-                    parameters["url"] = url;
-                    parameters["title"] = Content;
-                    parameters["content"] = "utf-8";
-                    parameters["pic"] = PicUrl;
-                    url = string.Format("http://service.t.sina.com.cn/share/share.php?{0}", parameters);
-                    break;
-                case Sites.Kaixin:
-                    parameters["rurl"] = url;
-                    parameters["rcontent"] = "";
-                    parameters["rtitle"] = Content;
-                    url = string.Format("http://www.kaixin001.com/repaste/bshare.php?{0}", parameters);
-                    break;
-                case Sites.Renren:
-                    parameters["resourceUrl"] = url;
-                    parameters["title"] = Content;
-                    parameters["pic"] = PicUrl;
-                    parameters["description"] = string.Empty;
-                    parameters["charset"] = "utf-8";
-                    url = string.Format("http://widget.renren.com/dialog/share?{0}", parameters);
-                    break;
-                case Sites.TencentWeibo:
-                    parameters["url"] = url;
-                    parameters["title"] = Content;
-                    parameters["site"] = "http://www.kfstorm.com/doubanfm";
-                    parameters["pic"] = PicUrl;
-                    parameters["appkey"] = "801098586";
-                    url = string.Format("http://v.t.qq.com/share/share.php?{0}", parameters);
-                    break;
-                case Sites.Facebook:
-                    parameters["u"] = url;
-                    parameters["t"] = Content;
-                    url = string.Format("http://www.facebook.com/sharer.php?{0}", parameters);
-                    break;
-                case Sites.Twitter:
-                    parameters["status"] = Content + " " + url;
-                    url = string.Format("http://twitter.com/home?{0}", parameters);
-                    break;
-                case Sites.Qzone:
-                    parameters["url"] = url;
-                    parameters["title"] = Content;
-                    url = string.Format("http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?{0}", parameters);
-                    break;
-                default:
-                    break;
-            }
-
-            System.Diagnostics.Process.Start(url);
         }
 
         #endregion
