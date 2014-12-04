@@ -14,6 +14,7 @@ namespace XIMALAYA.PCDesktop.Modules.Share
     [ModuleExport(WellKnownModuleNames.ShareModule, typeof(ShareModule))]
     class ShareModule : BaseModule
     {
+        private ShareEvent<ShareEventArgument> ShareEvent { get; set; }
         /// <summary>
         /// 分享服务
         /// </summary>
@@ -22,7 +23,8 @@ namespace XIMALAYA.PCDesktop.Modules.Share
 
         public override void Initialize()
         {
-            this.EventAggregator.GetEvent<ShareEvent<ShareEventArgument>>().Subscribe(this.OnShareEvent);
+            this.ShareEvent = this.EventAggregator.GetEvent<ShareEvent<ShareEventArgument>>();
+            this.ShareEvent.Subscribe(this.OnShareEvent);
         }
 
         private void OnShareEvent(ShareEventArgument args)
@@ -39,6 +41,13 @@ namespace XIMALAYA.PCDesktop.Modules.Share
                     this.GetShareUserLink(args.Site, args.ID);
                     break;
             }
+        }
+
+        public override void Dispose()
+        {
+            this.ShareEvent.Unsubscribe(this.OnShareEvent);
+            this.ShareEvent = null;
+            base.Dispose();
         }
 
         /// <summary>

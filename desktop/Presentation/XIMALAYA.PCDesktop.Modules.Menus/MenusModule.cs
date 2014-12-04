@@ -25,7 +25,7 @@ namespace XIMALAYA.PCDesktop.Modules.Menus
 
                 region.Add(view, WellKnownModuleNames.MenusModule);
             }
-            this.EventAggregator.GetEvent<ContentChangeEvent>().Publish(WellKnownModuleNames.DiscoverModule);
+            this.EventAggregator.GetEvent<ContentChangeEvent>().Publish(WellKnownModuleNames.PassportModule);
         }
     }
 }

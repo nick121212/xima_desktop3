@@ -36,6 +36,9 @@
     <Reference Include="CefSharp">
       <HintPath>..\..\build\CefSharp.dll</HintPath>
     </Reference>
+    <Reference Include="CefSharp.BrowserSubprocess">
+      <HintPath>..\..\build\CefSharp.BrowserSubprocess.exe</HintPath>
+    </Reference>
     <Reference Include="CefSharp.BrowserSubprocess.Core">
       <HintPath>..\..\build\CefSharp.BrowserSubprocess.Core.dll</HintPath>
     </Reference>
